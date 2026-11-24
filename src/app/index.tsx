@@ -84,6 +84,7 @@ export default function HomeScreen() {
       {session ? (
         <View style={styles.resume}>
           <ResumeCard
+            modeId={session.modeId}
             level={session.level}
             playerCount={playerCount}
             round={session.turnsCompleted + 1}

@@ -17,3 +17,14 @@ export function renderQuestionText(text: string, context: RenderContext): string
   const name = context.targetPlayerName?.trim() || context.fallbackTargetName;
   return text.split(OTHER_PLAYER_PLACEHOLDER).join(name);
 }
+
+/**
+ * Splits a fixed lead-in (e.g. "Ich hab noch nie") from the rest of a card text so
+ * the UI can style it separately. Returns `lead: null` if the text doesn't start with it.
+ */
+export function splitLead(text: string, lead: string): { lead: string | null; rest: string } {
+  if (lead && text.startsWith(`${lead} `)) {
+    return { lead, rest: text.slice(lead.length + 1) };
+  }
+  return { lead: null, rest: text };
+}

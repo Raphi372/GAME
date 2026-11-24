@@ -2,7 +2,8 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { Button, ConfirmSheet, Header, Screen } from '@/components/ui';
+import { AppText, Button, ConfirmSheet, Header, Icon, Screen, Surface } from '@/components/ui';
+import { modeTitleKey } from '@/features/game-modes/labels';
 import { DEFAULT_MODE_ID, getGameMode, isGameModeId } from '@/features/game-modes/registry';
 import { LevelCard } from '@/features/levels/components/LevelCard';
 import { LEVELS, listLevels } from '@/features/levels/levels';
@@ -10,7 +11,7 @@ import { getDeckSize } from '@/features/question-decks';
 import { useTranslation } from '@/i18n';
 import { feedback } from '@/services/feedback';
 import { useGameStore } from '@/store';
-import { spacing } from '@/theme';
+import { colors, spacing } from '@/theme';
 import type { SpicyLevel } from '@/types';
 
 export default function LevelScreen() {
@@ -28,7 +29,8 @@ export default function LevelScreen() {
   const [consented, setConsented] = useState(false);
   const [consentFor, setConsentFor] = useState<'select' | 'start' | null>(null);
   const meta = LEVELS[selected];
-  const canStart = playerCount >= getGameMode(modeId).minPlayers;
+  const mode = getGameMode(modeId);
+  const canStart = playerCount >= mode.minPlayers;
 
   const choose = (level: SpicyLevel) => {
     if (level === 'extreme' && !consented) {
@@ -69,12 +71,27 @@ export default function LevelScreen() {
         />
       }
     >
+      <AppText variant="overline" color={colors.accent} style={styles.modeName}>
+        {`${mode.emoji} ${t(modeTitleKey(modeId))}`}
+      </AppText>
+      {mode.turnStyle === 'group' ? (
+        <Surface style={styles.howTo} testID="how-to">
+          <Icon name="information-circle-outline" size={20} color={colors.lilacOrText} />
+          <View style={styles.howToText}>
+            <AppText variant="bodyStrong">{t('nhie.howToTitle')}</AppText>
+            <AppText variant="caption" color={colors.textSecondary}>
+              {t('nhie.howTo')}
+            </AppText>
+          </View>
+        </Surface>
+      ) : null}
       <View style={styles.list} role="radiogroup">
         {listLevels().map((level) => (
           <LevelCard
             key={level.id}
             level={level.id}
             selected={selected === level.id}
+            modeId={modeId}
             questionCount={getDeckSize(modeId, level.id, { locale })}
             onPress={() => choose(level.id)}
             testID={`level-${level.id}`}
@@ -104,5 +121,8 @@ export default function LevelScreen() {
 }
 
 const styles = StyleSheet.create({
-  list: { gap: spacing.lg, paddingTop: spacing.md },
+  modeName: { marginTop: spacing.xs, marginLeft: spacing.xs },
+  howTo: { flexDirection: 'row', gap: spacing.md, marginTop: spacing.md },
+  howToText: { flex: 1, gap: spacing.xxs },
+  list: { gap: spacing.lg, paddingTop: spacing.lg },
 });

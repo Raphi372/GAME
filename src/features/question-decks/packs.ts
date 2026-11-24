@@ -1,6 +1,9 @@
 import extremeData from '@/data/questions/extreme.json';
 import hotData from '@/data/questions/hot.json';
 import mildData from '@/data/questions/mild.json';
+import nhieExtremeData from '@/data/questions/never-have-i-ever/extreme.json';
+import nhieHotData from '@/data/questions/never-have-i-ever/hot.json';
+import nhieMildData from '@/data/questions/never-have-i-ever/mild.json';
 import type { GameModeId } from '@/features/game-modes/registry';
 import type { ContentTier } from '@/features/premium/entitlements';
 import type { Locale, Question, SpicyLevel } from '@/types';
@@ -39,6 +42,9 @@ export const BUILTIN_PACKS: readonly QuestionPack[] = [
   buildPack('spicy-questions.mild.base', 'spicy-questions', 'mild', mildData),
   buildPack('spicy-questions.hot.base', 'spicy-questions', 'hot', hotData),
   buildPack('spicy-questions.extreme.base', 'spicy-questions', 'extreme', extremeData),
+  buildPack('never-have-i-ever.mild.base', 'never-have-i-ever', 'mild', nhieMildData),
+  buildPack('never-have-i-ever.hot.base', 'never-have-i-ever', 'hot', nhieHotData),
+  buildPack('never-have-i-ever.extreme.base', 'never-have-i-ever', 'extreme', nhieExtremeData),
 ];
 
 /** Content is authored in German first; other locales fall back to it. */

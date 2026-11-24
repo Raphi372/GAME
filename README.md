@@ -3,9 +3,12 @@
 **The party gets hotter.**
 
 SPICY NIGHT ist eine Partyspiel-App für Erwachsene (18+) im Dark-Luxury-Design. Eine Runde
-fügt ihre Mitspieler hinzu, wählt eines von drei Spicy-Levels und bekommt zufällige Fragen
-rund um Flirt, Dating, Geständnisse und Intimität – mit fairer Spielerrotation, ohne
-Wiederholungen und komplett offline.
+fügt ihre Mitspieler hinzu, wählt einen Spielmodus und eines von drei Spicy-Levels und bekommt
+zufällige Karten rund um Flirt, Dating, Geständnisse und Intimität – mit fairer
+Spielerrotation, ohne Wiederholungen und komplett offline.
+
+**Spielmodi:** 🔥 *Spicy Questions* (Fragen an die Person, die dran ist) und 🙊 *Ich hab noch nie*
+(eine Person liest vor, die ganze Runde spielt mit).
 
 > **Fair Play ist eingebaut:** Niemand muss antworten („Ich passe“ ist immer erlaubt), kein
 > Alkohol ist nötig, und für EXTREME fragt die App vorher nach dem Einverständnis der Gruppe.
@@ -45,6 +48,10 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 | :-: | :-: | :-: | :-: |
 | <img src="docs/screenshots/05-game.jpg" width="190"> | <img src="docs/screenshots/06-level-switch.jpg" width="190"> | <img src="docs/screenshots/07-game-extreme.jpg" width="190"> | <img src="docs/screenshots/08-summary.jpg" width="190"> |
 
+| Ich hab noch nie – Level | Ich hab noch nie – Spiel | Einstellungen |
+| :-: | :-: | :-: |
+| <img src="docs/screenshots/11-nhie-level.jpg" width="190"> | <img src="docs/screenshots/10-nhie-game.jpg" width="190"> | <img src="docs/screenshots/09-settings.jpg" width="190"> |
+
 > **Platzhalter für Store-Screenshots:** Für App Store / Google Play werden später eigene
 > Marketing-Screenshots in den geforderten Gerätegrößen benötigt (z. B. 6,9″ iPhone,
 > Android-Phone, Tablet). Ablageort-Vorschlag: `docs/store/`.
@@ -53,7 +60,7 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 
 ## Features
 
-### Spiel
+### Spielmodus „Spicy Questions“
 - **Drei Spicy-Levels** – 🌶️ MILD („Let’s warm up.“), 🌶️🌶️ HOT („Things are heating up.“),
   🌶️🌶️🌶️ EXTREME („Are you ready?“).
 - **330 eigenständige deutsche Fragen** (110 pro Level) in 10 Kategorien, z. B. Flirt, Dating,
@@ -70,6 +77,14 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 - **Spieler mitten im Spiel hinzufügen/umbenennen/entfernen** – die Rotation bleibt fair.
 - **Spielstand bleibt erhalten** (auch nach App-Neustart) und kann auf der Startseite
   fortgesetzt werden. Am Ende gibt es eine Auswertung mit Statistik.
+
+### Spielmodus „Ich hab noch nie“
+- **300 eigenständige Aussagen** (100 pro Level), alle im Format „Ich hab noch nie …“.
+- Eine Person **liest vor** (gleiche faire Rotation wie bei den Fragen), die ganze Runde spielt mit.
+- **„Wer hat schon?“** – freiwillig antippen, wer es schon getan hat. Die App zählt die
+  Geständnisse pro Person; niemand muss etwas zugeben, **getrunken wird nicht**.
+- „Nächste Karte“ / „Überspringen“, Levelwechsel, Neu mischen und Spielerwechsel wie im
+  Fragenmodus; Auswertung mit „Die meisten Geständnisse“.
 
 ### Spieler
 - 2 bis 20 Spieler, Namen hinzufügen, bearbeiten, entfernen.
@@ -93,8 +108,8 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 - Alle lokalen Daten löschen
 
 ### Vorbereitet (noch nicht aktiv)
-- **Weitere Spielmodi** (Ich hab noch nie, Wahrheit oder Pflicht, Wer würde am ehesten?,
-  Random Challenges) – im Menü als „Bald“ sichtbar, Architektur vorhanden.
+- **Weitere Spielmodi** (Wahrheit oder Pflicht, Wer würde am ehesten?, Random Challenges) –
+  im Menü als „Bald“ sichtbar, Architektur vorhanden.
 - **Premium/Freemium** – Preis-Konfiguration, Entitlements, Kauf-Schnittstelle, Werbe-Regeln.
   Es werden **keine Zahlungen** abgewickelt oder simuliert.
 
@@ -143,7 +158,8 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 │   │   ├── game-modes/          # Registry aller Spielmodi
 │   │   ├── premium/             # Preise, Entitlements, Kauf-Interface, Werbe-Regeln
 │   │   └── settings/            # Einstellungs-Zeilen
-│   ├── data/questions/          # mild.json, hot.json, extreme.json
+│   ├── data/questions/          # Spicy Questions: mild.json, hot.json, extreme.json
+│   │   └── never-have-i-ever/   # Ich hab noch nie: mild.json, hot.json, extreme.json
 │   ├── hooks/                   # useMotion (Animationen + „Bewegung reduzieren“)
 │   ├── i18n/                    # de.ts (Quelle), en.ts, useTranslation
 │   ├── services/                # Storage, Haptik, Sound, Feedback, Zufallsquelle
@@ -228,8 +244,9 @@ npm run check                # alles zusammen
 Abgedeckt sind u. a.: Level-Auswahl, Fragen laden, Zufallsauswahl, keine Wiederholung,
 Spieler hinzufügen/umbenennen/entfernen, faire Rotation, Überspringen, Passen, Levelwechsel,
 leeres/durchgespieltes Deck, lokale Speicherung inkl. App-Neustart und korrupter Daten,
-Einstellungen, Sprache, 18+-Sperre, Datenlöschung sowie der komplette Spielablauf über die
-echten Routen.
+Einstellungen, Sprache, 18+-Sperre, Datenlöschung sowie der komplette Spielablauf beider
+Spielmodi über die echten Routen (inkl. „Wer hat schon?“-Auswahl und Geständnis-Zählung bei
+„Ich hab noch nie“).
 
 Die **GitHub-Actions-CI** (`.github/workflows/ci.yml`) führt bei jedem Push/PR Typecheck,
 Lint, Fragen-Validierung und Tests aus und baut anschließend Android-, iOS- und Web-Bundles
@@ -289,7 +306,12 @@ mit transparentem Hintergrund und ca. 66 % Safe-Zone).
 
 ## Fragen-Datenbank erweitern
 
-Die Fragen liegen in `src/data/questions/{mild,hot,extreme}.json` – ein Array pro Level:
+| Spielmodus | Dateien | ID-Präfix | Besonderheit |
+| --- | --- | --- | --- |
+| Spicy Questions | `src/data/questions/{mild,hot,extreme}.json` | `mild_`, `hot_`, `extreme_` | Platzhalter `{other}` erlaubt |
+| Ich hab noch nie | `src/data/questions/never-have-i-ever/{mild,hot,extreme}.json` | `nhie_mild_`, … | Text beginnt immer mit „Ich hab noch nie “, keine Platzhalter |
+
+Jede Datei ist ein Array pro Level, z. B. für Spicy Questions:
 
 ```json
 {
@@ -309,9 +331,21 @@ Die Fragen liegen in `src/data/questions/{mild,hot,extreme}.json` – ein Array 
 | `intensity` | – | 1 (sanft) bis 3 (mutig) innerhalb des Levels |
 | `text` | ✔ | 10–180 Zeichen; optional Platzhalter `{other}` für einen anderen Mitspieler |
 
-Danach `npm run validate:questions` und `npm test` ausführen. Der Validator prüft IDs,
-Duplikate (auch textlich), Kategorien, Länge, Platzhalter und die Mindestanzahl von 100 Fragen
-pro Level.
+Beispiel „Ich hab noch nie“:
+
+```json
+{
+  "id": "nhie_mild_101",
+  "level": "mild",
+  "category": "funny",
+  "intensity": 1,
+  "text": "Ich hab noch nie auf einer Hochzeit getanzt, ohne die Brautleute zu kennen."
+}
+```
+
+Danach `npm run validate:questions` und `npm test` ausführen. Der Validator prüft für alle
+Spielmodi IDs, Duplikate (auch textlich und modusübergreifend), Kategorien, Länge,
+Platzhalter, das Format „Ich hab noch nie …“ und die Mindestanzahl von 100 Karten pro Level.
 
 **Inhaltsrichtlinien:** nur Erwachsene, nichts mit Minderjährigen oder Schul-/Jugendbezug in
 intimen Kontexten, nichts Nicht-Einvernehmliches, keine Diskriminierung oder Demütigung, keine
@@ -343,10 +377,16 @@ Tests als Seed-RNG.
   repariert. Der Splash-Screen bleibt sichtbar, bis Fonts und Stores geladen sind.
 
 ### Spielmodi (`src/features/game-modes/registry.ts`)
-Jeder Modus hat ID, Status (`available`/`coming-soon`), Zugstil (Einzelperson/Gruppe),
-Spielerzahlen und eigene Fragenpakete. Neuen Modus aktivieren:
-1. Inhalte als Pakete in `question-decks/packs.ts` registrieren (`modeId` setzen).
-2. Status in der Registry auf `available` stellen.
+Jeder Modus hat ID, Status (`available`/`coming-soon`), Zugstil, Karteneinheit
+(„Fragen“/„Aussagen“), optionalen Karten-Vorspann und Spielerzahlen.
+- `single-player` (Spicy Questions): die Person, die dran ist, antwortet, passt oder überspringt.
+- `group` (Ich hab noch nie): die Person, die dran ist, liest vor; `completeGroupRound()`
+  zählt freiwillige Geständnisse und gibt die nächste Karte an die nächste Person.
+
+Neuen Modus aktivieren:
+1. Inhalte als JSON anlegen und in `question-decks/packs.ts` registrieren (`modeId` setzen),
+   im Validator (`scripts/validate-questions.mjs`) ergänzen.
+2. Status in der Registry auf `available` stellen, Übersetzungen `mode.<id>.title|tagline`.
 3. Falls nötig eigene Regeln/Screens ergänzen (z. B. Wahrheit-oder-Pflicht-Auswahl).
 
 ### Premium (`src/features/premium`)
@@ -367,7 +407,9 @@ liefern. Fragen-Pakete haben ein `locale`; fehlt eine Sprache, wird auf Deutsch 
 
 - Keine Registrierung, kein Konto, kein Server, keine Analyse-/Werbe-/Tracking-SDKs.
 - Lokal gespeichert werden nur: Spielernamen, Spielstand, Einstellungen, Zeitpunkt der
-  Altersbestätigung. **Antworten werden nie gespeichert.**
+  Altersbestätigung. **Antworten werden nie gespeichert.** Bei „Ich hab noch nie“ enthält der
+  Spielstand nur Zähler, wie oft jemand „hab ich schon“ angetippt hat (nicht bei welcher
+  Aussage); mit dem Spielende wird der Spielstand gelöscht.
 - Keine Berechtigungen für Kamera, Mikrofon, Kontakte oder Standort (Mikrofon- und
   Speicher-Berechtigungen sind auf Android explizit blockiert).
 - „Alle lokalen Daten löschen“ in den Einstellungen.
@@ -400,8 +442,8 @@ liefern. Fragen-Pakete haben ein `locale`; fehlt eine Sprache, wird auf Deutsch 
 ## Bekannte Einschränkungen & nächste Schritte
 
 **Noch nicht umgesetzt (bewusst für spätere Releases):**
-- Spielmodi *Ich hab noch nie*, *Wahrheit oder Pflicht*, *Wer würde am ehesten?*,
-  *Random Challenges* (nur als „Bald“ im Menü; Architektur vorhanden, Inhalte fehlen).
+- Spielmodi *Wahrheit oder Pflicht*, *Wer würde am ehesten?*, *Random Challenges* (nur als
+  „Bald“ im Menü; Architektur vorhanden, Inhalte fehlen).
 - Premium-Käufe (Store-Integration, z. B. via StoreKit/Play Billing), eigene Fragen,
   individuelle Spielrunden.
 - Englische Fragen-Inhalte (die Oberfläche ist übersetzt, die Fragen sind Deutsch).

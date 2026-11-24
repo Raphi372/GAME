@@ -3,16 +3,18 @@ import { useCallback, useState } from 'react';
 import { BackHandler, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { AppText, Button, ConfirmSheet, IconButton, Screen } from '@/components/ui';
-import { countRemaining } from '@/features/gameplay/engine/deck';
-import { getCurrentQuestion } from '@/features/gameplay/engine/session';
+import { getGameMode } from '@/features/game-modes/registry';
+import { ConfessionPicker } from '@/features/gameplay/components/ConfessionPicker';
 import { ExhaustedCard } from '@/features/gameplay/components/ExhaustedCard';
 import { LevelPill } from '@/features/gameplay/components/LevelPill';
 import { LevelSheet } from '@/features/gameplay/components/LevelSheet';
 import { QuestionCard } from '@/features/gameplay/components/QuestionCard';
 import { TurnBanner } from '@/features/gameplay/components/TurnBanner';
+import { countRemaining } from '@/features/gameplay/engine/deck';
+import { getCurrentQuestion } from '@/features/gameplay/engine/session';
 import { LEVELS } from '@/features/levels/levels';
-import { getDeck, renderQuestionText } from '@/features/question-decks';
-import { useTranslation, type TranslationKey } from '@/i18n';
+import { getDeck, renderQuestionText, splitLead } from '@/features/question-decks';
+import { useTranslation } from '@/i18n';
 import { feedback } from '@/services/feedback';
 import { useGameStore } from '@/store';
 import { colors, spacing } from '@/theme';
@@ -29,6 +31,7 @@ export default function GameScreen() {
   const answer = useGameStore((state) => state.answer);
   const pass = useGameStore((state) => state.pass);
   const skip = useGameStore((state) => state.skip);
+  const confessAndNext = useGameStore((state) => state.confessAndNext);
   const changeLevel = useGameStore((state) => state.changeLevel);
   const reshuffle = useGameStore((state) => state.reshuffle);
   const endGame = useGameStore((state) => state.endGame);
@@ -37,6 +40,11 @@ export default function GameScreen() {
   const [endSheetOpen, setEndSheetOpen] = useState(false);
   /** Set while navigating to the summary so the screen doesn't redirect home first. */
   const [leaving, setLeaving] = useState(false);
+  /** Group modes: players marked "hab ich schon" – only valid for the card it was made on. */
+  const [selection, setSelection] = useState<{ cardKey: string; ids: string[] }>({
+    cardKey: '',
+    ids: [],
+  });
 
   // Android back button asks before leaving a running game.
   useFocusEffect(
@@ -51,6 +59,8 @@ export default function GameScreen() {
 
   if (!session) return leaving ? null : <Redirect href="/" />;
 
+  const mode = getGameMode(session.modeId);
+  const isGroup = mode.turnStyle === 'group';
   const deckFor = (level: SpicyLevel) => getDeck(session.modeId, level, { locale });
   const deck = deckFor(session.level);
   const meta = LEVELS[session.level];
@@ -61,14 +71,28 @@ export default function GameScreen() {
   const remaining = countRemaining(deck, session.playedByLevel[session.level]);
   const round = session.turnsCompleted + 1;
   const exhausted = question === null;
+  const cardKey = `${session.level}:${current?.questionId ?? ''}:${current?.playerId ?? ''}`;
+  const selectedIds = selection.cardKey === cardKey ? selection.ids : [];
 
-  const text = question
+  const fullText = question
     ? renderQuestionText(question.text, {
         targetPlayerName: target?.name,
         fallbackTargetName: t('game.fallbackTarget'),
       })
     : '';
-  const categoryLabel = question ? t(`category.${question.category}` as TranslationKey) : '';
+  const { lead, rest } = splitLead(fullText, mode.cardLead ?? '');
+  const categoryLabel = question ? t(`category.${question.category}`) : '';
+  const confessionCounts = Object.fromEntries(
+    Object.entries(session.stats).map(([id, stats]) => [id, stats.confessed]),
+  );
+
+  const toggleConfession = (playerId: string) =>
+    setSelection({
+      cardKey,
+      ids: selectedIds.includes(playerId)
+        ? selectedIds.filter((id) => id !== playerId)
+        : [...selectedIds, playerId],
+    });
 
   const finish = () => {
     setLeaving(true);
@@ -76,6 +100,74 @@ export default function GameScreen() {
     endGame();
     router.replace('/summary');
   };
+
+  const footer = exhausted ? undefined : isGroup ? (
+    <>
+      <Button
+        label={t('nhie.next')}
+        icon="arrow-forward"
+        hint={t('nhie.nextHint')}
+        gradient={meta.gradient}
+        feedbackEvent="reveal"
+        onPress={() => confessAndNext(selectedIds)}
+        testID="action-next"
+      />
+      <Button
+        label={t('game.skip')}
+        icon="shuffle"
+        variant="secondary"
+        size="md"
+        hint={t('nhie.skipHint')}
+        feedbackEvent="reveal"
+        onPress={skip}
+        testID="action-skip"
+      />
+      <AppText variant="caption" color={colors.textMuted} align="center">
+        {`${t('nhie.safetyHint')} 💜`}
+      </AppText>
+    </>
+  ) : (
+    <>
+      <Button
+        label={t('game.next')}
+        icon="arrow-forward"
+        hint={t('game.nextHint')}
+        gradient={meta.gradient}
+        feedbackEvent="reveal"
+        onPress={answer}
+        testID="action-next"
+      />
+      <View style={styles.secondaryRow}>
+        <Button
+          label={t('game.skip')}
+          icon={narrow ? undefined : 'shuffle'}
+          variant="secondary"
+          size="md"
+          hint={t('game.skipHint')}
+          feedbackEvent="reveal"
+          onPress={skip}
+          style={styles.half}
+          dense={narrow}
+          testID="action-skip"
+        />
+        <Button
+          label={t('game.pass')}
+          icon={narrow ? undefined : 'hand-left-outline'}
+          variant="secondary"
+          size="md"
+          hint={t('game.passHint')}
+          feedbackEvent="pass"
+          onPress={pass}
+          style={styles.half}
+          dense={narrow}
+          testID="action-pass"
+        />
+      </View>
+      <AppText variant="caption" color={colors.textMuted} align="center">
+        {`${t('game.safetyHint')} 💜`}
+      </AppText>
+    </>
+  );
 
   return (
     <Screen
@@ -92,53 +184,16 @@ export default function GameScreen() {
           />
         </View>
       }
-      footer={
-        exhausted ? undefined : (
-          <>
-            <Button
-              label={t('game.next')}
-              icon="arrow-forward"
-              hint={t('game.nextHint')}
-              gradient={meta.gradient}
-              feedbackEvent="reveal"
-              onPress={answer}
-              testID="action-next"
-            />
-            <View style={styles.secondaryRow}>
-              <Button
-                label={t('game.skip')}
-                icon={narrow ? undefined : 'shuffle'}
-                variant="secondary"
-                size="md"
-                hint={t('game.skipHint')}
-                feedbackEvent="reveal"
-                onPress={skip}
-                style={styles.half}
-                dense={narrow}
-                testID="action-skip"
-              />
-              <Button
-                label={t('game.pass')}
-                icon={narrow ? undefined : 'hand-left-outline'}
-                variant="secondary"
-                size="md"
-                hint={t('game.passHint')}
-                feedbackEvent="pass"
-                onPress={pass}
-                style={styles.half}
-                dense={narrow}
-                testID="action-pass"
-              />
-            </View>
-            <AppText variant="caption" color={colors.textMuted} align="center">
-              {t('game.safetyHint')} 💜
-            </AppText>
-          </>
-        )
-      }
+      footer={footer}
     >
       <View style={styles.content}>
-        {player ? <TurnBanner player={player} accent={meta.accent} /> : null}
+        {player ? (
+          <TurnBanner
+            player={player}
+            accent={meta.accent}
+            overline={isGroup ? t('nhie.reader') : undefined}
+          />
+        ) : null}
         {exhausted ? (
           <ExhaustedCard
             level={session.level}
@@ -150,21 +205,38 @@ export default function GameScreen() {
             onChangeLevel={() => setLevelSheetOpen(true)}
           />
         ) : (
-          <QuestionCard
-            cardKey={`${session.level}:${current?.questionId ?? ''}:${current?.playerId ?? ''}`}
-            text={text}
-            level={session.level}
-            categoryLabel={categoryLabel}
-            footer={t('game.remaining', { round, count: remaining })}
-            accessibilityLabel={t('game.questionA11y', { name: player?.name ?? '', question: text })}
-            style={styles.card}
-          />
+          <>
+            <QuestionCard
+              cardKey={cardKey}
+              text={rest}
+              lead={lead ?? undefined}
+              level={session.level}
+              categoryLabel={categoryLabel}
+              footer={t('game.remaining', { round, count: remaining })}
+              accessibilityLabel={
+                isGroup
+                  ? t('nhie.cardA11y', { name: player?.name ?? '', statement: fullText })
+                  : t('game.questionA11y', { name: player?.name ?? '', question: fullText })
+              }
+              style={isGroup ? undefined : styles.card}
+            />
+            {isGroup ? (
+              <ConfessionPicker
+                players={players}
+                selectedIds={selectedIds}
+                onToggle={toggleConfession}
+                counts={confessionCounts}
+                accent={meta.accent}
+              />
+            ) : null}
+          </>
         )}
       </View>
 
       <LevelSheet
         visible={levelSheetOpen}
         current={session.level}
+        modeId={session.modeId}
         getCount={(level) => deckFor(level).length}
         onClose={() => setLevelSheetOpen(false)}
         onSelect={(level) => {
