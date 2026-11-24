@@ -1,0 +1,772 @@
+[
+  {
+    "id": "mild_001",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Was ist dein größter Turn-on?"
+  },
+  {
+    "id": "mild_002",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Was ist der beste Anmachspruch, den du je gehört hast?"
+  },
+  {
+    "id": "mild_003",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Mit welchem Kompliment kann man dich sofort um den Finger wickeln?"
+  },
+  {
+    "id": "mild_004",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Was fällt dir an einer Person als Erstes auf?"
+  },
+  {
+    "id": "mild_005",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Welcher Flirt-Move funktioniert bei dir garantiert?"
+  },
+  {
+    "id": "mild_006",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Wie flirtest du, wenn du jemanden wirklich gut findest?"
+  },
+  {
+    "id": "mild_007",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Augenkontakt, Lächeln oder direkt ansprechen – wie flirtest du am liebsten?"
+  },
+  {
+    "id": "mild_008",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Welche Kleinigkeit findest du bei anderen unglaublich charmant?"
+  },
+  {
+    "id": "mild_009",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Welches Kompliment verteilst du selbst am liebsten?"
+  },
+  {
+    "id": "mild_010",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Welcher Duft macht eine Person für dich sofort interessanter?"
+  },
+  {
+    "id": "mild_011",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Hast du schon einmal mit jemandem geflirtet, nur um zu sehen, ob es klappt?"
+  },
+  {
+    "id": "mild_012",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Welche Stimme findest du attraktiver: tief und ruhig oder hell und lebhaft?"
+  },
+  {
+    "id": "mild_013",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Woran merkst du, dass jemand mit dir flirtet?"
+  },
+  {
+    "id": "mild_014",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Hast du schon einmal einen Flirt komplett falsch verstanden?"
+  },
+  {
+    "id": "mild_015",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Was ist für dich ein absoluter Flirt-Killer?"
+  },
+  {
+    "id": "mild_016",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Welcher Promi ist dein heimlicher Crush?"
+  },
+  {
+    "id": "mild_017",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Hast du schon einmal jemandem deine Nummer zugesteckt, ohne dass danach gefragt wurde?"
+  },
+  {
+    "id": "mild_018",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Welche Eigenschaft macht jemanden für dich auf den ersten Blick sympathisch?"
+  },
+  {
+    "id": "mild_019",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Wie sieht für dich das perfekte erste Date aus?"
+  },
+  {
+    "id": "mild_020",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Was war das lustigste Date, das du je hattest?"
+  },
+  {
+    "id": "mild_021",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Kino, Dinner oder Spaziergang – was ist dein Lieblings-Date?"
+  },
+  {
+    "id": "mild_022",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Was war dein peinlichster Moment bei einem Date?"
+  },
+  {
+    "id": "mild_023",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Wer sollte beim ersten Date zahlen – und warum?"
+  },
+  {
+    "id": "mild_024",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Hast du schon einmal ein Date vorzeitig abgebrochen?"
+  },
+  {
+    "id": "mild_025",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Was ist die verrückteste Ausrede, mit der du dich aus einem Date gerettet hast?"
+  },
+  {
+    "id": "mild_026",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Wie lange wartest du nach einem Date, bevor du schreibst?"
+  },
+  {
+    "id": "mild_027",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Hast du schon einmal jemanden online kennengelernt und dann wirklich getroffen?"
+  },
+  {
+    "id": "mild_028",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Was ist ein absolutes No-Go beim ersten Date?"
+  },
+  {
+    "id": "mild_029",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Welche Frage stellst du bei einem Date am liebsten?"
+  },
+  {
+    "id": "mild_030",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Was ziehst du an, wenn du jemanden beeindrucken willst?"
+  },
+  {
+    "id": "mild_031",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Hattest du schon einmal ein Blind Date?"
+  },
+  {
+    "id": "mild_032",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Welches Date war rückblickend viel besser, als du erwartet hattest?"
+  },
+  {
+    "id": "mild_033",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Bist du bei Dates eher überpünktlich oder fashionably late?"
+  },
+  {
+    "id": "mild_034",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Welches Date-Erlebnis würdest du gerne noch einmal wiederholen?"
+  },
+  {
+    "id": "mild_035",
+    "level": "mild",
+    "category": "group",
+    "intensity": 1,
+    "text": "Wer aus dieser Runde hat deiner Meinung nach den besten Style?"
+  },
+  {
+    "id": "mild_036",
+    "level": "mild",
+    "category": "group",
+    "intensity": 1,
+    "text": "Wen findest du hier am attraktivsten?"
+  },
+  {
+    "id": "mild_037",
+    "level": "mild",
+    "category": "group",
+    "intensity": 1,
+    "text": "Wer aus dieser Runde wäre der beste Wingman oder die beste Wingwoman?"
+  },
+  {
+    "id": "mild_038",
+    "level": "mild",
+    "category": "group",
+    "intensity": 1,
+    "text": "Wer hier hat das schönste Lächeln?"
+  },
+  {
+    "id": "mild_039",
+    "level": "mild",
+    "category": "group",
+    "intensity": 1,
+    "text": "Wer aus dieser Runde flirtet am meisten?"
+  },
+  {
+    "id": "mild_040",
+    "level": "mild",
+    "category": "group",
+    "intensity": 1,
+    "text": "Mit wem aus dieser Runde würdest du am liebsten einen Roadtrip machen?"
+  },
+  {
+    "id": "mild_041",
+    "level": "mild",
+    "category": "group",
+    "intensity": 2,
+    "text": "Wer hier könnte am ehesten jemanden in einer Bar um den Finger wickeln?"
+  },
+  {
+    "id": "mild_042",
+    "level": "mild",
+    "category": "group",
+    "intensity": 2,
+    "text": "Wer aus dieser Runde ist heimlich total romantisch?"
+  },
+  {
+    "id": "mild_043",
+    "level": "mild",
+    "category": "group",
+    "intensity": 2,
+    "text": "Wem aus dieser Runde würdest du deine Dating-App für einen Abend anvertrauen?"
+  },
+  {
+    "id": "mild_044",
+    "level": "mild",
+    "category": "group",
+    "intensity": 2,
+    "text": "Wer hier hat den besten Musikgeschmack für einen Abend zu zweit?"
+  },
+  {
+    "id": "mild_045",
+    "level": "mild",
+    "category": "group",
+    "intensity": 2,
+    "text": "Was war dein erster Eindruck von {other}?"
+  },
+  {
+    "id": "mild_046",
+    "level": "mild",
+    "category": "group",
+    "intensity": 2,
+    "text": "Welches Kompliment wolltest du {other} schon immer mal machen?"
+  },
+  {
+    "id": "mild_047",
+    "level": "mild",
+    "category": "group",
+    "intensity": 3,
+    "text": "Welchen Song würdest du {other} für ein Date empfehlen?"
+  },
+  {
+    "id": "mild_048",
+    "level": "mild",
+    "category": "group",
+    "intensity": 3,
+    "text": "Welche Eigenschaft von {other} hättest du selbst gerne?"
+  },
+  {
+    "id": "mild_049",
+    "level": "mild",
+    "category": "group",
+    "intensity": 3,
+    "text": "Mit wem aus dieser Runde würdest du am liebsten tanzen gehen?"
+  },
+  {
+    "id": "mild_050",
+    "level": "mild",
+    "category": "group",
+    "intensity": 3,
+    "text": "Wer aus dieser Runde hat die besten Dating-Geschichten auf Lager?"
+  },
+  {
+    "id": "mild_051",
+    "level": "mild",
+    "category": "group",
+    "intensity": 3,
+    "text": "Wer hier würde zu einem Date am ehesten zu spät kommen?"
+  },
+  {
+    "id": "mild_052",
+    "level": "mild",
+    "category": "group",
+    "intensity": 3,
+    "text": "Wer aus dieser Runde wäre die perfekte Begleitung für eine Hochzeit?"
+  },
+  {
+    "id": "mild_053",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Was war dein peinlichster Flirtversuch?"
+  },
+  {
+    "id": "mild_054",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Hast du schon einmal heimlich jemanden aus deinem Freundeskreis gegoogelt?"
+  },
+  {
+    "id": "mild_055",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Hast du schon einmal eine Nachricht an die falsche Person geschickt?"
+  },
+  {
+    "id": "mild_056",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Was ist der schlechteste Anmachspruch, den du jemals selbst benutzt hast?"
+  },
+  {
+    "id": "mild_057",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Hast du beim Durchscrollen eines Profils schon einmal aus Versehen ein uraltes Foto geliked?"
+  },
+  {
+    "id": "mild_058",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Was war dein peinlichster Moment vor deinem Crush?"
+  },
+  {
+    "id": "mild_059",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Hast du schon einmal jemandem zurückgewunken, der gar nicht dich gemeint hat?"
+  },
+  {
+    "id": "mild_060",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Welche Dating-App-Bio würde dich perfekt beschreiben?"
+  },
+  {
+    "id": "mild_061",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Welches Emoji benutzt du zum Flirten am häufigsten?"
+  },
+  {
+    "id": "mild_062",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Hast du schon einmal so getan, als würdest du jemanden nicht sehen, um einem Gespräch auszuweichen?"
+  },
+  {
+    "id": "mild_063",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Was ist das Merkwürdigste, das dich je an einer Person angezogen hat?"
+  },
+  {
+    "id": "mild_064",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Hast du schon einmal vor dem Spiegel ein Gespräch mit deinem Crush geübt?"
+  },
+  {
+    "id": "mild_065",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Welcher Kosename wäre dir in einer Beziehung super peinlich?"
+  },
+  {
+    "id": "mild_066",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Hast du schon einmal eine Sprachnachricht verschickt, die du sofort bereut hast?"
+  },
+  {
+    "id": "mild_067",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Hast du dich schon einmal in eine Serienfigur verliebt?"
+  },
+  {
+    "id": "mild_068",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Was war das seltsamste Geschenk, das du von einem Date bekommen hast?"
+  },
+  {
+    "id": "mild_069",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Hast du beim Flirten schon einmal einen Namen verwechselt?"
+  },
+  {
+    "id": "mild_070",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Welcher Song ist dein heimlicher Liebeskummer-Song?"
+  },
+  {
+    "id": "mild_071",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Was macht dich in einer Beziehung glücklich?"
+  },
+  {
+    "id": "mild_072",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Bist du eher der romantische oder der spontane Typ?"
+  },
+  {
+    "id": "mild_073",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Was ist deine Liebessprache: Worte, Zeit, Berührungen, Geschenke oder Taten?"
+  },
+  {
+    "id": "mild_074",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Glaubst du an Liebe auf den ersten Blick?"
+  },
+  {
+    "id": "mild_075",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Was ist deine größte Red Flag beim Daten?"
+  },
+  {
+    "id": "mild_076",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Welche Green Flag findest du bei anderen besonders attraktiv?"
+  },
+  {
+    "id": "mild_077",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Was ist dir bei einem Gegenüber wichtiger: Humor oder Intelligenz?"
+  },
+  {
+    "id": "mild_078",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Wie würden deine Ex-Partner dich in drei Worten beschreiben?"
+  },
+  {
+    "id": "mild_079",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Was hast du aus deiner letzten Beziehung gelernt?"
+  },
+  {
+    "id": "mild_080",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Bist du eher eifersüchtig oder entspannt?"
+  },
+  {
+    "id": "mild_081",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Wie lange brauchst du, um dich zu verlieben?"
+  },
+  {
+    "id": "mild_082",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Was ist deine größte Schwäche, wenn du verliebt bist?"
+  },
+  {
+    "id": "mild_083",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Was ist das Netteste, das jemand je für dich getan hat?"
+  },
+  {
+    "id": "mild_084",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Welche Eigenschaft an dir selbst findest du am attraktivsten?"
+  },
+  {
+    "id": "mild_085",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Hattest du schon einmal einen Crush auf jemanden aus deinem Freundeskreis?"
+  },
+  {
+    "id": "mild_086",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Hast du schon einmal ein Kompliment gemacht, das du gar nicht ernst gemeint hast?"
+  },
+  {
+    "id": "mild_087",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Hast du dir schon einmal das Profil einer oder eines Ex angeschaut, obwohl du es eigentlich nicht wolltest?"
+  },
+  {
+    "id": "mild_088",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Hast du schon einmal absichtlich spät geantwortet, um cool zu wirken?"
+  },
+  {
+    "id": "mild_089",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Hast du schon einmal so getan, als würdest du ein Hobby mögen, um jemanden zu beeindrucken?"
+  },
+  {
+    "id": "mild_090",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Hast du schon einmal Screenshots eines Flirt-Chats an Freunde geschickt, um nach Rat zu fragen?"
+  },
+  {
+    "id": "mild_091",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Hast du schon einmal jemandem einen Korb gegeben und es später bereut?"
+  },
+  {
+    "id": "mild_092",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Warst du schon einmal in jemanden verliebt, der vergeben war?"
+  },
+  {
+    "id": "mild_093",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Hattest du schon einmal Gefühle für jemanden, den du anfangs gar nicht mochtest?"
+  },
+  {
+    "id": "mild_094",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Hast du schon einmal ein Date nur wegen des guten Essens zugesagt?"
+  },
+  {
+    "id": "mild_095",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Hast du schon einmal jemanden geghostet?"
+  },
+  {
+    "id": "mild_096",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Hast du schon einmal so getan, als wärst du beschäftigt, um interessanter zu wirken?"
+  },
+  {
+    "id": "mild_097",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Wurdest du schon einmal geghostet – und weißt du bis heute, warum?"
+  },
+  {
+    "id": "mild_098",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Bist du schon einmal jemandem auf Social Media gefolgt, nur um ihm oder ihr kurz danach wieder zu entfolgen?"
+  },
+  {
+    "id": "mild_099",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Wenn du einen Abend mit einem Promi verbringen könntest – mit wem?"
+  },
+  {
+    "id": "mild_100",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Würdest du lieber den perfekten Kuss oder das perfekte Date erleben?"
+  },
+  {
+    "id": "mild_101",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Wenn dein Liebesleben ein Film wäre – wie würde er heißen?"
+  },
+  {
+    "id": "mild_102",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Würdest du für die Liebe in ein anderes Land ziehen?"
+  },
+  {
+    "id": "mild_103",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Wenn du deinem Crush eine Nachricht ohne Konsequenzen schicken könntest – was würdest du schreiben?"
+  },
+  {
+    "id": "mild_104",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Würdest du mit deinem Crush lieber tanzen oder Karaoke singen?"
+  },
+  {
+    "id": "mild_105",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Wenn du dein Dating-Leben mit einem Wort beschreiben müsstest – welches wäre es?"
+  },
+  {
+    "id": "mild_106",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Würdest du lieber einen Liebesbrief schreiben oder einen bekommen?"
+  },
+  {
+    "id": "mild_107",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 3,
+    "text": "Wenn du ein Date an jedem Ort der Welt planen könntest – wohin geht’s?"
+  },
+  {
+    "id": "mild_108",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 3,
+    "text": "Würdest du deine Dating-Entscheidungen lieber deinen Freunden oder deiner Familie überlassen?"
+  },
+  {
+    "id": "mild_109",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 3,
+    "text": "Wenn du einen Tag lang die Gedanken deines Crushs lesen könntest – würdest du es tun?"
+  },
+  {
+    "id": "mild_110",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 3,
+    "text": "Lieber eine perfekte Person ohne Humor oder eine chaotische, die dich ständig zum Lachen bringt?"
+  }
+]
