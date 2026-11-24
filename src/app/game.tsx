@@ -1,0 +1,198 @@
+import { Redirect, useFocusEffect, useRouter } from 'expo-router';
+import { useCallback, useState } from 'react';
+import { BackHandler, StyleSheet, useWindowDimensions, View } from 'react-native';
+
+import { AppText, Button, ConfirmSheet, IconButton, Screen } from '@/components/ui';
+import { countRemaining } from '@/features/gameplay/engine/deck';
+import { getCurrentQuestion } from '@/features/gameplay/engine/session';
+import { ExhaustedCard } from '@/features/gameplay/components/ExhaustedCard';
+import { LevelPill } from '@/features/gameplay/components/LevelPill';
+import { LevelSheet } from '@/features/gameplay/components/LevelSheet';
+import { QuestionCard } from '@/features/gameplay/components/QuestionCard';
+import { TurnBanner } from '@/features/gameplay/components/TurnBanner';
+import { LEVELS } from '@/features/levels/levels';
+import { getDeck, renderQuestionText } from '@/features/question-decks';
+import { useTranslation, type TranslationKey } from '@/i18n';
+import { feedback } from '@/services/feedback';
+import { useGameStore } from '@/store';
+import { colors, spacing } from '@/theme';
+import type { SpicyLevel } from '@/types';
+
+export default function GameScreen() {
+  const router = useRouter();
+  const { t, locale } = useTranslation();
+  const { width } = useWindowDimensions();
+  /** Narrow phones: compact secondary buttons so the labels keep fitting. */
+  const narrow = width < 380;
+  const session = useGameStore((state) => state.session);
+  const players = useGameStore((state) => state.players);
+  const answer = useGameStore((state) => state.answer);
+  const pass = useGameStore((state) => state.pass);
+  const skip = useGameStore((state) => state.skip);
+  const changeLevel = useGameStore((state) => state.changeLevel);
+  const reshuffle = useGameStore((state) => state.reshuffle);
+  const endGame = useGameStore((state) => state.endGame);
+
+  const [levelSheetOpen, setLevelSheetOpen] = useState(false);
+  const [endSheetOpen, setEndSheetOpen] = useState(false);
+  /** Set while navigating to the summary so the screen doesn't redirect home first. */
+  const [leaving, setLeaving] = useState(false);
+
+  // Android back button asks before leaving a running game.
+  useFocusEffect(
+    useCallback(() => {
+      const subscription = BackHandler.addEventListener('hardwareBackPress', () => {
+        setEndSheetOpen(true);
+        return true;
+      });
+      return () => subscription.remove();
+    }, []),
+  );
+
+  if (!session) return leaving ? null : <Redirect href="/" />;
+
+  const deckFor = (level: SpicyLevel) => getDeck(session.modeId, level, { locale });
+  const deck = deckFor(session.level);
+  const meta = LEVELS[session.level];
+  const question = getCurrentQuestion(session, deckFor);
+  const current = session.current;
+  const player = players.find((candidate) => candidate.id === current?.playerId) ?? players[0];
+  const target = players.find((candidate) => candidate.id === current?.targetPlayerId);
+  const remaining = countRemaining(deck, session.playedByLevel[session.level]);
+  const round = session.turnsCompleted + 1;
+  const exhausted = question === null;
+
+  const text = question
+    ? renderQuestionText(question.text, {
+        targetPlayerName: target?.name,
+        fallbackTargetName: t('game.fallbackTarget'),
+      })
+    : '';
+  const categoryLabel = question ? t(`category.${question.category}` as TranslationKey) : '';
+
+  const finish = () => {
+    setLeaving(true);
+    setEndSheetOpen(false);
+    endGame();
+    router.replace('/summary');
+  };
+
+  return (
+    <Screen
+      accent={meta.gradient[0]}
+      secondaryAccent={meta.gradient[1]}
+      header={
+        <View style={styles.topBar}>
+          <IconButton icon="close" label={t('game.end')} onPress={() => setEndSheetOpen(true)} />
+          <LevelPill level={session.level} onPress={() => setLevelSheetOpen(true)} />
+          <IconButton
+            icon="people-outline"
+            label={t('game.managePlayers')}
+            onPress={() => router.push({ pathname: '/players', params: { from: 'game' } })}
+          />
+        </View>
+      }
+      footer={
+        exhausted ? undefined : (
+          <>
+            <Button
+              label={t('game.next')}
+              icon="arrow-forward"
+              hint={t('game.nextHint')}
+              gradient={meta.gradient}
+              feedbackEvent="reveal"
+              onPress={answer}
+              testID="action-next"
+            />
+            <View style={styles.secondaryRow}>
+              <Button
+                label={t('game.skip')}
+                icon={narrow ? undefined : 'shuffle'}
+                variant="secondary"
+                size="md"
+                hint={t('game.skipHint')}
+                feedbackEvent="reveal"
+                onPress={skip}
+                style={styles.half}
+                dense={narrow}
+                testID="action-skip"
+              />
+              <Button
+                label={t('game.pass')}
+                icon={narrow ? undefined : 'hand-left-outline'}
+                variant="secondary"
+                size="md"
+                hint={t('game.passHint')}
+                feedbackEvent="pass"
+                onPress={pass}
+                style={styles.half}
+                dense={narrow}
+                testID="action-pass"
+              />
+            </View>
+            <AppText variant="caption" color={colors.textMuted} align="center">
+              {t('game.safetyHint')} 💜
+            </AppText>
+          </>
+        )
+      }
+    >
+      <View style={styles.content}>
+        {player ? <TurnBanner player={player} accent={meta.accent} /> : null}
+        {exhausted ? (
+          <ExhaustedCard
+            level={session.level}
+            deckSize={deck.length}
+            onReshuffle={() => {
+              feedback('level');
+              reshuffle();
+            }}
+            onChangeLevel={() => setLevelSheetOpen(true)}
+          />
+        ) : (
+          <QuestionCard
+            cardKey={`${session.level}:${current?.questionId ?? ''}:${current?.playerId ?? ''}`}
+            text={text}
+            level={session.level}
+            categoryLabel={categoryLabel}
+            footer={t('game.remaining', { round, count: remaining })}
+            accessibilityLabel={t('game.questionA11y', { name: player?.name ?? '', question: text })}
+            style={styles.card}
+          />
+        )}
+      </View>
+
+      <LevelSheet
+        visible={levelSheetOpen}
+        current={session.level}
+        getCount={(level) => deckFor(level).length}
+        onClose={() => setLevelSheetOpen(false)}
+        onSelect={(level) => {
+          setLevelSheetOpen(false);
+          feedback('level');
+          changeLevel(level);
+        }}
+      />
+      <ConfirmSheet
+        visible={endSheetOpen}
+        emoji="🌙"
+        title={t('game.endTitle')}
+        body={t('game.endBody')}
+        confirmLabel={t('game.endConfirm')}
+        cancelLabel={t('game.endCancel')}
+        destructive
+        onConfirm={finish}
+        onCancel={() => setEndSheetOpen(false)}
+        testID="end-sheet"
+      />
+    </Screen>
+  );
+}
+
+const styles = StyleSheet.create({
+  topBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+  content: { flex: 1, gap: spacing.xl, paddingTop: spacing.md },
+  card: { flexGrow: 1 },
+  secondaryRow: { flexDirection: 'row', gap: spacing.md },
+  half: { flex: 1 },
+});

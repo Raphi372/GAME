@@ -1,0 +1,772 @@
+[
+  {
+    "id": "extreme_001",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Was ist eine geheime Fantasie, die du erzählen möchtest?"
+  },
+  {
+    "id": "extreme_002",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Welche Eigenschaft macht jemanden für dich unwiderstehlich?"
+  },
+  {
+    "id": "extreme_003",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Was macht dich in einem intimen Moment am meisten an?"
+  },
+  {
+    "id": "extreme_004",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 1,
+    "text": "An welchem ungewöhnlichen Ort würdest du gerne einmal intim werden?"
+  },
+  {
+    "id": "extreme_005",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Welche Fantasie hast du noch nie laut ausgesprochen?"
+  },
+  {
+    "id": "extreme_006",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Welche Vorliebe hast du, über die du heute zumindest einen kleinen Hinweis gibst?"
+  },
+  {
+    "id": "extreme_007",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Welche Berührung bringt dich sofort in Stimmung?"
+  },
+  {
+    "id": "extreme_008",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Was findest du verführerischer: Worte oder Taten?"
+  },
+  {
+    "id": "extreme_009",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Was wolltest du im Schlafzimmer schon immer mal ausprobieren?"
+  },
+  {
+    "id": "extreme_010",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Welches Outfit findest du an anderen unwiderstehlich?"
+  },
+  {
+    "id": "extreme_011",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Was ist für dich der größte Turn-off im Schlafzimmer?"
+  },
+  {
+    "id": "extreme_012",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Licht an oder Licht aus – und warum?"
+  },
+  {
+    "id": "extreme_013",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Welcher Song wäre der perfekte Soundtrack für eine heiße Nacht?"
+  },
+  {
+    "id": "extreme_014",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Was ist die verführerischste Nachricht, die du je bekommen hast?"
+  },
+  {
+    "id": "extreme_015",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Was macht für dich ein gutes Vorspiel aus?"
+  },
+  {
+    "id": "extreme_016",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Morgens, mittags oder nachts – wann bist du am meisten in Stimmung?"
+  },
+  {
+    "id": "extreme_017",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Was war die heißeste Nachricht, die du je verschickt hast?"
+  },
+  {
+    "id": "extreme_018",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Wo wirst du am liebsten geküsst?"
+  },
+  {
+    "id": "extreme_019",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Welche Rolle würdest du in einem Rollenspiel gerne übernehmen?"
+  },
+  {
+    "id": "extreme_020",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Welche Fantasie würdest du nur mit der richtigen Person ausleben?"
+  },
+  {
+    "id": "extreme_021",
+    "level": "extreme",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Was war dein wildestes romantisches Erlebnis?"
+  },
+  {
+    "id": "extreme_022",
+    "level": "extreme",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Hast du schon einmal eine verbotene Anziehung gespürt?"
+  },
+  {
+    "id": "extreme_023",
+    "level": "extreme",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Was war dein spontanstes intimes Erlebnis?"
+  },
+  {
+    "id": "extreme_024",
+    "level": "extreme",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Hattest du schon einmal einen One-Night-Stand – und wie war es?"
+  },
+  {
+    "id": "extreme_025",
+    "level": "extreme",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Wurdest du schon einmal in einem intimen Moment erwischt?"
+  },
+  {
+    "id": "extreme_026",
+    "level": "extreme",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Bist du schon einmal mit jemandem im Bett gelandet, den du erst am selben Abend kennengelernt hast?"
+  },
+  {
+    "id": "extreme_027",
+    "level": "extreme",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Was ist das Gewagteste, das du jemals aus Lust getan hast?"
+  },
+  {
+    "id": "extreme_028",
+    "level": "extreme",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Hast du schon einmal ein heißes Foto verschickt – und es danach bereut?"
+  },
+  {
+    "id": "extreme_029",
+    "level": "extreme",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Hattest du schon einmal eine Affäre?"
+  },
+  {
+    "id": "extreme_030",
+    "level": "extreme",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Hast du schon einmal in einem intimen Moment an jemand anderen gedacht?"
+  },
+  {
+    "id": "extreme_031",
+    "level": "extreme",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Was ist das Peinlichste, das dir jemals in einem intimen Moment passiert ist?"
+  },
+  {
+    "id": "extreme_032",
+    "level": "extreme",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Hast du im Schlafzimmer schon einmal etwas vorgetäuscht?"
+  },
+  {
+    "id": "extreme_033",
+    "level": "extreme",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Hattest du schon einmal etwas mit jemandem, von dem niemand wissen durfte?"
+  },
+  {
+    "id": "extreme_034",
+    "level": "extreme",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Hattest du schon einmal eine Freundschaft Plus?"
+  },
+  {
+    "id": "extreme_035",
+    "level": "extreme",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Hattest du schon einmal etwas mit zwei Personen aus demselben Freundeskreis?"
+  },
+  {
+    "id": "extreme_036",
+    "level": "extreme",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Hast du schon einmal heftig rumgeknutscht, während andere im selben Raum waren?"
+  },
+  {
+    "id": "extreme_037",
+    "level": "extreme",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Was war die längste Zeit, die du ohne Intimität ausgekommen bist?"
+  },
+  {
+    "id": "extreme_038",
+    "level": "extreme",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Gab es ein intimes Erlebnis, das dich selbst komplett überrascht hat?"
+  },
+  {
+    "id": "extreme_039",
+    "level": "extreme",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Welche Frage hoffst du, dass dir heute niemand stellt?"
+  },
+  {
+    "id": "extreme_040",
+    "level": "extreme",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Welches Geheimnis würdest du nur unter vier Augen erzählen?"
+  },
+  {
+    "id": "extreme_041",
+    "level": "extreme",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Gibt es etwas aus deinem Liebesleben, das du noch nie jemandem erzählt hast?"
+  },
+  {
+    "id": "extreme_042",
+    "level": "extreme",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Wessen Nachrichten löschst du sofort, damit sie niemand liest?"
+  },
+  {
+    "id": "extreme_043",
+    "level": "extreme",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Gibt es eine Person, mit der du heimlich gerne etwas anfangen würdest?"
+  },
+  {
+    "id": "extreme_044",
+    "level": "extreme",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Was steht auf deiner geheimen Bucket List fürs Schlafzimmer?"
+  },
+  {
+    "id": "extreme_045",
+    "level": "extreme",
+    "category": "secrets",
+    "intensity": 2,
+    "text": "Gibt es eine Nacht, die du am liebsten aus deinem Gedächtnis löschen würdest?"
+  },
+  {
+    "id": "extreme_046",
+    "level": "extreme",
+    "category": "secrets",
+    "intensity": 2,
+    "text": "Was würdest du deinem aktuellen oder letzten Partner niemals beichten?"
+  },
+  {
+    "id": "extreme_047",
+    "level": "extreme",
+    "category": "secrets",
+    "intensity": 2,
+    "text": "Hast du ein Geheimnis aus einer früheren Beziehung, das niemand kennt?"
+  },
+  {
+    "id": "extreme_048",
+    "level": "extreme",
+    "category": "secrets",
+    "intensity": 2,
+    "text": "Welche heimliche Sehnsucht hast du gerade?"
+  },
+  {
+    "id": "extreme_049",
+    "level": "extreme",
+    "category": "secrets",
+    "intensity": 2,
+    "text": "Was ist die verrückteste Sache, die du jemals aus Eifersucht getan hast?"
+  },
+  {
+    "id": "extreme_050",
+    "level": "extreme",
+    "category": "secrets",
+    "intensity": 3,
+    "text": "Wen hast du schon einmal heimlich begehrt, obwohl es nicht sein durfte?"
+  },
+  {
+    "id": "extreme_051",
+    "level": "extreme",
+    "category": "secrets",
+    "intensity": 3,
+    "text": "Welche Seite von dir kennt kaum jemand?"
+  },
+  {
+    "id": "extreme_052",
+    "level": "extreme",
+    "category": "secrets",
+    "intensity": 3,
+    "text": "Gibt es eine Fantasie, für die du dich ein bisschen schämst?"
+  },
+  {
+    "id": "extreme_053",
+    "level": "extreme",
+    "category": "secrets",
+    "intensity": 3,
+    "text": "Was hast du in einer Beziehung schon einmal verheimlicht?"
+  },
+  {
+    "id": "extreme_054",
+    "level": "extreme",
+    "category": "secrets",
+    "intensity": 3,
+    "text": "Welche Nacht deines Lebens würdest du sofort wiederholen?"
+  },
+  {
+    "id": "extreme_055",
+    "level": "extreme",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Was war die intensivste Nacht deines Lebens – ohne zu viele Details?"
+  },
+  {
+    "id": "extreme_056",
+    "level": "extreme",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Was war das Romantischste, das du nach einer gemeinsamen Nacht erlebt hast?"
+  },
+  {
+    "id": "extreme_057",
+    "level": "extreme",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Was bedeutet für dich echte Intimität?"
+  },
+  {
+    "id": "extreme_058",
+    "level": "extreme",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Was brauchst du, um dich bei jemandem wirklich fallen zu lassen?"
+  },
+  {
+    "id": "extreme_059",
+    "level": "extreme",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Hast du dich schon einmal nach einer einzigen Nacht verliebt?"
+  },
+  {
+    "id": "extreme_060",
+    "level": "extreme",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Was ist der schönste Moment, den du je mit jemandem im Bett erlebt hast – abgesehen vom Schlafen?"
+  },
+  {
+    "id": "extreme_061",
+    "level": "extreme",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Bist du danach eher zum Kuscheln aufgelegt oder brauchst du deinen Freiraum?"
+  },
+  {
+    "id": "extreme_062",
+    "level": "extreme",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Was war das beste Kompliment, das du nach einer gemeinsamen Nacht bekommen hast?"
+  },
+  {
+    "id": "extreme_063",
+    "level": "extreme",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Wie wichtig ist dir körperliche Nähe in einer Beziehung?"
+  },
+  {
+    "id": "extreme_064",
+    "level": "extreme",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Was ist für dich sinnlicher: eine Massage oder ein gemeinsames Bad?"
+  },
+  {
+    "id": "extreme_065",
+    "level": "extreme",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Was war die längste Knutsch-Session deines Lebens?"
+  },
+  {
+    "id": "extreme_066",
+    "level": "extreme",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Hast du schon einmal eine ganze Nacht nur geredet – und es war intimer als alles andere?"
+  },
+  {
+    "id": "extreme_067",
+    "level": "extreme",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Wie zeigst du jemandem ohne ein Wort, dass du ihn oder sie willst?"
+  },
+  {
+    "id": "extreme_068",
+    "level": "extreme",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Welcher romantische Moment war der schönste, den du nie geplant hattest?"
+  },
+  {
+    "id": "extreme_069",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Was ist für dich am wichtigsten, damit sich Intimität gut anfühlt?"
+  },
+  {
+    "id": "extreme_070",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Wie offen sprichst du mit Partnern über Wünsche und Grenzen?"
+  },
+  {
+    "id": "extreme_071",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Was hast du in deinem Liebesleben erst spät über dich selbst gelernt?"
+  },
+  {
+    "id": "extreme_072",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Welche Grenze ist für dich in einer Beziehung absolut nicht verhandelbar?"
+  },
+  {
+    "id": "extreme_073",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Bist du im Bett eher dominant oder lässt du dich lieber führen?"
+  },
+  {
+    "id": "extreme_074",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Wie wichtig ist dir Treue – und wo fängt Untreue für dich an?"
+  },
+  {
+    "id": "extreme_075",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Wann hast du dich zum ersten Mal richtig begehrt gefühlt?"
+  },
+  {
+    "id": "extreme_076",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Hast du schon einmal Liebe und Lust verwechselt?"
+  },
+  {
+    "id": "extreme_077",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Was macht dich verletzlich, wenn du jemanden sehr magst?"
+  },
+  {
+    "id": "extreme_078",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Was ist das Ehrlichste, das du jemandem nach einer Trennung gesagt hast?"
+  },
+  {
+    "id": "extreme_079",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Was war deine schwierigste Trennung – und warum?"
+  },
+  {
+    "id": "extreme_080",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Glaubst du, dass man mehrere Menschen gleichzeitig lieben kann?"
+  },
+  {
+    "id": "extreme_081",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Was ist deine größte Unsicherheit beim Thema Intimität?"
+  },
+  {
+    "id": "extreme_082",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Hast du schon einmal jemanden geliebt, obwohl du wusstest, dass es nicht gut für dich ist?"
+  },
+  {
+    "id": "extreme_083",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Wodurch fühlst du dich in einer Beziehung wirklich gesehen?"
+  },
+  {
+    "id": "extreme_084",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Was würdest du an deinem Liebesleben sofort ändern, wenn du könntest?"
+  },
+  {
+    "id": "extreme_085",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 1,
+    "text": "Wer aus dieser Runde hat deiner Meinung nach die spannendsten Geheimnisse?"
+  },
+  {
+    "id": "extreme_086",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 1,
+    "text": "Wer hier ist im Bett vermutlich ganz anders, als man denkt?"
+  },
+  {
+    "id": "extreme_087",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 1,
+    "text": "Wer aus dieser Runde wirkt auf dich am verführerischsten?"
+  },
+  {
+    "id": "extreme_088",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 1,
+    "text": "Wer hier hat vermutlich die heißesten Fantasien?"
+  },
+  {
+    "id": "extreme_089",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 2,
+    "text": "Wen aus dieser Runde würdest du gerne einmal ganz privat kennenlernen?"
+  },
+  {
+    "id": "extreme_090",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 2,
+    "text": "Wer aus dieser Runde ist am ehesten für ein Abenteuer zu haben?"
+  },
+  {
+    "id": "extreme_091",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 2,
+    "text": "Wer hier kann verführen, ohne es selbst zu merken?"
+  },
+  {
+    "id": "extreme_092",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 2,
+    "text": "Wer aus dieser Runde hatte vermutlich die wildeste Nacht von allen?"
+  },
+  {
+    "id": "extreme_093",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 3,
+    "text": "Wem hier würdest du ein intimes Geheimnis anvertrauen?"
+  },
+  {
+    "id": "extreme_094",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 3,
+    "text": "Wer aus dieser Runde wäre die beste Besetzung für ein Rollenspiel?"
+  },
+  {
+    "id": "extreme_095",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 3,
+    "text": "Wer hier hütet die meisten Geheimnisse über sein Liebesleben?"
+  },
+  {
+    "id": "extreme_096",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 3,
+    "text": "Bei wem aus dieser Runde würdest du am ehesten schwach werden?"
+  },
+  {
+    "id": "extreme_097",
+    "level": "extreme",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Lieber eine heiße Nacht ohne Gefühle oder eine Beziehung ohne Leidenschaft?"
+  },
+  {
+    "id": "extreme_098",
+    "level": "extreme",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Würdest du eine Nacht mit deinem Promi-Crush gegen ein Jahr Single-Sein eintauschen?"
+  },
+  {
+    "id": "extreme_099",
+    "level": "extreme",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Würdest du deine wildesten Fantasien lieber ausleben oder für immer Fantasie bleiben lassen?"
+  },
+  {
+    "id": "extreme_100",
+    "level": "extreme",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Lieber nie wieder küssen oder nie wieder kuscheln?"
+  },
+  {
+    "id": "extreme_101",
+    "level": "extreme",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Wenn du eine Nacht ohne Konsequenzen hättest – mit wem und wo?"
+  },
+  {
+    "id": "extreme_102",
+    "level": "extreme",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Würdest du mit jemandem zusammenkommen, der im Bett perfekt passt, aber sonst gar nicht?"
+  },
+  {
+    "id": "extreme_103",
+    "level": "extreme",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Lieber eine Woche Funkstille oder eine Woche lang alle ehrlichen Gedanken deines Gegenübers hören?"
+  },
+  {
+    "id": "extreme_104",
+    "level": "extreme",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Wenn du eine Fantasie anonym verraten müsstest – welche wäre es?"
+  },
+  {
+    "id": "extreme_105",
+    "level": "extreme",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Lieber eine heiße Nacht im Luxushotel oder unter freiem Himmel?"
+  },
+  {
+    "id": "extreme_106",
+    "level": "extreme",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Würdest du für einen Abend die Rollen mit deinem Partner oder deiner Partnerin tauschen?"
+  },
+  {
+    "id": "extreme_107",
+    "level": "extreme",
+    "category": "hypothetical",
+    "intensity": 3,
+    "text": "Würdest du lieber alles über die früheren Beziehungen deines Gegenübers wissen oder gar nichts?"
+  },
+  {
+    "id": "extreme_108",
+    "level": "extreme",
+    "category": "hypothetical",
+    "intensity": 3,
+    "text": "Wenn deine Ex-Partner dich bewerten müssten – welche Note würdest du bekommen?"
+  },
+  {
+    "id": "extreme_109",
+    "level": "extreme",
+    "category": "hypothetical",
+    "intensity": 3,
+    "text": "Lieber eine Nacht voller Leidenschaft oder einen ganzen Tag voller Zärtlichkeit?"
+  },
+  {
+    "id": "extreme_110",
+    "level": "extreme",
+    "category": "hypothetical",
+    "intensity": 3,
+    "text": "Wenn du einen Abend nur für eure Fantasien planen dürftest – was stünde auf dem Programm?"
+  }
+]

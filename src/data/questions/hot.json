@@ -1,0 +1,772 @@
+[
+  {
+    "id": "hot_001",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Was ist der heißeste Flirt, den du je erlebt hast?"
+  },
+  {
+    "id": "hot_002",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Welche Körperstelle findest du bei anderen besonders anziehend?"
+  },
+  {
+    "id": "hot_003",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Was ist der frechste Spruch, mit dem du jemals Erfolg hattest?"
+  },
+  {
+    "id": "hot_004",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Hast du schon einmal mit jemandem geflirtet, während dein Date danebenstand?"
+  },
+  {
+    "id": "hot_005",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Hast du schon einmal aus Langeweile mit jemandem geflirtet, der gar nicht dein Typ war?"
+  },
+  {
+    "id": "hot_006",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Wie weit bist du schon gegangen, nur um jemanden auf dich aufmerksam zu machen?"
+  },
+  {
+    "id": "hot_007",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Welcher Blick bringt dich sofort aus dem Konzept?"
+  },
+  {
+    "id": "hot_008",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Was trägst du, wenn du dich richtig sexy fühlen willst?"
+  },
+  {
+    "id": "hot_009",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Was ist der verwegenste Flirt, den du jemals über Social Media angefangen hast?"
+  },
+  {
+    "id": "hot_010",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Was war die mutigste Anmache, die du je gewagt hast?"
+  },
+  {
+    "id": "hot_011",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Hast du schon einmal geflirtet, nur um jemand anderen eifersüchtig zu machen?"
+  },
+  {
+    "id": "hot_012",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Welche Nachricht hat dich schon einmal richtig nervös gemacht?"
+  },
+  {
+    "id": "hot_013",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Hast du schon einmal geflirtet, um an der Bar etwas umsonst zu bekommen?"
+  },
+  {
+    "id": "hot_014",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Was ist für dich der verführerischste Satz, den jemand sagen kann?"
+  },
+  {
+    "id": "hot_015",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Hast du schon einmal jemandem in Bus oder Bahn schöne Augen gemacht?"
+  },
+  {
+    "id": "hot_016",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Was ist der beste Flirt-Tipp, den du je bekommen hast – und funktioniert er wirklich?"
+  },
+  {
+    "id": "hot_017",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Hast du schon einmal zwei Personen gleichzeitig gedatet?"
+  },
+  {
+    "id": "hot_018",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Was war dein aufregendstes Date?"
+  },
+  {
+    "id": "hot_019",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Was war das kürzeste Date deines Lebens – und warum?"
+  },
+  {
+    "id": "hot_020",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Hast du schon einmal beim ersten Date geküsst?"
+  },
+  {
+    "id": "hot_021",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Wie viele Dates hattest du schon über Dating-Apps?"
+  },
+  {
+    "id": "hot_022",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Sah ein Online-Match beim echten Treffen schon einmal komplett anders aus als auf den Fotos?"
+  },
+  {
+    "id": "hot_023",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Was war das wildeste Date-Erlebnis, das du je hattest?"
+  },
+  {
+    "id": "hot_024",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Hattest du schon einmal ein Date mit einer oder einem Ex, obwohl du wusstest, dass es keine gute Idee ist?"
+  },
+  {
+    "id": "hot_025",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Bist du schon einmal mit jemandem ausgegangen, nur weil er oder sie gut aussah?"
+  },
+  {
+    "id": "hot_026",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Wie viele Dates braucht es bei dir bis zum ersten Kuss?"
+  },
+  {
+    "id": "hot_027",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Hattest du schon einmal ein Date mit dem besten Freund oder der besten Freundin deines Crushs?"
+  },
+  {
+    "id": "hot_028",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Hast du schon einmal ein Date nur erfunden, um jemanden eifersüchtig zu machen?"
+  },
+  {
+    "id": "hot_029",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Was ist die größte Lüge, die du bei einem Date erzählt hast?"
+  },
+  {
+    "id": "hot_030",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Bist du nach einem Date schon einmal über Nacht geblieben, obwohl das nicht geplant war?"
+  },
+  {
+    "id": "hot_031",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Was ist der spontanste Ort, an dem du ein Date hattest?"
+  },
+  {
+    "id": "hot_032",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Hattest du schon einmal ein Date mit jemandem aus der Arbeit?"
+  },
+  {
+    "id": "hot_033",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Was ist dein Geheimrezept für ein zweites Date?"
+  },
+  {
+    "id": "hot_034",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Hattest du schon einmal ein Date, das du deinen Freunden komplett verschwiegen hast?"
+  },
+  {
+    "id": "hot_035",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Hast du schon einmal beim Küssen an jemand anderen gedacht?"
+  },
+  {
+    "id": "hot_036",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Wie war der beste Kuss deines Lebens?"
+  },
+  {
+    "id": "hot_037",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Wo war der ungewöhnlichste Ort, an dem du jemanden geküsst hast?"
+  },
+  {
+    "id": "hot_038",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Was macht für dich einen perfekten Kuss aus?"
+  },
+  {
+    "id": "hot_039",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Hast du schon einmal jemanden geküsst, dessen Namen du nicht kanntest?"
+  },
+  {
+    "id": "hot_040",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Wie viele Personen hast du schon geküsst – ungefähr?"
+  },
+  {
+    "id": "hot_041",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Hast du schon einmal jemanden aus deinem Freundeskreis geküsst?"
+  },
+  {
+    "id": "hot_042",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Was war der schlechteste Kuss, den du je bekommen hast?"
+  },
+  {
+    "id": "hot_043",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Hast du schon einmal mitten auf der Tanzfläche rumgeknutscht?"
+  },
+  {
+    "id": "hot_044",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Hast du schon einmal jemanden geküsst, nur weil die Stimmung gerade so gut war?"
+  },
+  {
+    "id": "hot_045",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Langsam und zärtlich oder wild und leidenschaftlich – welcher Kuss ist dein Ding?"
+  },
+  {
+    "id": "hot_046",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Hast du schon einmal einen Kuss bereut?"
+  },
+  {
+    "id": "hot_047",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Wurdest du schon einmal überraschend geküsst – und wie hast du reagiert?"
+  },
+  {
+    "id": "hot_048",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Was ist romantischer: ein Kuss im Regen oder ein Kuss im Sonnenuntergang?"
+  },
+  {
+    "id": "hot_049",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Erzähl von einem Kuss, an den du heute noch denkst."
+  },
+  {
+    "id": "hot_050",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Was ist die romantischste Geste, die du je für jemanden gemacht hast?"
+  },
+  {
+    "id": "hot_051",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Hast du schon einmal heimlich das Handy deines Partners oder deiner Partnerin durchsucht?"
+  },
+  {
+    "id": "hot_052",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Hattest du schon einmal Gefühle für jemanden, der in einer Beziehung war?"
+  },
+  {
+    "id": "hot_053",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Hast du schon einmal mitten in der Nacht deiner oder deinem Ex geschrieben?"
+  },
+  {
+    "id": "hot_054",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Hast du schon einmal jemanden betrogen oder warst kurz davor?"
+  },
+  {
+    "id": "hot_055",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Hattest du schon einmal einen Crush auf den Partner oder die Partnerin von Freunden?"
+  },
+  {
+    "id": "hot_056",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Hast du schon einmal mit jemandem rumgemacht und es später komplett bereut?"
+  },
+  {
+    "id": "hot_057",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Hast du schon einmal „Ich liebe dich“ gesagt, ohne es wirklich zu meinen?"
+  },
+  {
+    "id": "hot_058",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Hast du schon einmal bei einem Date eine falsche Telefonnummer herausgegeben?"
+  },
+  {
+    "id": "hot_059",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Hast du schon einmal heimlich Fotos von deinem Crush gespeichert?"
+  },
+  {
+    "id": "hot_060",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Hast du deinen Beziehungsstatus schon einmal vor jemandem verheimlicht?"
+  },
+  {
+    "id": "hot_061",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Hast du schon einmal eine Beziehung per Nachricht beendet?"
+  },
+  {
+    "id": "hot_062",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Warst du schon einmal eifersüchtig auf jemanden aus dieser Runde?"
+  },
+  {
+    "id": "hot_063",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Hast du schon einmal eine ganze Nacht durchgemacht, nur um länger mit deinem Crush zu schreiben?"
+  },
+  {
+    "id": "hot_064",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Hast du schon einmal so getan, als wärst du Single, obwohl du es nicht warst?"
+  },
+  {
+    "id": "hot_065",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Hast du schon einmal eine Nachricht an deinen Crush abgeschickt und dann sofort das Handy weggelegt?"
+  },
+  {
+    "id": "hot_066",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Hattest du schon einmal ein Match mit jemandem aus deinem Bekanntenkreis – und was ist passiert?"
+  },
+  {
+    "id": "hot_067",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Hast du schon einmal jemanden nur wegen seines Instagram-Profils gedatet?"
+  },
+  {
+    "id": "hot_068",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Hattest du schon einmal einen Crush auf deine Chefin oder deinen Chef?"
+  },
+  {
+    "id": "hot_069",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Was ist ein Dating-Geheimnis, das hier noch niemand kennt?"
+  },
+  {
+    "id": "hot_070",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Welches Geheimnis aus deinem Liebesleben hast du bisher nur einer Person erzählt?"
+  },
+  {
+    "id": "hot_071",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Gibt es jemanden, an den du heimlich immer noch denkst?"
+  },
+  {
+    "id": "hot_072",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Was ist das Verrückteste, das du je aus Liebe getan hast?"
+  },
+  {
+    "id": "hot_073",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Welche Nachricht in deinem Handy dürfte hier niemand lesen?"
+  },
+  {
+    "id": "hot_074",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 2,
+    "text": "Was googelst du heimlich, wenn es um Liebe oder Dating geht?"
+  },
+  {
+    "id": "hot_075",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 2,
+    "text": "Welche Person aus deiner Vergangenheit würdest du gerne noch einmal treffen?"
+  },
+  {
+    "id": "hot_076",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 2,
+    "text": "Hast du einen geheimen Crush, von dem hier niemand etwas weiß?"
+  },
+  {
+    "id": "hot_077",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 2,
+    "text": "Welches Date hast du deinen Freunden ganz anders erzählt, als es wirklich war?"
+  },
+  {
+    "id": "hot_078",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 2,
+    "text": "Was war der größte Fehler in deinem Liebesleben?"
+  },
+  {
+    "id": "hot_079",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 3,
+    "text": "Was ist das Romantischste, das du heimlich gerne erleben würdest?"
+  },
+  {
+    "id": "hot_080",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 3,
+    "text": "Gibt es eine Dating-App, auf der du heimlich noch angemeldet bist?"
+  },
+  {
+    "id": "hot_081",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 3,
+    "text": "Welchen Rat über die Liebe hättest du selbst gerne früher bekommen?"
+  },
+  {
+    "id": "hot_082",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 3,
+    "text": "Hast du schon einmal jemanden zurückgewiesen, in den du eigentlich verliebt warst?"
+  },
+  {
+    "id": "hot_083",
+    "level": "hot",
+    "category": "group",
+    "intensity": 1,
+    "text": "Mit wem aus dieser Runde würdest du auf ein Date gehen?"
+  },
+  {
+    "id": "hot_084",
+    "level": "hot",
+    "category": "group",
+    "intensity": 1,
+    "text": "Wer könnte dich am ehesten verführen?"
+  },
+  {
+    "id": "hot_085",
+    "level": "hot",
+    "category": "group",
+    "intensity": 1,
+    "text": "Wen aus dieser Runde würdest du am ehesten küssen?"
+  },
+  {
+    "id": "hot_086",
+    "level": "hot",
+    "category": "group",
+    "intensity": 1,
+    "text": "Wer aus dieser Runde hat die verführerischste Stimme?"
+  },
+  {
+    "id": "hot_087",
+    "level": "hot",
+    "category": "group",
+    "intensity": 1,
+    "text": "Wer hier hätte den heißesten Promi-Doppelgänger?"
+  },
+  {
+    "id": "hot_088",
+    "level": "hot",
+    "category": "group",
+    "intensity": 2,
+    "text": "Mit wem aus dieser Runde würdest du am liebsten einen Kurztrip zu zweit machen?"
+  },
+  {
+    "id": "hot_089",
+    "level": "hot",
+    "category": "group",
+    "intensity": 2,
+    "text": "Wer aus dieser Runde küsst deiner Meinung nach am besten?"
+  },
+  {
+    "id": "hot_090",
+    "level": "hot",
+    "category": "group",
+    "intensity": 2,
+    "text": "Wer hier hat vermutlich die meisten Herzen gebrochen?"
+  },
+  {
+    "id": "hot_091",
+    "level": "hot",
+    "category": "group",
+    "intensity": 2,
+    "text": "Welche Eigenschaft von {other} findest du anziehend?"
+  },
+  {
+    "id": "hot_092",
+    "level": "hot",
+    "category": "group",
+    "intensity": 2,
+    "text": "Wie würde ein Date mit {other} deiner Meinung nach aussehen?"
+  },
+  {
+    "id": "hot_093",
+    "level": "hot",
+    "category": "group",
+    "intensity": 3,
+    "text": "Was würdest du {other} gerne einmal ganz ehrlich sagen?"
+  },
+  {
+    "id": "hot_094",
+    "level": "hot",
+    "category": "group",
+    "intensity": 3,
+    "text": "Mit wem aus dieser Runde würdest du am liebsten einen engen Slow-Dance tanzen?"
+  },
+  {
+    "id": "hot_095",
+    "level": "hot",
+    "category": "group",
+    "intensity": 3,
+    "text": "Wer hier flirtet am subtilsten?"
+  },
+  {
+    "id": "hot_096",
+    "level": "hot",
+    "category": "group",
+    "intensity": 3,
+    "text": "Wer aus dieser Runde hätte die besten Chancen bei deinem Crush?"
+  },
+  {
+    "id": "hot_097",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Lieber eine Nacht mit deinem Promi-Crush oder eine Woche Urlaub mit deinem Ex?"
+  },
+  {
+    "id": "hot_098",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Würdest du für eine Million Euro ein Jahr lang Single bleiben?"
+  },
+  {
+    "id": "hot_099",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Würdest du lieber deine komplette Dating-History veröffentlichen oder deinen Browserverlauf?"
+  },
+  {
+    "id": "hot_100",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Würdest du mit deiner oder deinem Ex wieder zusammenkommen, wenn sich alles Störende ändern würde?"
+  },
+  {
+    "id": "hot_101",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Würdest du lieber mit jemandem zusammen sein, der dich mehr liebt, oder den du mehr liebst?"
+  },
+  {
+    "id": "hot_102",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Wenn du eine Person aus deiner Vergangenheit noch einmal küssen könntest – wer wäre es?"
+  },
+  {
+    "id": "hot_103",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Würdest du lieber ein Jahr ohne Küssen oder ein Jahr ohne Flirten leben?"
+  },
+  {
+    "id": "hot_104",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Würdest du eine offene Beziehung ausprobieren?"
+  },
+  {
+    "id": "hot_105",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Lieber ein heißer Urlaubsflirt oder eine langsam wachsende große Liebe?"
+  },
+  {
+    "id": "hot_106",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Wenn du einen Tag lang die Dating-App deiner besten Freundin oder deines besten Freundes übernehmen dürftest – wem würdest du schreiben?"
+  },
+  {
+    "id": "hot_107",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 3,
+    "text": "Würdest du lieber mit deinem Crush oder mit deinem Ex im Aufzug stecken bleiben?"
+  },
+  {
+    "id": "hot_108",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 3,
+    "text": "Würdest du deinem Partner oder deiner Partnerin dein Handy-Passwort verraten?"
+  },
+  {
+    "id": "hot_109",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 3,
+    "text": "Würdest du für die richtige Person deine eigenen Dating-Regeln über Bord werfen?"
+  },
+  {
+    "id": "hot_110",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 3,
+    "text": "Würdest du lieber wissen, wer heimlich in dich verliebt ist, oder wer dich heimlich nicht leiden kann?"
+  }
+]

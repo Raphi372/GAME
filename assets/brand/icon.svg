@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bgTop" cx="0.3" cy="0.15" r="0.9">
+      <stop offset="0" stop-color="#3B1A5C"/>
+      <stop offset="0.55" stop-color="#140B1F"/>
+      <stop offset="1" stop-color="#07050B"/>
+    </radialGradient>
+    <radialGradient id="bgGlow" cx="0.5" cy="0.62" r="0.42">
+      <stop offset="0" stop-color="#FF3D9A" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#FF3D9A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="flame" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#D9A6FF"/>
+      <stop offset="0.4" stop-color="#B14DFF"/>
+      <stop offset="1" stop-color="#FF3D9A"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#bgTop)"/>
+  <rect width="1024" height="1024" fill="url(#bgGlow)"/>
+  <g transform="translate(192 170) scale(6.4)">
+    <path filter="url(#glow)" opacity="0.85" fill="#FF3D9A" fill-rule="evenodd" d="M50 6 C58 22 77 31 77 56 C77 76 65 91 50 91 C35 91 23 77 23 58 C23 44 31 35 38 27 C38 39 43 45 50 48 C46 34 46 20 50 6 Z"/>
+    <path fill="url(#flame)" fill-rule="evenodd" d="M50 6 C58 22 77 31 77 56 C77 76 65 91 50 91 C35 91 23 77 23 58 C23 44 31 35 38 27 C38 39 43 45 50 48 C46 34 46 20 50 6 Z M50 56 C56 63 62 67 62 75 C62 82 56 86 50 86 C44 86 38 82 38 75 C38 68 44 63 50 56 Z"/>
+  </g>
+</svg>
