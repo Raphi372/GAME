@@ -1,5 +1,6 @@
 import {
   changeLevel,
+  completeGroupRound,
   completeTurn,
   createSession,
   getCurrentQuestion,
@@ -38,7 +39,12 @@ describe('game session', () => {
     expect(next.current?.playerId).not.toBe(session.current?.playerId);
     expect(next.current?.questionId).not.toBe(session.current?.questionId);
     expect(next.turnsCompleted).toBe(1);
-    expect(next.stats[session.current!.playerId]).toEqual({ answered: 1, passed: 0, skipped: 0 });
+    expect(next.stats[session.current!.playerId]).toEqual({
+      answered: 1,
+      passed: 0,
+      skipped: 0,
+      confessed: 0,
+    });
     expect(next.turnCounts[session.current!.playerId]).toBe(1);
   });
 
@@ -154,7 +160,7 @@ describe('game session', () => {
       ctx = makeContext([...players, { id: 'new', name: 'Neu', colorIndex: 5 }]);
       session = syncSessionPlayers(session, ctx);
       expect(session.turnCounts.new).toBe(Math.min(session.turnCounts.p1!, session.turnCounts.p2!));
-      expect(session.stats.new).toEqual({ answered: 0, passed: 0, skipped: 0 });
+      expect(session.stats.new).toEqual({ answered: 0, passed: 0, skipped: 0, confessed: 0 });
     });
 
     it('hands the current question to the next player if the active one leaves', () => {
@@ -197,5 +203,65 @@ describe('game session', () => {
     expect(repaired.playedByLevel.mild).not.toContain('deleted_question');
     expect(repaired.current?.questionId).toMatch(/^mild_/);
     expect(repaired.current?.playerId).toBe('p1');
+  });
+});
+
+describe('group rounds ("Ich hab noch nie")', () => {
+  const groupOptions = { ...options, modeId: 'never-have-i-ever' as const };
+
+  it('counts confessions and lets the next player read', () => {
+    const ctx = makeContext(makePlayers(3), { mild: 10 });
+    const session = createSession(groupOptions, ctx);
+    const reader = session.current!.playerId;
+    const next = completeGroupRound(session, ['p1', 'p3'], ctx);
+    expect(next.stats.p1?.confessed).toBe(1);
+    expect(next.stats.p2?.confessed).toBe(0);
+    expect(next.stats.p3?.confessed).toBe(1);
+    expect(next.current?.playerId).not.toBe(reader);
+    expect(next.current?.questionId).not.toBe(session.current?.questionId);
+    expect(next.turnsCompleted).toBe(1);
+    // Reading a card is not "answering" a question.
+    expect(next.stats[reader]?.answered).toBe(0);
+  });
+
+  it('allows a round without any confessions', () => {
+    const ctx = makeContext(makePlayers(2));
+    const session = createSession(groupOptions, ctx);
+    const next = completeGroupRound(session, [], ctx);
+    expect(Object.values(next.stats).every((stats) => stats.confessed === 0)).toBe(true);
+    expect(next.turnsCompleted).toBe(1);
+  });
+
+  it('ignores unknown and duplicate player ids', () => {
+    const ctx = makeContext(makePlayers(2));
+    const session = createSession(groupOptions, ctx);
+    const next = completeGroupRound(session, ['p1', 'p1', 'ghost'], ctx);
+    expect(next.stats.p1?.confessed).toBe(1);
+    expect(next.stats.ghost).toBeUndefined();
+  });
+
+  it('accumulates confessions over several rounds without repeating cards', () => {
+    const ctx = makeContext(makePlayers(3), { mild: 12 });
+    let session = createSession(groupOptions, ctx);
+    const seen = new Set([session.current!.questionId]);
+    for (let i = 0; i < 11; i += 1) {
+      session = completeGroupRound(session, ['p2'], ctx);
+      seen.add(session.current!.questionId);
+    }
+    expect(session.stats.p2?.confessed).toBe(11);
+    expect(seen.size).toBe(12);
+  });
+
+  it('adds missing counters to sessions saved by older versions', () => {
+    const ctx = makeContext(makePlayers(2));
+    const session = createSession(groupOptions, ctx);
+    const legacy: GameSession = {
+      ...session,
+      stats: { p1: { answered: 2, passed: 1, skipped: 0 } as never, p2: {} as never },
+    };
+    const repaired = repairSession(legacy, ctx);
+    expect(repaired.stats.p1).toEqual({ answered: 2, passed: 1, skipped: 0, confessed: 0 });
+    expect(repaired.stats.p2).toEqual({ answered: 0, passed: 0, skipped: 0, confessed: 0 });
+    expect(completeGroupRound(repaired, ['p1'], ctx).stats.p1?.confessed).toBe(1);
   });
 });

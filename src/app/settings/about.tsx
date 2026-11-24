@@ -2,17 +2,18 @@ import Constants from 'expo-constants';
 import { StyleSheet, View } from 'react-native';
 
 import { AppText, Header, Icon, Logo, Screen, Surface } from '@/components/ui';
-import { getDeckSize } from '@/features/question-decks';
+import { listPlayableModeIds } from '@/features/game-modes/registry';
+import { countBuiltInCards } from '@/features/question-decks';
 import { useTranslation } from '@/i18n';
 import { colors, spacing } from '@/theme';
-import { SPICY_LEVELS } from '@/types';
 
 export default function AboutScreen() {
   const { t } = useTranslation();
   const version = Constants.expoConfig?.version ?? '1.0.0';
-  const total = SPICY_LEVELS.reduce((sum, level) => sum + getDeckSize('spicy-questions', level), 0);
+  const playableModes = listPlayableModeIds();
+  const total = countBuiltInCards(playableModes);
   const features = [
-    t('about.feature.questions', { count: total }),
+    t('about.feature.questions', { count: total, modes: playableModes.length }),
     t('about.feature.offline'),
     t('about.feature.noAccount'),
     t('about.feature.fair'),

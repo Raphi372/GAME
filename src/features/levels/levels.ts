@@ -1,3 +1,4 @@
+import type { GameModeId } from '@/features/game-modes/registry';
 import type { TranslationKey } from '@/i18n';
 import { SPICY_LEVELS, type SpicyLevel } from '@/types';
 
@@ -54,4 +55,17 @@ export const LEVELS: Record<SpicyLevel, LevelMeta> = {
 
 export function listLevels(): LevelMeta[] {
   return SPICY_LEVELS.map((level) => LEVELS[level]);
+}
+
+/** Modes can describe the levels in their own words; Spicy Questions uses the default. */
+const MODE_LEVEL_DESCRIPTIONS: Partial<Record<GameModeId, Record<SpicyLevel, TranslationKey>>> = {
+  'never-have-i-ever': {
+    mild: 'nhie.level.mild.description',
+    hot: 'nhie.level.hot.description',
+    extreme: 'nhie.level.extreme.description',
+  },
+};
+
+export function levelDescriptionKey(level: SpicyLevel, modeId: GameModeId): TranslationKey {
+  return MODE_LEVEL_DESCRIPTIONS[modeId]?.[level] ?? LEVELS[level].descriptionKey;
 }

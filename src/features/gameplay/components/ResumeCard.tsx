@@ -2,19 +2,22 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, View } from 'react-native';
 
 import { AppText, Button } from '@/components/ui';
+import { modeTitleKey } from '@/features/game-modes/labels';
+import type { GameModeId } from '@/features/game-modes/registry';
 import { LEVELS } from '@/features/levels/levels';
 import { useTranslation } from '@/i18n';
 import { colors, radius, spacing } from '@/theme';
 import type { SpicyLevel } from '@/types';
 
 interface ResumeCardProps {
+  modeId: GameModeId;
   level: SpicyLevel;
   playerCount: number;
   round: number;
   onResume: () => void;
 }
 
-export function ResumeCard({ level, playerCount, round, onResume }: ResumeCardProps) {
+export function ResumeCard({ modeId, level, playerCount, round, onResume }: ResumeCardProps) {
   const { t } = useTranslation();
   const meta = LEVELS[level];
   return (
@@ -27,8 +30,8 @@ export function ResumeCard({ level, playerCount, round, onResume }: ResumeCardPr
       />
       <View style={[styles.stripe, { backgroundColor: meta.accent }]} />
       <View style={styles.text}>
-        <AppText variant="overline" color={meta.accent}>
-          {t('home.resumeOverline')}
+        <AppText variant="overline" color={meta.accent} numberOfLines={1}>
+          {`${t('home.resumeOverline')} · ${t(modeTitleKey(modeId))}`}
         </AppText>
         <AppText variant="bodyStrong">
           {t('home.resumeDetails', {

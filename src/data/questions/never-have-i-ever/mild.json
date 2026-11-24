@@ -1,0 +1,702 @@
+[
+  {
+    "id": "nhie_mild_001",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Ich hab noch nie jemandem meine Nummer auf einen Zettel geschrieben."
+  },
+  {
+    "id": "nhie_mild_002",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Ich hab noch nie mit jemandem nur über Blicke geflirtet."
+  },
+  {
+    "id": "nhie_mild_003",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Ich hab noch nie einen Anmachspruch benutzt, der wirklich funktioniert hat."
+  },
+  {
+    "id": "nhie_mild_004",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Ich hab noch nie mit einer Bedienung geflirtet."
+  },
+  {
+    "id": "nhie_mild_005",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Ich hab noch nie jemandem ein Kompliment gemacht, nur um ins Gespräch zu kommen."
+  },
+  {
+    "id": "nhie_mild_006",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Ich hab noch nie mit jemandem geflirtet, dessen Namen ich vergessen hatte."
+  },
+  {
+    "id": "nhie_mild_007",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Ich hab noch nie so getan, als würde ich mich für ein Thema interessieren, nur um zu flirten."
+  },
+  {
+    "id": "nhie_mild_008",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Ich hab noch nie jemandem zugezwinkert."
+  },
+  {
+    "id": "nhie_mild_009",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Ich hab noch nie einen Flirt mit einem Emoji angefangen."
+  },
+  {
+    "id": "nhie_mild_010",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Ich hab noch nie beim Flirten knallrot geworden."
+  },
+  {
+    "id": "nhie_mild_011",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Ich hab noch nie bei einem Flirt komplett vergessen, was ich sagen wollte."
+  },
+  {
+    "id": "nhie_mild_012",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Ich hab noch nie im Fitnessstudio geflirtet."
+  },
+  {
+    "id": "nhie_mild_013",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Ich hab noch nie absichtlich in der Nähe meines Crushs herumgestanden."
+  },
+  {
+    "id": "nhie_mild_014",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Ich hab noch nie jemandem auf eine Story geantwortet, nur um aufzufallen."
+  },
+  {
+    "id": "nhie_mild_015",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Ich hab noch nie mein Outfit dreimal gewechselt, weil ich jemanden treffen wollte."
+  },
+  {
+    "id": "nhie_mild_016",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Ich hab noch nie im Supermarkt geflirtet."
+  },
+  {
+    "id": "nhie_mild_017",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Ich hab noch nie ein Liebeslied gehört und dabei an meinen Crush gedacht."
+  },
+  {
+    "id": "nhie_mild_018",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Ich hab noch nie so getan, als hätte ich jemanden rein zufällig getroffen."
+  },
+  {
+    "id": "nhie_mild_019",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Ich hab noch nie jemandem so lange Blicke zugeworfen, bis es aufgefallen ist."
+  },
+  {
+    "id": "nhie_mild_020",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Ich hab noch nie einen Flirt gehabt, der nur aus Insider-Witzen bestand."
+  },
+  {
+    "id": "nhie_mild_021",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Ich hab noch nie ein Date gehabt, das länger als fünf Stunden gedauert hat."
+  },
+  {
+    "id": "nhie_mild_022",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Ich hab noch nie ein Date gehabt, bei dem wir uns überhaupt nichts zu sagen hatten."
+  },
+  {
+    "id": "nhie_mild_023",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Ich hab noch nie bei einem Date so getan, als würde mir das Essen schmecken."
+  },
+  {
+    "id": "nhie_mild_024",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Ich hab noch nie ein Date wegen schlechten Wetters abgesagt."
+  },
+  {
+    "id": "nhie_mild_025",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Ich hab noch nie mich zu einem Date mehr als eine halbe Stunde verspätet."
+  },
+  {
+    "id": "nhie_mild_026",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Ich hab noch nie ein Blind Date gehabt."
+  },
+  {
+    "id": "nhie_mild_027",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Ich hab noch nie jemanden über eine Dating-App getroffen."
+  },
+  {
+    "id": "nhie_mild_028",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Ich hab noch nie jemanden auf einer Dating-App weggewischt, den ich eigentlich kannte."
+  },
+  {
+    "id": "nhie_mild_029",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Ich hab noch nie ein Date in einem Museum gehabt."
+  },
+  {
+    "id": "nhie_mild_030",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Ich hab noch nie ein Picknick-Date gemacht."
+  },
+  {
+    "id": "nhie_mild_031",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Ich hab noch nie bei einem Date Karaoke gesungen."
+  },
+  {
+    "id": "nhie_mild_032",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Ich hab noch nie bei einem Date meine Geldbörse vergessen."
+  },
+  {
+    "id": "nhie_mild_033",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Ich hab noch nie ein Date gehabt, bei dem Freunde heimlich zugeschaut haben."
+  },
+  {
+    "id": "nhie_mild_034",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Ich hab noch nie mir für ein Date extra die Haare machen lassen."
+  },
+  {
+    "id": "nhie_mild_035",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Ich hab noch nie bei einem Date nach zehn Minuten am liebsten wieder gehen wollen."
+  },
+  {
+    "id": "nhie_mild_036",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Ich hab noch nie ein zweites Date abgesagt, obwohl das erste gut war."
+  },
+  {
+    "id": "nhie_mild_037",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Ich hab noch nie einen Date-Abend bis ins letzte Detail durchgeplant."
+  },
+  {
+    "id": "nhie_mild_038",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Ich hab noch nie mir vor einem Date Gesprächsthemen aufgeschrieben."
+  },
+  {
+    "id": "nhie_mild_039",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Ich hab noch nie jemanden gedatet, den ich im Urlaub kennengelernt habe."
+  },
+  {
+    "id": "nhie_mild_040",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Ich hab noch nie mehr als drei Dates in einer Woche gehabt."
+  },
+  {
+    "id": "nhie_mild_041",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Ich hab noch nie eine Nachricht an die falsche Person geschickt."
+  },
+  {
+    "id": "nhie_mild_042",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Ich hab noch nie eine Sprachnachricht verschickt und sie sofort bereut."
+  },
+  {
+    "id": "nhie_mild_043",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Ich hab noch nie meinen Crush gegoogelt."
+  },
+  {
+    "id": "nhie_mild_044",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Ich hab noch nie aus Versehen ein uraltes Foto geliked."
+  },
+  {
+    "id": "nhie_mild_045",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Ich hab noch nie mich vor meinem Crush richtig blamiert."
+  },
+  {
+    "id": "nhie_mild_046",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Ich hab noch nie jemandem zurückgewunken, der gar nicht mich gemeint hat."
+  },
+  {
+    "id": "nhie_mild_047",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Ich hab noch nie einen Liebesbrief geschrieben, den ich nie abgeschickt habe."
+  },
+  {
+    "id": "nhie_mild_048",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Ich hab noch nie einen Decknamen für meinen Crush erfunden, damit niemand weiß, um wen es geht."
+  },
+  {
+    "id": "nhie_mild_049",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Ich hab noch nie vor dem Spiegel ein Gespräch mit meinem Crush geübt."
+  },
+  {
+    "id": "nhie_mild_050",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Ich hab noch nie mich in eine Serienfigur verliebt."
+  },
+  {
+    "id": "nhie_mild_051",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Ich hab noch nie bei einem Liebesfilm geweint."
+  },
+  {
+    "id": "nhie_mild_052",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Ich hab noch nie auf einer Hochzeit den Brautstrauß gefangen."
+  },
+  {
+    "id": "nhie_mild_053",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Ich hab noch nie beim Tanzen jemandem auf den Fuß getreten."
+  },
+  {
+    "id": "nhie_mild_054",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Ich hab noch nie einen Liebeskummer-Song in Dauerschleife gehört."
+  },
+  {
+    "id": "nhie_mild_055",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Ich hab noch nie beim Flirten einen Namen verwechselt."
+  },
+  {
+    "id": "nhie_mild_056",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Ich hab noch nie mein Profilbild nur wegen meines Crushs geändert."
+  },
+  {
+    "id": "nhie_mild_057",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Ich hab noch nie mir das Profil einer oder eines Ex angeschaut."
+  },
+  {
+    "id": "nhie_mild_058",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Ich hab noch nie eine peinliche Nachricht mit „Sorry, falscher Chat“ gerettet."
+  },
+  {
+    "id": "nhie_mild_059",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Ich hab noch nie mich bei einem Date verschluckt."
+  },
+  {
+    "id": "nhie_mild_060",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Ich hab noch nie meine Freunde gefragt, welches Emoji ich meinem Crush schicken soll."
+  },
+  {
+    "id": "nhie_mild_061",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Ich hab noch nie einem Promi auf Social Media geschrieben."
+  },
+  {
+    "id": "nhie_mild_062",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Ich hab noch nie mich über ein passendes Horoskop mit meinem Crush gefreut."
+  },
+  {
+    "id": "nhie_mild_063",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Ich hab noch nie eine Dating-App installiert und am selben Tag wieder gelöscht."
+  },
+  {
+    "id": "nhie_mild_064",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Ich hab noch nie so getan, als würde ich telefonieren, um jemandem auszuweichen."
+  },
+  {
+    "id": "nhie_mild_065",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Ich hab noch nie einen Film nur ausgesucht, weil mein Date ihn mochte."
+  },
+  {
+    "id": "nhie_mild_066",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Ich hab noch nie an Liebe auf den ersten Blick geglaubt."
+  },
+  {
+    "id": "nhie_mild_067",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Ich hab noch nie jemandem Blumen geschenkt."
+  },
+  {
+    "id": "nhie_mild_068",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Ich hab noch nie einen Liebesbrief bekommen."
+  },
+  {
+    "id": "nhie_mild_069",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Ich hab noch nie für jemanden ein Lied gesungen."
+  },
+  {
+    "id": "nhie_mild_070",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Ich hab noch nie mit jemandem den Sonnenaufgang angeschaut."
+  },
+  {
+    "id": "nhie_mild_071",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Ich hab noch nie ein Geschenk selbst gebastelt, um jemanden zu beeindrucken."
+  },
+  {
+    "id": "nhie_mild_072",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Ich hab noch nie einen romantischen Abend mit Kerzen vorbereitet."
+  },
+  {
+    "id": "nhie_mild_073",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Ich hab noch nie für jemanden eine Playlist erstellt."
+  },
+  {
+    "id": "nhie_mild_074",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Ich hab noch nie mit jemandem unter dem Sternenhimmel gelegen."
+  },
+  {
+    "id": "nhie_mild_075",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Ich hab noch nie für jemanden ein Gedicht geschrieben."
+  },
+  {
+    "id": "nhie_mild_076",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Ich hab noch nie eine romantische Überraschung geplant, die komplett schiefging."
+  },
+  {
+    "id": "nhie_mild_077",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Ich hab noch nie ein Pärchenfoto als Hintergrundbild gehabt."
+  },
+  {
+    "id": "nhie_mild_078",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Ich hab noch nie einen Crush auf jemanden aus meinem Freundeskreis gehabt."
+  },
+  {
+    "id": "nhie_mild_079",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Ich hab noch nie jemanden geghostet."
+  },
+  {
+    "id": "nhie_mild_080",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Ich hab noch nie absichtlich spät geantwortet, um cool zu wirken."
+  },
+  {
+    "id": "nhie_mild_081",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Ich hab noch nie ein Kompliment gemacht, das ich nicht ernst gemeint habe."
+  },
+  {
+    "id": "nhie_mild_082",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Ich hab noch nie so getan, als wäre ich beschäftigt, um interessanter zu wirken."
+  },
+  {
+    "id": "nhie_mild_083",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Ich hab noch nie die Nachrichten meines Crushs heimlich zehnmal gelesen."
+  },
+  {
+    "id": "nhie_mild_084",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Ich hab noch nie mich in jemanden verliebt, der vergeben war."
+  },
+  {
+    "id": "nhie_mild_085",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Ich hab noch nie ein Date nur wegen des guten Essens zugesagt."
+  },
+  {
+    "id": "nhie_mild_086",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Ich hab noch nie jemandem einen Korb gegeben und es später bereut."
+  },
+  {
+    "id": "nhie_mild_087",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Ich hab noch nie Screenshots aus einem Flirt-Chat an Freunde geschickt."
+  },
+  {
+    "id": "nhie_mild_088",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Ich hab noch nie meinen Beziehungsstatus geheim gehalten."
+  },
+  {
+    "id": "nhie_mild_089",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Ich hab noch nie jemanden heimlich auf Social Media gestalkt."
+  },
+  {
+    "id": "nhie_mild_090",
+    "level": "mild",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Ich hab noch nie einen Crush gehabt, von dem bis heute niemand weiß."
+  },
+  {
+    "id": "nhie_mild_091",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Ich hab noch nie mich nach dem ersten Treffen sofort verliebt."
+  },
+  {
+    "id": "nhie_mild_092",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Ich hab noch nie mich in jemanden verliebt, den ich anfangs nicht mochte."
+  },
+  {
+    "id": "nhie_mild_093",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Ich hab noch nie Liebeskummer gehabt, der länger als einen Monat gedauert hat."
+  },
+  {
+    "id": "nhie_mild_094",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Ich hab noch nie als Erstes „Ich liebe dich“ gesagt."
+  },
+  {
+    "id": "nhie_mild_095",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Ich hab noch nie eine Fernbeziehung geführt."
+  },
+  {
+    "id": "nhie_mild_096",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Ich hab noch nie eine Beziehung beendet, weil ich mich gelangweilt habe."
+  },
+  {
+    "id": "nhie_mild_097",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Ich hab noch nie mit einer oder einem Ex befreundet geblieben."
+  },
+  {
+    "id": "nhie_mild_098",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Ich hab noch nie mich für jemanden komplett verändert."
+  },
+  {
+    "id": "nhie_mild_099",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Ich hab noch nie das Single-Leben so richtig genossen."
+  },
+  {
+    "id": "nhie_mild_100",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Ich hab noch nie einen Dating-Tipp von meinen Eltern bekommen."
+  }
+]

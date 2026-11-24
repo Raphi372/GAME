@@ -2,10 +2,11 @@ import { Animated, Pressable, StyleSheet, View } from 'react-native';
 
 import { AppText, Chip, Icon } from '@/components/ui';
 import { usePressScale } from '@/components/ui/usePressScale';
-import { useTranslation, type TranslationKey } from '@/i18n';
+import { useTranslation } from '@/i18n';
 import { feedback } from '@/services/feedback';
 import { colors, radius, spacing } from '@/theme';
 
+import { cardCountKey, modeTaglineKey, modeTitleKey } from './labels';
 import type { GameModeDefinition } from './registry';
 
 interface ModeCardProps {
@@ -17,8 +18,8 @@ interface ModeCardProps {
 export function ModeCard({ mode, questionCount, onPress }: ModeCardProps) {
   const { t } = useTranslation();
   const { scale, onPressIn, onPressOut } = usePressScale(0.98);
-  const title = t(`mode.${mode.id}.title` as TranslationKey);
-  const tagline = t(`mode.${mode.id}.tagline` as TranslationKey);
+  const title = t(modeTitleKey(mode.id));
+  const tagline = t(modeTaglineKey(mode.id));
   const available = mode.status === 'available';
 
   const body = (
@@ -34,7 +35,7 @@ export function ModeCard({ mode, questionCount, onPress }: ModeCardProps) {
         </AppText>
         <AppText variant="caption" color={colors.textMuted} numberOfLines={2}>
           {available && questionCount
-            ? `${tagline} · ${t('mode.questionCount', { count: questionCount })}`
+            ? `${tagline} · ${t(cardCountKey(mode.id), { count: questionCount })}`
             : tagline}
         </AppText>
       </View>

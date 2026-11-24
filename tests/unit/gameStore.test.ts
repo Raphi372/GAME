@@ -79,7 +79,12 @@ describe('game store', () => {
       game().pass();
       const afterPass = game().session!.current!;
       expect(afterPass.playerId).not.toBe(first.playerId);
-      expect(game().session!.stats[first.playerId]).toEqual({ answered: 0, passed: 1, skipped: 1 });
+      expect(game().session!.stats[first.playerId]).toEqual({
+        answered: 0,
+        passed: 1,
+        skipped: 1,
+        confessed: 0,
+      });
 
       game().answer();
       expect(game().session!.current!.playerId).not.toBe(afterPass.playerId);
@@ -146,10 +151,27 @@ describe('game store', () => {
       expect(result.players.reduce((sum, p) => sum + p.answered + p.passed, 0)).toBe(2);
     });
 
+    it('plays "Ich hab noch nie" with confessions and a summary', () => {
+      addPlayers('Lena', 'Max', 'Sophie');
+      expect(game().startGame('never-have-i-ever', 'hot')).toBe(true);
+      expect(game().session?.current?.questionId).toMatch(/^nhie_hot_/);
+      const [lena, max] = game().players;
+      game().confessAndNext([lena!.id, max!.id]);
+      game().confessAndNext([lena!.id]);
+      game().skip();
+      game().endGame();
+      const result = game().lastResult!;
+      expect(result.modeId).toBe('never-have-i-ever');
+      expect(result.turnsCompleted).toBe(2);
+      const byName = Object.fromEntries(result.players.map((p) => [p.name, p.confessed]));
+      expect(byName).toEqual({ Lena: 2, Max: 1, Sophie: 0 });
+    });
+
     it('ignores game actions when no game is running', () => {
       expect(() => {
         game().answer();
         game().pass();
+        game().confessAndNext(['x']);
         game().skip();
         game().changeLevel('hot');
         game().reshuffle();

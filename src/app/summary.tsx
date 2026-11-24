@@ -2,6 +2,7 @@ import { Redirect, useRouter } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
 import { AppText, Avatar, Button, Screen, SectionTitle, Surface } from '@/components/ui';
+import { getGameMode } from '@/features/game-modes/registry';
 import { LEVELS } from '@/features/levels/levels';
 import { useTranslation } from '@/i18n';
 import { useGameStore } from '@/store';
@@ -15,24 +16,35 @@ export default function SummaryScreen() {
   if (!result) return <Redirect href="/" />;
 
   const meta = LEVELS[result.level];
+  const isGroup = getGameMode(result.modeId).turnStyle === 'group';
   const totals = result.players.reduce(
     (sum, player) => ({
       answered: sum.answered + player.answered,
       passed: sum.passed + player.passed,
       skipped: sum.skipped + player.skipped,
+      confessed: sum.confessed + player.confessed,
     }),
-    { answered: 0, passed: 0, skipped: 0 },
+    { answered: 0, passed: 0, skipped: 0, confessed: 0 },
   );
-  const ranked = [...result.players].sort((a, b) => b.answered - a.answered);
-  const mostDaring = ranked[0] && ranked[0].answered > 0 ? ranked[0] : null;
+  // Spicy Questions ranks by answered questions, group modes by confessions.
+  const score = (player: (typeof result.players)[number]) =>
+    isGroup ? player.confessed : player.answered;
+  const ranked = [...result.players].sort((a, b) => score(b) - score(a));
+  const top = ranked[0] && score(ranked[0]) > 0 ? ranked[0] : null;
   const minutes = Math.max(1, Math.round(result.durationMs / 60000));
 
-  const stats = [
-    { label: t('summary.rounds'), value: result.turnsCompleted },
-    { label: t('summary.answered'), value: totals.answered },
-    { label: t('summary.passed'), value: totals.passed },
-    { label: t('summary.skipped'), value: totals.skipped },
-  ];
+  const stats = isGroup
+    ? [
+        { label: t('summary.rounds'), value: result.turnsCompleted },
+        { label: t('summary.confessions'), value: totals.confessed },
+        { label: t('summary.skipped'), value: totals.skipped },
+      ]
+    : [
+        { label: t('summary.rounds'), value: result.turnsCompleted },
+        { label: t('summary.answered'), value: totals.answered },
+        { label: t('summary.passed'), value: totals.passed },
+        { label: t('summary.skipped'), value: totals.skipped },
+      ];
 
   return (
     <Screen
@@ -83,14 +95,14 @@ export default function SummaryScreen() {
         ))}
       </View>
 
-      {mostDaring ? (
+      {top ? (
         <Surface style={[styles.daring, { borderColor: `${meta.accent}66` }]}>
-          <Avatar name={mostDaring.name} colorIndex={mostDaring.colorIndex} size={48} />
+          <Avatar name={top.name} colorIndex={top.colorIndex} size={48} />
           <View style={styles.flex}>
             <AppText variant="overline" color={meta.accent}>
-              {`🏆 ${t('summary.mostDaring')}`}
+              {`🏆 ${t(isGroup ? 'summary.mostConfessions' : 'summary.mostDaring')}`}
             </AppText>
-            <AppText variant="h2">{mostDaring.name}</AppText>
+            <AppText variant="h2">{top.name}</AppText>
           </View>
         </Surface>
       ) : null}
@@ -104,7 +116,11 @@ export default function SummaryScreen() {
               {player.name}
             </AppText>
             <AppText variant="caption" color={colors.textSecondary}>
-              {t('summary.playerLine', { answered: player.answered, passed: player.passed })}
+              {isGroup
+                ? player.confessed === 1
+                  ? t('summary.confessionLineOne')
+                  : t('summary.confessionLine', { count: player.confessed })
+                : t('summary.playerLine', { answered: player.answered, passed: player.passed })}
             </AppText>
           </View>
         ))}

@@ -19,8 +19,15 @@ export type GameModeId = (typeof GAME_MODE_IDS)[number];
 
 export type GameModeStatus = 'available' | 'coming-soon';
 
-/** Who is addressed by a card: one player in turn, or the whole group at once. */
+/**
+ * Who is addressed by a card:
+ * - `single-player`: the active player answers.
+ * - `group`: the active player reads the card aloud, everybody plays along.
+ */
 export type TurnStyle = 'single-player' | 'group';
+
+/** How a mode calls its cards in the UI ("110 Fragen" vs. "100 Aussagen"). */
+export type CardUnit = 'questions' | 'statements';
 
 export interface GameModeDefinition {
   id: GameModeId;
@@ -28,6 +35,9 @@ export interface GameModeDefinition {
   status: GameModeStatus;
   turnStyle: TurnStyle;
   usesSpicyLevels: boolean;
+  cardUnit: CardUnit;
+  /** Fixed lead-in every card starts with, highlighted on the card (content language). */
+  cardLead?: string;
   minPlayers: number;
   maxPlayers: number;
 }
@@ -42,15 +52,18 @@ export const GAME_MODES: Record<GameModeId, GameModeDefinition> = {
     status: 'available',
     turnStyle: 'single-player',
     usesSpicyLevels: true,
+    cardUnit: 'questions',
     minPlayers: MIN_PLAYERS,
     maxPlayers: MAX_PLAYERS,
   },
   'never-have-i-ever': {
     id: 'never-have-i-ever',
     emoji: '🙊',
-    status: 'coming-soon',
+    status: 'available',
     turnStyle: 'group',
     usesSpicyLevels: true,
+    cardUnit: 'statements',
+    cardLead: 'Ich hab noch nie',
     minPlayers: MIN_PLAYERS,
     maxPlayers: MAX_PLAYERS,
   },
@@ -60,6 +73,7 @@ export const GAME_MODES: Record<GameModeId, GameModeDefinition> = {
     status: 'coming-soon',
     turnStyle: 'single-player',
     usesSpicyLevels: true,
+    cardUnit: 'questions',
     minPlayers: MIN_PLAYERS,
     maxPlayers: MAX_PLAYERS,
   },
@@ -69,6 +83,7 @@ export const GAME_MODES: Record<GameModeId, GameModeDefinition> = {
     status: 'coming-soon',
     turnStyle: 'group',
     usesSpicyLevels: true,
+    cardUnit: 'questions',
     minPlayers: 3,
     maxPlayers: MAX_PLAYERS,
   },
@@ -78,6 +93,7 @@ export const GAME_MODES: Record<GameModeId, GameModeDefinition> = {
     status: 'coming-soon',
     turnStyle: 'single-player',
     usesSpicyLevels: true,
+    cardUnit: 'questions',
     minPlayers: MIN_PLAYERS,
     maxPlayers: MAX_PLAYERS,
   },
@@ -99,4 +115,12 @@ export function isModePlayable(id: GameModeId): boolean {
 
 export function listGameModes(): GameModeDefinition[] {
   return GAME_MODE_IDS.map((id) => GAME_MODES[id]);
+}
+
+export function listPlayableModeIds(): GameModeId[] {
+  return GAME_MODE_IDS.filter(isModePlayable);
+}
+
+export function isGroupMode(id: GameModeId): boolean {
+  return GAME_MODES[id].turnStyle === 'group';
 }

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { AppText, Button, Sheet } from '@/components/ui';
+import type { GameModeId } from '@/features/game-modes/registry';
 import { LevelCard } from '@/features/levels/components/LevelCard';
 import { LEVELS, listLevels } from '@/features/levels/levels';
 import { useTranslation } from '@/i18n';
@@ -11,13 +12,21 @@ import type { SpicyLevel } from '@/types';
 interface LevelSheetProps {
   visible: boolean;
   current: SpicyLevel;
+  modeId: GameModeId;
   getCount: (level: SpicyLevel) => number;
   onSelect: (level: SpicyLevel) => void;
   onClose: () => void;
 }
 
 /** In-game level switcher. Switching to EXTREME asks the group for consent first. */
-export function LevelSheet({ visible, current, getCount, onSelect, onClose }: LevelSheetProps) {
+export function LevelSheet({
+  visible,
+  current,
+  modeId,
+  getCount,
+  onSelect,
+  onClose,
+}: LevelSheetProps) {
   const { t } = useTranslation();
   const [pendingExtreme, setPendingExtreme] = useState(false);
 
@@ -88,6 +97,7 @@ export function LevelSheet({ visible, current, getCount, onSelect, onClose }: Le
                 key={meta.id}
                 level={meta.id}
                 compact
+                modeId={modeId}
                 selected={meta.id === current}
                 questionCount={getCount(meta.id)}
                 onPress={() => choose(meta.id)}

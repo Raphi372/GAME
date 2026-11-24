@@ -4,7 +4,9 @@ import { persist } from 'zustand/middleware';
 import { getGameMode, isGameModeId, isModePlayable, type GameModeId } from '@/features/game-modes/registry';
 import {
   changeLevel as changeSessionLevel,
+  completeGroupRound,
   completeTurn,
+  emptyStats,
   createSession,
   repairSession,
   reshuffleLevel,
@@ -59,6 +61,8 @@ export interface GameState extends GameData {
   startGame: (modeId: GameModeId, level: SpicyLevel) => boolean;
   answer: () => void;
   pass: () => void;
+  /** Group modes: records who admitted "hab ich schon" and moves to the next card. */
+  confessAndNext: (confessedPlayerIds: readonly string[]) => void;
   skip: () => void;
   changeLevel: (level: SpicyLevel) => void;
   reshuffle: () => void;
@@ -107,7 +111,8 @@ export function buildResult(session: GameSession, players: readonly Player[], no
     durationMs: Math.max(0, now - session.startedAt),
     players: players.map((player) => ({
       ...player,
-      ...(session.stats[player.id] ?? { answered: 0, passed: 0, skipped: 0 }),
+      ...emptyStats(),
+      ...session.stats[player.id],
     })),
   };
 }
@@ -207,6 +212,8 @@ export const useGameStore = create<GameState>()(
 
         answer: () => updateSession((session, ctx) => completeTurn(session, 'answered', ctx)),
         pass: () => updateSession((session, ctx) => completeTurn(session, 'passed', ctx)),
+        confessAndNext: (confessedPlayerIds) =>
+          updateSession((session, ctx) => completeGroupRound(session, confessedPlayerIds, ctx)),
         skip: () => updateSession(skipQuestion),
         changeLevel: (level) => {
           updateSession((session, ctx) => changeSessionLevel(session, level, ctx));

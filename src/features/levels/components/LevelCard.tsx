@@ -2,13 +2,15 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Animated, Pressable, StyleSheet, View } from 'react-native';
 
 import { AppText, Icon } from '@/components/ui';
+import { cardCountKey } from '@/features/game-modes/labels';
+import type { GameModeId } from '@/features/game-modes/registry';
 import { usePressScale } from '@/components/ui/usePressScale';
 import { useTranslation } from '@/i18n';
 import { feedback } from '@/services/feedback';
 import { colors, glow, radius, spacing } from '@/theme';
 import type { SpicyLevel } from '@/types';
 
-import { LEVELS } from '../levels';
+import { levelDescriptionKey, LEVELS } from '../levels';
 
 interface LevelCardProps {
   level: SpicyLevel;
@@ -16,6 +18,7 @@ interface LevelCardProps {
   onPress: () => void;
   questionCount: number;
   compact?: boolean;
+  modeId?: GameModeId;
   testID?: string;
 }
 
@@ -25,6 +28,7 @@ export function LevelCard({
   onPress,
   questionCount,
   compact = false,
+  modeId = 'spicy-questions',
   testID,
 }: LevelCardProps) {
   const { t } = useTranslation();
@@ -32,8 +36,8 @@ export function LevelCard({
   const { scale, onPressIn, onPressOut } = usePressScale(0.975);
   const name = t(meta.nameKey);
   const tagline = t(meta.taglineKey);
-  const description = t(meta.descriptionKey);
-  const count = t('level.questions', { count: questionCount });
+  const description = t(levelDescriptionKey(level, modeId));
+  const count = t(cardCountKey(modeId), { count: questionCount });
 
   return (
     <Animated.View

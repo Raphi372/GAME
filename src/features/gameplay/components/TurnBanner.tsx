@@ -10,11 +10,14 @@ import type { Player } from '@/types';
 interface TurnBannerProps {
   player: Player;
   accent: string;
+  /** Small label above the name. Defaults to "Du bist dran". */
+  overline?: string;
 }
 
-/** "Du bist dran" banner – slides in whenever the active player changes. */
-export function TurnBanner({ player, accent }: TurnBannerProps) {
+/** "Du bist dran" / "Liest vor" banner – slides in whenever the active player changes. */
+export function TurnBanner({ player, accent, overline }: TurnBannerProps) {
   const { t } = useTranslation();
+  const label = overline ?? t('game.yourTurn');
   const { enabled: motion } = useMotion();
   const [progress] = useState(() => new Animated.Value(1));
 
@@ -46,13 +49,13 @@ export function TurnBanner({ player, accent }: TurnBannerProps) {
         },
       ]}
       accessible
-      aria-label={`${t('game.yourTurn')}: ${player.name}`}
+      aria-label={`${label}: ${player.name}`}
       testID="turn-banner"
     >
       <Avatar name={player.name} colorIndex={player.colorIndex} size={52} />
       <View style={styles.text}>
         <AppText variant="overline" color={accent}>
-          {t('game.yourTurn')}
+          {label}
         </AppText>
         <AppText variant="h1" numberOfLines={1} adjustsFontSizeToFit color={colors.text}>
           {player.name}

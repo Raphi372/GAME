@@ -1,0 +1,702 @@
+[
+  {
+    "id": "nhie_hot_001",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Ich hab noch nie geflirtet, obwohl ich vergeben war."
+  },
+  {
+    "id": "nhie_hot_002",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Ich hab noch nie geflirtet, um jemand anderen eifersüchtig zu machen."
+  },
+  {
+    "id": "nhie_hot_003",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Ich hab noch nie am selben Abend mit zwei Personen geflirtet."
+  },
+  {
+    "id": "nhie_hot_004",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Ich hab noch nie eine freche Nachricht geschickt, die ich danach bereut habe."
+  },
+  {
+    "id": "nhie_hot_005",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Ich hab noch nie mit dem Partner oder der Partnerin von Freunden geflirtet."
+  },
+  {
+    "id": "nhie_hot_006",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Ich hab noch nie auf einer Party jemandem meine Nummer direkt ins Handy getippt."
+  },
+  {
+    "id": "nhie_hot_007",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Ich hab noch nie geflirtet, um etwas umsonst zu bekommen."
+  },
+  {
+    "id": "nhie_hot_008",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Ich hab noch nie mit jemandem geflirtet, der deutlich älter war als ich."
+  },
+  {
+    "id": "nhie_hot_009",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Ich hab noch nie mit einer Arbeitskollegin oder einem Arbeitskollegen geflirtet."
+  },
+  {
+    "id": "nhie_hot_010",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Ich hab noch nie eine Nachricht mit einem eindeutig zweideutigen Emoji beendet."
+  },
+  {
+    "id": "nhie_hot_011",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Ich hab noch nie jemanden nur wegen der Stimme unwiderstehlich gefunden."
+  },
+  {
+    "id": "nhie_hot_012",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Ich hab noch nie bei einem Flirt einen falschen Namen angegeben."
+  },
+  {
+    "id": "nhie_hot_013",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Ich hab noch nie mich absichtlich sexy angezogen, um jemanden zu beeindrucken."
+  },
+  {
+    "id": "nhie_hot_014",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Ich hab noch nie ein Kompliment bekommen, das mich tagelang beschäftigt hat."
+  },
+  {
+    "id": "nhie_hot_015",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Ich hab noch nie jemandem in einer Bar etwas ausgegeben, um ins Gespräch zu kommen."
+  },
+  {
+    "id": "nhie_hot_016",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Ich hab noch nie zwei Personen gleichzeitig gedatet."
+  },
+  {
+    "id": "nhie_hot_017",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Ich hab noch nie beim ersten Date geküsst."
+  },
+  {
+    "id": "nhie_hot_018",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Ich hab noch nie ein Date mit einer oder einem Ex gehabt."
+  },
+  {
+    "id": "nhie_hot_019",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Ich hab noch nie ein Date gehabt, das erst am nächsten Morgen zu Ende war."
+  },
+  {
+    "id": "nhie_hot_020",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Ich hab noch nie jemanden aus der Arbeit gedatet."
+  },
+  {
+    "id": "nhie_hot_021",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Ich hab noch nie jemanden gedatet, den meine Freunde nicht leiden konnten."
+  },
+  {
+    "id": "nhie_hot_022",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Ich hab noch nie ein Date erfunden, um interessanter zu wirken."
+  },
+  {
+    "id": "nhie_hot_023",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Ich hab noch nie auf einer Dating-App ein stark geschöntes Foto benutzt."
+  },
+  {
+    "id": "nhie_hot_024",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Ich hab noch nie bei einem Date gelogen."
+  },
+  {
+    "id": "nhie_hot_025",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Ich hab noch nie ein Date gehabt, das ganz anders aussah als auf den Fotos."
+  },
+  {
+    "id": "nhie_hot_026",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Ich hab noch nie ein Date heimlich im Gruppenchat mit Freunden kommentiert."
+  },
+  {
+    "id": "nhie_hot_027",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Ich hab noch nie ein Date mit der besten Freundin oder dem besten Freund einer oder eines Ex gehabt."
+  },
+  {
+    "id": "nhie_hot_028",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Ich hab noch nie ein Date nur angenommen, weil die Person reich wirkte."
+  },
+  {
+    "id": "nhie_hot_029",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Ich hab noch nie mehrere Dating-Apps gleichzeitig benutzt."
+  },
+  {
+    "id": "nhie_hot_030",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Ich hab noch nie ein Date verlassen, ohne mich zu verabschieden."
+  },
+  {
+    "id": "nhie_hot_031",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Ich hab noch nie jemanden nur wegen des Aussehens gedatet."
+  },
+  {
+    "id": "nhie_hot_032",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Ich hab noch nie jemanden gedatet, den ich im Club kennengelernt habe."
+  },
+  {
+    "id": "nhie_hot_033",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Ich hab noch nie am selben Tag zwei verschiedene Dates gehabt."
+  },
+  {
+    "id": "nhie_hot_034",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Ich hab noch nie jemanden geküsst, dessen Namen ich nicht kannte."
+  },
+  {
+    "id": "nhie_hot_035",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Ich hab noch nie auf der Tanzfläche rumgeknutscht."
+  },
+  {
+    "id": "nhie_hot_036",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Ich hab noch nie jemanden aus meinem Freundeskreis geküsst."
+  },
+  {
+    "id": "nhie_hot_037",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Ich hab noch nie im Regen geküsst."
+  },
+  {
+    "id": "nhie_hot_038",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Ich hab noch nie jemanden geküsst, nur weil die Stimmung so gut war."
+  },
+  {
+    "id": "nhie_hot_039",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Ich hab noch nie beim Küssen an jemand anderen gedacht."
+  },
+  {
+    "id": "nhie_hot_040",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Ich hab noch nie einen Kuss bereut."
+  },
+  {
+    "id": "nhie_hot_041",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Ich hab noch nie jemanden wegen einer Wette geküsst."
+  },
+  {
+    "id": "nhie_hot_042",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Ich hab noch nie an einem öffentlichen Ort wild rumgeknutscht."
+  },
+  {
+    "id": "nhie_hot_043",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Ich hab noch nie an einem Abend mehr als eine Person geküsst."
+  },
+  {
+    "id": "nhie_hot_044",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Ich hab noch nie im Auto rumgeknutscht."
+  },
+  {
+    "id": "nhie_hot_045",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Ich hab noch nie einen Kuss bekommen, der mich komplett umgehauen hat."
+  },
+  {
+    "id": "nhie_hot_046",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Ich hab noch nie jemanden geküsst, der vergeben war."
+  },
+  {
+    "id": "nhie_hot_047",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Ich hab noch nie jemanden zum Abschied geküsst und nie wiedergesehen."
+  },
+  {
+    "id": "nhie_hot_048",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Ich hab noch nie im Aufzug geküsst."
+  },
+  {
+    "id": "nhie_hot_049",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Ich hab noch nie jemanden geküsst, um eine Diskussion zu beenden."
+  },
+  {
+    "id": "nhie_hot_050",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Ich hab noch nie im Urlaub einen Kuss erlebt, an den ich noch oft denke."
+  },
+  {
+    "id": "nhie_hot_051",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Ich hab noch nie unter dem Tisch heimlich Händchen gehalten."
+  },
+  {
+    "id": "nhie_hot_052",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Ich hab noch nie beim Küssen so lachen müssen, dass die Stimmung weg war."
+  },
+  {
+    "id": "nhie_hot_053",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Ich hab noch nie jemanden geküsst, den ich erst eine Stunde kannte."
+  },
+  {
+    "id": "nhie_hot_054",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Ich hab noch nie das Handy meines Partners oder meiner Partnerin durchsucht."
+  },
+  {
+    "id": "nhie_hot_055",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Ich hab noch nie mitten in der Nacht einer oder einem Ex geschrieben."
+  },
+  {
+    "id": "nhie_hot_056",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Ich hab noch nie jemanden betrogen."
+  },
+  {
+    "id": "nhie_hot_057",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Ich hab noch nie „Ich liebe dich“ gesagt, ohne es zu meinen."
+  },
+  {
+    "id": "nhie_hot_058",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Ich hab noch nie eine falsche Telefonnummer herausgegeben."
+  },
+  {
+    "id": "nhie_hot_059",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Ich hab noch nie heimlich Fotos meines Crushs gespeichert."
+  },
+  {
+    "id": "nhie_hot_060",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Ich hab noch nie eine Beziehung per Nachricht beendet."
+  },
+  {
+    "id": "nhie_hot_061",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Ich hab noch nie so getan, als wäre ich Single, obwohl ich es nicht war."
+  },
+  {
+    "id": "nhie_hot_062",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Ich hab noch nie auf jemanden aus dieser Runde eifersüchtig gewesen."
+  },
+  {
+    "id": "nhie_hot_063",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Ich hab noch nie heimlich Kontakt zu einer oder einem Ex gehabt."
+  },
+  {
+    "id": "nhie_hot_064",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Ich hab noch nie mit jemandem rumgemacht und es danach bereut."
+  },
+  {
+    "id": "nhie_hot_065",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Ich hab noch nie eine ganze Nacht durchgeschrieben, nur um länger mit meinem Crush zu chatten."
+  },
+  {
+    "id": "nhie_hot_066",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Ich hab noch nie einen Crush auf meine Chefin oder meinen Chef gehabt."
+  },
+  {
+    "id": "nhie_hot_067",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Ich hab noch nie meine Gefühle per Nachricht gestanden."
+  },
+  {
+    "id": "nhie_hot_068",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Ich hab noch nie mich bei einer Trennung feige verhalten."
+  },
+  {
+    "id": "nhie_hot_069",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Ich hab noch nie jemandem falsche Hoffnungen gemacht."
+  },
+  {
+    "id": "nhie_hot_070",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Ich hab noch nie eine Dating-App behalten, obwohl ich schon in einer Beziehung war."
+  },
+  {
+    "id": "nhie_hot_071",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Ich hab noch nie Schluss gemacht und es am nächsten Tag bereut."
+  },
+  {
+    "id": "nhie_hot_072",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Ich hab noch nie jemanden aus dieser Runde attraktiver gefunden, als ich zugeben würde."
+  },
+  {
+    "id": "nhie_hot_073",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Ich hab noch nie meinem Crush geschrieben und danach sofort das Handy weggelegt."
+  },
+  {
+    "id": "nhie_hot_074",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Ich hab noch nie bei einer Trennung gelogen, warum ich gehe."
+  },
+  {
+    "id": "nhie_hot_075",
+    "level": "hot",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Ich hab noch nie eine frühere Beziehung auf Social Media gestalkt."
+  },
+  {
+    "id": "nhie_hot_076",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Ich hab noch nie ein Date vor meinen Freunden verheimlicht."
+  },
+  {
+    "id": "nhie_hot_077",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Ich hab noch nie ein Geheimnis aus meinem Liebesleben nur einer einzigen Person erzählt."
+  },
+  {
+    "id": "nhie_hot_078",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Ich hab noch nie an eine oder einen Ex gedacht, während ich vergeben war."
+  },
+  {
+    "id": "nhie_hot_079",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Ich hab noch nie eine heimliche Beziehung geführt."
+  },
+  {
+    "id": "nhie_hot_080",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Ich hab noch nie nachgeschaut, mit wem meine oder mein Ex jetzt zusammen ist."
+  },
+  {
+    "id": "nhie_hot_081",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 2,
+    "text": "Ich hab noch nie Nachrichten gelöscht, damit sie niemand liest."
+  },
+  {
+    "id": "nhie_hot_082",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 2,
+    "text": "Ich hab noch nie ein Liebesgeständnis bekommen, von dem ich niemandem erzählt habe."
+  },
+  {
+    "id": "nhie_hot_083",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 2,
+    "text": "Ich hab noch nie einen geheimen Crush auf jemanden aus dieser Runde gehabt."
+  },
+  {
+    "id": "nhie_hot_084",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 2,
+    "text": "Ich hab noch nie ein Date ganz anders erzählt, als es wirklich war."
+  },
+  {
+    "id": "nhie_hot_085",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 3,
+    "text": "Ich hab noch nie heimlich eine Dating-App benutzt."
+  },
+  {
+    "id": "nhie_hot_086",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 3,
+    "text": "Ich hab noch nie einen zweiten Social-Media-Account nur zum Stalken gehabt."
+  },
+  {
+    "id": "nhie_hot_087",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 3,
+    "text": "Ich hab noch nie eine Urlaubsromanze gehabt, von der niemand weiß."
+  },
+  {
+    "id": "nhie_hot_088",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 3,
+    "text": "Ich hab noch nie heimlich die Playlist meines Crushs nach versteckten Botschaften durchsucht."
+  },
+  {
+    "id": "nhie_hot_089",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Ich hab noch nie jemanden nur wegen des Dufts unwiderstehlich gefunden."
+  },
+  {
+    "id": "nhie_hot_090",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Ich hab noch nie jemanden nur wegen der Hände attraktiv gefunden."
+  },
+  {
+    "id": "nhie_hot_091",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Ich hab noch nie eine heiße Nachricht verschickt."
+  },
+  {
+    "id": "nhie_hot_092",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Ich hab noch nie von jemandem aus dieser Runde geträumt."
+  },
+  {
+    "id": "nhie_hot_093",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Ich hab noch nie eine Filmszene zurückgespult, weil sie so heiß war."
+  },
+  {
+    "id": "nhie_hot_094",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Ich hab noch nie im Urlaub eine heiße Begegnung gehabt."
+  },
+  {
+    "id": "nhie_hot_095",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Ich hab noch nie mich in einem Outfit absolut unwiderstehlich gefühlt."
+  },
+  {
+    "id": "nhie_hot_096",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Ich hab noch nie von einem Promi geträumt."
+  },
+  {
+    "id": "nhie_hot_097",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Ich hab noch nie bei einer Massage mehr gefühlt, als ich zugeben wollte."
+  },
+  {
+    "id": "nhie_hot_098",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Ich hab noch nie eine ganze Nacht mit jemandem nur geredet und gekuschelt."
+  },
+  {
+    "id": "nhie_hot_099",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Ich hab noch nie das Gefühl gehabt, jemanden mit einem einzigen Blick um den Verstand zu bringen."
+  },
+  {
+    "id": "nhie_hot_100",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Ich hab noch nie eine Fantasie über jemanden gehabt, den ich kaum kannte."
+  }
+]

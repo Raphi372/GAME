@@ -2,9 +2,12 @@ import {
   GAME_MODE_IDS,
   getGameMode,
   isGameModeId,
+  isGroupMode,
   isModePlayable,
   listGameModes,
+  listPlayableModeIds,
 } from '@/features/game-modes/registry';
+import { cardCountKey, modeTitleKey } from '@/features/game-modes/labels';
 import { canShowAd } from '@/features/premium/adPolicy';
 import { canAccessTier, FREE_ENTITLEMENTS } from '@/features/premium/entitlements';
 import { formatPrice, PREMIUM_PLANS, PURCHASES_ENABLED } from '@/features/premium/plans';
@@ -46,7 +49,14 @@ describe('game mode registry', () => {
   it('lists all planned modes with Spicy Questions playable', () => {
     expect(listGameModes().map((mode) => mode.id)).toEqual([...GAME_MODE_IDS]);
     expect(isModePlayable('spicy-questions')).toBe(true);
+    expect(isModePlayable('never-have-i-ever')).toBe(true);
     expect(isModePlayable('truth-or-dare')).toBe(false);
+    expect(listPlayableModeIds()).toEqual(['spicy-questions', 'never-have-i-ever']);
+    expect(isGroupMode('never-have-i-ever')).toBe(true);
+    expect(isGroupMode('spicy-questions')).toBe(false);
+    expect(modeTitleKey('never-have-i-ever')).toBe('mode.never-have-i-ever.title');
+    expect(cardCountKey('never-have-i-ever')).toBe('mode.unit.statements');
+    expect(cardCountKey('spicy-questions')).toBe('mode.unit.questions');
     expect(getGameMode('spicy-questions').minPlayers).toBe(2);
     expect(getGameMode('spicy-questions').maxPlayers).toBe(20);
     expect(isGameModeId('most-likely')).toBe(true);

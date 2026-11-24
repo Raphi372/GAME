@@ -9,9 +9,14 @@ import { initialTurnCount, pickNextPlayer, pickOtherPlayer, type TurnCounts } fr
 export type TurnOutcome = 'answered' | 'passed' | 'skipped';
 
 export interface PlayerStats {
+  /** Spicy Questions: questions answered. */
   answered: number;
+  /** Spicy Questions: turns passed ("Ich passe"). */
   passed: number;
+  /** Cards skipped while this player was active. */
   skipped: number;
+  /** Group modes (e.g. "Ich hab noch nie"): times the player admitted "hab ich schon". */
+  confessed: number;
 }
 
 export interface CurrentTurn {
@@ -46,7 +51,12 @@ export interface SessionContext {
   rng: Rng;
 }
 
-const emptyStats = (): PlayerStats => ({ answered: 0, passed: 0, skipped: 0 });
+export const emptyStats = (): PlayerStats => ({ answered: 0, passed: 0, skipped: 0, confessed: 0 });
+
+/** Fills in counters missing in sessions persisted by older app versions. */
+function normalizeStats(stats: Partial<PlayerStats> | undefined): PlayerStats {
+  return { ...emptyStats(), ...stats };
+}
 
 function emptyPlayed(): Record<SpicyLevel, string[]> {
   return SPICY_LEVELS.reduce(
@@ -129,8 +139,32 @@ function bumpStat(
   playerId: string,
   key: keyof PlayerStats,
 ): Record<string, PlayerStats> {
-  const current = stats[playerId] ?? emptyStats();
+  const current = normalizeStats(stats[playerId]);
   return { ...stats, [playerId]: { ...current, [key]: current[key] + 1 } };
+}
+
+/** Ends the active player's turn and deals the next card to the next player. */
+function advanceTurn(session: GameSession, ctx: SessionContext): GameSession {
+  const current = session.current;
+  if (!current) return session;
+  const turnCounts = {
+    ...session.turnCounts,
+    [current.playerId]: (session.turnCounts[current.playerId] ?? 0) + 1,
+  };
+  const updated: GameSession = {
+    ...session,
+    turnCounts,
+    lastPlayerId: current.playerId,
+    turnsCompleted: session.turnsCompleted + 1,
+  };
+  const nextPlayer = pickNextPlayer(
+    ctx.players.map((player) => player.id),
+    turnCounts,
+    current.playerId,
+    ctx.rng,
+  );
+  if (!nextPlayer) return { ...updated, current: null };
+  return dealTurn(updated, nextPlayer, ctx);
 }
 
 /**
@@ -144,27 +178,26 @@ export function completeTurn(
 ): GameSession {
   const current = session.current;
   if (!current) return session;
+  return advanceTurn({ ...session, stats: bumpStat(session.stats, current.playerId, outcome) }, ctx);
+}
 
-  const turnCounts = {
-    ...session.turnCounts,
-    [current.playerId]: (session.turnCounts[current.playerId] ?? 0) + 1,
-  };
-  const updated: GameSession = {
-    ...session,
-    turnCounts,
-    lastPlayerId: current.playerId,
-    turnsCompleted: session.turnsCompleted + 1,
-    stats: bumpStat(session.stats, current.playerId, outcome),
-  };
-
-  const nextPlayer = pickNextPlayer(
-    ctx.players.map((player) => player.id),
-    turnCounts,
-    current.playerId,
-    ctx.rng,
-  );
-  if (!nextPlayer) return { ...updated, current: null };
-  return dealTurn(updated, nextPlayer, ctx);
+/**
+ * Group modes ("Ich hab noch nie"): everybody who admits "hab ich schon" gets a
+ * confession counted (voluntary – the list may be empty), then the next player
+ * reads the next card.
+ */
+export function completeGroupRound(
+  session: GameSession,
+  confessedPlayerIds: readonly string[],
+  ctx: SessionContext,
+): GameSession {
+  if (!session.current) return session;
+  const valid = new Set(ctx.players.map((player) => player.id));
+  let stats = session.stats;
+  for (const id of new Set(confessedPlayerIds)) {
+    if (valid.has(id)) stats = bumpStat(stats, id, 'confessed');
+  }
+  return advanceTurn({ ...session, stats }, ctx);
 }
 
 /** ÜBERSPRINGEN: same player, new question. The skipped question is not shown again. */
@@ -223,7 +256,7 @@ export function syncSessionPlayers(session: GameSession, ctx: SessionContext): G
   const startCount = initialTurnCount(session.turnCounts, existingIds);
   for (const id of ids) {
     turnCounts[id] = session.turnCounts[id] ?? startCount;
-    stats[id] = session.stats[id] ?? emptyStats();
+    stats[id] = normalizeStats(session.stats[id]);
   }
 
   let updated: GameSession = {

@@ -4,7 +4,7 @@ import type { Locale, Question, SpicyLevel } from '@/types';
 
 import { BUILTIN_PACKS, CONTENT_FALLBACK_LOCALE, type QuestionPack } from './packs';
 
-export { renderQuestionText, requiresTargetPlayer } from './templates';
+export { renderQuestionText, requiresTargetPlayer, splitLead } from './templates';
 export type { QuestionPack } from './packs';
 
 export interface DeckOptions {
@@ -55,4 +55,12 @@ export function hasContentInLocale(locale: Locale): boolean {
 
 export function getDeckSize(modeId: GameModeId, level: SpicyLevel, options?: DeckOptions): number {
   return getDeck(modeId, level, options).length;
+}
+
+/** Number of built-in cards over all playable modes and levels (for marketing copy). */
+export function countBuiltInCards(modeIds: readonly GameModeId[]): number {
+  return BUILTIN_PACKS.filter((pack) => modeIds.includes(pack.modeId) && pack.tier === 'free').reduce(
+    (sum, pack) => sum + pack.questions.length,
+    0,
+  );
 }

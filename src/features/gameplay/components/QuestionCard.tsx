@@ -24,6 +24,8 @@ interface QuestionCardProps {
   categoryLabel: string;
   footer: string;
   accessibilityLabel: string;
+  /** Optional lead-in shown above the text, e.g. "Ich hab noch nie". */
+  lead?: string;
   style?: StyleProp<ViewStyle>;
 }
 
@@ -41,6 +43,7 @@ export function QuestionCard({
   categoryLabel,
   footer,
   accessibilityLabel,
+  lead,
   style,
 }: QuestionCardProps) {
   const meta = LEVELS[level];
@@ -105,6 +108,11 @@ export function QuestionCard({
             </AppText>
           </View>
           <View style={styles.body}>
+            {lead ? (
+              <AppText variant="h3" align="center" color={meta.accent} style={styles.lead}>
+                {lead.toLocaleUpperCase()}
+              </AppText>
+            ) : null}
             <AppText
               variant="question"
               align="center"
@@ -145,4 +153,5 @@ const styles = StyleSheet.create({
   },
   topRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   body: { flex: 1, justifyContent: 'center', paddingVertical: spacing.md },
+  lead: { marginBottom: spacing.sm, letterSpacing: 1.5 },
 });

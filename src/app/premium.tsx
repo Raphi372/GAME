@@ -4,10 +4,10 @@ import { StyleSheet, View } from 'react-native';
 import { AppText, Chip, Header, Icon, Screen, Surface, type IconName } from '@/components/ui';
 import type { PremiumFeature } from '@/features/premium/entitlements';
 import { formatPrice, PREMIUM_PLANS } from '@/features/premium/plans';
-import { getDeckSize } from '@/features/question-decks';
+import { listPlayableModeIds } from '@/features/game-modes/registry';
+import { countBuiltInCards } from '@/features/question-decks';
 import { useTranslation } from '@/i18n';
 import { brandGradient, colors, radius, spacing } from '@/theme';
-import { SPICY_LEVELS } from '@/types';
 
 const FEATURE_ICONS: Record<PremiumFeature, IconName> = {
   extraPacks: 'albums-outline',
@@ -19,7 +19,8 @@ const FEATURE_ICONS: Record<PremiumFeature, IconName> = {
 
 export default function PremiumScreen() {
   const { t, intlLocale } = useTranslation();
-  const total = SPICY_LEVELS.reduce((sum, level) => sum + getDeckSize('spicy-questions', level), 0);
+  const playableModes = listPlayableModeIds();
+  const total = countBuiltInCards(playableModes);
 
   return (
     <Screen header={<Header />}>
