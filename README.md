@@ -145,6 +145,21 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 - Respektiert die Systemeinstellung **„Bewegung reduzieren“** und den eigenen Schalter.
 - Responsive bis Tablet-Breite, Accessibility-Labels/Rollen für Screenreader.
 
+### Barrierefreiheit
+- Geprüft mit axe-core (WCAG 2.2 A/AA + Best Practices) über alle Bildschirme, Sheets und
+  Spielmodi der Web-Version: keine Verstöße.
+- Kontraste: Text auf den dunklen Flächen mindestens 4,5:1; weiße Knopfschrift auf den
+  Verläufen ebenfalls – die Knopf-Verläufe werden dafür bei Bedarf minimal abgedunkelt
+  (`readableWithWhite()` in `src/theme/contrast.ts`), Avatar-Initialen bei Bedarf aufgehellt.
+- Screenreader: jedes Element mit Rolle und Namen; neue Karten werden mit dem Namen der
+  Person angesagt, Countdown und „Zeit ist um!“ ebenfalls; Sheets sind benannte Dialoge.
+- Tastatur (Web): logische Tab-Reihenfolge, sichtbarer Fokus, Fokus bleibt im offenen Sheet,
+  Escape schließt es; Auswahlfelder, Schalter und Ankreuzfelder reagieren auf Enter und
+  Leertaste; Textseiten lassen sich per Tastatur scrollen.
+- Seitensprache (`lang`) folgt der App-Sprache, Abschnittstitel sind Überschriften 2. Ebene.
+- Schriftgröße folgt der Systemeinstellung bis 200 % (Überschriften bis 125 %, damit lange
+  deutsche Wörter nicht mitten im Wort umbrechen); Tipp-Flächen mindestens 48 px.
+
 ### Einstellungen
 - Sound, Vibration, Animationen an/aus (lokal gespeichert)
 - Sprache: Deutsch (Standard) / English – Oberfläche und alle Karten; der Wechsel geht auch mitten
@@ -543,7 +558,10 @@ eine Sprache, wird auf Deutsch zurückgegriffen. Feste Kartenanfänge („Ich ha
 - **Tests:** `renderRouter` aus `expo-router/testing-library` aktiviert Jest-Fake-Timer – zum
   Abwarten von Speicher-Operationen `flushPromises()` aus `tests/helpers/stores.ts` nutzen.
 - **Barrierefreiheit:** interaktive Elemente brauchen `role` und `aria-label`; Icons sind
-  dekorativ und werden vor Screenreadern versteckt.
+  dekorativ und werden vor Screenreadern versteckt. Auswahlfelder/Schalter/Ankreuzfelder
+  bekommen zusätzlich `{...spaceKeyPress(onPress)}` (Leertaste im Web), Sheets ein `label`
+  (Dialogname), reine Textseiten `<Screen focusableScroll>`. Eigene Farbverläufe hinter weißer
+  Schrift über den `Button` laufen lassen – er sorgt für ausreichenden Kontrast.
 
 ---
 

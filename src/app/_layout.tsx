@@ -11,7 +11,7 @@ import { Stack, type ErrorBoundaryProps } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 
 import { AppText, Button, Screen } from '@/components/ui';
 import { useMotion } from '@/hooks/useMotion';
@@ -34,6 +34,7 @@ export default function RootLayout() {
   });
   const hydrated = useStoresHydrated();
   const ageConfirmed = useSettingsStore((state) => state.ageConfirmedAt !== null);
+  const locale = useSettingsStore((state) => state.locale);
   const { enabled: motion } = useMotion();
   // Fall back to system fonts instead of blocking the app if fonts fail to load.
   const ready = (fontsLoaded || fontError !== null) && hydrated;
@@ -41,6 +42,11 @@ export default function RootLayout() {
   useEffect(() => {
     if (ready) SplashScreen.hideAsync().catch(() => undefined);
   }, [ready]);
+
+  // Web: screen readers pick the voice from the page language – keep it in sync with the app.
+  useEffect(() => {
+    if (Platform.OS === 'web' && typeof document !== 'undefined') document.documentElement.lang = locale;
+  }, [locale]);
 
   if (!ready) return <View style={styles.placeholder} />;
 

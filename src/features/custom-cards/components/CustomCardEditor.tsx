@@ -77,7 +77,13 @@ export function CustomCardEditor({ modeId, level, card, onClose }: CustomCardEdi
   };
 
   return (
-    <Sheet visible onClose={onClose} accent={meta.accent} testID="custom-card-editor">
+    <Sheet
+      visible
+      onClose={onClose}
+      accent={meta.accent}
+      label={t(card ? 'custom.editorEdit' : 'custom.editorNew')}
+      testID="custom-card-editor"
+    >
       <View style={styles.titles}>
         <AppText variant="h3" role="heading">
           {t(card ? 'custom.editorEdit' : 'custom.editorNew')}

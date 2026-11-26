@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 
 import { avatarColor, initials } from '@/features/players/validation';
-import { fonts } from '@/theme';
+import { blend, colors, fonts, readableOnDark } from '@/theme';
 
 import { AppText } from './AppText';
 
@@ -13,6 +13,8 @@ interface AvatarProps {
 
 export function Avatar({ name, colorIndex, size = 44 }: AvatarProps) {
   const color = avatarColor(colorIndex);
+  // Initials sit on a translucent tint of the same colour – lighten them where needed.
+  const textColor = readableOnDark(color, blend(color, colors.surfaceRaised, 0x2e / 255));
   return (
     <View
       aria-hidden
@@ -29,7 +31,7 @@ export function Avatar({ name, colorIndex, size = 44 }: AvatarProps) {
     >
       <AppText
         style={{ fontFamily: fonts.displayBold, fontSize: size * 0.36, lineHeight: size * 0.46 }}
-        color={color}
+        color={textColor}
         maxFontSizeMultiplier={1}
       >
         {initials(name)}

@@ -51,6 +51,7 @@ export function LevelSheet({
       visible={visible}
       onClose={close}
       accent={LEVELS[pendingExtreme ? 'extreme' : current].accent}
+      label={t(pendingExtreme ? 'level.extremeConsentTitle' : 'game.levelSheetTitle')}
       testID="level-sheet"
     >
       {pendingExtreme ? (

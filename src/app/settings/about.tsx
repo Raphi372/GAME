@@ -20,7 +20,7 @@ export default function AboutScreen() {
   ];
 
   return (
-    <Screen header={<Header />}>
+    <Screen focusableScroll header={<Header />}>
       <View style={styles.hero}>
         <Logo size="md" />
       </View>
