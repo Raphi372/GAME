@@ -7,6 +7,7 @@ import {
   listGameModes,
   listPlayableModeIds,
 } from '@/features/game-modes/registry';
+import { FEATURES } from '@/config/features';
 import { cardCountKey, modeTitleKey } from '@/features/game-modes/labels';
 import { canShowAd } from '@/features/premium/adPolicy';
 import { canAccessTier, FREE_ENTITLEMENTS } from '@/features/premium/entitlements';
@@ -19,6 +20,10 @@ describe('premium preparation', () => {
     expect(canAccessTier('free', FREE_ENTITLEMENTS)).toBe(true);
     expect(canAccessTier('premium', FREE_ENTITLEMENTS)).toBe(false);
     expect(canAccessTier('premium', { premium: true })).toBe(true);
+  });
+
+  it('shows Premium only once purchases really work (no placeholder features in the stores)', () => {
+    expect(FEATURES.premium).toBe(PURCHASES_ENABLED);
   });
 
   it('never simulates a successful purchase', async () => {

@@ -37,7 +37,6 @@ verbotene Begriffe, Bildgrößen und dass Zahlen wie „1560 Karten“ zur App p
 - [ ] **Datenschutzerklärung** rechtlich prüfen, Platzhalter ausfüllen und öffentlich
       erreichbar machen (eigene Website o. Ä.). Beide Stores verlangen die URL.
 - [ ] **Support-URL** (Apple: Pflicht) – eine Seite mit Kontaktmöglichkeit genügt.
-- [ ] **Premium-Vorschau klären** (siehe „Offene Punkte“ unten).
 - [ ] **App-Name prüfen:** „SPICY NIGHT“ muss im App Store noch frei sein. Ist er vergeben,
       Namen in `store.config.json` (`title`) und `app.json` anpassen.
 
@@ -96,16 +95,25 @@ ergänzen und neu bauen.
    `eas.json` lädt Builds als Entwurf in den internen Test-Track; in die Produktion gibst
    du sie in der Play Console frei.
 
-## Offene Punkte vor der Einreichung
+## Premium in der Store-Version
 
-- **Premium-Vorschau:** Der Premium-Bildschirm zeigt geplante Funktionen und Preise, die man
-  noch nicht kaufen kann, und „Eigene Karten“ ist ohne Premium gesperrt. Apple lehnt Apps mit
-  Platzhalter- oder unfertigen Funktionen häufig ab (Richtlinie 2.1). Außerdem nennt die
-  Vorschau „Werbefreies Spielerlebnis“, obwohl die App gar keine Werbung enthält.
-  Empfehlung für die erste Version: Premium-Vorschau ausblenden und „Eigene Karten“ entweder
-  ausblenden oder vorerst freischalten – oder mit der Einreichung warten, bis Käufe fertig
-  sind.
-- **Inhalte bei Google Play:** siehe Richtlinien-Hinweis in [`questionnaires.md`](questionnaires.md).
+Solange es keine echten Käufe gibt, sind die Premium-Vorschau und „Eigene Karten“
+ausgeblendet ([`src/config/features.ts`](../../src/config/features.ts), `FEATURES.premium =
+false`). Apple lehnt Apps mit Funktionen, die man nicht freischalten kann, und Platzhalter-
+Inhalten häufig ab (Richtlinie 2.1). Startseite und Level-Auswahl zeigen deshalb keine
+Verweise darauf, und Deep Links auf `/premium` oder `/custom-cards` führen zur Startseite.
+
+Kommen Käufe dazu, werden `FEATURES.premium` und `PURCHASES_ENABLED` gemeinsam eingeschaltet
+(ein Test achtet darauf). Dann vorher prüfen:
+
+- Die Vorschau nennt „Werbefreies Spielerlebnis“, obwohl die App keine Werbung enthält –
+  Text anpassen, solange das so bleibt.
+- App-Datenschutz, Data safety, Datenschutzerklärung, Review-Hinweise und Screenshots neu
+  prüfen bzw. erzeugen.
+
+## Inhalte bei Google Play
+
+Siehe Richtlinien-Hinweis in [`questionnaires.md`](questionnaires.md).
 
 ## Screenshots und Grafiken neu erzeugen
 

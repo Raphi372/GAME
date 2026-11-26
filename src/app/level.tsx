@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { AppText, Button, ConfirmSheet, Header, Icon, Screen, Surface } from '@/components/ui';
+import { FEATURES } from '@/config/features';
 import { modeTitleKey } from '@/features/game-modes/labels';
 import { DEFAULT_MODE_ID, getGameMode, isGameModeId } from '@/features/game-modes/registry';
 import { LevelCard } from '@/features/levels/components/LevelCard';
@@ -102,16 +103,18 @@ export default function LevelScreen() {
           />
         ))}
       </View>
-      <Button
-        label={t('level.customLink')}
-        hint={t('level.customLinkHint')}
-        icon="create-outline"
-        variant="ghost"
-        size="sm"
-        onPress={() => router.push({ pathname: '/custom-cards', params: { mode: modeId, level: selected } })}
-        style={styles.customLink}
-        testID="level-custom-cards"
-      />
+      {FEATURES.premium ? (
+        <Button
+          label={t('level.customLink')}
+          hint={t('level.customLinkHint')}
+          icon="create-outline"
+          variant="ghost"
+          size="sm"
+          onPress={() => router.push({ pathname: '/custom-cards', params: { mode: modeId, level: selected } })}
+          style={styles.customLink}
+          testID="level-custom-cards"
+        />
+      ) : null}
       <ConfirmSheet
         visible={consentFor !== null}
         emoji={LEVELS.extreme.emoji}

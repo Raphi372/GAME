@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { userEvent } from '@testing-library/react-native';
 import { renderRouter, screen, within } from 'expo-router/testing-library';
 
+import { FEATURES } from '@/config/features';
 import { LEGAL } from '@/config/legal';
 import { STORAGE_KEYS } from '@/services/storage';
 import { useCustomCardsStore, useEntitlementsStore, useGameStore, useSettingsStore } from '@/store';
@@ -165,6 +166,8 @@ describe('home screen', () => {
     useSettingsStore.getState().confirmAge();
   });
 
+  afterEach(() => jest.restoreAllMocks());
+
   it('shows the game modes and offers to resume a running game', async () => {
     addPlayers('Lena', 'Max');
     useGameStore.getState().startGame('spicy-questions', 'hot');
@@ -181,6 +184,7 @@ describe('home screen', () => {
   });
 
   it('opens the premium preview without any purchase option', async () => {
+    jest.replaceProperty(FEATURES, 'premium', true);
     const user = userEvent.setup();
     await renderRouter(APP_DIR, { initialUrl: '/' });
     await user.press(await screen.findByRole('button', { name: 'Premium' }));
