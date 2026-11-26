@@ -1,0 +1,702 @@
+[
+  {
+    "id": "mlt_hot_001",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Wer würde am ehesten auf einer Party mit zwei Personen gleichzeitig flirten?"
+  },
+  {
+    "id": "mlt_hot_002",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Wer würde am ehesten um Mitternacht eine freche Nachricht schicken?"
+  },
+  {
+    "id": "mlt_hot_003",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Wer würde am ehesten flirten, nur um etwas umsonst zu bekommen?"
+  },
+  {
+    "id": "mlt_hot_004",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Wer würde am ehesten mit einem einzigen Tanz jemanden verführen?"
+  },
+  {
+    "id": "mlt_hot_005",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Wer würde am ehesten sich absichtlich sexy anziehen, um jemanden zu beeindrucken?"
+  },
+  {
+    "id": "mlt_hot_006",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Wer würde am ehesten den heißesten Flirt-Spruch des Abends raushauen?"
+  },
+  {
+    "id": "mlt_hot_007",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Wer würde am ehesten mit dem Personal Trainer flirten?"
+  },
+  {
+    "id": "mlt_hot_008",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Wer würde am ehesten quer durch den Raum mit Blicken flirten, bis es knistert?"
+  },
+  {
+    "id": "mlt_hot_009",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Wer würde am ehesten bei einem Flirt eine erfundene Identität benutzen?"
+  },
+  {
+    "id": "mlt_hot_010",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Wer würde am ehesten im Urlaub jeden Abend mit jemand anderem flirten?"
+  },
+  {
+    "id": "mlt_hot_011",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Wer würde am ehesten jemandem die eigene Nummer direkt ins Handy tippen?"
+  },
+  {
+    "id": "mlt_hot_012",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Wer würde am ehesten aus einem Flirt eine Wette machen?"
+  },
+  {
+    "id": "mlt_hot_013",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Wer würde am ehesten sich mit einem Augenzwinkern aus jeder Situation rausflirten?"
+  },
+  {
+    "id": "mlt_hot_014",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Wer würde am ehesten mit dem Barkeeper flirten, bis die Getränke aufs Haus gehen?"
+  },
+  {
+    "id": "mlt_hot_015",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Wer würde am ehesten heimlich mit jemandem aus dieser Runde flirten?"
+  },
+  {
+    "id": "mlt_hot_016",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Wer würde am ehesten nach einem Flirt als Erstes schreiben?"
+  },
+  {
+    "id": "mlt_hot_017",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Wer würde am ehesten die zweideutigsten Emojis verschicken?"
+  },
+  {
+    "id": "mlt_hot_018",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Wer würde am ehesten am Telefon nur mit der Stimme jemanden verrückt machen?"
+  },
+  {
+    "id": "mlt_hot_019",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Wer würde am ehesten zwei Dates am selben Abend haben?"
+  },
+  {
+    "id": "mlt_hot_020",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Wer würde am ehesten schon beim ersten Date küssen?"
+  },
+  {
+    "id": "mlt_hot_021",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Wer würde am ehesten ein Date bis zum nächsten Morgen ausdehnen?"
+  },
+  {
+    "id": "mlt_hot_022",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Wer würde am ehesten jemanden aus der Arbeit daten?"
+  },
+  {
+    "id": "mlt_hot_023",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Wer würde am ehesten noch einmal mit einer oder einem Ex ausgehen?"
+  },
+  {
+    "id": "mlt_hot_024",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Wer würde am ehesten auf einer Dating-App das beste Profil haben?"
+  },
+  {
+    "id": "mlt_hot_025",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Wer würde am ehesten aus einem Date spontan einen Kurztrip machen?"
+  },
+  {
+    "id": "mlt_hot_026",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Wer würde am ehesten sich auf ein Date mit einem Promi-Doppelgänger einlassen?"
+  },
+  {
+    "id": "mlt_hot_027",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Wer würde am ehesten mehrere Dating-Apps gleichzeitig nutzen?"
+  },
+  {
+    "id": "mlt_hot_028",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Wer würde am ehesten ein langweiliges Date mit einer Ausrede beenden?"
+  },
+  {
+    "id": "mlt_hot_029",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Wer würde am ehesten beim Date auf getrennte Rechnungen bestehen?"
+  },
+  {
+    "id": "mlt_hot_030",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Wer würde am ehesten ein Date mit einer Wette beginnen?"
+  },
+  {
+    "id": "mlt_hot_031",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Wer würde am ehesten ein Date per Sprachnachricht absagen?"
+  },
+  {
+    "id": "mlt_hot_032",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Wer würde am ehesten auf einem Festival jemanden kennenlernen und gleich zusammen zelten?"
+  },
+  {
+    "id": "mlt_hot_033",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Wer würde am ehesten sich nach einem Date nie wieder melden?"
+  },
+  {
+    "id": "mlt_hot_034",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Wer würde am ehesten ein Date mit einer heißen Tanzeinlage beenden?"
+  },
+  {
+    "id": "mlt_hot_035",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Wer würde am ehesten einen Urlaubsflirt zu Hause wiedertreffen?"
+  },
+  {
+    "id": "mlt_hot_036",
+    "level": "hot",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Wer würde am ehesten auf einem Date die Zeit komplett vergessen?"
+  },
+  {
+    "id": "mlt_hot_037",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Wer würde am ehesten auf der Tanzfläche wild rumknutschen?"
+  },
+  {
+    "id": "mlt_hot_038",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Wer würde am ehesten jemanden küssen, ohne den Namen zu kennen?"
+  },
+  {
+    "id": "mlt_hot_039",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Wer würde am ehesten im Regen knutschen?"
+  },
+  {
+    "id": "mlt_hot_040",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Wer würde am ehesten im Aufzug küssen?"
+  },
+  {
+    "id": "mlt_hot_041",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Wer würde am ehesten beim Flaschendrehen schummeln, um die richtige Person zu küssen?"
+  },
+  {
+    "id": "mlt_hot_042",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Wer würde am ehesten den besten Kuss des Lebens schon hinter sich haben?"
+  },
+  {
+    "id": "mlt_hot_043",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Wer würde am ehesten jemanden zum Abschied küssen und nie wiedersehen?"
+  },
+  {
+    "id": "mlt_hot_044",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Wer würde am ehesten wegen einer Wette küssen?"
+  },
+  {
+    "id": "mlt_hot_045",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Wer würde am ehesten im Kino mehr knutschen als zuschauen?"
+  },
+  {
+    "id": "mlt_hot_046",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Wer würde am ehesten jemanden aus dem Freundeskreis küssen?"
+  },
+  {
+    "id": "mlt_hot_047",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Wer würde am ehesten im Auto rumknutschen?"
+  },
+  {
+    "id": "mlt_hot_048",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Wer würde am ehesten an einem öffentlichen Ort knutschen, bis sich jemand beschwert?"
+  },
+  {
+    "id": "mlt_hot_049",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Wer würde am ehesten einen Kuss geben, der jemanden komplett umhaut?"
+  },
+  {
+    "id": "mlt_hot_050",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Wer würde am ehesten beim Küssen kichern müssen?"
+  },
+  {
+    "id": "mlt_hot_051",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Wer würde am ehesten unter dem Mistelzweig auf die richtige Person warten?"
+  },
+  {
+    "id": "mlt_hot_052",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Wer würde am ehesten an Silvester um Mitternacht jemanden küssen?"
+  },
+  {
+    "id": "mlt_hot_053",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Wer würde am ehesten einen Urlaubskuss nie vergessen?"
+  },
+  {
+    "id": "mlt_hot_054",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Wer würde am ehesten ganz direkt fragen, ob jemand geküsst werden möchte?"
+  },
+  {
+    "id": "mlt_hot_055",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Wer würde am ehesten den längsten Kuss der Runde schaffen?"
+  },
+  {
+    "id": "mlt_hot_056",
+    "level": "hot",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Wer würde am ehesten jemandem ganz altmodisch einen Handkuss geben?"
+  },
+  {
+    "id": "mlt_hot_057",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Wer würde am ehesten heimlich einen Crush auf jemanden in dieser Runde haben?"
+  },
+  {
+    "id": "mlt_hot_058",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Wer würde am ehesten eine geheime Dating-App auf dem Handy haben?"
+  },
+  {
+    "id": "mlt_hot_059",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Wer würde am ehesten ein Date vor allen verheimlichen?"
+  },
+  {
+    "id": "mlt_hot_060",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Wer würde am ehesten ein Liebesgeheimnis am längsten für sich behalten?"
+  },
+  {
+    "id": "mlt_hot_061",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Wer würde am ehesten heimlich die Ex-Partner auf Social Media verfolgen?"
+  },
+  {
+    "id": "mlt_hot_062",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 2,
+    "text": "Wer würde am ehesten einen geheimen Zweit-Account haben?"
+  },
+  {
+    "id": "mlt_hot_063",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 2,
+    "text": "Wer würde am ehesten ein Tagebuch über das eigene Liebesleben führen?"
+  },
+  {
+    "id": "mlt_hot_064",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 2,
+    "text": "Wer würde am ehesten die Nachrichten vom Crush heimlich zehnmal lesen?"
+  },
+  {
+    "id": "mlt_hot_065",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 2,
+    "text": "Wer würde am ehesten eine Urlaubsromanze geheim halten?"
+  },
+  {
+    "id": "mlt_hot_066",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 2,
+    "text": "Wer würde am ehesten unter Druck ein Liebesgeheimnis ausplaudern?"
+  },
+  {
+    "id": "mlt_hot_067",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 3,
+    "text": "Wer würde am ehesten heimlich schon die Hochzeit mit dem Crush planen?"
+  },
+  {
+    "id": "mlt_hot_068",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 3,
+    "text": "Wer würde am ehesten eine geheime Pinnwand mit Date-Ideen haben?"
+  },
+  {
+    "id": "mlt_hot_069",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 3,
+    "text": "Wer würde am ehesten heimlich Liebesfilme schauen und es abstreiten?"
+  },
+  {
+    "id": "mlt_hot_070",
+    "level": "hot",
+    "category": "secrets",
+    "intensity": 3,
+    "text": "Wer würde am ehesten ein Liebesgeständnis ohne Absender verschicken?"
+  },
+  {
+    "id": "mlt_hot_071",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Wer würde am ehesten eine heiße Nachricht an die falsche Person schicken?"
+  },
+  {
+    "id": "mlt_hot_072",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Wer würde am ehesten bei einer Massage schwach werden?"
+  },
+  {
+    "id": "mlt_hot_073",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Wer würde am ehesten jemanden mit einem Outfit sprachlos machen?"
+  },
+  {
+    "id": "mlt_hot_074",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Wer würde am ehesten von jemandem aus dieser Runde träumen?"
+  },
+  {
+    "id": "mlt_hot_075",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Wer würde am ehesten sich von einer tiefen Stimme verführen lassen?"
+  },
+  {
+    "id": "mlt_hot_076",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Wer würde am ehesten einen heißen Urlaubsflirt haben?"
+  },
+  {
+    "id": "mlt_hot_077",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Wer würde am ehesten beim Slow Dance alles um sich herum vergessen?"
+  },
+  {
+    "id": "mlt_hot_078",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Wer würde am ehesten die heißeste Ausstrahlung der Runde haben?"
+  },
+  {
+    "id": "mlt_hot_079",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Wer würde am ehesten bei einer Filmszene rot werden?"
+  },
+  {
+    "id": "mlt_hot_080",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Wer würde am ehesten mit einem Hüftschwung die ganze Tanzfläche erobern?"
+  },
+  {
+    "id": "mlt_hot_081",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Wer würde am ehesten einen spontanen Kurztrip zu zweit vorschlagen?"
+  },
+  {
+    "id": "mlt_hot_082",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Wer würde am ehesten ein Date mit Dessert im Bett beenden?"
+  },
+  {
+    "id": "mlt_hot_083",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Wer würde am ehesten von einem Promi schwärmen, bis es peinlich wird?"
+  },
+  {
+    "id": "mlt_hot_084",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Wer würde am ehesten für ein Date eine heiße Playlist zusammenstellen?"
+  },
+  {
+    "id": "mlt_hot_085",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Wer würde am ehesten nach einem Date noch „auf einen Kaffee“ mit hochkommen wollen?"
+  },
+  {
+    "id": "mlt_hot_086",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Wer würde am ehesten beim Flirten heimlich auf die Lippen schauen?"
+  },
+  {
+    "id": "mlt_hot_087",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Wer würde am ehesten für eine Million Euro ein Jahr Single bleiben?"
+  },
+  {
+    "id": "mlt_hot_088",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Wer würde am ehesten eine offene Beziehung ausprobieren?"
+  },
+  {
+    "id": "mlt_hot_089",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Wer würde am ehesten bei einer Dating-Show auf einer Insel mitmachen?"
+  },
+  {
+    "id": "mlt_hot_090",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Wer würde am ehesten auf einem roten Teppich jemanden kennenlernen?"
+  },
+  {
+    "id": "mlt_hot_091",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Wer würde am ehesten die eigene Dating-History veröffentlichen?"
+  },
+  {
+    "id": "mlt_hot_092",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Wer würde am ehesten für die richtige Person alle eigenen Regeln brechen?"
+  },
+  {
+    "id": "mlt_hot_093",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Wer würde am ehesten mit dem Crush absichtlich im Aufzug stecken bleiben wollen?"
+  },
+  {
+    "id": "mlt_hot_094",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Wer würde am ehesten in einer Beziehung sofort das Handy-Passwort verraten?"
+  },
+  {
+    "id": "mlt_hot_095",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Wer würde am ehesten einen Urlaubsflirt heiraten?"
+  },
+  {
+    "id": "mlt_hot_096",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Wer würde am ehesten ein Speed-Dating mit zehn Leuten gewinnen?"
+  },
+  {
+    "id": "mlt_hot_097",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 3,
+    "text": "Wer würde am ehesten auf einem Junggesellenabschied die Show stehlen?"
+  },
+  {
+    "id": "mlt_hot_098",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 3,
+    "text": "Wer würde am ehesten mit der großen Liebe durchbrennen?"
+  },
+  {
+    "id": "mlt_hot_099",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 3,
+    "text": "Wer würde am ehesten einem Promi einen Liebesbrief schreiben?"
+  },
+  {
+    "id": "mlt_hot_100",
+    "level": "hot",
+    "category": "hypothetical",
+    "intensity": 3,
+    "text": "Wer würde am ehesten für ein Date einen Fallschirmsprung wagen?"
+  }
+]

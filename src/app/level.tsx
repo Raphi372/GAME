@@ -74,13 +74,13 @@ export default function LevelScreen() {
       <AppText variant="overline" color={colors.accent} style={styles.modeName}>
         {`${mode.emoji} ${t(modeTitleKey(modeId))}`}
       </AppText>
-      {mode.turnStyle === 'group' ? (
+      {mode.group ? (
         <Surface style={styles.howTo} testID="how-to">
           <Icon name="information-circle-outline" size={20} color={colors.lilacOrText} />
           <View style={styles.howToText}>
-            <AppText variant="bodyStrong">{t('nhie.howToTitle')}</AppText>
+            <AppText variant="bodyStrong">{t('group.howToTitle')}</AppText>
             <AppText variant="caption" color={colors.textSecondary}>
-              {t('nhie.howTo')}
+              {t(mode.group.copy.howTo)}
             </AppText>
           </View>
         </Surface>

@@ -15,9 +15,14 @@ export interface PlayerStats {
   passed: number;
   /** Cards skipped while this player was active. */
   skipped: number;
-  /** Group modes (e.g. "Ich hab noch nie"): times the player admitted "hab ich schon". */
+  /** "Ich hab noch nie": times the player admitted "hab ich schon". */
   confessed: number;
+  /** "Wer würde am ehesten?": times the group picked this player. */
+  picked: number;
 }
+
+/** The counter a group mode increments for the players marked on a card. */
+export type GroupTally = 'confessed' | 'picked';
 
 export interface CurrentTurn {
   playerId: string;
@@ -51,7 +56,13 @@ export interface SessionContext {
   rng: Rng;
 }
 
-export const emptyStats = (): PlayerStats => ({ answered: 0, passed: 0, skipped: 0, confessed: 0 });
+export const emptyStats = (): PlayerStats => ({
+  answered: 0,
+  passed: 0,
+  skipped: 0,
+  confessed: 0,
+  picked: 0,
+});
 
 /** Fills in counters missing in sessions persisted by older app versions. */
 function normalizeStats(stats: Partial<PlayerStats> | undefined): PlayerStats {
@@ -182,20 +193,21 @@ export function completeTurn(
 }
 
 /**
- * Group modes ("Ich hab noch nie"): everybody who admits "hab ich schon" gets a
- * confession counted (voluntary – the list may be empty), then the next player
- * reads the next card.
+ * Group modes: every marked player gets the mode's counter increased (e.g. a
+ * confession in "Ich hab noch nie", a pick in "Wer würde am ehesten?"). Marking is
+ * voluntary – the list may be empty. Then the next player reads the next card.
  */
 export function completeGroupRound(
   session: GameSession,
-  confessedPlayerIds: readonly string[],
+  markedPlayerIds: readonly string[],
   ctx: SessionContext,
+  tally: GroupTally = 'confessed',
 ): GameSession {
   if (!session.current) return session;
   const valid = new Set(ctx.players.map((player) => player.id));
   let stats = session.stats;
-  for (const id of new Set(confessedPlayerIds)) {
-    if (valid.has(id)) stats = bumpStat(stats, id, 'confessed');
+  for (const id of new Set(markedPlayerIds)) {
+    if (valid.has(id)) stats = bumpStat(stats, id, tally);
   }
   return advanceTurn({ ...session, stats }, ctx);
 }

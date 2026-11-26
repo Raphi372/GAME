@@ -26,6 +26,8 @@ interface QuestionCardProps {
   accessibilityLabel: string;
   /** Optional lead-in shown above the text, e.g. "Ich hab noch nie". */
   lead?: string;
+  /** Smaller card so content below it (e.g. the player picker) stays visible. */
+  compact?: boolean;
   style?: StyleProp<ViewStyle>;
 }
 
@@ -44,6 +46,7 @@ export function QuestionCard({
   footer,
   accessibilityLabel,
   lead,
+  compact = false,
   style,
 }: QuestionCardProps) {
   const meta = LEVELS[level];
@@ -96,7 +99,15 @@ export function QuestionCard({
           colors={[meta.tint, colors.surface, colors.backgroundAlt]}
           start={{ x: 0, y: 0 }}
           end={{ x: 0.6, y: 1 }}
-          style={[styles.card, { minHeight: Math.max(220, Math.min(height * 0.38, 400)) }]}
+          style={[
+            styles.card,
+            compact && styles.cardCompact,
+            {
+              minHeight: compact
+                ? Math.max(190, Math.min(height * 0.26, 300))
+                : Math.max(220, Math.min(height * 0.38, 400)),
+            },
+          ]}
         >
           <AppText style={[styles.watermark, { color: meta.accent }]} aria-hidden maxFontSizeMultiplier={1}>
             ?
@@ -142,6 +153,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     justifyContent: 'space-between',
   },
+  cardCompact: { padding: spacing.xl, gap: spacing.md },
   watermark: {
     position: 'absolute',
     right: -10,

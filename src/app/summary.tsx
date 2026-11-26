@@ -16,27 +16,27 @@ export default function SummaryScreen() {
   if (!result) return <Redirect href="/" />;
 
   const meta = LEVELS[result.level];
-  const isGroup = getGameMode(result.modeId).turnStyle === 'group';
+  const group = getGameMode(result.modeId).group;
   const totals = result.players.reduce(
     (sum, player) => ({
       answered: sum.answered + player.answered,
       passed: sum.passed + player.passed,
       skipped: sum.skipped + player.skipped,
-      confessed: sum.confessed + player.confessed,
+      tally: sum.tally + (group ? player[group.tally] : 0),
     }),
-    { answered: 0, passed: 0, skipped: 0, confessed: 0 },
+    { answered: 0, passed: 0, skipped: 0, tally: 0 },
   );
-  // Spicy Questions ranks by answered questions, group modes by confessions.
+  // Spicy Questions ranks by answered questions, group modes by their tally.
   const score = (player: (typeof result.players)[number]) =>
-    isGroup ? player.confessed : player.answered;
+    group ? player[group.tally] : player.answered;
   const ranked = [...result.players].sort((a, b) => score(b) - score(a));
   const top = ranked[0] && score(ranked[0]) > 0 ? ranked[0] : null;
   const minutes = Math.max(1, Math.round(result.durationMs / 60000));
 
-  const stats = isGroup
+  const stats = group
     ? [
         { label: t('summary.rounds'), value: result.turnsCompleted },
-        { label: t('summary.confessions'), value: totals.confessed },
+        { label: t(group.copy.summaryStat), value: totals.tally },
         { label: t('summary.skipped'), value: totals.skipped },
       ]
     : [
@@ -100,7 +100,7 @@ export default function SummaryScreen() {
           <Avatar name={top.name} colorIndex={top.colorIndex} size={48} />
           <View style={styles.flex}>
             <AppText variant="overline" color={meta.accent}>
-              {`🏆 ${t(isGroup ? 'summary.mostConfessions' : 'summary.mostDaring')}`}
+              {`🏆 ${t(group ? group.copy.summaryTop : 'summary.mostDaring')}`}
             </AppText>
             <AppText variant="h2">{top.name}</AppText>
           </View>
@@ -116,10 +116,10 @@ export default function SummaryScreen() {
               {player.name}
             </AppText>
             <AppText variant="caption" color={colors.textSecondary}>
-              {isGroup
-                ? player.confessed === 1
-                  ? t('summary.confessionLineOne')
-                  : t('summary.confessionLine', { count: player.confessed })
+              {group
+                ? player[group.tally] === 1
+                  ? t(group.copy.summaryLineOne)
+                  : t(group.copy.summaryLine, { count: player[group.tally] })
                 : t('summary.playerLine', { answered: player.answered, passed: player.passed })}
             </AppText>
           </View>

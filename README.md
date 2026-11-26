@@ -7,8 +7,8 @@ fügt ihre Mitspieler hinzu, wählt einen Spielmodus und eines von drei Spicy-Le
 zufällige Karten rund um Flirt, Dating, Geständnisse und Intimität – mit fairer
 Spielerrotation, ohne Wiederholungen und komplett offline.
 
-**Spielmodi:** 🔥 *Spicy Questions* (Fragen an die Person, die dran ist) und 🙊 *Ich hab noch nie*
-(eine Person liest vor, die ganze Runde spielt mit).
+**Spielmodi:** 🔥 *Spicy Questions* (Fragen an die Person, die dran ist), 🙊 *Ich hab noch nie*
+und 👀 *Wer würde am ehesten?* (in beiden liest eine Person vor, die ganze Runde spielt mit).
 
 > **Fair Play ist eingebaut:** Niemand muss antworten („Ich passe“ ist immer erlaubt), kein
 > Alkohol ist nötig, und für EXTREME fragt die App vorher nach dem Einverständnis der Gruppe.
@@ -48,9 +48,9 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 | :-: | :-: | :-: | :-: |
 | <img src="docs/screenshots/05-game.jpg" width="190"> | <img src="docs/screenshots/06-level-switch.jpg" width="190"> | <img src="docs/screenshots/07-game-extreme.jpg" width="190"> | <img src="docs/screenshots/08-summary.jpg" width="190"> |
 
-| Ich hab noch nie – Level | Ich hab noch nie – Spiel | Einstellungen |
-| :-: | :-: | :-: |
-| <img src="docs/screenshots/11-nhie-level.jpg" width="190"> | <img src="docs/screenshots/10-nhie-game.jpg" width="190"> | <img src="docs/screenshots/09-settings.jpg" width="190"> |
+| Ich hab noch nie – Level | Ich hab noch nie – Spiel | Wer würde am ehesten? | Auswertung (Gruppe) |
+| :-: | :-: | :-: | :-: |
+| <img src="docs/screenshots/11-nhie-level.jpg" width="190"> | <img src="docs/screenshots/10-nhie-game.jpg" width="190"> | <img src="docs/screenshots/12-mlt-game.jpg" width="190"> | <img src="docs/screenshots/13-mlt-summary.jpg" width="190"> |
 
 > **Platzhalter für Store-Screenshots:** Für App Store / Google Play werden später eigene
 > Marketing-Screenshots in den geforderten Gerätegrößen benötigt (z. B. 6,9″ iPhone,
@@ -86,8 +86,17 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 - „Nächste Karte“ / „Überspringen“, Levelwechsel, Neu mischen und Spielerwechsel wie im
   Fragenmodus; Auswertung mit „Die meisten Geständnisse“.
 
+### Spielmodus „Wer würde am ehesten?“
+- **300 eigenständige Fragen** (100 pro Level) im Format „Wer würde am ehesten …?“.
+- Eine Person liest vor; mit dem optionalen **3‑2‑1‑Countdown** zeigen alle gleichzeitig auf
+  eine Person.
+- **„Wer wurde gewählt?“** – antippen, wer die meisten Stimmen hat (bei Gleichstand mehrere);
+  die App zählt mit, Auswertung „Am häufigsten gewählt“.
+- Mindestens **3 Spieler**. Die Inhalte zielen auf echte Personen der Runde und sind deshalb
+  bewusst respektvoll: keine Beleidigungen, kein Body-Shaming, keine Untreue-Unterstellungen.
+
 ### Spieler
-- 2 bis 20 Spieler, Namen hinzufügen, bearbeiten, entfernen.
+- 2 bis 20 Spieler (bei „Wer würde am ehesten?“ mindestens 3), Namen hinzufügen, bearbeiten, entfernen.
 - Validierung: keine leeren Namen, keine Duplikate (Groß-/Kleinschreibung egal), max. 20 Zeichen.
 - Farbige Avatare mit Initialen.
 
@@ -108,8 +117,8 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 - Alle lokalen Daten löschen
 
 ### Vorbereitet (noch nicht aktiv)
-- **Weitere Spielmodi** (Wahrheit oder Pflicht, Wer würde am ehesten?, Random Challenges) –
-  im Menü als „Bald“ sichtbar, Architektur vorhanden.
+- **Weitere Spielmodi** (Wahrheit oder Pflicht, Random Challenges) – im Menü als „Bald“
+  sichtbar, Architektur vorhanden.
 - **Premium/Freemium** – Preis-Konfiguration, Entitlements, Kauf-Schnittstelle, Werbe-Regeln.
   Es werden **keine Zahlungen** abgewickelt oder simuliert.
 
@@ -159,7 +168,8 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 │   │   ├── premium/             # Preise, Entitlements, Kauf-Interface, Werbe-Regeln
 │   │   └── settings/            # Einstellungs-Zeilen
 │   ├── data/questions/          # Spicy Questions: mild.json, hot.json, extreme.json
-│   │   └── never-have-i-ever/   # Ich hab noch nie: mild.json, hot.json, extreme.json
+│   │   ├── never-have-i-ever/   # Ich hab noch nie: mild.json, hot.json, extreme.json
+│   │   └── most-likely/         # Wer würde am ehesten?: mild.json, hot.json, extreme.json
 │   ├── hooks/                   # useMotion (Animationen + „Bewegung reduzieren“)
 │   ├── i18n/                    # de.ts (Quelle), en.ts, useTranslation
 │   ├── services/                # Storage, Haptik, Sound, Feedback, Zufallsquelle
@@ -244,9 +254,9 @@ npm run check                # alles zusammen
 Abgedeckt sind u. a.: Level-Auswahl, Fragen laden, Zufallsauswahl, keine Wiederholung,
 Spieler hinzufügen/umbenennen/entfernen, faire Rotation, Überspringen, Passen, Levelwechsel,
 leeres/durchgespieltes Deck, lokale Speicherung inkl. App-Neustart und korrupter Daten,
-Einstellungen, Sprache, 18+-Sperre, Datenlöschung sowie der komplette Spielablauf beider
-Spielmodi über die echten Routen (inkl. „Wer hat schon?“-Auswahl und Geständnis-Zählung bei
-„Ich hab noch nie“).
+Einstellungen, Sprache, 18+-Sperre, Datenlöschung sowie der komplette Spielablauf
+aller drei Spielmodi über die echten Routen (inkl. Spielerauswahl und Zählern in den Gruppenmodi sowie
+dem 3‑2‑1‑Countdown).
 
 Die **GitHub-Actions-CI** (`.github/workflows/ci.yml`) führt bei jedem Push/PR Typecheck,
 Lint, Fragen-Validierung und Tests aus und baut anschließend Android-, iOS- und Web-Bundles
@@ -310,6 +320,7 @@ mit transparentem Hintergrund und ca. 66 % Safe-Zone).
 | --- | --- | --- | --- |
 | Spicy Questions | `src/data/questions/{mild,hot,extreme}.json` | `mild_`, `hot_`, `extreme_` | Platzhalter `{other}` erlaubt |
 | Ich hab noch nie | `src/data/questions/never-have-i-ever/{mild,hot,extreme}.json` | `nhie_mild_`, … | Text beginnt immer mit „Ich hab noch nie “, keine Platzhalter |
+| Wer würde am ehesten? | `src/data/questions/most-likely/{mild,hot,extreme}.json` | `mlt_mild_`, … | „Wer würde am ehesten … ?“, endet mit „?“, keine Platzhalter, respektvoll gegenüber realen Personen |
 
 Jede Datei ist ein Array pro Level, z. B. für Spicy Questions:
 
@@ -345,7 +356,8 @@ Beispiel „Ich hab noch nie“:
 
 Danach `npm run validate:questions` und `npm test` ausführen. Der Validator prüft für alle
 Spielmodi IDs, Duplikate (auch textlich und modusübergreifend), Kategorien, Länge,
-Platzhalter, das Format „Ich hab noch nie …“ und die Mindestanzahl von 100 Karten pro Level.
+Platzhalter, das jeweilige Format („Ich hab noch nie …“, „Wer würde am ehesten …?“) und die
+Mindestanzahl von 100 Karten pro Level.
 
 **Inhaltsrichtlinien:** nur Erwachsene, nichts mit Minderjährigen oder Schul-/Jugendbezug in
 intimen Kontexten, nichts Nicht-Einvernehmliches, keine Diskriminierung oder Demütigung, keine
@@ -380,8 +392,11 @@ Tests als Seed-RNG.
 Jeder Modus hat ID, Status (`available`/`coming-soon`), Zugstil, Karteneinheit
 („Fragen“/„Aussagen“), optionalen Karten-Vorspann und Spielerzahlen.
 - `single-player` (Spicy Questions): die Person, die dran ist, antwortet, passt oder überspringt.
-- `group` (Ich hab noch nie): die Person, die dran ist, liest vor; `completeGroupRound()`
-  zählt freiwillige Geständnisse und gibt die nächste Karte an die nächste Person.
+- `group` (Ich hab noch nie, Wer würde am ehesten?): die Person, die dran ist, liest vor;
+  `completeGroupRound()` erhöht für alle markierten Spieler den Zähler des Modus
+  (`group.tally`: `confessed` bzw. `picked`) und gibt die nächste Karte an die nächste Person.
+  Texte, Level-Beschreibungen und der optionale Countdown kommen aus `group.copy` bzw.
+  `group.countdown` in der Registry.
 
 Neuen Modus aktivieren:
 1. Inhalte als JSON anlegen und in `question-decks/packs.ts` registrieren (`modeId` setzen),
@@ -407,9 +422,9 @@ liefern. Fragen-Pakete haben ein `locale`; fehlt eine Sprache, wird auf Deutsch 
 
 - Keine Registrierung, kein Konto, kein Server, keine Analyse-/Werbe-/Tracking-SDKs.
 - Lokal gespeichert werden nur: Spielernamen, Spielstand, Einstellungen, Zeitpunkt der
-  Altersbestätigung. **Antworten werden nie gespeichert.** Bei „Ich hab noch nie“ enthält der
-  Spielstand nur Zähler, wie oft jemand „hab ich schon“ angetippt hat (nicht bei welcher
-  Aussage); mit dem Spielende wird der Spielstand gelöscht.
+  Altersbestätigung. **Antworten werden nie gespeichert.** In den Gruppenmodi enthält der
+  Spielstand nur Zähler, wie oft jemand angetippt wurde (nicht bei welcher Karte); mit dem
+  Spielende wird der Spielstand gelöscht.
 - Keine Berechtigungen für Kamera, Mikrofon, Kontakte oder Standort (Mikrofon- und
   Speicher-Berechtigungen sind auf Android explizit blockiert).
 - „Alle lokalen Daten löschen“ in den Einstellungen.
@@ -442,8 +457,8 @@ liefern. Fragen-Pakete haben ein `locale`; fehlt eine Sprache, wird auf Deutsch 
 ## Bekannte Einschränkungen & nächste Schritte
 
 **Noch nicht umgesetzt (bewusst für spätere Releases):**
-- Spielmodi *Wahrheit oder Pflicht*, *Wer würde am ehesten?*, *Random Challenges* (nur als
-  „Bald“ im Menü; Architektur vorhanden, Inhalte fehlen).
+- Spielmodi *Wahrheit oder Pflicht* und *Random Challenges* (nur als „Bald“ im Menü;
+  Architektur vorhanden, Inhalte fehlen).
 - Premium-Käufe (Store-Integration, z. B. via StoreKit/Play Billing), eigene Fragen,
   individuelle Spielrunden.
 - Englische Fragen-Inhalte (die Oberfläche ist übersetzt, die Fragen sind Deutsch).

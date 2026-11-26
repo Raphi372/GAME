@@ -61,8 +61,11 @@ export interface GameState extends GameData {
   startGame: (modeId: GameModeId, level: SpicyLevel) => boolean;
   answer: () => void;
   pass: () => void;
-  /** Group modes: records who admitted "hab ich schon" and moves to the next card. */
-  confessAndNext: (confessedPlayerIds: readonly string[]) => void;
+  /**
+   * Group modes: counts the marked players with the mode's tally (confessions,
+   * picks …) and the next player reads the next card.
+   */
+  nextGroupCard: (markedPlayerIds: readonly string[]) => void;
   skip: () => void;
   changeLevel: (level: SpicyLevel) => void;
   reshuffle: () => void;
@@ -212,8 +215,15 @@ export const useGameStore = create<GameState>()(
 
         answer: () => updateSession((session, ctx) => completeTurn(session, 'answered', ctx)),
         pass: () => updateSession((session, ctx) => completeTurn(session, 'passed', ctx)),
-        confessAndNext: (confessedPlayerIds) =>
-          updateSession((session, ctx) => completeGroupRound(session, confessedPlayerIds, ctx)),
+        nextGroupCard: (markedPlayerIds) =>
+          updateSession((session, ctx) =>
+            completeGroupRound(
+              session,
+              markedPlayerIds,
+              ctx,
+              getGameMode(session.modeId).group?.tally ?? 'confessed',
+            ),
+          ),
         skip: () => updateSession(skipQuestion),
         changeLevel: (level) => {
           updateSession((session, ctx) => changeSessionLevel(session, level, ctx));

@@ -3,6 +3,9 @@ import hot from '@/data/questions/hot.json';
 import mild from '@/data/questions/mild.json';
 import nhieExtreme from '@/data/questions/never-have-i-ever/extreme.json';
 import nhieHot from '@/data/questions/never-have-i-ever/hot.json';
+import mltExtreme from '@/data/questions/most-likely/extreme.json';
+import mltHot from '@/data/questions/most-likely/hot.json';
+import mltMild from '@/data/questions/most-likely/mild.json';
 import nhieMild from '@/data/questions/never-have-i-ever/mild.json';
 import {
   countBuiltInCards,
@@ -81,13 +84,13 @@ describe('"Ich hab noch nie" deck', () => {
     }
   });
 
-  it('has unique ids and texts across both game modes', () => {
-    const all = (['spicy-questions', 'never-have-i-ever'] as const).flatMap((mode) =>
-      SPICY_LEVELS.flatMap((level) => getDeck(mode, level)),
-    );
+  it('has unique ids and texts across all game modes', () => {
+    const modes = ['spicy-questions', 'never-have-i-ever', 'most-likely'] as const;
+    const all = modes.flatMap((mode) => SPICY_LEVELS.flatMap((level) => getDeck(mode, level)));
     expect(new Set(all.map((card) => card.id)).size).toBe(all.length);
     expect(new Set(all.map((card) => card.text.toLowerCase())).size).toBe(all.length);
-    expect(countBuiltInCards(['spicy-questions', 'never-have-i-ever'])).toBe(all.length);
+    expect(countBuiltInCards(modes)).toBe(all.length);
+    expect(all.length).toBeGreaterThanOrEqual(900);
   });
 
   it('contains no drinking instructions', () => {
@@ -102,6 +105,33 @@ describe('"Ich hab noch nie" deck', () => {
     });
     expect(splitLead('Andere Frage?', 'Ich hab noch nie')).toEqual({ lead: null, rest: 'Andere Frage?' });
     expect(splitLead('Text', '')).toEqual({ lead: null, rest: 'Text' });
+  });
+});
+
+describe('"Wer würde am ehesten?" deck', () => {
+  const mltFiles = { mild: mltMild, hot: mltHot, extreme: mltExtreme };
+
+  it.each(SPICY_LEVELS)('%s contains at least 100 valid questions', (level) => {
+    const { questions, issues } = parseQuestions(mltFiles[level], level);
+    expect(issues).toEqual([]);
+    expect(questions.length).toBeGreaterThanOrEqual(100);
+  });
+
+  it('only contains "Wer würde am ehesten …?" questions without placeholders', () => {
+    for (const level of SPICY_LEVELS) {
+      for (const card of getDeck('most-likely', level)) {
+        expect(card.id.startsWith(`mlt_${level}_`)).toBe(true);
+        expect(card.text.startsWith('Wer würde am ehesten ')).toBe(true);
+        expect(card.text.endsWith('?')).toBe(true);
+        expect(card.text).not.toMatch(/[{}]/);
+      }
+    }
+  });
+
+  it('stays respectful: no insults, shaming or drinking', () => {
+    const all = SPICY_LEVELS.flatMap((level) => getDeck('most-likely', level));
+    const banned = /(hässlich|\bdumm|\bfett\b|betrüg|fremdgeh|\btrink|\bschluck)/i;
+    all.forEach((card) => expect(card.text).not.toMatch(banned));
   });
 });
 

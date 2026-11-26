@@ -4,10 +4,11 @@ import { BackHandler, StyleSheet, useWindowDimensions, View } from 'react-native
 
 import { AppText, Button, ConfirmSheet, IconButton, Screen } from '@/components/ui';
 import { getGameMode } from '@/features/game-modes/registry';
-import { ConfessionPicker } from '@/features/gameplay/components/ConfessionPicker';
+import { Countdown } from '@/features/gameplay/components/Countdown';
 import { ExhaustedCard } from '@/features/gameplay/components/ExhaustedCard';
 import { LevelPill } from '@/features/gameplay/components/LevelPill';
 import { LevelSheet } from '@/features/gameplay/components/LevelSheet';
+import { PlayerPicker } from '@/features/gameplay/components/PlayerPicker';
 import { QuestionCard } from '@/features/gameplay/components/QuestionCard';
 import { TurnBanner } from '@/features/gameplay/components/TurnBanner';
 import { countRemaining } from '@/features/gameplay/engine/deck';
@@ -31,7 +32,7 @@ export default function GameScreen() {
   const answer = useGameStore((state) => state.answer);
   const pass = useGameStore((state) => state.pass);
   const skip = useGameStore((state) => state.skip);
-  const confessAndNext = useGameStore((state) => state.confessAndNext);
+  const nextGroupCard = useGameStore((state) => state.nextGroupCard);
   const changeLevel = useGameStore((state) => state.changeLevel);
   const reshuffle = useGameStore((state) => state.reshuffle);
   const endGame = useGameStore((state) => state.endGame);
@@ -40,7 +41,7 @@ export default function GameScreen() {
   const [endSheetOpen, setEndSheetOpen] = useState(false);
   /** Set while navigating to the summary so the screen doesn't redirect home first. */
   const [leaving, setLeaving] = useState(false);
-  /** Group modes: players marked "hab ich schon" – only valid for the card it was made on. */
+  /** Group modes: players marked on the current card – only valid for the card it was made on. */
   const [selection, setSelection] = useState<{ cardKey: string; ids: string[] }>({
     cardKey: '',
     ids: [],
@@ -60,7 +61,8 @@ export default function GameScreen() {
   if (!session) return leaving ? null : <Redirect href="/" />;
 
   const mode = getGameMode(session.modeId);
-  const isGroup = mode.turnStyle === 'group';
+  const group = mode.turnStyle === 'group' ? mode.group : undefined;
+  const isGroup = group !== undefined;
   const deckFor = (level: SpicyLevel) => getDeck(session.modeId, level, { locale });
   const deck = deckFor(session.level);
   const meta = LEVELS[session.level];
@@ -82,11 +84,11 @@ export default function GameScreen() {
     : '';
   const { lead, rest } = splitLead(fullText, mode.cardLead ?? '');
   const categoryLabel = question ? t(`category.${question.category}`) : '';
-  const confessionCounts = Object.fromEntries(
-    Object.entries(session.stats).map(([id, stats]) => [id, stats.confessed]),
-  );
+  const tallies = group
+    ? Object.fromEntries(Object.entries(session.stats).map(([id, stats]) => [id, stats[group.tally]]))
+    : {};
 
-  const toggleConfession = (playerId: string) =>
+  const toggleMark = (playerId: string) =>
     setSelection({
       cardKey,
       ids: selectedIds.includes(playerId)
@@ -101,15 +103,15 @@ export default function GameScreen() {
     router.replace('/summary');
   };
 
-  const footer = exhausted ? undefined : isGroup ? (
+  const footer = exhausted ? undefined : group ? (
     <>
       <Button
-        label={t('nhie.next')}
+        label={t('group.next')}
         icon="arrow-forward"
-        hint={t('nhie.nextHint')}
+        hint={t(group.copy.nextHint)}
         gradient={meta.gradient}
         feedbackEvent="reveal"
-        onPress={() => confessAndNext(selectedIds)}
+        onPress={() => nextGroupCard(selectedIds)}
         testID="action-next"
       />
       <Button
@@ -117,13 +119,13 @@ export default function GameScreen() {
         icon="shuffle"
         variant="secondary"
         size="md"
-        hint={t('nhie.skipHint')}
+        hint={t('group.skipHint')}
         feedbackEvent="reveal"
         onPress={skip}
         testID="action-skip"
       />
       <AppText variant="caption" color={colors.textMuted} align="center">
-        {`${t('nhie.safetyHint')} 💜`}
+        {`${t(group.copy.safetyHint)} 💜`}
       </AppText>
     </>
   ) : (
@@ -191,7 +193,7 @@ export default function GameScreen() {
           <TurnBanner
             player={player}
             accent={meta.accent}
-            overline={isGroup ? t('nhie.reader') : undefined}
+            overline={isGroup ? t('group.reader') : undefined}
           />
         ) : null}
         {exhausted ? (
@@ -215,18 +217,33 @@ export default function GameScreen() {
               footer={t('game.remaining', { round, count: remaining })}
               accessibilityLabel={
                 isGroup
-                  ? t('nhie.cardA11y', { name: player?.name ?? '', statement: fullText })
+                  ? t('group.cardA11y', { name: player?.name ?? '', statement: fullText })
                   : t('game.questionA11y', { name: player?.name ?? '', question: fullText })
               }
+              compact={isGroup}
               style={isGroup ? undefined : styles.card}
             />
-            {isGroup ? (
-              <ConfessionPicker
+            {group ? (
+              <PlayerPicker
+                title={t(group.copy.pickerTitle)}
+                hint={t(group.copy.pickerHint)}
                 players={players}
                 selectedIds={selectedIds}
-                onToggle={toggleConfession}
-                counts={confessionCounts}
+                onToggle={toggleMark}
+                toggleLabel={(candidate) => t(group.copy.toggleLabel, { name: candidate.name })}
+                counts={tallies}
                 accent={meta.accent}
+                accessory={
+                  group.countdown ? (
+                    <Countdown
+                      label={t('mlt.countdown')}
+                      hint={t('mlt.countdownHint')}
+                      goLabel={t('mlt.countdownGo')}
+                      accent={meta.accent}
+                      resetKey={cardKey}
+                    />
+                  ) : null
+                }
               />
             ) : null}
           </>

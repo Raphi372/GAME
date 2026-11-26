@@ -1,6 +1,9 @@
 import extremeData from '@/data/questions/extreme.json';
 import hotData from '@/data/questions/hot.json';
 import mildData from '@/data/questions/mild.json';
+import mltExtremeData from '@/data/questions/most-likely/extreme.json';
+import mltHotData from '@/data/questions/most-likely/hot.json';
+import mltMildData from '@/data/questions/most-likely/mild.json';
 import nhieExtremeData from '@/data/questions/never-have-i-ever/extreme.json';
 import nhieHotData from '@/data/questions/never-have-i-ever/hot.json';
 import nhieMildData from '@/data/questions/never-have-i-ever/mild.json';
@@ -45,6 +48,9 @@ export const BUILTIN_PACKS: readonly QuestionPack[] = [
   buildPack('never-have-i-ever.mild.base', 'never-have-i-ever', 'mild', nhieMildData),
   buildPack('never-have-i-ever.hot.base', 'never-have-i-ever', 'hot', nhieHotData),
   buildPack('never-have-i-ever.extreme.base', 'never-have-i-ever', 'extreme', nhieExtremeData),
+  buildPack('most-likely.mild.base', 'most-likely', 'mild', mltMildData),
+  buildPack('most-likely.hot.base', 'most-likely', 'hot', mltHotData),
+  buildPack('most-likely.extreme.base', 'most-likely', 'extreme', mltExtremeData),
 ];
 
 /** Content is authored in German first; other locales fall back to it. */
