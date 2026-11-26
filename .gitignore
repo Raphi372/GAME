@@ -17,6 +17,8 @@ expo-env.d.ts
 *.p12
 *.key
 *.mobileprovision
+# Store credentials (Google Play service account for `eas submit`)
+*service-account*.json
 
 # Metro
 .metro-health-check*

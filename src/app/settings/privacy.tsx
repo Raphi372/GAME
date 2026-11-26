@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 
 import { AppText, Header, Screen, Surface } from '@/components/ui';
+import { LEGAL } from '@/config/legal';
 import { useTranslation, type TranslationKey } from '@/i18n';
 import { colors, spacing } from '@/theme';
 
@@ -12,13 +13,17 @@ const SECTIONS = ['summary', 'data', 'sharing', 'permissions', 'rights', 'contac
 export default function PrivacyScreen() {
   const { t, intlLocale } = useTranslation();
   const updated = new Intl.DateTimeFormat(intlLocale, { dateStyle: 'long' }).format(PRIVACY_LAST_UPDATED);
+  /** Until the provider details are filled in, the notice is clearly marked as a draft. */
+  const contact = LEGAL.providerContact?.trim() || null;
   return (
     <Screen focusableScroll header={<Header title={t('privacy.title')} />}>
-      <Surface style={styles.draft}>
-        <AppText variant="caption" color={colors.warning}>
-          {`⚠️ ${t('privacy.draftNote')}`}
-        </AppText>
-      </Surface>
+      {contact ? null : (
+        <Surface style={styles.draft} testID="privacy-draft-note">
+          <AppText variant="caption" color={colors.warning}>
+            {`⚠️ ${t('privacy.draftNote')}`}
+          </AppText>
+        </Surface>
+      )}
       <View style={styles.list}>
         {SECTIONS.map((section) => (
           <View key={section} style={styles.section}>
@@ -26,7 +31,7 @@ export default function PrivacyScreen() {
               {t(`privacy.${section}.title` as TranslationKey)}
             </AppText>
             <AppText variant="body" color={colors.textSecondary}>
-              {t(`privacy.${section}.body` as TranslationKey)}
+              {section === 'contact' && contact ? contact : t(`privacy.${section}.body` as TranslationKey)}
             </AppText>
           </View>
         ))}

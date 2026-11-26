@@ -31,11 +31,12 @@ Runde spielt mit).
 7. [Entwicklungsserver starten](#entwicklungsserver-starten)
 8. [Tests & Qualität](#tests--qualität)
 9. [Build-Prozess (iOS & Android)](#build-prozess-ios--android)
-10. [Fragen-Datenbank erweitern](#fragen-datenbank-erweitern)
-11. [Architektur](#architektur)
-12. [Datenschutz & Sicherheit](#datenschutz--sicherheit)
-13. [Hinweise für zukünftige Entwickler](#hinweise-für-zukünftige-entwickler)
-14. [Bekannte Einschränkungen & nächste Schritte](#bekannte-einschränkungen--nächste-schritte)
+10. [Store-Vorbereitung](#store-vorbereitung)
+11. [Fragen-Datenbank erweitern](#fragen-datenbank-erweitern)
+12. [Architektur](#architektur)
+13. [Datenschutz & Sicherheit](#datenschutz--sicherheit)
+14. [Hinweise für zukünftige Entwickler](#hinweise-für-zukünftige-entwickler)
+15. [Bekannte Einschränkungen & nächste Schritte](#bekannte-einschränkungen--nächste-schritte)
 
 ---
 
@@ -63,9 +64,9 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 | :-: |
 | <img src="docs/screenshots/09-settings.jpg" width="190"> |
 
-> **Platzhalter für Store-Screenshots:** Für App Store / Google Play werden später eigene
-> Marketing-Screenshots in den geforderten Gerätegrößen benötigt (z. B. 6,9″ iPhone,
-> Android-Phone, Tablet). Ablageort-Vorschlag: `docs/store/`.
+Die **Store-Screenshots** in den von Apple und Google geforderten Größen (Deutsch und
+Englisch) liegen in [`docs/store/screenshots/`](docs/store/screenshots/) – siehe
+[Store-Vorbereitung](#store-vorbereitung).
 
 ---
 
@@ -221,6 +222,7 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 │   │   ├── premium.tsx          # Premium-Vorschau (ohne Kauf)
 │   │   └── settings/            # Einstellungen, Datenschutz, Fair Play, Über
 │   ├── components/ui/           # Designsystem-Komponenten (Button, Sheet, Screen, …)
+│   ├── config/legal.ts          # Anbieterdaten für die Datenschutzhinweise (vor Release ausfüllen)
 │   ├── features/
 │   │   ├── gameplay/engine/     # Reine Spiellogik: Deck, Rotation, Session (ohne React)
 │   │   ├── gameplay/components/ # Fragekarte, Spieler-Banner, Level-Sheet, …
@@ -253,10 +255,15 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 │   ├── brand/                   # SVG-Quellen von Logo/Icon
 │   ├── images/                  # App-Icon, Adaptive Icons, Splash, Favicon
 │   └── sounds/                  # Kurze UI-Sounds (WAV)
-├── docs/screenshots/
-├── scripts/validate-questions.mjs
+├── docs/
+│   ├── screenshots/             # Screenshots für dieses README
+│   └── store/                   # Store-Texte, -Screenshots, Fragebögen, Datenschutzerklärung
+├── scripts/
+│   ├── validate-questions.mjs   # prüft die Fragen-Datenbank
+│   └── store-screenshots.mjs    # erzeugt Store-Screenshots und Play-Grafik
 ├── .github/workflows/ci.yml
-├── app.json · eas.json · jest.config.js · eslint.config.js · tsconfig.json
+├── app.json · eas.json · store.config.json (App-Store-Texte für EAS Metadata)
+├── jest.config.js · eslint.config.js · tsconfig.json
 ```
 
 Trennung der Verantwortlichkeiten: **UI** (`app/`, `components/`, `features/*/components`) ·
@@ -357,18 +364,20 @@ npm run build:preview     # Android-APK + iOS-Build für interne Tester
 ### Android (Google Play)
 ```bash
 npm run build:android     # erzeugt ein .aab (Production-Profil)
-npx eas-cli@latest submit --platform android   # Upload in die Play Console
+npm run submit:android    # Upload des letzten Builds als Entwurf in den internen Test-Track
 ```
-Voraussetzungen: Google-Play-Developer-Konto, App in der Play Console angelegt,
-Inhaltsbewertung (IARC) ausgefüllt, Datensicherheits-Formular („keine Daten erhoben“).
+Voraussetzungen: Google-Play-Developer-Konto, App in der Play Console angelegt, der erste
+Build einmal von Hand hochgeladen, Inhaltsbewertung (IARC) und Datensicherheit ausgefüllt
+(„keine Daten erhoben“) – Details in [`docs/store/`](docs/store/README.md).
 
 ### iOS (App Store)
 ```bash
 npm run build:ios         # EAS kümmert sich um Zertifikate & Provisioning
-npx eas-cli@latest submit --platform ios       # Upload zu App Store Connect / TestFlight
+npm run submit:ios        # Upload des letzten Builds zu App Store Connect / TestFlight
 ```
 Voraussetzungen: Apple-Developer-Programm, App in App Store Connect angelegt,
-Altersfreigabe-Fragebogen (voraussichtlich 17+/18+), App-Datenschutz-Angaben („Data Not Collected“).
+Altersfreigabe **18+**, App-Datenschutz „Keine Daten erfasst“ – Details in
+[`docs/store/`](docs/store/README.md).
 
 ### Lokale native Builds (optional)
 ```bash
@@ -381,6 +390,26 @@ npx expo run:ios          # nur macOS mit Xcode
 Die PNGs in `assets/images/` wurden aus den SVG-Quellen in `assets/brand/` gerendert.
 Bei Änderungen das SVG anpassen und neu exportieren (1024 × 1024 px; Adaptive-Icon-Vordergrund
 mit transparentem Hintergrund und ca. 66 % Safe-Zone).
+
+---
+
+## Store-Vorbereitung
+
+Alles für App Store und Google Play außer Käufen liegt in [`docs/store/`](docs/store/README.md):
+
+- **Texte** auf Deutsch und Englisch – für den App Store in `store.config.json`
+  (hochladen mit `npm run store:metadata`), für Google Play in `docs/store/google-play/`.
+- **Screenshots** für iPhone 6,9″ (1320 × 2868), iPad 13″ (2064 × 2752) und Android
+  (1080 × 2340), dazu Play-Symbol (512 × 512) und Vorstellungsgrafik (1024 × 500).
+  Neu erzeugen mit `npm run store:screenshots`.
+- **Fragebögen:** App-Datenschutz („Keine Daten erfasst“), Data safety („Keine Daten
+  erhoben“), Altersfreigabe 18+, IARC, App-Inhalte – mit fertigen Antworten.
+- **Review-Hinweise** für Apple und eine **Datenschutzerklärung** (DE/EN) zum Veröffentlichen.
+- **Checkliste** mit allem, was vor der Einreichung noch von dir kommt: Bundle-ID,
+  Anbieterdaten in `src/config/legal.ts`, Datenschutz- und Support-URL, Konten.
+
+`tests/unit/store-listing.test.ts` hält die Store-Texte innerhalb der Limits, ohne sexuelle
+oder Trink-Begriffe und mit denselben Zahlen wie die App.
 
 ---
 
@@ -537,7 +566,9 @@ eine Sprache, wird auf Deutsch zurückgegriffen. Feste Kartenanfänge („Ich ha
   Speicher-Berechtigungen sind auf Android explizit blockiert).
 - „Alle lokalen Daten löschen“ in den Einstellungen.
 - Die Datenschutzhinweise in der App sind eine **Vorlage** und müssen vor Veröffentlichung
-  rechtlich geprüft und um die Anbieterdaten ergänzt werden.
+  rechtlich geprüft werden. Die Anbieterdaten kommen in `src/config/legal.ts`; solange sie
+  fehlen, zeigt der Datenschutz-Bildschirm einen sichtbaren Vorlagen-Hinweis. Eine
+  passende Datenschutzerklärung zum Veröffentlichen liegt in `docs/store/`.
 - Die Altersabfrage ist eine einfache Selbstauskunft und **ersetzt keine rechtliche Prüfung**
   der Altersfreigabe in den Stores.
 
@@ -574,9 +605,11 @@ eine Sprache, wird auf Deutsch zurückgegriffen. Feste Kartenanfänge („Ich ha
 
 **Vor der Veröffentlichung:**
 - Rechtliche Prüfung von Datenschutzhinweisen, Impressum/Anbieterangaben und Altersfreigabe;
-  Kontaktdaten in den Datenschutzhinweisen eintragen.
-- Bundle-ID/Package-Name final festlegen, `eas init` ausführen, Store-Einträge anlegen,
-  Store-Screenshots, Beschreibung und Datenschutz-Labels erstellen.
+  Anbieterdaten in `src/config/legal.ts` eintragen.
+- Die Checkliste in [`docs/store/README.md`](docs/store/README.md) abarbeiten: Bundle-ID,
+  `eas init`, Store-Einträge, Datenschutz- und Support-URL, Fragebögen.
+- Premium-Vorschau für die erste Store-Version klären: Apple lehnt Platzhalter-Funktionen
+  oft ab (Details in `docs/store/README.md`).
 - Test auf echten iOS- und Android-Geräten (inkl. Screenreader, großer Schrift, älterer Geräte).
 - Lizenz des Projekts festlegen. Die verwendeten Schriften stehen unter der SIL Open Font
   License, die Icons (Ionicons) unter MIT.
