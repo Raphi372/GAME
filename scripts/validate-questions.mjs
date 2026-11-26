@@ -31,6 +31,15 @@ const DECKS = [
     placeholders: [],
     startsWith: 'Ich hab noch nie ',
   },
+  {
+    mode: 'most-likely',
+    dir: 'src/data/questions/most-likely',
+    idPrefix: (level) => `mlt_${level}_`,
+    minPerLevel: 100,
+    placeholders: [],
+    startsWith: 'Wer würde am ehesten ',
+    endsWith: '?',
+  },
 ];
 
 const errors = [];
@@ -76,6 +85,9 @@ for (const deck of DECKS) {
       if (q.text.length > 180) errors.push(`${where}: text longer than 180 characters`);
       if (deck.startsWith && !q.text.startsWith(deck.startsWith)) {
         errors.push(`${where}: text must start with "${deck.startsWith}"`);
+      }
+      if (deck.endsWith && !q.text.endsWith(deck.endsWith)) {
+        errors.push(`${where}: text must end with "${deck.endsWith}"`);
       }
       for (const placeholder of q.text.match(/\{[^}]*\}/g) ?? []) {
         if (!deck.placeholders.includes(placeholder)) {

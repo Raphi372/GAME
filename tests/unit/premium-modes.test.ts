@@ -46,12 +46,18 @@ describe('premium preparation', () => {
 });
 
 describe('game mode registry', () => {
-  it('lists all planned modes with Spicy Questions playable', () => {
+  it('lists all planned modes and marks the playable ones', () => {
     expect(listGameModes().map((mode) => mode.id)).toEqual([...GAME_MODE_IDS]);
     expect(isModePlayable('spicy-questions')).toBe(true);
     expect(isModePlayable('never-have-i-ever')).toBe(true);
+    expect(isModePlayable('most-likely')).toBe(true);
     expect(isModePlayable('truth-or-dare')).toBe(false);
-    expect(listPlayableModeIds()).toEqual(['spicy-questions', 'never-have-i-ever']);
+    expect(isModePlayable('random-challenges')).toBe(false);
+    expect(listPlayableModeIds()).toEqual(['spicy-questions', 'never-have-i-ever', 'most-likely']);
+    expect(getGameMode('most-likely').minPlayers).toBe(3);
+    expect(getGameMode('most-likely').group?.tally).toBe('picked');
+    expect(getGameMode('most-likely').group?.countdown).toBe(true);
+    expect(getGameMode('never-have-i-ever').group?.tally).toBe('confessed');
     expect(isGroupMode('never-have-i-ever')).toBe(true);
     expect(isGroupMode('spicy-questions')).toBe(false);
     expect(modeTitleKey('never-have-i-ever')).toBe('mode.never-have-i-ever.title');
@@ -61,5 +67,16 @@ describe('game mode registry', () => {
     expect(getGameMode('spicy-questions').maxPlayers).toBe(20);
     expect(isGameModeId('most-likely')).toBe(true);
     expect(isGameModeId('poker')).toBe(false);
+  });
+});
+
+describe('group mode configuration', () => {
+  it('every group mode has its rules and texts', () => {
+    for (const mode of listGameModes()) {
+      if (mode.turnStyle === 'group' && mode.status === 'available') {
+        expect(mode.group).toBeDefined();
+        expect(mode.cardLead).toBeTruthy();
+      }
+    }
   });
 });

@@ -84,6 +84,7 @@ describe('game store', () => {
         passed: 1,
         skipped: 1,
         confessed: 0,
+        picked: 0,
       });
 
       game().answer();
@@ -156,8 +157,8 @@ describe('game store', () => {
       expect(game().startGame('never-have-i-ever', 'hot')).toBe(true);
       expect(game().session?.current?.questionId).toMatch(/^nhie_hot_/);
       const [lena, max] = game().players;
-      game().confessAndNext([lena!.id, max!.id]);
-      game().confessAndNext([lena!.id]);
+      game().nextGroupCard([lena!.id, max!.id]);
+      game().nextGroupCard([lena!.id]);
       game().skip();
       game().endGame();
       const result = game().lastResult!;
@@ -167,11 +168,27 @@ describe('game store', () => {
       expect(byName).toEqual({ Lena: 2, Max: 1, Sophie: 0 });
     });
 
+    it('plays "Wer würde am ehesten?" with picks (needs three players)', () => {
+      addPlayers('Lena', 'Max');
+      expect(game().startGame('most-likely', 'mild')).toBe(false);
+      addPlayers('Sophie');
+      expect(game().startGame('most-likely', 'mild')).toBe(true);
+      expect(game().session?.current?.questionId).toMatch(/^mlt_mild_/);
+      const [lena, max] = game().players;
+      game().nextGroupCard([max!.id]);
+      game().nextGroupCard([max!.id, lena!.id]);
+      expect(game().session!.stats[max!.id]?.picked).toBe(2);
+      expect(game().session!.stats[max!.id]?.confessed).toBe(0);
+      // Removing a player below the minimum of three ends the game.
+      game().removePlayer(lena!.id);
+      expect(game().session).toBeNull();
+    });
+
     it('ignores game actions when no game is running', () => {
       expect(() => {
         game().answer();
         game().pass();
-        game().confessAndNext(['x']);
+        game().nextGroupCard(['x']);
         game().skip();
         game().changeLevel('hot');
         game().reshuffle();

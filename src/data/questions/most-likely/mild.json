@@ -1,0 +1,702 @@
+[
+  {
+    "id": "mlt_mild_001",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Wer würde am ehesten beim ersten Date über den eigenen Fuß stolpern?"
+  },
+  {
+    "id": "mlt_mild_002",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Wer würde am ehesten aus Versehen eine Sprachnachricht an den Crush schicken?"
+  },
+  {
+    "id": "mlt_mild_003",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Wer würde am ehesten vor Aufregung den eigenen Namen vergessen?"
+  },
+  {
+    "id": "mlt_mild_004",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Wer würde am ehesten beim Karaoke einen Liebessong schmettern?"
+  },
+  {
+    "id": "mlt_mild_005",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Wer würde am ehesten einen Liebesfilm dreimal hintereinander schauen?"
+  },
+  {
+    "id": "mlt_mild_006",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Wer würde am ehesten sich in eine Serienfigur verlieben?"
+  },
+  {
+    "id": "mlt_mild_007",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Wer würde am ehesten beim Flirten am lautesten über den eigenen Witz lachen?"
+  },
+  {
+    "id": "mlt_mild_008",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Wer würde am ehesten auf einer Hochzeit als Erstes auf der Tanzfläche stehen?"
+  },
+  {
+    "id": "mlt_mild_009",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Wer würde am ehesten das eigene Handy mit dem des Crushs verwechseln?"
+  },
+  {
+    "id": "mlt_mild_010",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Wer würde am ehesten eine Dating-App-Bio nur aus Emojis schreiben?"
+  },
+  {
+    "id": "mlt_mild_011",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Wer würde am ehesten zum ersten Date ins Fast-Food-Restaurant einladen?"
+  },
+  {
+    "id": "mlt_mild_012",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Wer würde am ehesten beim Speed-Dating die Zeit komplett vergessen?"
+  },
+  {
+    "id": "mlt_mild_013",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Wer würde am ehesten beim Date aus Versehen den falschen Namen sagen?"
+  },
+  {
+    "id": "mlt_mild_014",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Wer würde am ehesten eine Liebesnachricht in den Familienchat schicken?"
+  },
+  {
+    "id": "mlt_mild_015",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Wer würde am ehesten beim ersten Date das Essen verschütten?"
+  },
+  {
+    "id": "mlt_mild_016",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Wer würde am ehesten alle zwei Minuten nachschauen, ob der Crush schon geantwortet hat?"
+  },
+  {
+    "id": "mlt_mild_017",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Wer würde am ehesten sich für ein Date viel zu schick anziehen?"
+  },
+  {
+    "id": "mlt_mild_018",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Wer würde am ehesten sich auf einem Date vor Nervosität verschlucken?"
+  },
+  {
+    "id": "mlt_mild_019",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Wer würde am ehesten aus Versehen ein uraltes Foto vom Crush liken?"
+  },
+  {
+    "id": "mlt_mild_020",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Wer würde am ehesten einen Liebesbrief voller Tippfehler schreiben?"
+  },
+  {
+    "id": "mlt_mild_021",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Wer würde am ehesten ein Date im Baumarkt planen?"
+  },
+  {
+    "id": "mlt_mild_022",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Wer würde am ehesten beim Slow Dance ständig auf die Füße treten?"
+  },
+  {
+    "id": "mlt_mild_023",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Wer würde am ehesten beim Flirten so heftig zwinkern, dass alle denken, es ist etwas im Auge?"
+  },
+  {
+    "id": "mlt_mild_024",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Wer würde am ehesten einen Promi auf der Straße ansprechen und um ein Date bitten?"
+  },
+  {
+    "id": "mlt_mild_025",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Wer würde am ehesten eine zehnminütige Sprachnachricht an den Crush schicken?"
+  },
+  {
+    "id": "mlt_mild_026",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Wer würde am ehesten mit der Bedienung flirten?"
+  },
+  {
+    "id": "mlt_mild_027",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Wer würde am ehesten mit einem einzigen Blick jemanden um den Finger wickeln?"
+  },
+  {
+    "id": "mlt_mild_028",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Wer würde am ehesten den besten Anmachspruch des Abends bringen?"
+  },
+  {
+    "id": "mlt_mild_029",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Wer würde am ehesten auf einer Party als Erstes eine Nummer bekommen?"
+  },
+  {
+    "id": "mlt_mild_030",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Wer würde am ehesten Fremden einfach so ein Kompliment machen?"
+  },
+  {
+    "id": "mlt_mild_031",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Wer würde am ehesten mit dem DJ flirten, um den Lieblingssong zu hören?"
+  },
+  {
+    "id": "mlt_mild_032",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Wer würde am ehesten flirten, ohne es selbst zu merken?"
+  },
+  {
+    "id": "mlt_mild_033",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Wer würde am ehesten einen Flirt mit einem Witz anfangen?"
+  },
+  {
+    "id": "mlt_mild_034",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Wer würde am ehesten jemanden beim Einkaufen ansprechen?"
+  },
+  {
+    "id": "mlt_mild_035",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Wer würde am ehesten mit Augenkontakt jemanden nervös machen?"
+  },
+  {
+    "id": "mlt_mild_036",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Wer würde am ehesten beim Flirten knallrot werden?"
+  },
+  {
+    "id": "mlt_mild_037",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Wer würde am ehesten jemandem einen Zettel mit der eigenen Nummer zustecken?"
+  },
+  {
+    "id": "mlt_mild_038",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Wer würde am ehesten nur mit Emojis flirten?"
+  },
+  {
+    "id": "mlt_mild_039",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Wer würde am ehesten im Urlaub einen Flirt haben?"
+  },
+  {
+    "id": "mlt_mild_040",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Wer würde am ehesten heimlich über Social Media flirten?"
+  },
+  {
+    "id": "mlt_mild_041",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Wer würde am ehesten schon nach dem ersten Satz eine Nummer bekommen?"
+  },
+  {
+    "id": "mlt_mild_042",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Wer würde am ehesten auf einer Hochzeit den besten Flirt landen?"
+  },
+  {
+    "id": "mlt_mild_043",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Wer würde am ehesten mit einem Kompliment den ganzen Abend von jemandem retten?"
+  },
+  {
+    "id": "mlt_mild_044",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Wer würde am ehesten sich trauen, den Crush als Erstes anzuschreiben?"
+  },
+  {
+    "id": "mlt_mild_045",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Wer würde am ehesten jemanden mit einem Lächeln aus dem Konzept bringen?"
+  },
+  {
+    "id": "mlt_mild_046",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Wer würde am ehesten als Erstes aus dieser Runde heiraten?"
+  },
+  {
+    "id": "mlt_mild_047",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Wer würde am ehesten auf ein Blind Date gehen?"
+  },
+  {
+    "id": "mlt_mild_048",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Wer würde am ehesten sich über eine Dating-App verlieben?"
+  },
+  {
+    "id": "mlt_mild_049",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Wer würde am ehesten ein Date bis ins letzte Detail durchplanen?"
+  },
+  {
+    "id": "mlt_mild_050",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Wer würde am ehesten drei Dates an einem Wochenende haben?"
+  },
+  {
+    "id": "mlt_mild_051",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Wer würde am ehesten ein Date spontan in ein Abenteuer verwandeln?"
+  },
+  {
+    "id": "mlt_mild_052",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Wer würde am ehesten zum ersten Date zu spät kommen?"
+  },
+  {
+    "id": "mlt_mild_053",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Wer würde am ehesten ein Date mit einem Picknick überraschen?"
+  },
+  {
+    "id": "mlt_mild_054",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Wer würde am ehesten das romantischste erste Date organisieren?"
+  },
+  {
+    "id": "mlt_mild_055",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Wer würde am ehesten sich noch beim ersten Date für das zweite verabreden?"
+  },
+  {
+    "id": "mlt_mild_056",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Wer würde am ehesten ein Date im Freizeitpark vorschlagen?"
+  },
+  {
+    "id": "mlt_mild_057",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Wer würde am ehesten beim Date darauf bestehen, die Rechnung zu übernehmen?"
+  },
+  {
+    "id": "mlt_mild_058",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Wer würde am ehesten ein Date absagen, weil die Lieblingsserie läuft?"
+  },
+  {
+    "id": "mlt_mild_059",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Wer würde am ehesten Dating-Tipps von der eigenen Familie annehmen?"
+  },
+  {
+    "id": "mlt_mild_060",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Wer würde am ehesten sich im Urlaub verlieben?"
+  },
+  {
+    "id": "mlt_mild_061",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Wer würde am ehesten die besten Dating-Geschichten erzählen?"
+  },
+  {
+    "id": "mlt_mild_062",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Wer würde am ehesten ein Date vor lauter Aufregung absagen?"
+  },
+  {
+    "id": "mlt_mild_063",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Wer würde am ehesten ein Date mit einem selbst gekochten Menü beeindrucken?"
+  },
+  {
+    "id": "mlt_mild_064",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Wer würde am ehesten auf einer Hochzeit die große Liebe treffen?"
+  },
+  {
+    "id": "mlt_mild_065",
+    "level": "mild",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Wer würde am ehesten eine Dating-Show gewinnen?"
+  },
+  {
+    "id": "mlt_mild_066",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Wer würde am ehesten einen Liebesbrief mit der Hand schreiben?"
+  },
+  {
+    "id": "mlt_mild_067",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Wer würde am ehesten für den Crush ein Lied singen?"
+  },
+  {
+    "id": "mlt_mild_068",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Wer würde am ehesten an Liebe auf den ersten Blick glauben?"
+  },
+  {
+    "id": "mlt_mild_069",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Wer würde am ehesten einen Heiratsantrag mit Flashmob machen?"
+  },
+  {
+    "id": "mlt_mild_070",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Wer würde am ehesten Rosenblätter auf dem Bett verteilen?"
+  },
+  {
+    "id": "mlt_mild_071",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Wer würde am ehesten mit jemandem den Sonnenaufgang anschauen?"
+  },
+  {
+    "id": "mlt_mild_072",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Wer würde am ehesten eine Playlist nur für den Crush erstellen?"
+  },
+  {
+    "id": "mlt_mild_073",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Wer würde am ehesten ein Gedicht für jemanden schreiben?"
+  },
+  {
+    "id": "mlt_mild_074",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Wer würde am ehesten zum Jahrestag eine riesige Überraschung planen?"
+  },
+  {
+    "id": "mlt_mild_075",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Wer würde am ehesten bei einem Liebesfilm weinen?"
+  },
+  {
+    "id": "mlt_mild_076",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Wer würde am ehesten schon beim ersten Treffen Schmetterlinge im Bauch haben?"
+  },
+  {
+    "id": "mlt_mild_077",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Wer würde am ehesten sich in die beste Freundin oder den besten Freund verlieben?"
+  },
+  {
+    "id": "mlt_mild_078",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Wer würde am ehesten für die Liebe in ein anderes Land ziehen?"
+  },
+  {
+    "id": "mlt_mild_079",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Wer würde am ehesten sich ein Pärchen-Tattoo stechen lassen?"
+  },
+  {
+    "id": "mlt_mild_080",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Wer würde am ehesten ein Leben lang mit derselben Person zusammenbleiben?"
+  },
+  {
+    "id": "mlt_mild_081",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Wer würde am ehesten bei einer Dating-Show im Fernsehen mitmachen?"
+  },
+  {
+    "id": "mlt_mild_082",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Wer würde am ehesten einen Promi daten?"
+  },
+  {
+    "id": "mlt_mild_083",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Wer würde am ehesten auf einer einsamen Insel die große Liebe finden?"
+  },
+  {
+    "id": "mlt_mild_084",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 1,
+    "text": "Wer würde am ehesten nach Jahren wieder mit einer oder einem Ex zusammenkommen?"
+  },
+  {
+    "id": "mlt_mild_085",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Wer würde am ehesten für ein Date um die halbe Welt fliegen?"
+  },
+  {
+    "id": "mlt_mild_086",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Wer würde am ehesten jemanden heiraten, den sie oder er erst am Altar kennenlernt?"
+  },
+  {
+    "id": "mlt_mild_087",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Wer würde am ehesten eine Zeitkapsel mit Liebesbriefen vergraben?"
+  },
+  {
+    "id": "mlt_mild_088",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 2,
+    "text": "Wer würde am ehesten freiwillig ein Jahr Dating-Pause einlegen?"
+  },
+  {
+    "id": "mlt_mild_089",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 3,
+    "text": "Wer würde am ehesten einen Liebesroman über das eigene Leben schreiben?"
+  },
+  {
+    "id": "mlt_mild_090",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 3,
+    "text": "Wer würde am ehesten spontan in Las Vegas heiraten?"
+  },
+  {
+    "id": "mlt_mild_091",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 3,
+    "text": "Wer würde am ehesten mit dem Crush auf Weltreise gehen?"
+  },
+  {
+    "id": "mlt_mild_092",
+    "level": "mild",
+    "category": "hypothetical",
+    "intensity": 3,
+    "text": "Wer würde am ehesten eine Wahrsagerin nach der großen Liebe fragen?"
+  },
+  {
+    "id": "mlt_mild_093",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Wer würde am ehesten Liebeskummer mit einer Riesenportion Eis bekämpfen?"
+  },
+  {
+    "id": "mlt_mild_094",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Wer würde am ehesten sich innerhalb von fünf Minuten verlieben?"
+  },
+  {
+    "id": "mlt_mild_095",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Wer würde am ehesten die besten Beziehungstipps geben?"
+  },
+  {
+    "id": "mlt_mild_096",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Wer würde am ehesten noch Wochen später über einen Korb nachdenken?"
+  },
+  {
+    "id": "mlt_mild_097",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Wer würde am ehesten das Herz auf der Zunge tragen?"
+  },
+  {
+    "id": "mlt_mild_098",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Wer würde am ehesten einen Crush jahrelang geheim halten?"
+  },
+  {
+    "id": "mlt_mild_099",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Wer würde am ehesten das neue Date sofort der Familie vorstellen?"
+  },
+  {
+    "id": "mlt_mild_100",
+    "level": "mild",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Wer würde am ehesten jede Woche einen neuen Crush haben?"
+  }
+]

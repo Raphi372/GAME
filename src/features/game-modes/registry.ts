@@ -1,3 +1,7 @@
+import type { GroupTally } from '@/features/gameplay/engine/session';
+import type { TranslationKey } from '@/i18n';
+import type { SpicyLevel } from '@/types';
+
 /**
  * Game mode registry.
  *
@@ -29,6 +33,32 @@ export type TurnStyle = 'single-player' | 'group';
 /** How a mode calls its cards in the UI ("110 Fragen" vs. "100 Aussagen"). */
 export type CardUnit = 'questions' | 'statements';
 
+/** UI copy of a group mode (all translation keys, checked by TypeScript). */
+export interface GroupModeCopy {
+  howTo: TranslationKey;
+  pickerTitle: TranslationKey;
+  pickerHint: TranslationKey;
+  /** Accessible name of a player chip, receives `{name}`. */
+  toggleLabel: TranslationKey;
+  nextHint: TranslationKey;
+  safetyHint: TranslationKey;
+  summaryStat: TranslationKey;
+  summaryTop: TranslationKey;
+  /** Receives `{count}`. */
+  summaryLine: TranslationKey;
+  summaryLineOne: TranslationKey;
+  levelDescriptions: Record<SpicyLevel, TranslationKey>;
+}
+
+/** Rules of a group mode: one person reads aloud, everybody plays along. */
+export interface GroupModeConfig {
+  /** Counter increased for every player marked on a card. */
+  tally: GroupTally;
+  /** Offer a 3-2-1 countdown so everybody points at the same time. */
+  countdown: boolean;
+  copy: GroupModeCopy;
+}
+
 export interface GameModeDefinition {
   id: GameModeId;
   emoji: string;
@@ -38,6 +68,8 @@ export interface GameModeDefinition {
   cardUnit: CardUnit;
   /** Fixed lead-in every card starts with, highlighted on the card (content language). */
   cardLead?: string;
+  /** Required for `turnStyle: 'group'`. */
+  group?: GroupModeConfig;
   minPlayers: number;
   maxPlayers: number;
 }
@@ -64,6 +96,27 @@ export const GAME_MODES: Record<GameModeId, GameModeDefinition> = {
     usesSpicyLevels: true,
     cardUnit: 'statements',
     cardLead: 'Ich hab noch nie',
+    group: {
+      tally: 'confessed',
+      countdown: false,
+      copy: {
+        howTo: 'nhie.howTo',
+        pickerTitle: 'nhie.whoHas',
+        pickerHint: 'nhie.whoHasHint',
+        toggleLabel: 'nhie.confessToggle',
+        nextHint: 'nhie.nextHint',
+        safetyHint: 'nhie.safetyHint',
+        summaryStat: 'summary.confessions',
+        summaryTop: 'summary.mostConfessions',
+        summaryLine: 'summary.confessionLine',
+        summaryLineOne: 'summary.confessionLineOne',
+        levelDescriptions: {
+          mild: 'nhie.level.mild.description',
+          hot: 'nhie.level.hot.description',
+          extreme: 'nhie.level.extreme.description',
+        },
+      },
+    },
     minPlayers: MIN_PLAYERS,
     maxPlayers: MAX_PLAYERS,
   },
@@ -80,10 +133,32 @@ export const GAME_MODES: Record<GameModeId, GameModeDefinition> = {
   'most-likely': {
     id: 'most-likely',
     emoji: '👀',
-    status: 'coming-soon',
+    status: 'available',
     turnStyle: 'group',
     usesSpicyLevels: true,
     cardUnit: 'questions',
+    cardLead: 'Wer würde am ehesten',
+    group: {
+      tally: 'picked',
+      countdown: true,
+      copy: {
+        howTo: 'mlt.howTo',
+        pickerTitle: 'mlt.pickerTitle',
+        pickerHint: 'mlt.pickerHint',
+        toggleLabel: 'mlt.toggle',
+        nextHint: 'mlt.nextHint',
+        safetyHint: 'mlt.safetyHint',
+        summaryStat: 'summary.picks',
+        summaryTop: 'summary.mostPicked',
+        summaryLine: 'summary.pickLine',
+        summaryLineOne: 'summary.pickLineOne',
+        levelDescriptions: {
+          mild: 'mlt.level.mild.description',
+          hot: 'mlt.level.hot.description',
+          extreme: 'mlt.level.extreme.description',
+        },
+      },
+    },
     minPlayers: 3,
     maxPlayers: MAX_PLAYERS,
   },

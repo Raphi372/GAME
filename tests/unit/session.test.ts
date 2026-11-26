@@ -44,6 +44,7 @@ describe('game session', () => {
       passed: 0,
       skipped: 0,
       confessed: 0,
+      picked: 0,
     });
     expect(next.turnCounts[session.current!.playerId]).toBe(1);
   });
@@ -160,7 +161,13 @@ describe('game session', () => {
       ctx = makeContext([...players, { id: 'new', name: 'Neu', colorIndex: 5 }]);
       session = syncSessionPlayers(session, ctx);
       expect(session.turnCounts.new).toBe(Math.min(session.turnCounts.p1!, session.turnCounts.p2!));
-      expect(session.stats.new).toEqual({ answered: 0, passed: 0, skipped: 0, confessed: 0 });
+      expect(session.stats.new).toEqual({
+        answered: 0,
+        passed: 0,
+        skipped: 0,
+        confessed: 0,
+        picked: 0,
+      });
     });
 
     it('hands the current question to the next player if the active one leaves', () => {
@@ -260,8 +267,22 @@ describe('group rounds ("Ich hab noch nie")', () => {
       stats: { p1: { answered: 2, passed: 1, skipped: 0 } as never, p2: {} as never },
     };
     const repaired = repairSession(legacy, ctx);
-    expect(repaired.stats.p1).toEqual({ answered: 2, passed: 1, skipped: 0, confessed: 0 });
-    expect(repaired.stats.p2).toEqual({ answered: 0, passed: 0, skipped: 0, confessed: 0 });
+    expect(repaired.stats.p1).toEqual({ answered: 2, passed: 1, skipped: 0, confessed: 0, picked: 0 });
+    expect(repaired.stats.p2).toEqual({ answered: 0, passed: 0, skipped: 0, confessed: 0, picked: 0 });
     expect(completeGroupRound(repaired, ['p1'], ctx).stats.p1?.confessed).toBe(1);
+  });
+});
+
+describe('group rounds ("Wer würde am ehesten?")', () => {
+  const mltOptions = { ...options, modeId: 'most-likely' as const };
+
+  it('counts picks instead of confessions', () => {
+    const ctx = makeContext(makePlayers(4));
+    const session = createSession(mltOptions, ctx);
+    const next = completeGroupRound(session, ['p2', 'p4'], ctx, 'picked');
+    expect(next.stats.p2?.picked).toBe(1);
+    expect(next.stats.p4?.picked).toBe(1);
+    expect(next.stats.p2?.confessed).toBe(0);
+    expect(next.turnsCompleted).toBe(1);
   });
 });
