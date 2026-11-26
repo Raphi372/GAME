@@ -1,9 +1,9 @@
 import type { GameModeId } from '@/features/game-modes/registry';
 import { requiresTargetPlayer } from '@/features/question-decks/templates';
-import { SPICY_LEVELS, type Player, type Question, type SpicyLevel } from '@/types';
+import { SPICY_LEVELS, type CardKind, type Player, type Question, type SpicyLevel } from '@/types';
 import type { Rng } from '@/utils/random';
 
-import { drawQuestion } from './deck';
+import { drawQuestion, getRemainingQuestions } from './deck';
 import { initialTurnCount, pickNextPlayer, pickOtherPlayer, type TurnCounts } from './rotation';
 
 export type TurnOutcome = 'answered' | 'passed' | 'skipped';
@@ -19,6 +19,10 @@ export interface PlayerStats {
   confessed: number;
   /** "Wer würde am ehesten?": times the group picked this player. */
   picked: number;
+  /** "Wahrheit oder Pflicht": truths answered. */
+  truths: number;
+  /** "Wahrheit oder Pflicht": dares done. */
+  dares: number;
 }
 
 /** The counter a group mode increments for the players marked on a card. */
@@ -26,10 +30,15 @@ export type GroupTally = 'confessed' | 'picked';
 
 export interface CurrentTurn {
   playerId: string;
-  /** `null` when every question of the current level has been played. */
+  /**
+   * `null` when every question of the current level has been played – or, in
+   * choice modes, while the player is still choosing (then `kind` is null too).
+   */
   questionId: string | null;
   /** Player that replaces the `{other}` placeholder of the question. */
   targetPlayerId: string | null;
+  /** Choice modes: the kind the player picked ("truth"/"dare"); null while choosing. */
+  kind?: CardKind | null;
 }
 
 /**
@@ -54,6 +63,11 @@ export interface SessionContext {
   players: readonly Player[];
   getDeck: (level: SpicyLevel) => readonly Question[];
   rng: Rng;
+  /**
+   * Choice modes ("Wahrheit oder Pflicht"): the player first picks one of these
+   * kinds, then a card of that kind is drawn. Omitted for all other modes.
+   */
+  choiceKinds?: readonly CardKind[];
 }
 
 export const emptyStats = (): PlayerStats => ({
@@ -62,6 +76,8 @@ export const emptyStats = (): PlayerStats => ({
   skipped: 0,
   confessed: 0,
   picked: 0,
+  truths: 0,
+  dares: 0,
 });
 
 /** Fills in counters missing in sessions persisted by older app versions. */
@@ -81,31 +97,84 @@ function findQuestion(deck: readonly Question[], id: string | null): Question | 
   return deck.find((question) => question.id === id);
 }
 
-/**
- * Draws a new question for `playerId` and marks it as played immediately so it can
- * never appear twice – even when it gets skipped.
- */
-function dealTurn(session: GameSession, playerId: string, ctx: SessionContext): GameSession {
-  const deck = ctx.getDeck(session.level);
+/** Draws a card (optionally of one kind) for `playerId`; null if none is left. */
+function drawCard(
+  session: GameSession,
+  playerId: string,
+  ctx: SessionContext,
+  kind: CardKind | null,
+): GameSession | null {
+  const fullDeck = ctx.getDeck(session.level);
+  const deck = kind ? fullDeck.filter((question) => question.kind === kind) : fullDeck;
   const played = session.playedByLevel[session.level];
-  const previous = findQuestion(deck, session.current?.questionId ?? null);
+  const previous = findQuestion(fullDeck, session.current?.questionId ?? null);
   const question = drawQuestion(deck, played, ctx.rng, {
     avoidCategory: previous?.category ?? null,
   });
+  if (!question) return null;
 
   const playerIds = ctx.players.map((player) => player.id);
-  const targetPlayerId =
-    question && requiresTargetPlayer(question.text)
-      ? pickOtherPlayer(playerIds, playerId, ctx.rng)
-      : null;
+  const targetPlayerId = requiresTargetPlayer(question.text)
+    ? pickOtherPlayer(playerIds, playerId, ctx.rng)
+    : null;
 
   return {
     ...session,
-    playedByLevel: question
-      ? { ...session.playedByLevel, [session.level]: [...played, question.id] }
-      : session.playedByLevel,
-    current: { playerId, questionId: question?.id ?? null, targetPlayerId },
+    playedByLevel: { ...session.playedByLevel, [session.level]: [...played, question.id] },
+    current: { playerId, questionId: question.id, targetPlayerId, kind },
   };
+}
+
+/**
+ * Starts the turn of `playerId`. Usually a new question is drawn and marked as
+ * played immediately so it can never appear twice – even when it gets skipped.
+ * In choice modes the player first has to pick a kind (see `chooseCard`).
+ */
+function dealTurn(session: GameSession, playerId: string, ctx: SessionContext): GameSession {
+  if (ctx.choiceKinds && ctx.choiceKinds.length > 0) {
+    return {
+      ...session,
+      current: { playerId, questionId: null, targetPlayerId: null, kind: null },
+    };
+  }
+  return (
+    drawCard(session, playerId, ctx, null) ?? {
+      ...session,
+      current: { playerId, questionId: null, targetPlayerId: null },
+    }
+  );
+}
+
+/** True while the active player of a choice mode still has to pick a kind. */
+export function isAwaitingChoice(session: GameSession, ctx: Pick<SessionContext, 'choiceKinds'>): boolean {
+  const current = session.current;
+  return Boolean(
+    ctx.choiceKinds?.length && current && current.questionId === null && !current.kind,
+  );
+}
+
+/** Unplayed cards per kind in the current level (for the choice buttons). */
+export function remainingByKind(
+  session: GameSession,
+  getDeck: SessionContext['getDeck'],
+  kinds: readonly CardKind[],
+): Record<CardKind, number> {
+  const remaining = getRemainingQuestions(getDeck(session.level), session.playedByLevel[session.level]);
+  const counts = { truth: 0, dare: 0 } as Record<CardKind, number>;
+  for (const kind of kinds) counts[kind] = remaining.filter((question) => question.kind === kind).length;
+  return counts;
+}
+
+/**
+ * Choice modes: the active player picks "truth" or "dare" and gets a card of that
+ * kind. Does nothing if the player already has a card or no card of that kind is left.
+ */
+export function chooseCard(session: GameSession, kind: CardKind, ctx: SessionContext): GameSession {
+  const current = session.current;
+  if (!current || !isAwaitingChoice(session, ctx) || !ctx.choiceKinds?.includes(kind)) {
+    return session;
+  }
+  return drawCard(session, current.playerId, ctx, kind) ?? session;
 }
 
 export interface CreateSessionOptions {
@@ -189,7 +258,12 @@ export function completeTurn(
 ): GameSession {
   const current = session.current;
   if (!current) return session;
-  return advanceTurn({ ...session, stats: bumpStat(session.stats, current.playerId, outcome) }, ctx);
+  let stats = bumpStat(session.stats, current.playerId, outcome);
+  // Choice modes also count which kind was done.
+  if (outcome === 'answered' && current.kind && current.questionId) {
+    stats = bumpStat(stats, current.playerId, current.kind === 'truth' ? 'truths' : 'dares');
+  }
+  return advanceTurn({ ...session, stats }, ctx);
 }
 
 /**
@@ -212,11 +286,23 @@ export function completeGroupRound(
   return advanceTurn({ ...session, stats }, ctx);
 }
 
-/** ÜBERSPRINGEN: same player, new question. The skipped question is not shown again. */
+/**
+ * ÜBERSPRINGEN: same player, new question. The skipped question is not shown again.
+ * In choice modes the new card has the same kind; if none is left, the player
+ * chooses again.
+ */
 export function skipQuestion(session: GameSession, ctx: SessionContext): GameSession {
   const current = session.current;
   if (!current || current.questionId === null) return session;
   const updated = { ...session, stats: bumpStat(session.stats, current.playerId, 'skipped') };
+  if (current.kind) {
+    return (
+      drawCard(updated, current.playerId, ctx, current.kind) ?? {
+        ...updated,
+        current: { playerId: current.playerId, questionId: null, targetPlayerId: null, kind: null },
+      }
+    );
+  }
   return dealTurn(updated, current.playerId, ctx);
 }
 

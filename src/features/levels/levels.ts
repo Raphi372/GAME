@@ -57,7 +57,7 @@ export function listLevels(): LevelMeta[] {
   return SPICY_LEVELS.map((level) => LEVELS[level]);
 }
 
-/** Group modes describe the levels in their own words; Spicy Questions uses the default. */
+/** Modes can describe the levels in their own words; Spicy Questions uses the default. */
 export function levelDescriptionKey(level: SpicyLevel, modeId: GameModeId): TranslationKey {
-  return GAME_MODES[modeId].group?.copy.levelDescriptions[level] ?? LEVELS[level].descriptionKey;
+  return GAME_MODES[modeId].levelDescriptions?.[level] ?? LEVELS[level].descriptionKey;
 }

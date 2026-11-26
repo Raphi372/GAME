@@ -1,6 +1,9 @@
 import {
   changeLevel,
+  chooseCard,
   completeGroupRound,
+  isAwaitingChoice,
+  remainingByKind,
   completeTurn,
   createSession,
   getCurrentQuestion,
@@ -11,6 +14,7 @@ import {
   type GameSession,
   type SessionContext,
 } from '@/features/gameplay/engine/session';
+import type { CardKind, Question } from '@/types';
 import { createSeededRng } from '@/utils/random';
 
 import { makeContext, makeDeck, makePlayers } from '../helpers/fixtures';
@@ -45,6 +49,8 @@ describe('game session', () => {
       skipped: 0,
       confessed: 0,
       picked: 0,
+        truths: 0,
+        dares: 0,
     });
     expect(next.turnCounts[session.current!.playerId]).toBe(1);
   });
@@ -167,6 +173,8 @@ describe('game session', () => {
         skipped: 0,
         confessed: 0,
         picked: 0,
+        truths: 0,
+        dares: 0,
       });
     });
 
@@ -267,8 +275,8 @@ describe('group rounds ("Ich hab noch nie")', () => {
       stats: { p1: { answered: 2, passed: 1, skipped: 0 } as never, p2: {} as never },
     };
     const repaired = repairSession(legacy, ctx);
-    expect(repaired.stats.p1).toEqual({ answered: 2, passed: 1, skipped: 0, confessed: 0, picked: 0 });
-    expect(repaired.stats.p2).toEqual({ answered: 0, passed: 0, skipped: 0, confessed: 0, picked: 0 });
+    expect(repaired.stats.p1).toEqual({ answered: 2, passed: 1, skipped: 0, confessed: 0, picked: 0, truths: 0, dares: 0 });
+    expect(repaired.stats.p2).toEqual({ answered: 0, passed: 0, skipped: 0, confessed: 0, picked: 0, truths: 0, dares: 0 });
     expect(completeGroupRound(repaired, ['p1'], ctx).stats.p1?.confessed).toBe(1);
   });
 });
@@ -284,5 +292,123 @@ describe('group rounds ("Wer würde am ehesten?")', () => {
     expect(next.stats.p4?.picked).toBe(1);
     expect(next.stats.p2?.confessed).toBe(0);
     expect(next.turnsCompleted).toBe(1);
+  });
+});
+
+describe('choice rounds ("Wahrheit oder Pflicht")', () => {
+  const todOptions = { ...options, modeId: 'truth-or-dare' as const };
+
+  function todContext(truths = 4, dares = 4, players = makePlayers(3)): SessionContext {
+    const deck: Question[] = [
+      ...Array.from({ length: truths }, (_, i) => ({
+        id: `t${i}`,
+        level: 'mild' as const,
+        category: 'personal' as const,
+        kind: 'truth' as CardKind,
+        text: `Wahrheit ${i}?`,
+      })),
+      ...Array.from({ length: dares }, (_, i) => ({
+        id: `d${i}`,
+        level: 'mild' as const,
+        category: 'funny' as const,
+        kind: 'dare' as CardKind,
+        text: `Pflicht ${i} mit {other}.`,
+      })),
+    ];
+    return { players, rng: createSeededRng(5), getDeck: () => deck, choiceKinds: ['truth', 'dare'] };
+  }
+
+  it('starts every turn with a choice instead of a card', () => {
+    const ctx = todContext();
+    const session = createSession(todOptions, ctx);
+    expect(isAwaitingChoice(session, ctx)).toBe(true);
+    expect(session.current?.questionId).toBeNull();
+    expect(session.playedByLevel.mild).toEqual([]);
+    expect(remainingByKind(session, ctx.getDeck, ['truth', 'dare'])).toEqual({ truth: 4, dare: 4 });
+  });
+
+  it('draws a card of the chosen kind', () => {
+    const ctx = todContext();
+    let session = createSession(todOptions, ctx);
+    session = chooseCard(session, 'dare', ctx);
+    expect(session.current?.kind).toBe('dare');
+    expect(session.current?.questionId).toMatch(/^d/);
+    expect(session.current?.targetPlayerId).not.toBe(session.current?.playerId);
+    expect(isAwaitingChoice(session, ctx)).toBe(false);
+    // A second choice in the same turn is ignored.
+    expect(chooseCard(session, 'truth', ctx)).toBe(session);
+  });
+
+  it('counts truths and dares and returns to the choice for the next player', () => {
+    const ctx = todContext();
+    let session = createSession(todOptions, ctx);
+    const first = session.current!.playerId;
+    session = completeTurn(chooseCard(session, 'truth', ctx), 'answered', ctx);
+    expect(session.stats[first]).toMatchObject({ answered: 1, truths: 1, dares: 0 });
+    expect(session.current?.playerId).not.toBe(first);
+    expect(isAwaitingChoice(session, ctx)).toBe(true);
+
+    const second = session.current!.playerId;
+    session = completeTurn(chooseCard(session, 'dare', ctx), 'answered', ctx);
+    expect(session.stats[second]).toMatchObject({ dares: 1, truths: 0 });
+  });
+
+  it('lets a player pass before or after choosing', () => {
+    const ctx = todContext();
+    let session = createSession(todOptions, ctx);
+    const first = session.current!.playerId;
+    session = completeTurn(session, 'passed', ctx);
+    expect(session.stats[first]).toMatchObject({ passed: 1, truths: 0, dares: 0 });
+    const second = session.current!.playerId;
+    session = completeTurn(chooseCard(session, 'dare', ctx), 'passed', ctx);
+    expect(session.stats[second]).toMatchObject({ passed: 1, dares: 0 });
+  });
+
+  it('"Andere Karte" gives the same player a new card of the same kind', () => {
+    const ctx = todContext(3, 3);
+    let session = chooseCard(createSession(todOptions, ctx), 'truth', ctx);
+    const player = session.current!.playerId;
+    const firstCard = session.current!.questionId;
+    session = skipQuestion(session, ctx);
+    expect(session.current?.playerId).toBe(player);
+    expect(session.current?.kind).toBe('truth');
+    expect(session.current?.questionId).not.toBe(firstCard);
+    expect(session.stats[player]?.skipped).toBe(1);
+  });
+
+  it('goes back to the choice when no card of that kind is left', () => {
+    const ctx = todContext(1, 2);
+    let session = chooseCard(createSession(todOptions, ctx), 'truth', ctx);
+    session = skipQuestion(session, ctx);
+    expect(isAwaitingChoice(session, ctx)).toBe(true);
+    expect(remainingByKind(session, ctx.getDeck, ['truth', 'dare'])).toEqual({ truth: 0, dare: 2 });
+    // An exhausted kind cannot be chosen.
+    expect(chooseCard(session, 'truth', ctx)).toBe(session);
+    expect(chooseCard(session, 'dare', ctx).current?.kind).toBe('dare');
+  });
+
+  it('never repeats cards and allows reshuffling once everything is played', () => {
+    const ctx = todContext(2, 2);
+    let session = createSession(todOptions, ctx);
+    const seen: string[] = [];
+    for (const kind of ['truth', 'dare', 'truth', 'dare'] as const) {
+      session = chooseCard(session, kind, ctx);
+      seen.push(session.current!.questionId!);
+      session = completeTurn(session, 'answered', ctx);
+    }
+    expect(new Set(seen).size).toBe(4);
+    expect(remainingByKind(session, ctx.getDeck, ['truth', 'dare'])).toEqual({ truth: 0, dare: 0 });
+    session = reshuffleLevel(session, ctx);
+    expect(isAwaitingChoice(session, ctx)).toBe(true);
+    expect(remainingByKind(session, ctx.getDeck, ['truth', 'dare'])).toEqual({ truth: 2, dare: 2 });
+  });
+
+  it('keeps the choice state when the level changes', () => {
+    const ctx = todContext();
+    let session = chooseCard(createSession(todOptions, ctx), 'dare', ctx);
+    const player = session.current!.playerId;
+    session = changeLevel(session, 'hot', ctx);
+    expect(session.current?.playerId).toBe(player);
+    expect(isAwaitingChoice(session, ctx)).toBe(true);
   });
 });

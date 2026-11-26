@@ -1,0 +1,882 @@
+[
+  {
+    "id": "tod_extreme_001",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Was ist die heißeste Fantasie, die du dich heute auszusprechen traust?"
+  },
+  {
+    "id": "tod_extreme_002",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Was magst du im Bett, worüber du selten sprichst?"
+  },
+  {
+    "id": "tod_extreme_003",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Welche Fantasie würdest du nur mit einer ganz bestimmten Person ausprobieren?"
+  },
+  {
+    "id": "tod_extreme_004",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Was war das Mutigste, das du je im Schlafzimmer ausprobiert hast?"
+  },
+  {
+    "id": "tod_extreme_005",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Welche drei Worte machen dich in einem intimen Moment schwach?"
+  },
+  {
+    "id": "tod_extreme_006",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Was ist dein Lieblingsvorspiel in einem Satz?"
+  },
+  {
+    "id": "tod_extreme_007",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Wovon träumst du, wenn es um Intimität geht?"
+  },
+  {
+    "id": "tod_extreme_008",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Welches Geräusch findest du verführerisch?"
+  },
+  {
+    "id": "tod_extreme_009",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Welches Kostüm würdest du für eine heiße Nacht anziehen?"
+  },
+  {
+    "id": "tod_extreme_010",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Was hast du im Schlafzimmer zuletzt Neues entdeckt?"
+  },
+  {
+    "id": "tod_extreme_011",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Wo am Körper bist du am empfindlichsten?"
+  },
+  {
+    "id": "tod_extreme_012",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Was ist dein größter Turn-on bei einer Stimme?"
+  },
+  {
+    "id": "tod_extreme_013",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Wie stehst du zu Spielzeug im Schlafzimmer?"
+  },
+  {
+    "id": "tod_extreme_014",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Welchen Satz würdest du gern einmal im Bett hören?"
+  },
+  {
+    "id": "tod_extreme_015",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Was würdest du in einer Nacht ohne Regeln als Erstes ausprobieren?"
+  },
+  {
+    "id": "tod_extreme_016",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Was war der intimste Moment, den du je mit einer fremden Person hattest?"
+  },
+  {
+    "id": "tod_extreme_017",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Wo wurdest du schon einmal fast erwischt?"
+  },
+  {
+    "id": "tod_extreme_018",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Hast du schon einmal eine Nacht bereut – und warum?"
+  },
+  {
+    "id": "tod_extreme_019",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "confession",
+    "intensity": 1,
+    "text": "Was ist dir in einer intimen Situation schon einmal herausgerutscht?"
+  },
+  {
+    "id": "tod_extreme_020",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Was ist die ehrlichste Kritik, die du jemandem nach einer Nacht gegeben hast?"
+  },
+  {
+    "id": "tod_extreme_021",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Was war dein spontanstes Abenteuer mit jemandem, den du kaum kanntest?"
+  },
+  {
+    "id": "tod_extreme_022",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "confession",
+    "intensity": 2,
+    "text": "Hattest du schon einmal Lust auf zwei Personen gleichzeitig?"
+  },
+  {
+    "id": "tod_extreme_023",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Welches Foto würdest du nie in den Familienchat schicken?"
+  },
+  {
+    "id": "tod_extreme_024",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Was hat dich in einer Nacht schon einmal komplett überrascht?"
+  },
+  {
+    "id": "tod_extreme_025",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "confession",
+    "intensity": 3,
+    "text": "Welche Fantasie hat sich als besser herausgestellt als gedacht?"
+  },
+  {
+    "id": "tod_extreme_026",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "group",
+    "intensity": 1,
+    "text": "Welche Person aus dieser Runde stellst du dir manchmal heimlich vor?"
+  },
+  {
+    "id": "tod_extreme_027",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "group",
+    "intensity": 1,
+    "text": "Mit wem aus der Runde würdest du eine Nacht im Hotel verbringen – rein hypothetisch?"
+  },
+  {
+    "id": "tod_extreme_028",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "group",
+    "intensity": 2,
+    "text": "Gibt es jemanden hier, bei dem du dir eine Nacht vorstellen könntest?"
+  },
+  {
+    "id": "tod_extreme_029",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "group",
+    "intensity": 3,
+    "text": "Wem hier würdest du am ehesten eine Fantasie anvertrauen?"
+  },
+  {
+    "id": "tod_extreme_030",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Wann hattest du zuletzt richtig Lust auf jemanden, den du nicht haben konntest?"
+  },
+  {
+    "id": "tod_extreme_031",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Was ist deine größte Unsicherheit im Bett?"
+  },
+  {
+    "id": "tod_extreme_032",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Was würdest du nie im Bett tun – egal mit wem?"
+  },
+  {
+    "id": "tod_extreme_033",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Welche Fantasie ist für dich tabu, reizt dich aber trotzdem?"
+  },
+  {
+    "id": "tod_extreme_034",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Welchen Rat über Intimität hättest du gern früher bekommen?"
+  },
+  {
+    "id": "tod_extreme_035",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Welche Kleidung gibt dir selbst am meisten Selbstbewusstsein?"
+  },
+  {
+    "id": "tod_extreme_036",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Was ist für dich der Unterschied zwischen Sex und Liebe machen?"
+  },
+  {
+    "id": "tod_extreme_037",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Wie wichtig ist dir, dass ihr vorher über Grenzen sprecht?"
+  },
+  {
+    "id": "tod_extreme_038",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Was ist dein Lieblingskompliment über deinen Körper?"
+  },
+  {
+    "id": "tod_extreme_039",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Was gibt dir das Gefühl, unwiderstehlich zu sein?"
+  },
+  {
+    "id": "tod_extreme_040",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Wie zeigst du, dass du mehr willst – ganz konkret?"
+  },
+  {
+    "id": "tod_extreme_041",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Wie sieht deine perfekte Nacht aus, von Anfang bis Ende?"
+  },
+  {
+    "id": "tod_extreme_042",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Was ist der verrückteste Ort, an den du für eine Nacht gereist bist?"
+  },
+  {
+    "id": "tod_extreme_043",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Wie wichtig sind dir Licht, Musik oder Duft in einer heißen Nacht?"
+  },
+  {
+    "id": "tod_extreme_044",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Was war der beste Moment deines Liebeslebens bisher?"
+  },
+  {
+    "id": "tod_extreme_045",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Was gefällt dir am Morgen danach am besten?"
+  },
+  {
+    "id": "tod_extreme_046",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Was macht für dich gutes Küssen im Bett aus?"
+  },
+  {
+    "id": "tod_extreme_047",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Hast du schon einmal mit jemandem über Fantasien geschrieben, bevor ihr euch getroffen habt?"
+  },
+  {
+    "id": "tod_extreme_048",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Was ist dein heimlicher Lieblingsfilm, wenn es heiß werden soll?"
+  },
+  {
+    "id": "tod_extreme_049",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Welche Nacht würdest du gern noch einmal erleben – und was würdest du anders machen?"
+  },
+  {
+    "id": "tod_extreme_050",
+    "level": "extreme",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Wie lang war die längste Nacht, die du mit jemandem durchgemacht hast?"
+  },
+  {
+    "id": "tod_extreme_051",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Gib {other} eine 30-Sekunden-Nackenmassage – nur wenn {other} zustimmt."
+  },
+  {
+    "id": "tod_extreme_052",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Flüstere {other} eine Fantasie ins Ohr – {other} darf vorher Nein sagen."
+  },
+  {
+    "id": "tod_extreme_053",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Tanz 30 Sekunden lang verführerisch für {other} – nur wenn {other} das möchte."
+  },
+  {
+    "id": "tod_extreme_054",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Beschreib {other} mit leiser Stimme deinen perfekten Kuss – wenn {other} zuhören mag."
+  },
+  {
+    "id": "tod_extreme_055",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Frag {other}, ob ihr euch küssen wollt – nur bei einem klaren Ja von euch beiden."
+  },
+  {
+    "id": "tod_extreme_056",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Küss {other} auf den Hals – nur wenn {other} ausdrücklich zustimmt."
+  },
+  {
+    "id": "tod_extreme_057",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Setz dich für eine Runde auf den Schoß von {other} – wenn {other} einverstanden ist."
+  },
+  {
+    "id": "tod_extreme_058",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Lass dir von {other} die Augen verbinden und dich mit etwas Süßem füttern – nur wenn ihr beide wollt."
+  },
+  {
+    "id": "tod_extreme_059",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Zeig {other} pantomimisch und ganz ohne Berührung, wie du gern geküsst wirst."
+  },
+  {
+    "id": "tod_extreme_060",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Gib {other} eine Handmassage und mach dabei ein Kompliment nach dem anderen – wenn {other} mag."
+  },
+  {
+    "id": "tod_extreme_061",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Hauch {other} einen Kuss aufs Handgelenk – nur mit Erlaubnis."
+  },
+  {
+    "id": "tod_extreme_062",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Leg dich 30 Sekunden mit dem Kopf auf den Schoß von {other} – wenn {other} einverstanden ist."
+  },
+  {
+    "id": "tod_extreme_063",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Tanz einen engen Slow Dance mit {other} – nur wenn ihr beide Lust habt."
+  },
+  {
+    "id": "tod_extreme_064",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Lass {other} eine Stelle wählen, an der du einen Kuss geben darfst: Wange, Hand oder Stirn."
+  },
+  {
+    "id": "tod_extreme_065",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Leg deine Hand fünf Sekunden auf das Knie von {other} – nur wenn {other} zustimmt."
+  },
+  {
+    "id": "tod_extreme_066",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Mach einen Striptease-Move – nur mit Jacke oder Schal, alles andere bleibt an."
+  },
+  {
+    "id": "tod_extreme_067",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Knabber {other} sanft am Ohrläppchen – nur bei einem klaren Ja."
+  },
+  {
+    "id": "tod_extreme_068",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Kuschel dich eine Runde lang an {other} – wenn {other} mag."
+  },
+  {
+    "id": "tod_extreme_069",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Hauch {other} einen Kuss auf die Stirn – nur mit Erlaubnis."
+  },
+  {
+    "id": "tod_extreme_070",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Lass dir von {other} 20 Sekunden den Rücken streicheln – nur wenn ihr beide wollt."
+  },
+  {
+    "id": "tod_extreme_071",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Gib {other} eine sanfte Gesichtsmassage – wenn {other} zustimmt."
+  },
+  {
+    "id": "tod_extreme_072",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Halte deine Lippen zehn Sekunden ganz nah an die Wange von {other}, ohne sie zu berühren – nur wenn {other} mag."
+  },
+  {
+    "id": "tod_extreme_073",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Lass {other} zehn Sekunden lang mit den Fingern über deinen Arm streichen – nur wenn ihr beide wollt."
+  },
+  {
+    "id": "tod_extreme_074",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Wähle jemanden aus der Runde für einen langen Kuss – nur bei einem klaren Ja, sonst wird es ein Kompliment."
+  },
+  {
+    "id": "tod_extreme_075",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Leg {other} die Hände auf die Schultern und mach {other} ein ehrliches, heißes Kompliment – wenn {other} mag."
+  },
+  {
+    "id": "tod_extreme_076",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Beschreib in 30 Sekunden die heißeste Szene, die du dir heute vorstellen kannst."
+  },
+  {
+    "id": "tod_extreme_077",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Liefert euch ein 30-Sekunden-Blickduell, du und {other} – so verführerisch wie möglich, ohne zu lachen."
+  },
+  {
+    "id": "tod_extreme_078",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Mach einen langsamen, verführerischen Walk zu {other} und wieder zurück."
+  },
+  {
+    "id": "tod_extreme_079",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Lass die Runde ein Wort nennen und erfinde damit eine heiße Szene in drei Sätzen."
+  },
+  {
+    "id": "tod_extreme_080",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Lies {other} einen Satz vor, als wäre es der heißeste Satz der Welt – {other} wählt den Satz aus."
+  },
+  {
+    "id": "tod_extreme_081",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Zeig der Runde deinen verführerischsten Blick und halte ihn zehn Sekunden lang."
+  },
+  {
+    "id": "tod_extreme_082",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Beschreib, was du mit {other} auf einer einsamen Insel machen würdest – jugendfrei oder nicht, du entscheidest."
+  },
+  {
+    "id": "tod_extreme_083",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Mach {other} ein respektvolles Kompliment über eine Körperstelle deiner Wahl."
+  },
+  {
+    "id": "tod_extreme_084",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Erzähl {other} ins Ohr, was dich an {other} am meisten anzieht – wenn {other} es hören möchte."
+  },
+  {
+    "id": "tod_extreme_085",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Beschreib deine perfekte Nacht in genau fünf Wörtern."
+  },
+  {
+    "id": "tod_extreme_086",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Spielt 30 Sekunden ein Rollenspiel, du und {other}: Barkeeper trifft Gast."
+  },
+  {
+    "id": "tod_extreme_087",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Verrate {other}, welche Fantasie du mit einem Promi ausleben würdest."
+  },
+  {
+    "id": "tod_extreme_088",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Lass dir von {other} eine heiße Aufgabe für die nächste Runde stellen – du darfst ablehnen."
+  },
+  {
+    "id": "tod_extreme_089",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Erzähl die heißeste Geschichte, die du je gehört hast – ohne Namen."
+  },
+  {
+    "id": "tod_extreme_090",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Schließ die Augen und lass dir von {other} drei Worte ins Ohr flüstern – nur wenn ihr beide wollt."
+  },
+  {
+    "id": "tod_extreme_091",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Massiere 30 Sekunden die Hand von {other} und erzähl dabei von deinem Traum-Urlaub zu zweit – wenn {other} mag."
+  },
+  {
+    "id": "tod_extreme_092",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Sag {other} drei Dinge, die du in einer gemeinsamen Nacht tun würdest – {other} entscheidet vorher, ob es jugendfrei bleibt."
+  },
+  {
+    "id": "tod_extreme_093",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Lass die Runde einen Song wählen und tanz eine verführerische 20-Sekunden-Choreo."
+  },
+  {
+    "id": "tod_extreme_094",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Erzähl {other} mit Flüsterstimme, wie du dir den perfekten Morgen danach vorstellst."
+  },
+  {
+    "id": "tod_extreme_095",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Lass {other} bestimmen, wem du einen Kuss auf die Wange geben darfst – nur mit dessen Einverständnis."
+  },
+  {
+    "id": "tod_extreme_096",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Beschreib die Person deiner Träume so, dass alle rot werden."
+  },
+  {
+    "id": "tod_extreme_097",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Sag mit voller Hingabe einen Satz, den du gern im Bett hören würdest."
+  },
+  {
+    "id": "tod_extreme_098",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Spielt eine Kussszene aus einem Film nach, du und {other} – mit den Händen statt den Lippen, außer ihr wollt beide mehr."
+  },
+  {
+    "id": "tod_extreme_099",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Wähle jemanden, mit dem du 30 Sekunden eng tanzt – nur wenn die Person zustimmt."
+  },
+  {
+    "id": "tod_extreme_100",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 3,
+    "text": "Verrate der Runde deine geheimste Vorliebe in einem einzigen Wort."
+  },
+  {
+    "id": "tod_extreme_101",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 3,
+    "text": "Lass {other} deinen Duft beschreiben – ganz nah, wenn ihr beide wollt."
+  },
+  {
+    "id": "tod_extreme_102",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 3,
+    "text": "Erfinde einen verführerischen Spitznamen für {other}."
+  },
+  {
+    "id": "tod_extreme_103",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 3,
+    "text": "Spielt 30 Sekunden ein Date im Fahrstuhl nach, du und {other}."
+  },
+  {
+    "id": "tod_extreme_104",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 3,
+    "text": "Liefert euch ein Duell, du und {other}: Wer sagt das verführerischste „Hallo“? Die Runde entscheidet."
+  },
+  {
+    "id": "tod_extreme_105",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 3,
+    "text": "Lass {other} entscheiden: Kuss auf die Wange, Umarmung oder Kompliment."
+  },
+  {
+    "id": "tod_extreme_106",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 3,
+    "text": "Erzähl {other}, an welchem Ort du gern mit {other} allein wärst."
+  },
+  {
+    "id": "tod_extreme_107",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 3,
+    "text": "Flüstere jeder Person in der Runde ein Wort ins Ohr, das sie beschreibt – nur mit ihrem Einverständnis."
+  },
+  {
+    "id": "tod_extreme_108",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 3,
+    "text": "Beschreib deine heißeste Nacht in nur drei Sätzen – ohne Namen."
+  },
+  {
+    "id": "tod_extreme_109",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 3,
+    "text": "Lass die Runde entscheiden, ob du {other} Hände, Schultern oder Nacken massierst – {other} hat das letzte Wort."
+  },
+  {
+    "id": "tod_extreme_110",
+    "level": "extreme",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 3,
+    "text": "Mach mit verbundenen Augen der Person ein Kompliment, die die Runde vor dich stellt – nur wenn sie einverstanden ist."
+  }
+]

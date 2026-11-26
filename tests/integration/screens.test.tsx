@@ -160,7 +160,7 @@ describe('home screen', () => {
     const router = await renderRouter(APP_DIR, { initialUrl: '/' });
 
     expect(await screen.findByRole('button', { name: /^Spicy Questions/ })).toBeOnTheScreen();
-    expect(screen.getByLabelText('Wahrheit oder Pflicht – bald verfügbar')).toBeOnTheScreen();
+    expect(screen.getByLabelText('Random Challenges – bald verfügbar')).toBeOnTheScreen();
     const resume = screen.getByTestId('resume-card');
     await user.press(within(resume).getByRole('button', { name: 'Weiterspielen' }));
     expect(router.getPathname()).toBe('/game');

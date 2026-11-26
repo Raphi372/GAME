@@ -4,6 +4,7 @@ import { persist } from 'zustand/middleware';
 import { getGameMode, isGameModeId, isModePlayable, type GameModeId } from '@/features/game-modes/registry';
 import {
   changeLevel as changeSessionLevel,
+  chooseCard as chooseSessionCard,
   completeGroupRound,
   completeTurn,
   emptyStats,
@@ -24,7 +25,7 @@ import {
 } from '@/features/players/validation';
 import { getRng } from '@/services/randomSource';
 import { persistStorage, STORAGE_KEYS } from '@/services/storage';
-import { isSpicyLevel, type Player, type SpicyLevel } from '@/types';
+import { isSpicyLevel, type CardKind, type Player, type SpicyLevel } from '@/types';
 import { createId } from '@/utils/id';
 
 import { useSettingsStore } from './settingsStore';
@@ -66,6 +67,8 @@ export interface GameState extends GameData {
    * picks …) and the next player reads the next card.
    */
   nextGroupCard: (markedPlayerIds: readonly string[]) => void;
+  /** Choice modes: the active player picks "truth" or "dare". */
+  chooseCard: (kind: CardKind) => void;
   skip: () => void;
   changeLevel: (level: SpicyLevel) => void;
   reshuffle: () => void;
@@ -81,6 +84,7 @@ function contextFor(players: readonly Player[], modeId: GameModeId): SessionCont
     players,
     rng: getRng(),
     getDeck: (level) => getDeck(modeId, level, { locale }),
+    choiceKinds: getGameMode(modeId).choice?.kinds,
   };
 }
 
@@ -225,6 +229,7 @@ export const useGameStore = create<GameState>()(
             ),
           ),
         skip: () => updateSession(skipQuestion),
+        chooseCard: (kind) => updateSession((session, ctx) => chooseSessionCard(session, kind, ctx)),
         changeLevel: (level) => {
           updateSession((session, ctx) => changeSessionLevel(session, level, ctx));
           set({ lastLevel: level });

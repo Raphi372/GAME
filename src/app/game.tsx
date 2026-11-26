@@ -4,6 +4,7 @@ import { BackHandler, StyleSheet, useWindowDimensions, View } from 'react-native
 
 import { AppText, Button, ConfirmSheet, IconButton, Screen } from '@/components/ui';
 import { getGameMode } from '@/features/game-modes/registry';
+import { ChoicePanel } from '@/features/gameplay/components/ChoicePanel';
 import { Countdown } from '@/features/gameplay/components/Countdown';
 import { ExhaustedCard } from '@/features/gameplay/components/ExhaustedCard';
 import { LevelPill } from '@/features/gameplay/components/LevelPill';
@@ -12,7 +13,11 @@ import { PlayerPicker } from '@/features/gameplay/components/PlayerPicker';
 import { QuestionCard } from '@/features/gameplay/components/QuestionCard';
 import { TurnBanner } from '@/features/gameplay/components/TurnBanner';
 import { countRemaining } from '@/features/gameplay/engine/deck';
-import { getCurrentQuestion } from '@/features/gameplay/engine/session';
+import {
+  getCurrentQuestion,
+  isAwaitingChoice,
+  remainingByKind,
+} from '@/features/gameplay/engine/session';
 import { LEVELS } from '@/features/levels/levels';
 import { getDeck, renderQuestionText, splitLead } from '@/features/question-decks';
 import { useTranslation } from '@/i18n';
@@ -33,6 +38,7 @@ export default function GameScreen() {
   const pass = useGameStore((state) => state.pass);
   const skip = useGameStore((state) => state.skip);
   const nextGroupCard = useGameStore((state) => state.nextGroupCard);
+  const chooseCard = useGameStore((state) => state.chooseCard);
   const changeLevel = useGameStore((state) => state.changeLevel);
   const reshuffle = useGameStore((state) => state.reshuffle);
   const endGame = useGameStore((state) => state.endGame);
@@ -72,7 +78,14 @@ export default function GameScreen() {
   const target = players.find((candidate) => candidate.id === current?.targetPlayerId);
   const remaining = countRemaining(deck, session.playedByLevel[session.level]);
   const round = session.turnsCompleted + 1;
-  const exhausted = question === null;
+  // Choice modes ("Wahrheit oder Pflicht"): the player first picks a kind.
+  const choiceKinds = mode.choice?.kinds;
+  const awaitingChoice = isAwaitingChoice(session, { choiceKinds });
+  const kindCounts = choiceKinds ? remainingByKind(session, deckFor, choiceKinds) : null;
+  const exhausted = choiceKinds
+    ? awaitingChoice && choiceKinds.every((kind) => (kindCounts?.[kind] ?? 0) === 0)
+    : question === null;
+  const kindLabel = current?.kind ? t(current.kind === 'truth' ? 'tod.truth' : 'tod.dare') : null;
   const cardKey = `${session.level}:${current?.questionId ?? ''}:${current?.playerId ?? ''}`;
   const selectedIds = selection.cardKey === cardKey ? selection.ids : [];
 
@@ -103,7 +116,66 @@ export default function GameScreen() {
     router.replace('/summary');
   };
 
-  const footer = exhausted ? undefined : group ? (
+  const choiceFooter = awaitingChoice ? (
+    <>
+      <Button
+        label={t('game.pass')}
+        icon="hand-left-outline"
+        variant="secondary"
+        size="md"
+        hint={t('game.passHint')}
+        feedbackEvent="pass"
+        onPress={pass}
+        testID="action-pass"
+      />
+      <AppText variant="caption" color={colors.textMuted} align="center">
+        {`${t('tod.safetyHint')} 💜`}
+      </AppText>
+    </>
+  ) : (
+    <>
+      <Button
+        label={t('tod.done')}
+        icon="checkmark"
+        hint={t('tod.doneHint')}
+        gradient={meta.gradient}
+        feedbackEvent="success"
+        onPress={answer}
+        testID="action-next"
+      />
+      <View style={styles.secondaryRow}>
+        <Button
+          label={t('tod.another')}
+          icon={narrow ? undefined : 'shuffle'}
+          variant="secondary"
+          size="md"
+          hint={t('tod.anotherHint')}
+          feedbackEvent="reveal"
+          onPress={skip}
+          style={styles.half}
+          dense={narrow}
+          testID="action-skip"
+        />
+        <Button
+          label={t('game.pass')}
+          icon={narrow ? undefined : 'hand-left-outline'}
+          variant="secondary"
+          size="md"
+          hint={t('game.passHint')}
+          feedbackEvent="pass"
+          onPress={pass}
+          style={styles.half}
+          dense={narrow}
+          testID="action-pass"
+        />
+      </View>
+      <AppText variant="caption" color={colors.textMuted} align="center">
+        {`${t('tod.safetyHint')} 💜`}
+      </AppText>
+    </>
+  );
+
+  const footer = exhausted ? undefined : choiceKinds ? choiceFooter : group ? (
     <>
       <Button
         label={t('group.next')}
@@ -206,17 +278,21 @@ export default function GameScreen() {
             }}
             onChangeLevel={() => setLevelSheetOpen(true)}
           />
+        ) : awaitingChoice && choiceKinds && kindCounts ? (
+          <ChoicePanel kinds={choiceKinds} remaining={kindCounts} onChoose={chooseCard} />
         ) : (
           <>
             <QuestionCard
               cardKey={cardKey}
               text={rest}
-              lead={lead ?? undefined}
+              lead={kindLabel ?? lead ?? undefined}
               level={session.level}
               categoryLabel={categoryLabel}
               footer={t('game.remaining', { round, count: remaining })}
               accessibilityLabel={
-                isGroup
+                kindLabel
+                  ? t('tod.cardA11y', { kind: kindLabel, name: player?.name ?? '', text: fullText })
+                  : isGroup
                   ? t('group.cardA11y', { name: player?.name ?? '', statement: fullText })
                   : t('game.questionA11y', { name: player?.name ?? '', question: fullText })
               }

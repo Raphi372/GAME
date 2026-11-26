@@ -1,0 +1,882 @@
+[
+  {
+    "id": "tod_hot_001",
+    "level": "hot",
+    "kind": "truth",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Wer aus dieser Runde hätte die besten Chancen, dich rumzukriegen?"
+  },
+  {
+    "id": "tod_hot_002",
+    "level": "hot",
+    "kind": "truth",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Was war der schlechteste Anmachspruch, auf den du trotzdem reingefallen bist?"
+  },
+  {
+    "id": "tod_hot_003",
+    "level": "hot",
+    "kind": "truth",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Was ist das Frechste, das du je jemandem geschrieben hast?"
+  },
+  {
+    "id": "tod_hot_004",
+    "level": "hot",
+    "kind": "truth",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Welche drei Worte beschreiben dich beim Flirten?"
+  },
+  {
+    "id": "tod_hot_005",
+    "level": "hot",
+    "kind": "truth",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Wie flirtest du per Nachricht, wenn du es ernst meinst?"
+  },
+  {
+    "id": "tod_hot_006",
+    "level": "hot",
+    "kind": "truth",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Welches Kompliment hat dich am meisten angemacht?"
+  },
+  {
+    "id": "tod_hot_007",
+    "level": "hot",
+    "kind": "truth",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Welcher Flirt-Fehler passiert dir immer wieder?"
+  },
+  {
+    "id": "tod_hot_008",
+    "level": "hot",
+    "kind": "truth",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Was ist dein heimlicher Typ, den keiner erwartet?"
+  },
+  {
+    "id": "tod_hot_009",
+    "level": "hot",
+    "kind": "truth",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Was ist dein Lieblingsduft an anderen Menschen?"
+  },
+  {
+    "id": "tod_hot_010",
+    "level": "hot",
+    "kind": "truth",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Welcher Flirt-Trick ist dir viel zu kitschig?"
+  },
+  {
+    "id": "tod_hot_011",
+    "level": "hot",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Wann hast du zuletzt jemanden geküsst?"
+  },
+  {
+    "id": "tod_hot_012",
+    "level": "hot",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Wie lange war dein längster Kuss?"
+  },
+  {
+    "id": "tod_hot_013",
+    "level": "hot",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Was hat den besten Kuss deines Lebens so besonders gemacht?"
+  },
+  {
+    "id": "tod_hot_014",
+    "level": "hot",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Wie lange sollte ein erster Kuss deiner Meinung nach dauern?"
+  },
+  {
+    "id": "tod_hot_015",
+    "level": "hot",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Welchen Promi würdest du sofort küssen?"
+  },
+  {
+    "id": "tod_hot_016",
+    "level": "hot",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Hast du schon mal jemanden geküsst, der eigentlich nicht dein Typ war?"
+  },
+  {
+    "id": "tod_hot_017",
+    "level": "hot",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Welche Wette würdest du für einen Kuss eingehen?"
+  },
+  {
+    "id": "tod_hot_018",
+    "level": "hot",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Was war die romantischste Nachricht, die du um Mitternacht bekommen hast?"
+  },
+  {
+    "id": "tod_hot_019",
+    "level": "hot",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Wo warst du, als du dich zuletzt so richtig verknallt hast?"
+  },
+  {
+    "id": "tod_hot_020",
+    "level": "hot",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Welche Person hier hat die schönsten Lippen?"
+  },
+  {
+    "id": "tod_hot_021",
+    "level": "hot",
+    "kind": "truth",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Was war dein heißester Urlaubsflirt?"
+  },
+  {
+    "id": "tod_hot_022",
+    "level": "hot",
+    "kind": "truth",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Wie viele Dates hattest du in diesem Jahr?"
+  },
+  {
+    "id": "tod_hot_023",
+    "level": "hot",
+    "kind": "truth",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Welche Eigenschaft deines letzten Dates hat dich am meisten angemacht?"
+  },
+  {
+    "id": "tod_hot_024",
+    "level": "hot",
+    "kind": "truth",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Was war dein mutigster Move bei einem Date?"
+  },
+  {
+    "id": "tod_hot_025",
+    "level": "hot",
+    "kind": "truth",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Hattest du schon einmal ein Date, das im Bett geendet hat?"
+  },
+  {
+    "id": "tod_hot_026",
+    "level": "hot",
+    "kind": "truth",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Welche Dating-App-Bio hat dich je sofort überzeugt?"
+  },
+  {
+    "id": "tod_hot_027",
+    "level": "hot",
+    "kind": "truth",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Was turnt dich bei einem Date sofort ab?"
+  },
+  {
+    "id": "tod_hot_028",
+    "level": "hot",
+    "kind": "truth",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Was ist dir bei einem Date schon einmal richtig peinlich gewesen?"
+  },
+  {
+    "id": "tod_hot_029",
+    "level": "hot",
+    "kind": "truth",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Welche Frage traust du dich bei einem Date nie zu stellen?"
+  },
+  {
+    "id": "tod_hot_030",
+    "level": "hot",
+    "kind": "truth",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Welche Ausrede benutzt du, um ein Date früher zu beenden?"
+  },
+  {
+    "id": "tod_hot_031",
+    "level": "hot",
+    "kind": "truth",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Welche Nachricht von dir würdest du am liebsten zurückholen?"
+  },
+  {
+    "id": "tod_hot_032",
+    "level": "hot",
+    "kind": "truth",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Was war dein heißester Traum der letzten Zeit – ohne Namen?"
+  },
+  {
+    "id": "tod_hot_033",
+    "level": "hot",
+    "kind": "truth",
+    "category": "secrets",
+    "intensity": 1,
+    "text": "Wem aus der Runde würdest du deine Dating-App-Matches zeigen?"
+  },
+  {
+    "id": "tod_hot_034",
+    "level": "hot",
+    "kind": "truth",
+    "category": "secrets",
+    "intensity": 2,
+    "text": "Wie oft denkst du an deine oder deinen Ex?"
+  },
+  {
+    "id": "tod_hot_035",
+    "level": "hot",
+    "kind": "truth",
+    "category": "secrets",
+    "intensity": 2,
+    "text": "Was war dein längster Flirt, aus dem nie etwas wurde?"
+  },
+  {
+    "id": "tod_hot_036",
+    "level": "hot",
+    "kind": "truth",
+    "category": "secrets",
+    "intensity": 3,
+    "text": "Wen hast du zuletzt angeschwärmt, ohne es zu sagen?"
+  },
+  {
+    "id": "tod_hot_037",
+    "level": "hot",
+    "kind": "truth",
+    "category": "secrets",
+    "intensity": 3,
+    "text": "Hast du dich schon einmal in jemanden verliebt, der dich nur als Freund oder Freundin gesehen hat?"
+  },
+  {
+    "id": "tod_hot_038",
+    "level": "hot",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Was findest du an dir selbst am sexiesten?"
+  },
+  {
+    "id": "tod_hot_039",
+    "level": "hot",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Welches Kleidungsstück an anderen macht dich sofort schwach?"
+  },
+  {
+    "id": "tod_hot_040",
+    "level": "hot",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Welche Körperstelle wird deiner Meinung nach viel zu selten geküsst?"
+  },
+  {
+    "id": "tod_hot_041",
+    "level": "hot",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Mit wem würdest du gern einmal eng tanzen – Promi erlaubt?"
+  },
+  {
+    "id": "tod_hot_042",
+    "level": "hot",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Welcher Song läuft bei dir, wenn es romantisch wird?"
+  },
+  {
+    "id": "tod_hot_043",
+    "level": "hot",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Was würdest du tun, wenn dein Crush jetzt anruft?"
+  },
+  {
+    "id": "tod_hot_044",
+    "level": "hot",
+    "kind": "truth",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Wann hast du zuletzt einen Kuss so richtig genossen – und wie lange ist das her?"
+  },
+  {
+    "id": "tod_hot_045",
+    "level": "hot",
+    "kind": "truth",
+    "category": "group",
+    "intensity": 1,
+    "text": "Wen in dieser Runde würdest du gern besser kennenlernen – und warum?"
+  },
+  {
+    "id": "tod_hot_046",
+    "level": "hot",
+    "kind": "truth",
+    "category": "group",
+    "intensity": 1,
+    "text": "Hast du schon einmal mit jemandem aus dieser Runde geflirtet?"
+  },
+  {
+    "id": "tod_hot_047",
+    "level": "hot",
+    "kind": "truth",
+    "category": "group",
+    "intensity": 2,
+    "text": "Mit wem aus dieser Runde würdest du am ehesten durchbrennen?"
+  },
+  {
+    "id": "tod_hot_048",
+    "level": "hot",
+    "kind": "truth",
+    "category": "group",
+    "intensity": 2,
+    "text": "Was würdest du tun, wenn dir jemand aus dieser Runde jetzt ein Liebesgeständnis macht?"
+  },
+  {
+    "id": "tod_hot_049",
+    "level": "hot",
+    "kind": "truth",
+    "category": "group",
+    "intensity": 3,
+    "text": "Was ist das Verrückteste, das du für einen Kuss getan hast?"
+  },
+  {
+    "id": "tod_hot_050",
+    "level": "hot",
+    "kind": "truth",
+    "category": "group",
+    "intensity": 3,
+    "text": "Wer hier könnte dir am ehesten ein Date-Geheimnis entlocken?"
+  },
+  {
+    "id": "tod_hot_051",
+    "level": "hot",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Flüstere {other} ein Kompliment ins Ohr – wenn {other} einverstanden ist."
+  },
+  {
+    "id": "tod_hot_052",
+    "level": "hot",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Schau {other} 20 Sekunden tief in die Augen und sag dann, was du siehst."
+  },
+  {
+    "id": "tod_hot_053",
+    "level": "hot",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Mach {other} einen frechen Anmachspruch – mit vollem Ernst."
+  },
+  {
+    "id": "tod_hot_054",
+    "level": "hot",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Flirte 30 Sekunden mit {other}, als wärt ihr Fremde in einer Bar – wenn {other} mitspielt."
+  },
+  {
+    "id": "tod_hot_055",
+    "level": "hot",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Sag {other} drei Dinge, die du an {other} anziehend findest."
+  },
+  {
+    "id": "tod_hot_056",
+    "level": "hot",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Erzähl {other} mit Schlafzimmerstimme, was du heute noch vorhast."
+  },
+  {
+    "id": "tod_hot_057",
+    "level": "hot",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Mach {other} eine Liebeserklärung wie in einem Kitschfilm."
+  },
+  {
+    "id": "tod_hot_058",
+    "level": "hot",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Zeig der Runde, wie du nur mit Blicken flirtest."
+  },
+  {
+    "id": "tod_hot_059",
+    "level": "hot",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Sing {other} eine Zeile aus einem Liebeslied direkt ins Gesicht."
+  },
+  {
+    "id": "tod_hot_060",
+    "level": "hot",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Beschreib {other} so, als würdest du von einem Filmstar schwärmen."
+  },
+  {
+    "id": "tod_hot_061",
+    "level": "hot",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Wirf {other} einen Luftkuss zu – {other} darf ihn auffangen oder einfach ignorieren."
+  },
+  {
+    "id": "tod_hot_062",
+    "level": "hot",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Mach {other} ein Kompliment, ohne das Wort „schön“ zu benutzen."
+  },
+  {
+    "id": "tod_hot_063",
+    "level": "hot",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Erzähl {other} mit verführerischer Stimme das Wetter von morgen."
+  },
+  {
+    "id": "tod_hot_064",
+    "level": "hot",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Liefert euch ein Blick-Duell: Versuch, {other} zu verführen – wer zuerst lacht, verliert."
+  },
+  {
+    "id": "tod_hot_065",
+    "level": "hot",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Erfinde einen Dating-App-Text für {other} – {other} darf ihn ablehnen."
+  },
+  {
+    "id": "tod_hot_066",
+    "level": "hot",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Sag {other}, wo du mit {other} auf ein Date gehen würdest."
+  },
+  {
+    "id": "tod_hot_067",
+    "level": "hot",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Mach {other} ein Kompliment über die Stimme."
+  },
+  {
+    "id": "tod_hot_068",
+    "level": "hot",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Spielt 30 Sekunden Komplimente-Ping-Pong, du und {other}."
+  },
+  {
+    "id": "tod_hot_069",
+    "level": "hot",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Plane in 30 Sekunden laut ein Traum-Date mit {other} – {other} darf ein Detail ändern."
+  },
+  {
+    "id": "tod_hot_070",
+    "level": "hot",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Lass dir von {other} einen Flirt-Spruch beibringen und probier ihn bei der Runde aus."
+  },
+  {
+    "id": "tod_hot_071",
+    "level": "hot",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Tanz 30 Sekunden lang so verführerisch, wie du kannst."
+  },
+  {
+    "id": "tod_hot_072",
+    "level": "hot",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Frag {other}, ob du einen Kuss auf die Wange geben darfst – nur bei einem klaren Ja."
+  },
+  {
+    "id": "tod_hot_073",
+    "level": "hot",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Umarme {other} zehn Sekunden lang – nur wenn {other} das möchte."
+  },
+  {
+    "id": "tod_hot_074",
+    "level": "hot",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Zeig deinen besten Hüftschwung."
+  },
+  {
+    "id": "tod_hot_075",
+    "level": "hot",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Lade {other} mit ausgestreckter Hand zu einem 30-Sekunden-Slow-Dance ein – nur wenn {other} Lust hat."
+  },
+  {
+    "id": "tod_hot_076",
+    "level": "hot",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Sprich die nächste Runde mit verführerischer Stimme."
+  },
+  {
+    "id": "tod_hot_077",
+    "level": "hot",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Spiel einen leidenschaftlichen Filmkuss nach – mit deiner eigenen Hand."
+  },
+  {
+    "id": "tod_hot_078",
+    "level": "hot",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Mach 20 Sekunden lang eine Pose wie auf einem Magazin-Cover."
+  },
+  {
+    "id": "tod_hot_079",
+    "level": "hot",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Massiere {other} 30 Sekunden die Schultern – wenn {other} zustimmt."
+  },
+  {
+    "id": "tod_hot_080",
+    "level": "hot",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Beiß dir zehn Sekunden lang verführerisch auf die Lippe, ohne zu lachen."
+  },
+  {
+    "id": "tod_hot_081",
+    "level": "hot",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Lass {other} entscheiden: Kompliment oder Umarmung von dir."
+  },
+  {
+    "id": "tod_hot_082",
+    "level": "hot",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Mach einen Laufsteg-Walk mit maximalem Sexappeal."
+  },
+  {
+    "id": "tod_hot_083",
+    "level": "hot",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Frag {other}, ob du einen Kuss auf Hand oder Wange geben darfst – {other} entscheidet, ob überhaupt."
+  },
+  {
+    "id": "tod_hot_084",
+    "level": "hot",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Halte die Hand von {other} bis zu deiner nächsten Runde – wenn ihr beide das wollt."
+  },
+  {
+    "id": "tod_hot_085",
+    "level": "hot",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Tanz 20 Sekunden lang sexy, während du auf einem Stuhl sitzt."
+  },
+  {
+    "id": "tod_hot_086",
+    "level": "hot",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Zeig, wie du jemanden mit nur einem Finger zu dir winkst."
+  },
+  {
+    "id": "tod_hot_087",
+    "level": "hot",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Spielt eine Zeitlupen-Szene: Du drehst dich um und wirfst {other} einen langen Blick zu."
+  },
+  {
+    "id": "tod_hot_088",
+    "level": "hot",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Zeig der Runde dein „Ich-will-dich-küssen“-Gesicht."
+  },
+  {
+    "id": "tod_hot_089",
+    "level": "hot",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Beschreib die perfekte Kussszene in drei Sätzen."
+  },
+  {
+    "id": "tod_hot_090",
+    "level": "hot",
+    "kind": "dare",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Halte eine 20-sekündige Rede darüber, warum Küssen unterschätzt wird."
+  },
+  {
+    "id": "tod_hot_091",
+    "level": "hot",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Sag jeder Person in der Runde, was an ihr attraktiv ist."
+  },
+  {
+    "id": "tod_hot_092",
+    "level": "hot",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Schreib eine flirty Nachricht auf einen Zettel und gib sie {other}."
+  },
+  {
+    "id": "tod_hot_093",
+    "level": "hot",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Imitiere, wie du jemanden zum ersten Mal küssen würdest – in Zeitlupe und ohne Partner."
+  },
+  {
+    "id": "tod_hot_094",
+    "level": "hot",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Lass die Runde einen Song wählen und tanz dazu, als wärst du allein im Club."
+  },
+  {
+    "id": "tod_hot_095",
+    "level": "hot",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Setz dich für die nächste Runde neben {other} – wenn {other} das mag."
+  },
+  {
+    "id": "tod_hot_096",
+    "level": "hot",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Lass dich von der Runde in eine Flirt-Situation schicken und spiel sie 30 Sekunden lang."
+  },
+  {
+    "id": "tod_hot_097",
+    "level": "hot",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Mach mit {other} ein Pärchen-Selfie – nur wenn {other} zustimmt."
+  },
+  {
+    "id": "tod_hot_098",
+    "level": "hot",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Flüstere {other} dein heißestes Dating-Geheimnis zu – wenn {other} es hören will."
+  },
+  {
+    "id": "tod_hot_099",
+    "level": "hot",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Erzähl in 30 Sekunden, wie dein letzter Kuss war – Details sind freiwillig."
+  },
+  {
+    "id": "tod_hot_100",
+    "level": "hot",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Lass {other} dir eine beliebige Frage stellen – du antwortest ehrlich oder passt."
+  },
+  {
+    "id": "tod_hot_101",
+    "level": "hot",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Imitiere {other} beim Flirten – liebevoll und ohne bloßzustellen."
+  },
+  {
+    "id": "tod_hot_102",
+    "level": "hot",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Spiel 20 Sekunden lang einen Flirt als Pantomime."
+  },
+  {
+    "id": "tod_hot_103",
+    "level": "hot",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Wirf jeder Person in der Runde einen Luftkuss zu."
+  },
+  {
+    "id": "tod_hot_104",
+    "level": "hot",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Lass {other} ein Lied aussuchen, das du jetzt verführerisch summst."
+  },
+  {
+    "id": "tod_hot_105",
+    "level": "hot",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 3,
+    "text": "Liefert euch ein Zwinker-Duell, du und {other} – die Runde entscheidet, wer verführerischer war."
+  },
+  {
+    "id": "tod_hot_106",
+    "level": "hot",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 3,
+    "text": "Tausch mit {other} für eine Runde ein Accessoire wie Uhr oder Schal – wenn ihr beide wollt."
+  },
+  {
+    "id": "tod_hot_107",
+    "level": "hot",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 3,
+    "text": "Sag {other} einen Satz aus einem Liebesfilm, als würdest du ihn ernst meinen."
+  },
+  {
+    "id": "tod_hot_108",
+    "level": "hot",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 3,
+    "text": "Lass die Runde bestimmen, wem du ein Kompliment ins Ohr flüsterst – nur mit dessen Einverständnis."
+  },
+  {
+    "id": "tod_hot_109",
+    "level": "hot",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 3,
+    "text": "Frag {other} nach der Hand und gib einen Handkuss – nur wenn {other} sie dir reicht."
+  },
+  {
+    "id": "tod_hot_110",
+    "level": "hot",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 3,
+    "text": "Erzähl der Runde von deinem besten Flirt in genau drei Sätzen."
+  }
+]
