@@ -7,6 +7,9 @@ import mltExtreme from '@/data/questions/most-likely/extreme.json';
 import mltHot from '@/data/questions/most-likely/hot.json';
 import mltMild from '@/data/questions/most-likely/mild.json';
 import nhieMild from '@/data/questions/never-have-i-ever/mild.json';
+import rcExtreme from '@/data/questions/random-challenges/extreme.json';
+import rcHot from '@/data/questions/random-challenges/hot.json';
+import rcMild from '@/data/questions/random-challenges/mild.json';
 import todExtreme from '@/data/questions/truth-or-dare/extreme.json';
 import todHot from '@/data/questions/truth-or-dare/hot.json';
 import todMild from '@/data/questions/truth-or-dare/mild.json';
@@ -88,12 +91,18 @@ describe('"Ich hab noch nie" deck', () => {
   });
 
   it('has unique ids and texts across all game modes', () => {
-    const modes = ['spicy-questions', 'never-have-i-ever', 'most-likely', 'truth-or-dare'] as const;
+    const modes = [
+      'spicy-questions',
+      'never-have-i-ever',
+      'most-likely',
+      'truth-or-dare',
+      'random-challenges',
+    ] as const;
     const all = modes.flatMap((mode) => SPICY_LEVELS.flatMap((level) => getDeck(mode, level)));
     expect(new Set(all.map((card) => card.id)).size).toBe(all.length);
     expect(new Set(all.map((card) => card.text.toLowerCase())).size).toBe(all.length);
     expect(countBuiltInCards(modes)).toBe(all.length);
-    expect(all.length).toBeGreaterThanOrEqual(1200);
+    expect(all.length).toBeGreaterThanOrEqual(1500);
   });
 
   it('contains no drinking instructions', () => {
@@ -179,6 +188,45 @@ describe('"Wahrheit oder Pflicht" deck', () => {
   });
 });
 
+describe('"Random Challenges" deck', () => {
+  const rcFiles = { mild: rcMild, hot: rcHot, extreme: rcExtreme };
+  const all = SPICY_LEVELS.flatMap((level) => getDeck('random-challenges', level));
+
+  it.each(SPICY_LEVELS)('%s has at least 100 valid challenges, many with a timer', (level) => {
+    const { questions, issues } = parseQuestions(rcFiles[level], level);
+    expect(issues).toEqual([]);
+    expect(questions.length).toBeGreaterThanOrEqual(100);
+    expect(questions.filter((q) => q.seconds !== undefined).length).toBeGreaterThanOrEqual(20);
+    expect(questions.filter((q) => q.text.startsWith('Alle: ')).length).toBeGreaterThanOrEqual(10);
+  });
+
+  it('challenges are tasks with sensible timers', () => {
+    for (const card of all) {
+      expect(card.id).toMatch(/^rc_(mild|hot|extreme)_\d{3}$/);
+      expect(card.text).toMatch(/[.!]$/);
+      if (card.seconds !== undefined) {
+        expect(card.seconds).toBeGreaterThanOrEqual(5);
+        expect(card.seconds).toBeLessThanOrEqual(120);
+      }
+    }
+  });
+
+  it('asks for consent whenever a challenge involves body contact with others', () => {
+    const contact = /(küss|kuss auf|einen kuss|massier|massage|umarm|im arm|schoß|streichel|berühr|nacken|schulter|kuschel|knabber|lippen|hals|puls|herzschlag|fütter|polonaise|wange an wange|slow dance|tango|tanzt .*eng|eng mit|verbundenen augen|augen verbinden|hand reich|die hand von|hand aufs herz|ins ohr|am ohr)/i;
+    const optIn = /(nur wenn|wenn \{other\}|wenn ihr beide|nur bei einem klaren ja|nur mit|einverstanden|zustimm|erlaubnis|darf|entscheid|wollt|möchte|mag|lust|reicht|letzte wort|ablehnen|ohne berührung|freiwillig|wollen|will|mitmachen)/i;
+    const others = (text: string) =>
+      text.includes('{other}') || text.startsWith('Alle:') || /\b(person|personen|jemand|jemanden)\b/i.test(text);
+    const offending = all.filter((card) => others(card.text) && contact.test(card.text) && !optIn.test(card.text));
+    expect(offending.map((card) => card.id)).toEqual([]);
+  });
+
+  it('contains no drinking, nudity, humiliation or ranking of looks', () => {
+    const banned =
+      /(\btrink|\bschluck|\bshot|nackt|auszieh|bloßstell|demütig|am besten aussieht|heißeste ausstrahlung|attraktivst|hübschest)/i;
+    all.forEach((card) => expect(card.text).not.toMatch(banned));
+  });
+});
+
 describe('question parsing', () => {
   it('skips invalid and duplicate entries instead of crashing', () => {
     const { questions, issues } = parseQuestions(
@@ -190,12 +238,13 @@ describe('question parsing', () => {
         { id: 'mild_4', level: 'mild', category: 'flirty', text: '' },
         { id: 'mild_5', level: 'mild', category: 'flirty', text: 'Intensität?', intensity: 7 },
         { id: 'mild_6', level: 'mild', category: 'flirty', text: 'Falsche Art?', kind: 'joke' },
+        { id: 'mild_7', level: 'mild', category: 'funny', text: 'Viel zu langer Timer.', seconds: 999 },
         'kein Objekt',
       ],
       'mild',
     );
     expect(questions.map((q) => q.id)).toEqual(['mild_1']);
-    expect(issues).toHaveLength(7);
+    expect(issues).toHaveLength(8);
   });
 
   it('reports non-array input', () => {
@@ -239,7 +288,7 @@ describe('deck loading', () => {
     );
   });
 
-  it('returns an empty deck for modes without content', () => {
-    expect(getDeck('random-challenges', 'mild')).toEqual([]);
+  it('returns an empty deck when a mode has no pack', () => {
+    expect(getDeck('random-challenges', 'mild', { packs: [] })).toEqual([]);
   });
 });

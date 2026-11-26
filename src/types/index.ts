@@ -34,6 +34,8 @@ export interface Question {
   intensity?: QuestionIntensity;
   /** Only in choice modes: "truth" (a question) or "dare" (a task). */
   kind?: CardKind;
+  /** Optional timer for the card in seconds (Random Challenges). */
+  seconds?: number;
 }
 
 export interface Player {

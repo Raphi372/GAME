@@ -3,7 +3,8 @@ import { useCallback, useState } from 'react';
 import { BackHandler, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { AppText, Button, ConfirmSheet, IconButton, Screen } from '@/components/ui';
-import { getGameMode } from '@/features/game-modes/registry';
+import { DEFAULT_SINGLE_COPY, getGameMode } from '@/features/game-modes/registry';
+import { ChallengeTimer } from '@/features/gameplay/components/ChallengeTimer';
 import { ChoicePanel } from '@/features/gameplay/components/ChoicePanel';
 import { Countdown } from '@/features/gameplay/components/Countdown';
 import { ExhaustedCard } from '@/features/gameplay/components/ExhaustedCard';
@@ -96,6 +97,9 @@ export default function GameScreen() {
       })
     : '';
   const { lead, rest } = splitLead(fullText, mode.cardLead ?? '');
+  // "Alle:" → "Alle" above the text; otherwise an optional mode label ("Challenge").
+  const displayLead = lead?.replace(/:$/, '') ?? (mode.cardLabel ? t(mode.cardLabel) : null);
+  const single = mode.singleCopy ?? DEFAULT_SINGLE_COPY;
   const categoryLabel = question ? t(`category.${question.category}`) : '';
   const tallies = group
     ? Object.fromEntries(Object.entries(session.stats).map(([id, stats]) => [id, stats[group.tally]]))
@@ -203,9 +207,9 @@ export default function GameScreen() {
   ) : (
     <>
       <Button
-        label={t('game.next')}
+        label={t(single.next)}
         icon="arrow-forward"
-        hint={t('game.nextHint')}
+        hint={t(single.nextHint)}
         gradient={meta.gradient}
         feedbackEvent="reveal"
         onPress={answer}
@@ -213,11 +217,11 @@ export default function GameScreen() {
       />
       <View style={styles.secondaryRow}>
         <Button
-          label={t('game.skip')}
+          label={t(single.skip)}
           icon={narrow ? undefined : 'shuffle'}
           variant="secondary"
           size="md"
-          hint={t('game.skipHint')}
+          hint={t(single.skipHint)}
           feedbackEvent="reveal"
           onPress={skip}
           style={styles.half}
@@ -238,7 +242,7 @@ export default function GameScreen() {
         />
       </View>
       <AppText variant="caption" color={colors.textMuted} align="center">
-        {`${t('game.safetyHint')} 💜`}
+        {`${t(single.safetyHint)} 💜`}
       </AppText>
     </>
   );
@@ -285,7 +289,7 @@ export default function GameScreen() {
             <QuestionCard
               cardKey={cardKey}
               text={rest}
-              lead={kindLabel ?? lead ?? undefined}
+              lead={kindLabel ?? displayLead ?? undefined}
               level={session.level}
               categoryLabel={categoryLabel}
               footer={t('game.remaining', { round, count: remaining })}
@@ -299,6 +303,9 @@ export default function GameScreen() {
               compact={isGroup}
               style={isGroup ? undefined : styles.card}
             />
+            {question?.seconds ? (
+              <ChallengeTimer seconds={question.seconds} accent={meta.accent} resetKey={cardKey} />
+            ) : null}
             {group ? (
               <PlayerPicker
                 title={t(group.copy.pickerTitle)}

@@ -31,7 +31,7 @@ export type GameModeStatus = 'available' | 'coming-soon';
 export type TurnStyle = 'single-player' | 'group';
 
 /** How a mode calls its cards in the UI ("110 Fragen", "100 Aussagen", "110 Karten"). */
-export type CardUnit = 'questions' | 'statements' | 'cards';
+export type CardUnit = 'questions' | 'statements' | 'cards' | 'challenges';
 
 /** UI copy of a group mode (all translation keys, checked by TypeScript). */
 export interface GroupModeCopy {
@@ -47,6 +47,30 @@ export interface GroupModeCopy {
   summaryLine: TranslationKey;
   summaryLineOne: TranslationKey;
 }
+
+/** Button and summary texts of a single-player mode (defaults: Spicy Questions). */
+export interface SingleModeCopy {
+  next: TranslationKey;
+  nextHint: TranslationKey;
+  skip: TranslationKey;
+  skipHint: TranslationKey;
+  safetyHint: TranslationKey;
+  summaryAnswered: TranslationKey;
+  summaryTop: TranslationKey;
+  /** Receives `{answered}` and `{passed}`. */
+  summaryLine: TranslationKey;
+}
+
+export const DEFAULT_SINGLE_COPY: SingleModeCopy = {
+  next: 'game.next',
+  nextHint: 'game.nextHint',
+  skip: 'game.skip',
+  skipHint: 'game.skipHint',
+  safetyHint: 'game.safetyHint',
+  summaryAnswered: 'summary.answered',
+  summaryTop: 'summary.mostDaring',
+  summaryLine: 'summary.playerLine',
+};
 
 /** Rules of a choice mode: the active player picks a kind, then gets a card of it. */
 export interface ChoiceModeConfig {
@@ -69,8 +93,12 @@ export interface GameModeDefinition {
   turnStyle: TurnStyle;
   usesSpicyLevels: boolean;
   cardUnit: CardUnit;
-  /** Fixed lead-in every card starts with, highlighted on the card (content language). */
+  /** Fixed lead-in a card may start with, highlighted on the card (content language). */
   cardLead?: string;
+  /** Label shown above cards that have no lead-in (e.g. "Challenge"). */
+  cardLabel?: TranslationKey;
+  /** Single-player modes: custom button and summary texts. */
+  singleCopy?: SingleModeCopy;
   /** Required for `turnStyle: 'group'`. */
   group?: GroupModeConfig;
   /** Player picks the kind of card first ("Wahrheit oder Pflicht"). */
@@ -181,10 +209,28 @@ export const GAME_MODES: Record<GameModeId, GameModeDefinition> = {
   'random-challenges': {
     id: 'random-challenges',
     emoji: '⚡',
-    status: 'coming-soon',
+    status: 'available',
     turnStyle: 'single-player',
     usesSpicyLevels: true,
-    cardUnit: 'questions',
+    cardUnit: 'challenges',
+    cardLead: 'Alle:',
+    cardLabel: 'rc.cardLabel',
+    howTo: 'rc.howTo',
+    levelDescriptions: {
+      mild: 'rc.level.mild.description',
+      hot: 'rc.level.hot.description',
+      extreme: 'rc.level.extreme.description',
+    },
+    singleCopy: {
+      next: 'rc.next',
+      nextHint: 'rc.nextHint',
+      skip: 'rc.skip',
+      skipHint: 'rc.skipHint',
+      safetyHint: 'tod.safetyHint',
+      summaryAnswered: 'summary.challengesDone',
+      summaryTop: 'summary.mostChallenges',
+      summaryLine: 'summary.challengeLine',
+    },
     minPlayers: MIN_PLAYERS,
     maxPlayers: MAX_PLAYERS,
   },

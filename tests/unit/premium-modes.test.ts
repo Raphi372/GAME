@@ -52,13 +52,10 @@ describe('game mode registry', () => {
     expect(isModePlayable('never-have-i-ever')).toBe(true);
     expect(isModePlayable('most-likely')).toBe(true);
     expect(isModePlayable('truth-or-dare')).toBe(true);
-    expect(isModePlayable('random-challenges')).toBe(false);
-    expect(listPlayableModeIds()).toEqual([
-      'spicy-questions',
-      'never-have-i-ever',
-      'truth-or-dare',
-      'most-likely',
-    ]);
+    expect(isModePlayable('random-challenges')).toBe(true);
+    expect(listPlayableModeIds()).toEqual([...GAME_MODE_IDS]);
+    expect(cardCountKey('random-challenges')).toBe('mode.unit.challenges');
+    expect(getGameMode('random-challenges').singleCopy?.next).toBe('rc.next');
     expect(getGameMode('truth-or-dare').choice?.kinds).toEqual(['truth', 'dare']);
     expect(cardCountKey('truth-or-dare')).toBe('mode.unit.cards');
     expect(getGameMode('most-likely').minPlayers).toBe(3);

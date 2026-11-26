@@ -1,0 +1,740 @@
+[
+  {
+    "id": "rc_hot_001",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Flirte 30 Sekunden lang nur mit Blicken mit {other} – wenn {other} mitspielt.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_hot_002",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Flüstere {other} einen frechen Anmachspruch zu – wenn {other} zuhören mag."
+  },
+  {
+    "id": "rc_hot_003",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Mach {other} in 20 Sekunden drei Komplimente, bei denen man rot wird.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_hot_004",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Bring {other} in 30 Sekunden dazu, dir zuzuzwinkern – ohne darum zu bitten.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_hot_005",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Spielt ein 30-Sekunden-Speed-Date mit maximalem Charme, du und {other}.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_hot_006",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Erfinde eine Dating-App-Bio für dich, die niemand ablehnen kann."
+  },
+  {
+    "id": "rc_hot_007",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Schick {other} mit Blicken eine Botschaft – {other} rät, was du meinst."
+  },
+  {
+    "id": "rc_hot_008",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Sag {other} drei Dinge, die du bei einem Date mit {other} sofort machen würdest."
+  },
+  {
+    "id": "rc_hot_009",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Mach einen Flirt-Spruch, der mit einem Kompliment über die Augen beginnt."
+  },
+  {
+    "id": "rc_hot_010",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Lass {other} entscheiden, ob du dein Kompliment flüsterst oder laut sagst."
+  },
+  {
+    "id": "rc_hot_011",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Spiel 20 Sekunden lang einen Filmstar, der {other} anbaggert.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_hot_012",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Flirte 15 Sekunden lang mit der Person, die als Erstes lacht.",
+    "seconds": 15
+  },
+  {
+    "id": "rc_hot_013",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Erfinde einen Kosenamen für {other} und benutz ihn bis zum Spielende – wenn {other} ihn mag."
+  },
+  {
+    "id": "rc_hot_014",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Schreib {other} eine freche Nachricht auf einen Zettel."
+  },
+  {
+    "id": "rc_hot_015",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Mach {other} ein Kompliment nur aus Emojis und zeig es auf deinem Handy."
+  },
+  {
+    "id": "rc_hot_016",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Stell dir vor, {other} sitzt allein an einer Bar – sprich {other} in 20 Sekunden an.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_hot_017",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Sag {other}, welches Outfit-Detail {other} heute am besten steht."
+  },
+  {
+    "id": "rc_hot_018",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Lies mit verführerischer Stimme die Zutatenliste eines Snacks vor."
+  },
+  {
+    "id": "rc_hot_019",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Zwinkere drei Personen hintereinander zu, ohne zu lachen."
+  },
+  {
+    "id": "rc_hot_020",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Gib jeder Person in der Runde einen flirty Spitznamen."
+  },
+  {
+    "id": "rc_hot_021",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Halte 30 Sekunden Blickkontakt mit {other} – wer zuerst lacht, verliert.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_hot_022",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Sag {other}, was dir heute zuerst an {other} aufgefallen ist."
+  },
+  {
+    "id": "rc_hot_023",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Erfinde in 20 Sekunden einen Song über {other}.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_hot_024",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Lass die Runde einen Flirt-Stil wählen – schüchtern, frech oder poetisch – und flirte damit 20 Sekunden mit {other}.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_hot_025",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Mach {other} zum Spaß einen Heiratsantrag – {other} darf ihn dramatisch ablehnen."
+  },
+  {
+    "id": "rc_hot_026",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Sprich {other} an, als wärt ihr auf einem Maskenball."
+  },
+  {
+    "id": "rc_hot_027",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Wirf {other} aus größtmöglicher Entfernung einen Luftkuss zu."
+  },
+  {
+    "id": "rc_hot_028",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Beschreib {other} wie ein Sternekoch sein bestes Gericht."
+  },
+  {
+    "id": "rc_hot_029",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Spielt 20 Sekunden ein Flirt-Telefonat mit geschlossenen Augen, du und {other}.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_hot_030",
+    "level": "hot",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Mach ein Kompliment, das mit „Wenn ich ein Stern wäre …“ beginnt."
+  },
+  {
+    "id": "rc_hot_031",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Tanz 30 Sekunden lang sexy zu einem Song, den {other} aussucht.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_hot_032",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Gib {other} eine 20-Sekunden-Schultermassage – nur wenn {other} zustimmt.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_hot_033",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Bitte {other} um Erlaubnis für einen Kuss auf die Wange – nur bei einem klaren Ja gibt es ihn."
+  },
+  {
+    "id": "rc_hot_034",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Tanz 20 Sekunden lang langsam und verführerisch für die Runde.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_hot_035",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Lass {other} deinen Puls fühlen – nur wenn ihr beide wollt."
+  },
+  {
+    "id": "rc_hot_036",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Setz dich für eine Runde so nah neben {other}, wie {other} es erlaubt."
+  },
+  {
+    "id": "rc_hot_037",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Zeig der Runde 15 Sekunden lang deinen sexiesten Gang.",
+    "seconds": 15
+  },
+  {
+    "id": "rc_hot_038",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Flüstere {other} ein Wort ins Ohr, das {other} beschreibt – nur wenn {other} mag."
+  },
+  {
+    "id": "rc_hot_039",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Tanz 30 Sekunden einen Slow Dance mit {other} – nur wenn {other} Lust hat.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_hot_040",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Lass {other} entscheiden: Umarmung, High Five oder Kompliment."
+  },
+  {
+    "id": "rc_hot_041",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Beiß verführerisch in einen Snack – die Runde bewertet den Sexappeal."
+  },
+  {
+    "id": "rc_hot_042",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Mach 20 Sekunden lang Posen wie bei einem heißen Fotoshooting.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_hot_043",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Sag mit Schlafzimmerstimme drei harmlose Wörter, die die Runde aussucht."
+  },
+  {
+    "id": "rc_hot_044",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Halte 30 Sekunden lang die Hand von {other} – nur wenn ihr beide wollt.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_hot_045",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Lass dir von {other} ein Kompliment ins Ohr flüstern – wenn ihr beide mögt."
+  },
+  {
+    "id": "rc_hot_046",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Tanz 15 Sekunden lang, als wärst du in einem Musikvideo.",
+    "seconds": 15
+  },
+  {
+    "id": "rc_hot_047",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Wirf jeder Person in der Runde drei Sekunden lang deinen verführerischsten Blick zu."
+  },
+  {
+    "id": "rc_hot_048",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Leg {other} die Hand auf die Schulter und sag einen Satz wie aus einem Liebesfilm – wenn {other} mag."
+  },
+  {
+    "id": "rc_hot_049",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Lade {other} zu einem 20-Sekunden-Tango durch den Raum ein – nur wenn {other} mitmachen will.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_hot_050",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Zeig in 20 Sekunden deinen heißesten Tanz-Move.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_hot_051",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Gib {other} einen Handkuss – nur wenn {other} dir die Hand reicht."
+  },
+  {
+    "id": "rc_hot_052",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Lass {other} entscheiden, wie nah ihr für die nächste Runde nebeneinander sitzt."
+  },
+  {
+    "id": "rc_hot_053",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Tanz 20 Sekunden mit einem Kissen, als wäre es dein Schwarm.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_hot_054",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Wirf einen Kuss in Zeitlupe in die Luft."
+  },
+  {
+    "id": "rc_hot_055",
+    "level": "hot",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Umarme jede Person in der Runde, die das möchte."
+  },
+  {
+    "id": "rc_hot_056",
+    "level": "hot",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Wer schon einmal auf einer Party geknutscht hat, steht kurz auf – freiwillig."
+  },
+  {
+    "id": "rc_hot_057",
+    "level": "hot",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Zeigt gleichzeitig auf die Person mit dem besten Tanz-Move des Abends – sie wählt den nächsten Song."
+  },
+  {
+    "id": "rc_hot_058",
+    "level": "hot",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Flüstert reihum der Person rechts ein Kompliment zu – nur wenn sie mag."
+  },
+  {
+    "id": "rc_hot_059",
+    "level": "hot",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Zeigt 20 Sekunden lang euren besten Flirt-Blick – die Person, die dran ist, kürt einen Sieger.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_hot_060",
+    "level": "hot",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Tanzt 30 Sekunden zu einem Song, den die Person, die dran ist, aussucht.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_hot_061",
+    "level": "hot",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Jede Person verrät ihren größten Turn-on in einem Wort – Passen ist erlaubt."
+  },
+  {
+    "id": "rc_hot_062",
+    "level": "hot",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Stellt euch nach geschätzter Flirt-Erfahrung in eine Reihe – geraten, nicht bewiesen."
+  },
+  {
+    "id": "rc_hot_063",
+    "level": "hot",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Wer schon einmal ein Blind Date hatte, erzählt einen Satz darüber – freiwillig."
+  },
+  {
+    "id": "rc_hot_064",
+    "level": "hot",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Bildet Paare und macht euch gegenseitig drei Komplimente – nur Paare, die das wollen."
+  },
+  {
+    "id": "rc_hot_065",
+    "level": "hot",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Ratet in 20 Sekunden den Promi-Crush der Person, die dran ist.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_hot_066",
+    "level": "hot",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Jede Person zeigt fünf Sekunden lang ihren besten Hüftschwung."
+  },
+  {
+    "id": "rc_hot_067",
+    "level": "hot",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Stimmt ab, wer am besten flirten kann – diese Person bestimmt für zwei Runden die Musik."
+  },
+  {
+    "id": "rc_hot_068",
+    "level": "hot",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Macht ein Gruppen-Selfie mit Kussmund – alle, die mitmachen wollen."
+  },
+  {
+    "id": "rc_hot_069",
+    "level": "hot",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Sagt gleichzeitig euren Traum-Urlaubsort für zwei – wer übereinstimmt, gibt sich ein High Five."
+  },
+  {
+    "id": "rc_hot_070",
+    "level": "hot",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Wer heute schon geflirtet hat, hebt die Hand – ehrlich, aber freiwillig."
+  },
+  {
+    "id": "rc_hot_071",
+    "level": "hot",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Spielt 30 Sekunden „Wer bin ich?“ mit berühmten Liebespaaren.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_hot_072",
+    "level": "hot",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Flüstert der Person, die dran ist, reihum eine Date-Idee zu – nur wenn sie zuhören mag."
+  },
+  {
+    "id": "rc_hot_073",
+    "level": "hot",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Wählt per Handzeichen die Person, die den nächsten Song aussucht."
+  },
+  {
+    "id": "rc_hot_074",
+    "level": "hot",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Jede Person beschreibt ihren Flirt-Stil mit einem Tier."
+  },
+  {
+    "id": "rc_hot_075",
+    "level": "hot",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Haltet 20 Sekunden lang Blickkontakt mit der Person neben euch – wer lacht, scheidet aus.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_hot_076",
+    "level": "hot",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Die Person, die dran ist, verteilt drei Komplimente an drei verschiedene Leute."
+  },
+  {
+    "id": "rc_hot_077",
+    "level": "hot",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Erfindet gemeinsam den heißesten Anmachspruch des Abends."
+  },
+  {
+    "id": "rc_hot_078",
+    "level": "hot",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Macht eine Polonaise durch den Raum – alle, die Lust haben."
+  },
+  {
+    "id": "rc_hot_079",
+    "level": "hot",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Wer mag, zeigt ein Foto seines liebsten Date-Ortes auf dem Handy."
+  },
+  {
+    "id": "rc_hot_080",
+    "level": "hot",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Schätzt, wie viele Dates die Person, die dran ist, dieses Jahr hatte – sie darf schweigen."
+  },
+  {
+    "id": "rc_hot_081",
+    "level": "hot",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Bewirb dich in 30 Sekunden bei {other} als perfektes Date.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_hot_082",
+    "level": "hot",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Halte 20 Sekunden lang eine Liebeserklärung an dein Handy.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_hot_083",
+    "level": "hot",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Spiel 20 Sekunden lang eine übertriebene Telenovela-Szene.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_hot_084",
+    "level": "hot",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Lies den Titel des letzten Songs in deiner Playlist vor, als wäre er ein Liebesgedicht."
+  },
+  {
+    "id": "rc_hot_085",
+    "level": "hot",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Erfinde in 20 Sekunden einen Dating-Werbespot für {other}.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_hot_086",
+    "level": "hot",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Zeig in 15 Sekunden, wie du nach einem schlechten Date nach Hause gehst.",
+    "seconds": 15
+  },
+  {
+    "id": "rc_hot_087",
+    "level": "hot",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Spiel 20 Sekunden lang einen Hund, der sich verliebt.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_hot_088",
+    "level": "hot",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Kündige die nächste Person an, als wäre sie Gast in einer Dating-Show."
+  },
+  {
+    "id": "rc_hot_089",
+    "level": "hot",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Sing den Refrain eines Liebeslieds mit dramatischem Opern-Ausdruck."
+  },
+  {
+    "id": "rc_hot_090",
+    "level": "hot",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Imitiere 15 Sekunden lang einen nervösen ersten Kuss – ganz allein.",
+    "seconds": 15
+  },
+  {
+    "id": "rc_hot_091",
+    "level": "hot",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Kommentiere in 20 Sekunden einen Flirt wie ein Fußballreporter.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_hot_092",
+    "level": "hot",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Zeig den „Ich-hab-dich-gesehen“-Blick in Zeitlupe."
+  },
+  {
+    "id": "rc_hot_093",
+    "level": "hot",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Erfinde in 20 Sekunden einen Liebes-Rap über die Runde.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_hot_094",
+    "level": "hot",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Nimm einen Stift zwischen die Zähne wie eine Rose und flirte 10 Sekunden lang.",
+    "seconds": 10
+  },
+  {
+    "id": "rc_hot_095",
+    "level": "hot",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Spiel 30 Sekunden lang Paartherapie für zwei Gegenstände auf dem Tisch.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_hot_096",
+    "level": "hot",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Zeig, wie du dich nach einem perfekten Kuss bewegst."
+  },
+  {
+    "id": "rc_hot_097",
+    "level": "hot",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Erzähl ein erfundenes Date rückwärts – vom Abschied bis zum Kennenlernen."
+  },
+  {
+    "id": "rc_hot_098",
+    "level": "hot",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Sprich bis zu deiner nächsten Runde nur in Liedzeilen."
+  },
+  {
+    "id": "rc_hot_099",
+    "level": "hot",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Lauf mit einem Kissen als Handtasche über einen imaginären Laufsteg."
+  },
+  {
+    "id": "rc_hot_100",
+    "level": "hot",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Erfinde einen Serientitel für dein Liebesleben."
+  }
+]
