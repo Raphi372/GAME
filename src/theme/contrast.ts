@@ -3,9 +3,16 @@
  * colourful gradients without changing their hue.
  */
 
+const HEX_COLOR = /^#[0-9a-f]{6}$/i;
+
+/** True for colours in `#RRGGBB` form – the only format these helpers work with. */
+export function isHexColor(value: string): boolean {
+  return HEX_COLOR.test(value);
+}
+
 function channels(hex: string): [number, number, number] {
-  const value = hex.replace('#', '');
-  return [0, 2, 4].map((offset) => parseInt(value.slice(offset, offset + 2), 16) / 255) as [
+  if (!isHexColor(hex)) throw new TypeError(`Expected a #RRGGBB colour, got "${hex}"`);
+  return [1, 3, 5].map((offset) => parseInt(hex.slice(offset, offset + 2), 16) / 255) as [
     number,
     number,
     number,
@@ -60,7 +67,7 @@ export const MIN_TEXT_CONTRAST = 4.6;
  * to reach `minRatio`. Colours that are dark enough already are returned unchanged.
  */
 export function readableWithWhite(hex: string, minRatio = MIN_TEXT_CONTRAST): string {
-  if (!/^#[0-9a-f]{6}$/i.test(hex) || contrastRatio('#FFFFFF', hex) >= minRatio) return hex;
+  if (!isHexColor(hex) || contrastRatio('#FFFFFF', hex) >= minRatio) return hex;
   const [h, s, start] = toHsl(hex);
   for (let l = start; l > 0; l -= 0.005) {
     const candidate = fromHsl(h, s, l);
@@ -84,7 +91,7 @@ export function blend(color: string, background: string, opacity: number): strin
  * Colours that are readable already are returned unchanged.
  */
 export function readableOnDark(hex: string, background: string, minRatio = MIN_TEXT_CONTRAST): string {
-  if (!/^#[0-9a-f]{6}$/i.test(hex) || contrastRatio(hex, background) >= minRatio) return hex;
+  if (!isHexColor(hex) || !isHexColor(background) || contrastRatio(hex, background) >= minRatio) return hex;
   const [h, s, start] = toHsl(hex);
   for (let l = start; l < 1; l += 0.005) {
     const candidate = fromHsl(h, s, l);

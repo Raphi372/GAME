@@ -68,6 +68,33 @@ describe('"Random Challenges" mode', () => {
     expect(await screen.findByText('CHALLENGE')).toBeOnTheScreen();
   });
 
+  it('keeps the right time after the app was in the background', async () => {
+    addPlayers('Lena', 'Max');
+    useGameStore.getState().startGame('random-challenges', 'mild');
+    showCard((_text, seconds) => seconds === 20);
+    const user = userEvent.setup();
+    await renderRouter(APP_DIR, { initialUrl: '/game' });
+
+    await user.press(await screen.findByRole('button', { name: 'Timer starten · 20 s' }));
+    // In the background JS timers pause while the clock keeps running.
+    await act(async () => {
+      jest.setSystemTime(Date.now() + 12000);
+      jest.advanceTimersByTime(250);
+    });
+    expect(screen.getByText('8')).toBeOnTheScreen();
+  });
+
+  it('names everyone with the best score on a tie', async () => {
+    addPlayers('Lena', 'Max');
+    useGameStore.getState().startGame('random-challenges', 'mild');
+    useGameStore.getState().answer();
+    useGameStore.getState().answer();
+    useGameStore.getState().endGame();
+    await renderRouter(APP_DIR, { initialUrl: '/summary' });
+    expect(await screen.findByText('🏆 Die meisten Challenges')).toBeOnTheScreen();
+    expect(screen.getByText('Lena & Max')).toBeOnTheScreen();
+  });
+
   it('runs the timer of timed challenges and resets it for the next card', async () => {
     addPlayers('Lena', 'Max');
     useGameStore.getState().startGame('random-challenges', 'mild');
