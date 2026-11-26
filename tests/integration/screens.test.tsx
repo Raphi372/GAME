@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { userEvent } from '@testing-library/react-native';
 import { renderRouter, screen, within } from 'expo-router/testing-library';
 
+import { LEGAL } from '@/config/legal';
 import { STORAGE_KEYS } from '@/services/storage';
 import { useCustomCardsStore, useEntitlementsStore, useGameStore, useSettingsStore } from '@/store';
 
@@ -186,5 +187,29 @@ describe('home screen', () => {
     expect(await screen.findByText('Mehr Hitze kommt bald.')).toBeOnTheScreen();
     expect(screen.getByText('Noch nicht verfügbar. Es werden keine Zahlungen abgewickelt.')).toBeOnTheScreen();
     expect(screen.queryByRole('button', { name: /kaufen|abonnieren/i })).not.toBeOnTheScreen();
+  });
+});
+
+describe('privacy screen', () => {
+  beforeEach(async () => {
+    await resetStores();
+    useSettingsStore.getState().confirmAge();
+  });
+
+  afterEach(() => jest.restoreAllMocks());
+
+  it('is marked as a draft while the provider details are missing', async () => {
+    jest.replaceProperty(LEGAL, 'providerContact', null);
+    await renderRouter(APP_DIR, { initialUrl: '/settings/privacy' });
+    expect(await screen.findByTestId('privacy-draft-note')).toBeOnTheScreen();
+    expect(screen.getByText(/Anschrift und E-Mail-Adresse des Anbieters/)).toBeOnTheScreen();
+  });
+
+  it('shows the provider details and drops the draft note once they are filled in', async () => {
+    jest.replaceProperty(LEGAL, 'providerContact', 'Beispiel GmbH\nBeispielweg 1\n12345 Beispielstadt\nhallo@example.com');
+    await renderRouter(APP_DIR, { initialUrl: '/settings/privacy' });
+    expect(await screen.findByText(/Beispiel GmbH/)).toBeOnTheScreen();
+    expect(screen.queryByTestId('privacy-draft-note')).not.toBeOnTheScreen();
+    expect(screen.queryByText(/Anschrift und E-Mail-Adresse des Anbieters/)).not.toBeOnTheScreen();
   });
 });
