@@ -17,7 +17,6 @@ import {
   type PlayerStats,
   type SessionContext,
 } from '@/features/gameplay/engine/session';
-import { getDeck } from '@/features/question-decks';
 import {
   nextColorIndex,
   validatePlayerName,
@@ -28,6 +27,7 @@ import { persistStorage, STORAGE_KEYS } from '@/services/storage';
 import { isSpicyLevel, type CardKind, type Player, type SpicyLevel } from '@/types';
 import { createId } from '@/utils/id';
 
+import { getPlayableDeck } from './decks';
 import { useSettingsStore } from './settingsStore';
 
 export interface GameData {
@@ -72,6 +72,11 @@ export interface GameState extends GameData {
   skip: () => void;
   changeLevel: (level: SpicyLevel) => void;
   reshuffle: () => void;
+  /**
+   * Re-checks the running game against the current decks, e.g. after the players
+   * deleted the custom card that is on the table – a new card is dealt if needed.
+   */
+  refreshDecks: () => void;
   endGame: () => void;
   resetAll: () => void;
 }
@@ -83,7 +88,7 @@ function contextFor(players: readonly Player[], modeId: GameModeId): SessionCont
   return {
     players,
     rng: getRng(),
-    getDeck: (level) => getDeck(modeId, level, { locale }),
+    getDeck: (level) => getPlayableDeck(modeId, level, locale),
     choiceKinds: getGameMode(modeId).choice?.kinds,
   };
 }
@@ -235,6 +240,7 @@ export const useGameStore = create<GameState>()(
           set({ lastLevel: level });
         },
         reshuffle: () => updateSession(reshuffleLevel),
+        refreshDecks: () => updateSession(repairSession),
         endGame: () => {
           const { session, players } = get();
           if (!session) return;

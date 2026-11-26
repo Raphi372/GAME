@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
 
+import { useCustomCardsStore } from './customCardsStore';
 import { useGameStore } from './gameStore';
 import { useSettingsStore } from './settingsStore';
 
 function allHydrated(): boolean {
-  return useSettingsStore.persist.hasHydrated() && useGameStore.persist.hasHydrated();
+  return (
+    useSettingsStore.persist.hasHydrated() &&
+    useGameStore.persist.hasHydrated() &&
+    useCustomCardsStore.persist.hasHydrated()
+  );
 }
 
 /** True once every persisted store has been restored from the device storage. */
@@ -15,10 +20,12 @@ export function useStoresHydrated(): boolean {
     const check = () => setHydrated(allHydrated());
     const unsubscribeSettings = useSettingsStore.persist.onFinishHydration(check);
     const unsubscribeGame = useGameStore.persist.onFinishHydration(check);
+    const unsubscribeCustom = useCustomCardsStore.persist.onFinishHydration(check);
     check();
     return () => {
       unsubscribeSettings();
       unsubscribeGame();
+      unsubscribeCustom();
     };
   }, []);
 

@@ -1,7 +1,15 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { FREE_ENTITLEMENTS } from '@/features/premium/entitlements';
 import { setRng } from '@/services/randomSource';
-import { DEFAULT_SETTINGS, INITIAL_GAME_DATA, useGameStore, useSettingsStore } from '@/store';
+import {
+  DEFAULT_SETTINGS,
+  INITIAL_GAME_DATA,
+  useCustomCardsStore,
+  useEntitlementsStore,
+  useGameStore,
+  useSettingsStore,
+} from '@/store';
 import { createSeededRng } from '@/utils/random';
 
 /** Resets all stores and storage to a clean state with a deterministic RNG. */
@@ -10,6 +18,8 @@ export async function resetStores(seed = 1234) {
   await AsyncStorage.clear();
   useGameStore.setState({ ...INITIAL_GAME_DATA, lastResult: null });
   useSettingsStore.setState({ ...DEFAULT_SETTINGS });
+  useCustomCardsStore.setState({ cards: [] });
+  useEntitlementsStore.setState({ entitlements: FREE_ENTITLEMENTS });
 }
 
 export function addPlayers(...names: string[]) {

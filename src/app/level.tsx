@@ -10,7 +10,7 @@ import { LEVELS, listLevels } from '@/features/levels/levels';
 import { getDeckSize } from '@/features/question-decks';
 import { useTranslation } from '@/i18n';
 import { feedback } from '@/services/feedback';
-import { useGameStore } from '@/store';
+import { getCustomQuestions, useCustomCardsStore, useEntitlementsStore, useGameStore } from '@/store';
 import { colors, spacing } from '@/theme';
 import type { SpicyLevel } from '@/types';
 
@@ -21,6 +21,9 @@ export default function LevelScreen() {
   const modeId = isGameModeId(params.mode) ? params.mode : DEFAULT_MODE_ID;
 
   const lastLevel = useGameStore((state) => state.lastLevel);
+  // Re-render when the players' own cards or the Premium state change (card counts).
+  useCustomCardsStore((state) => state.cards);
+  useEntitlementsStore((state) => state.entitlements);
   const playerCount = useGameStore((state) => state.players.length);
   const startGame = useGameStore((state) => state.startGame);
 
@@ -93,11 +96,22 @@ export default function LevelScreen() {
             selected={selected === level.id}
             modeId={modeId}
             questionCount={getDeckSize(modeId, level.id, { locale })}
+            customCount={getCustomQuestions(modeId, level.id).length}
             onPress={() => choose(level.id)}
             testID={`level-${level.id}`}
           />
         ))}
       </View>
+      <Button
+        label={t('level.customLink')}
+        hint={t('level.customLinkHint')}
+        icon="create-outline"
+        variant="ghost"
+        size="sm"
+        onPress={() => router.push({ pathname: '/custom-cards', params: { mode: modeId, level: selected } })}
+        style={styles.customLink}
+        testID="level-custom-cards"
+      />
       <ConfirmSheet
         visible={consentFor !== null}
         emoji={LEVELS.extreme.emoji}
@@ -125,4 +139,5 @@ const styles = StyleSheet.create({
   howTo: { flexDirection: 'row', gap: spacing.md, marginTop: spacing.md },
   howToText: { flex: 1, gap: spacing.xxs },
   list: { gap: spacing.lg, paddingTop: spacing.lg },
+  customLink: { alignSelf: 'center', marginTop: spacing.md },
 });

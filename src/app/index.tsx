@@ -105,6 +105,17 @@ export default function HomeScreen() {
         ))}
       </View>
 
+      <Button
+        label={t('home.customCards')}
+        hint={t('home.customCardsHint')}
+        icon="create-outline"
+        variant="secondary"
+        size="md"
+        onPress={() => router.push('/custom-cards')}
+        style={styles.custom}
+        testID="home-custom-cards"
+      />
+
       <AppText variant="caption" color={colors.textMuted} align="center" style={styles.footer}>
         {t('home.footer')}
       </AppText>
@@ -119,5 +130,6 @@ const styles = StyleSheet.create({
   play: { marginBottom: spacing.sm },
   resume: { marginTop: spacing.xl },
   modes: { gap: spacing.md },
+  custom: { marginTop: spacing.lg },
   footer: { marginTop: spacing.xxl },
 });

@@ -9,7 +9,7 @@ import { LinkRow, RadioRow, SettingsGroup, SwitchRow } from '@/features/settings
 import { useMotion } from '@/hooks/useMotion';
 import { useTranslation } from '@/i18n';
 import { clearPersistedData } from '@/services/storage';
-import { useGameStore, useSettingsStore } from '@/store';
+import { useCustomCardsStore, useGameStore, useSettingsStore } from '@/store';
 import { colors, spacing } from '@/theme';
 import { LOCALES } from '@/types';
 
@@ -30,6 +30,7 @@ export default function SettingsScreen() {
   const deleteAll = () => {
     setDeleteOpen(false);
     useGameStore.getState().resetAll();
+    useCustomCardsStore.getState().resetCustomCards();
     useSettingsStore.getState().resetSettings();
     void clearPersistedData();
   };

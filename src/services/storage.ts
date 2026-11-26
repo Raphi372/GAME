@@ -8,6 +8,7 @@ import { createJSONStorage, type StateStorage } from 'zustand/middleware';
 export const STORAGE_KEYS = {
   settings: 'spicy-night/settings',
   game: 'spicy-night/game',
+  customCards: 'spicy-night/custom-cards',
 } as const;
 
 function report(action: string, key: string, error: unknown) {
