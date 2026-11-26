@@ -2,7 +2,7 @@ import { Redirect, useRouter } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
 import { AppText, Avatar, Button, Screen, SectionTitle, Surface } from '@/components/ui';
-import { getGameMode } from '@/features/game-modes/registry';
+import { DEFAULT_SINGLE_COPY, getGameMode } from '@/features/game-modes/registry';
 import { LEVELS } from '@/features/levels/levels';
 import { useTranslation } from '@/i18n';
 import { useGameStore } from '@/store';
@@ -19,6 +19,7 @@ export default function SummaryScreen() {
   const mode = getGameMode(result.modeId);
   const group = mode.group;
   const isChoice = Boolean(mode.choice);
+  const single = mode.singleCopy ?? DEFAULT_SINGLE_COPY;
   const totals = result.players.reduce(
     (sum, player) => ({
       answered: sum.answered + player.answered,
@@ -53,7 +54,7 @@ export default function SummaryScreen() {
       ]
     : [
         { label: t('summary.rounds'), value: result.turnsCompleted },
-        { label: t('summary.answered'), value: totals.answered },
+        { label: t(single.summaryAnswered), value: totals.answered },
         { label: t('summary.passed'), value: totals.passed },
         { label: t('summary.skipped'), value: totals.skipped },
       ];
@@ -112,7 +113,7 @@ export default function SummaryScreen() {
           <Avatar name={top.name} colorIndex={top.colorIndex} size={48} />
           <View style={styles.flex}>
             <AppText variant="overline" color={meta.accent}>
-              {`🏆 ${t(group ? group.copy.summaryTop : isChoice ? 'summary.mostDares' : 'summary.mostDaring')}`}
+              {`🏆 ${t(group ? group.copy.summaryTop : isChoice ? 'summary.mostDares' : single.summaryTop)}`}
             </AppText>
             <AppText variant="h2">{top.name}</AppText>
           </View>
@@ -135,7 +136,7 @@ export default function SummaryScreen() {
                   ? player[group.tally] === 1
                     ? t(group.copy.summaryLineOne)
                     : t(group.copy.summaryLine, { count: player[group.tally] })
-                  : t('summary.playerLine', { answered: player.answered, passed: player.passed })}
+                  : t(single.summaryLine, { answered: player.answered, passed: player.passed })}
               </AppText>
             </View>
           </View>

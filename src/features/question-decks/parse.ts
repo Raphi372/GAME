@@ -42,7 +42,7 @@ export function parseQuestions(raw: unknown, expectedLevel?: SpicyLevel): ParseR
       issues.push({ index, reason: 'not an object' });
       return;
     }
-    const { id, level, category, text, intensity, kind } = entry;
+    const { id, level, category, text, intensity, kind, seconds } = entry;
     if (typeof id !== 'string' || id.trim() === '') {
       issues.push({ index, reason: 'missing id' });
       return;
@@ -71,6 +71,13 @@ export function parseQuestions(raw: unknown, expectedLevel?: SpicyLevel): ParseR
       issues.push({ index, reason: `invalid kind for ${id}` });
       return;
     }
+    if (
+      seconds !== undefined &&
+      !(typeof seconds === 'number' && Number.isInteger(seconds) && seconds >= 5 && seconds <= 120)
+    ) {
+      issues.push({ index, reason: `invalid seconds for ${id}` });
+      return;
+    }
     seenIds.add(id);
     questions.push({
       id,
@@ -79,6 +86,7 @@ export function parseQuestions(raw: unknown, expectedLevel?: SpicyLevel): ParseR
       text: text.trim(),
       ...(intensity !== undefined ? { intensity } : {}),
       ...(kind !== undefined ? { kind } : {}),
+      ...(typeof seconds === 'number' ? { seconds } : {}),
     });
   });
   return { questions, issues };

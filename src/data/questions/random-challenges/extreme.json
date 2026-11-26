@@ -1,0 +1,744 @@
+[
+  {
+    "id": "rc_extreme_001",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Massiere {other} 30 Sekunden lang den Nacken – nur mit einem klaren Ja.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_extreme_002",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Tanz 30 Sekunden lang verführerisch für die Runde.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_extreme_003",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Flüstere {other} 20 Sekunden lang, was dich gerade anmacht – nur wenn {other} zuhören mag.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_extreme_004",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Frag {other}, ob du einen Kuss auf den Hals geben darfst – nur bei einem klaren Ja."
+  },
+  {
+    "id": "rc_extreme_005",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Lass dir die Augen verbinden und errate am Duft, wer vor dir steht – nur Personen, die einverstanden sind."
+  },
+  {
+    "id": "rc_extreme_006",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Gib {other} einen 10-Sekunden-Kuss – nur wenn ihr beide es wollt, sonst wird es ein Kompliment.",
+    "seconds": 10
+  },
+  {
+    "id": "rc_extreme_007",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Setz dich 30 Sekunden auf den Schoß von {other} – nur wenn {other} zustimmt.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_extreme_008",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Streichel {other} 20 Sekunden lang über den Arm – nur wenn {other} das möchte.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_extreme_009",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Tanzt 45 Sekunden einen engen Slow Dance, du und {other} – nur wenn ihr beide Lust habt.",
+    "seconds": 45
+  },
+  {
+    "id": "rc_extreme_010",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Beschreib {other} in 30 Sekunden, wie ein perfekter Abend mit {other} endet – {other} darf jederzeit stoppen.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_extreme_011",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Lass {other} entscheiden, wohin du einen Kuss gibst – Hand, Wange, Stirn oder gar nicht."
+  },
+  {
+    "id": "rc_extreme_012",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 1,
+    "text": "Massiere 30 Sekunden lang die Hände von {other} – wenn {other} mag.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_extreme_013",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Mach einen 20-Sekunden-Striptease nur mit Jacke, Schal oder Mütze.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_extreme_014",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Hauch {other} einen Kuss auf die Schulter – nur mit Erlaubnis."
+  },
+  {
+    "id": "rc_extreme_015",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Leg deinen Kopf 30 Sekunden auf die Schulter von {other} – wenn {other} einverstanden ist.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_extreme_016",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Lass dir von {other} 20 Sekunden den Nacken streicheln – nur wenn ihr beide wollt.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_extreme_017",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Flüstere {other} deine heißeste Fantasie ins Ohr – {other} darf vorher ablehnen."
+  },
+  {
+    "id": "rc_extreme_018",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Halte {other} 30 Sekunden im Arm – nur wenn {other} das möchte.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_extreme_019",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Tanz 20 Sekunden lang lasziv mit einem Stuhl.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_extreme_020",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Fütter {other} mit einem Snack – nur wenn {other} das will."
+  },
+  {
+    "id": "rc_extreme_021",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Lass {other} deinen Herzschlag spüren, Hand aufs Herz – nur wenn ihr beide wollt."
+  },
+  {
+    "id": "rc_extreme_022",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Schau {other} 15 Sekunden lang so verführerisch an, wie du kannst – wenn {other} mitspielt.",
+    "seconds": 15
+  },
+  {
+    "id": "rc_extreme_023",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Gib jeder Person in der Runde, die das möchte, einen Kuss auf die Wange."
+  },
+  {
+    "id": "rc_extreme_024",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 2,
+    "text": "Kuschel dich 30 Sekunden lang an {other} – nur wenn ihr beide Lust habt.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_extreme_025",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Knabber {other} sanft an der Hand – nur mit einem klaren Ja."
+  },
+  {
+    "id": "rc_extreme_026",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Stellt das Plakat eines Liebesfilms nach, du und {other} – so nah, wie ihr beide wollt."
+  },
+  {
+    "id": "rc_extreme_027",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Führe {other} 20 Sekunden mit verbundenen Augen durch den Raum – nur wenn {other} einverstanden ist.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_extreme_028",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Beschreib 20 Sekunden lang mit leiser Stimme eine heiße Szene am Strand.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_extreme_029",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Gib {other} einen Kuss auf die Fingerspitzen – nur wenn {other} dir die Hand reicht."
+  },
+  {
+    "id": "rc_extreme_030",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Flüstere {other} 10 Sekunden lang ganz nah am Ohr „Hallo“ – nur wenn {other} mag.",
+    "seconds": 10
+  },
+  {
+    "id": "rc_extreme_031",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Lass {other} deinen Duft am Hals beschreiben – nur wenn ihr beide wollt."
+  },
+  {
+    "id": "rc_extreme_032",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Tanzt 20 Sekunden Wange an Wange, du und {other} – nur wenn ihr beide wollt.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_extreme_033",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Gib {other} eine 20-Sekunden-Kopfmassage – wenn {other} zustimmt.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_extreme_034",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Lass die Runde bestimmen, wem du 20 Sekunden den Rücken massierst – die Person hat das letzte Wort.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_extreme_035",
+    "level": "extreme",
+    "category": "desire",
+    "intensity": 3,
+    "text": "Wähle jemanden für einen Kuss auf die Lippen – nur bei einem klaren Ja, sonst wird es ein Kompliment."
+  },
+  {
+    "id": "rc_extreme_036",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Jede Person verrät eine Fantasie in einem Wort – Passen ist erlaubt."
+  },
+  {
+    "id": "rc_extreme_037",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Zeigt gleichzeitig auf die Person, die heute am verführerischsten wirkt."
+  },
+  {
+    "id": "rc_extreme_038",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Flüstert reihum der Person neben euch ein heißes Wort ins Ohr – nur bei denen, die das wollen."
+  },
+  {
+    "id": "rc_extreme_039",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Wer schon einmal einen One-Night-Stand hatte, steht kurz auf – freiwillig."
+  },
+  {
+    "id": "rc_extreme_040",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Stimmt ab, wer heute den mutigsten Flirtspruch gebracht hat – diese Person bestimmt zwei Runden lang die Musik."
+  },
+  {
+    "id": "rc_extreme_041",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Zeigt 20 Sekunden lang eure verführerischste Pose – die Person, die dran ist, kürt den Sieger.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_extreme_042",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Jede Person sagt, welche Körperstelle sie bei anderen am meisten anzieht – Passen ist erlaubt."
+  },
+  {
+    "id": "rc_extreme_043",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Bildet Paare und flüstert euch eine Fantasie zu – nur Paare, in denen beide das wollen."
+  },
+  {
+    "id": "rc_extreme_044",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Tanzt 30 Sekunden eng mit einer Person eurer Wahl – nur wenn ihr beide wollt.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_extreme_045",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Wer schon einmal an einem ungewöhnlichen Ort intim geworden ist, hebt die Hand – freiwillig."
+  },
+  {
+    "id": "rc_extreme_046",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Ratet 30 Sekunden lang die geheime Vorliebe der Person, die dran ist – sie sagt nur „warm“ oder „kalt“.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_extreme_047",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Jede Person beschreibt ihre perfekte Nacht in drei Wörtern."
+  },
+  {
+    "id": "rc_extreme_048",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Wählt gemeinsam einen Song für eine heiße Nacht – bei Gleichstand entscheidet die Person, die dran ist."
+  },
+  {
+    "id": "rc_extreme_049",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Massiert euch in einer Reihe 30 Sekunden lang die Schultern – nur wer will, macht mit.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_extreme_050",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Wer heute noch jemanden küssen möchte, zwinkert – freiwillig und ohne Namen."
+  },
+  {
+    "id": "rc_extreme_051",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Jede Person verrät ihren größten Turn-off im Bett in einem Wort – Passen ist erlaubt."
+  },
+  {
+    "id": "rc_extreme_052",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Erzählt reihum eine heiße Geschichte – jede Person einen Satz."
+  },
+  {
+    "id": "rc_extreme_053",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Die Person, die dran ist, verteilt drei verführerische Komplimente."
+  },
+  {
+    "id": "rc_extreme_054",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Stimmt ab, wer in der Runde vermutlich der beste Kisser ist – geschätzt, nicht getestet."
+  },
+  {
+    "id": "rc_extreme_055",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Jede Person zeigt fünf Sekunden lang ihr „Komm her“-Gesicht."
+  },
+  {
+    "id": "rc_extreme_056",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Sagt gleichzeitig „Licht an“ oder „Licht aus“ – wer in der Minderheit ist, darf sich erklären."
+  },
+  {
+    "id": "rc_extreme_057",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Wer schon einmal ein heißes Foto verschickt hat, hebt die Hand – freiwillig."
+  },
+  {
+    "id": "rc_extreme_058",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Jede Person nennt einen Film, der sie richtig heiß gemacht hat."
+  },
+  {
+    "id": "rc_extreme_059",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Ratet, welche Fantasie die Person, die dran ist, gleich pantomimisch darstellt – jugendfrei bitte."
+  },
+  {
+    "id": "rc_extreme_060",
+    "level": "extreme",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Gebt der Person, die dran ist, 30 Sekunden lang so viele heiße Komplimente wie möglich.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_extreme_061",
+    "level": "extreme",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Flirte 30 Sekunden mit {other}, als wärt ihr allein in einem Hotelzimmer – nur mit Worten.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_extreme_062",
+    "level": "extreme",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Sag {other} in 20 Sekunden, was du an {other} küssen würdest – {other} darf jederzeit stoppen.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_extreme_063",
+    "level": "extreme",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Beschreib ein Sandwich so verführerisch, dass alle rot werden."
+  },
+  {
+    "id": "rc_extreme_064",
+    "level": "extreme",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Erzähl {other} mit Schlafzimmerstimme, wie dein perfekter Morgen danach aussieht."
+  },
+  {
+    "id": "rc_extreme_065",
+    "level": "extreme",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Mach {other} ein respektvolles Kompliment über eine Stelle, die sonst nie gelobt wird."
+  },
+  {
+    "id": "rc_extreme_066",
+    "level": "extreme",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Spielt 30 Sekunden ein Rollenspiel, du und {other}: Fremde im Nachtzug.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_extreme_067",
+    "level": "extreme",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Flüstere {other} drei Wörter, die dich heute an {other} reizen – wenn {other} mag."
+  },
+  {
+    "id": "rc_extreme_068",
+    "level": "extreme",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Gestehe {other} in 15 Sekunden, was du heute an {other} heiß findest.",
+    "seconds": 15
+  },
+  {
+    "id": "rc_extreme_069",
+    "level": "extreme",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Lade {other} mit einem einzigen Satz zu einem heißen Date ein."
+  },
+  {
+    "id": "rc_extreme_070",
+    "level": "extreme",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Lass {other} eine Fantasie wählen und beschreib sie 20 Sekunden lang.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_extreme_071",
+    "level": "extreme",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Wünsch {other} so verführerisch wie möglich eine gute Nacht."
+  },
+  {
+    "id": "rc_extreme_072",
+    "level": "extreme",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Gib {other} einen Codenamen für heiße Nachrichten."
+  },
+  {
+    "id": "rc_extreme_073",
+    "level": "extreme",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Spielt 30 Sekunden ein Flirt-Duell, du und {other} – wer zuerst rot wird, verliert.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_extreme_074",
+    "level": "extreme",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Beschreib {other} deinen perfekten Kuss mit {other} – nur wenn {other} das hören möchte."
+  },
+  {
+    "id": "rc_extreme_075",
+    "level": "extreme",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Sag {other}, welches Kleidungsstück {other} heute besonders gut steht – und warum."
+  },
+  {
+    "id": "rc_extreme_076",
+    "level": "extreme",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Schreib {other} eine heiße Nachricht auf einen Zettel – höchstens zehn Wörter."
+  },
+  {
+    "id": "rc_extreme_077",
+    "level": "extreme",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Flüstere {other} eine rein hypothetische Einladung zu einer heißen Nacht zu – wenn {other} mag."
+  },
+  {
+    "id": "rc_extreme_078",
+    "level": "extreme",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Lass dir von {other} eine Szene vorgeben und spiel sie 20 Sekunden lang verführerisch.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_extreme_079",
+    "level": "extreme",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Erzähl der Runde, wie du {other} verführen würdest – {other} darf ein Veto einlegen."
+  },
+  {
+    "id": "rc_extreme_080",
+    "level": "extreme",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Mach {other} eine Liebeserklärung im Stil eines Erotikromans – jugendfrei."
+  },
+  {
+    "id": "rc_extreme_081",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Erzähl in 30 Sekunden deine heißeste Erinnerung – ohne Namen.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_extreme_082",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Verrate eine Vorliebe, die hier niemand erwarten würde – Passen ist erlaubt."
+  },
+  {
+    "id": "rc_extreme_083",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Beschreib in 20 Sekunden, was du im Bett nie wieder machen würdest.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_extreme_084",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Erzähl in einem Satz, wo du zuletzt so richtig Lust bekommen hast."
+  },
+  {
+    "id": "rc_extreme_085",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Nenn in 15 Sekunden fünf Dinge, die dich sofort in Stimmung bringen.",
+    "seconds": 15
+  },
+  {
+    "id": "rc_extreme_086",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Gestehe der Runde deine heißeste Fantasie in einem Satz."
+  },
+  {
+    "id": "rc_extreme_087",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Beschreib deinen Typ so genau, dass alle raten können, ob er hier sitzt."
+  },
+  {
+    "id": "rc_extreme_088",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Erzähl in 20 Sekunden von deinem wildesten Date.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_extreme_089",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Verrate, welche Filmszene du gern einmal nachspielen würdest."
+  },
+  {
+    "id": "rc_extreme_090",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Nenn drei Dinge, die du einmal im Leben ausprobieren willst – Schlafzimmer erlaubt."
+  },
+  {
+    "id": "rc_extreme_091",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Erzähl in 30 Sekunden von deinem spontansten Abenteuer.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_extreme_092",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Verrate, was dich an dir selbst am meisten anzieht."
+  },
+  {
+    "id": "rc_extreme_093",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Beschreib in 15 Sekunden ehrlich deine Grenzen beim Flirten.",
+    "seconds": 15
+  },
+  {
+    "id": "rc_extreme_094",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Sag der Runde, welches Kompliment dich sofort schwach macht."
+  },
+  {
+    "id": "rc_extreme_095",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Beschreib in drei Sätzen dein perfektes Vorspiel."
+  },
+  {
+    "id": "rc_extreme_096",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Nenn in 10 Sekunden drei Orte, an denen du gern intim werden würdest.",
+    "seconds": 10
+  },
+  {
+    "id": "rc_extreme_097",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Erzähl, was dein letztes Date richtig gut gemacht hat."
+  },
+  {
+    "id": "rc_extreme_098",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Verrate, welches Geräusch dich verrückt macht."
+  },
+  {
+    "id": "rc_extreme_099",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Beschreib in 20 Sekunden, wie du jemandem zeigst, dass du mehr willst.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_extreme_100",
+    "level": "extreme",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Erzähl sinngemäß, welche Nachricht dich zuletzt richtig heiß gemacht hat."
+  }
+]

@@ -1,0 +1,746 @@
+[
+  {
+    "id": "rc_mild_001",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Nenn in 15 Sekunden fünf Liebesfilme.",
+    "seconds": 15
+  },
+  {
+    "id": "rc_mild_002",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Balancier ein Kissen 20 Sekunden lang auf dem Kopf.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_mild_003",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Sprich bis zu deiner nächsten Runde nur in Fragen."
+  },
+  {
+    "id": "rc_mild_004",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Erfinde in 20 Sekunden einen Song über das Wort „Date“ und sing ihn.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_mild_005",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Zähl in 10 Sekunden so viele Kosenamen auf, wie dir einfallen.",
+    "seconds": 10
+  },
+  {
+    "id": "rc_mild_006",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Sag das Alphabet rückwärts von Z bis P – ohne Fehler."
+  },
+  {
+    "id": "rc_mild_007",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Mach 30 Sekunden lang Komplimente an die Runde, ohne ein Wort zu wiederholen.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_mild_008",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Erklär einem imaginären Alien in 30 Sekunden, was ein Date ist.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_mild_009",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Halte 20 Sekunden ein ernstes Gesicht, während die Runde dich ohne Berührung zum Lachen bringen darf.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_mild_010",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Bau aus Gegenständen in Reichweite in 30 Sekunden ein Herz.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_mild_011",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Nenn in 15 Sekunden fünf Wörter, die sich auf „Herz“ reimen.",
+    "seconds": 15
+  },
+  {
+    "id": "rc_mild_012",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Spiel 20 Sekunden lang einen Roboter, der sich verliebt.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_mild_013",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Ruf bis zu deiner nächsten Runde bei jedem Lachen in der Runde „Amore!“."
+  },
+  {
+    "id": "rc_mild_014",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Zeichne mit geschlossenen Augen ein Herz und lass die Runde es bewerten."
+  },
+  {
+    "id": "rc_mild_015",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Nenn in 15 Sekunden fünf Dinge, die man zu einem Picknick-Date mitnimmt.",
+    "seconds": 15
+  },
+  {
+    "id": "rc_mild_016",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Erzähl eine Liebesgeschichte in genau sechs Wörtern."
+  },
+  {
+    "id": "rc_mild_017",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Lauf einmal durch den Raum, als wärst du auf dem roten Teppich."
+  },
+  {
+    "id": "rc_mild_018",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Mach 20 Sekunden lang Tiergeräusche – die Runde rät die Tiere.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_mild_019",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Sprich die nächste Minute wie ein Fernsehmoderator.",
+    "seconds": 60
+  },
+  {
+    "id": "rc_mild_020",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Erfinde einen Tanz namens „Der Flirt“ und zeig ihn 15 Sekunden lang.",
+    "seconds": 15
+  },
+  {
+    "id": "rc_mild_021",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Buchstabiere deinen Namen mit Körperbewegungen."
+  },
+  {
+    "id": "rc_mild_022",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Imitiere 20 Sekunden lang einen Pinguin auf seinem ersten Date.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_mild_023",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Nenn in 10 Sekunden drei Promi-Paare.",
+    "seconds": 10
+  },
+  {
+    "id": "rc_mild_024",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Sag dreimal schnell hintereinander „Fischers Fritz flirtet frisch“."
+  },
+  {
+    "id": "rc_mild_025",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Erzähl einen Witz, in dem das Wort „Kuss“ vorkommt."
+  },
+  {
+    "id": "rc_mild_026",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Stütz für die nächsten zwei Runden dein Kinn auf die Hand wie ein großer Denker."
+  },
+  {
+    "id": "rc_mild_027",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Stell 20 Sekunden lang eine Statue der Liebe dar.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_mild_028",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Erfinde einen Werbespruch für Herzklopfen."
+  },
+  {
+    "id": "rc_mild_029",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Sing ein Weihnachtslied als dramatische Liebesballade."
+  },
+  {
+    "id": "rc_mild_030",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Zähl so schnell du kannst von 30 in Dreierschritten rückwärts."
+  },
+  {
+    "id": "rc_mild_031",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Schreib mit deiner schwächeren Hand „Spicy Night“ und zeig es der Runde."
+  },
+  {
+    "id": "rc_mild_032",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Nenn in 15 Sekunden fünf Orte für einen ersten Kuss.",
+    "seconds": 15
+  },
+  {
+    "id": "rc_mild_033",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Klopf einen bekannten Liebessong auf den Tisch – die Runde rät ihn."
+  },
+  {
+    "id": "rc_mild_034",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Stell pantomimisch einen Heiratsantrag dar, der komplett schiefgeht."
+  },
+  {
+    "id": "rc_mild_035",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Erklär in 30 Sekunden, warum Socken ein romantisches Geschenk sind.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_mild_036",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Sprich bis zu deiner nächsten Runde in der dritten Person über dich."
+  },
+  {
+    "id": "rc_mild_037",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Mach zehn Hampelmänner und ruf bei jedem einen Kosenamen."
+  },
+  {
+    "id": "rc_mild_038",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Du bist ein Liebesbrief: Stell dich in 20 Sekunden vor.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_mild_039",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Nenn in 20 Sekunden zehn romantische Wörter, die mit „K“ beginnen.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_mild_040",
+    "level": "mild",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Erfinde eine neue Dating-App und pitch sie in 20 Sekunden.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_mild_041",
+    "level": "mild",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Zeigt auf die Person mit dem ansteckendsten Lachen – sie sucht den nächsten Song aus."
+  },
+  {
+    "id": "rc_mild_042",
+    "level": "mild",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Wer zuerst einen Liebesfilm nennt, bekommt von der Runde ein Kompliment."
+  },
+  {
+    "id": "rc_mild_043",
+    "level": "mild",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Macht 20 Sekunden lang dieselbe Tanzbewegung wie die Person, die dran ist.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_mild_044",
+    "level": "mild",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Jede Person sagt reihum ein Wort – zusammen ergibt es einen Liebesbrief."
+  },
+  {
+    "id": "rc_mild_045",
+    "level": "mild",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Erzählt reihum eine Geschichte über ein erfundenes Date – jede Person einen Satz."
+  },
+  {
+    "id": "rc_mild_046",
+    "level": "mild",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Spielt 30 Sekunden Stille Post mit dem Satz „Heute wird es heiß“.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_mild_047",
+    "level": "mild",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Wer als Letztes die Hand hebt, stellt der Runde eine harmlose Frage."
+  },
+  {
+    "id": "rc_mild_048",
+    "level": "mild",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Summt gemeinsam einen Liebessong – die Person, die dran ist, errät ihn."
+  },
+  {
+    "id": "rc_mild_049",
+    "level": "mild",
+    "category": "group",
+    "intensity": 1,
+    "text": "Alle: Gebt der Person, die dran ist, in 30 Sekunden so viele nette Spitznamen wie möglich.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_mild_050",
+    "level": "mild",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Macht ein Gruppenfoto mit eurem besten Flirt-Gesicht – alle, die mitmachen wollen."
+  },
+  {
+    "id": "rc_mild_051",
+    "level": "mild",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Zählt gemeinsam bis 20 – sprechen zwei gleichzeitig, fangt ihr wieder bei 1 an."
+  },
+  {
+    "id": "rc_mild_052",
+    "level": "mild",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Jede Person nennt einen Ort für ein Traum-Date – die Runde stimmt ab."
+  },
+  {
+    "id": "rc_mild_053",
+    "level": "mild",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Klatscht einen gemeinsamen Rhythmus, die Person, die dran ist, singt dazu."
+  },
+  {
+    "id": "rc_mild_054",
+    "level": "mild",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Wer zuerst etwas Rotes zeigen kann, darf das nächste Lied aussuchen."
+  },
+  {
+    "id": "rc_mild_055",
+    "level": "mild",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Macht eine Welle durch den Raum wie im Stadion."
+  },
+  {
+    "id": "rc_mild_056",
+    "level": "mild",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Ratet in 20 Sekunden das Lieblingsessen der Person, die dran ist.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_mild_057",
+    "level": "mild",
+    "category": "group",
+    "intensity": 2,
+    "text": "Alle: Erfindet gemeinsam den Titel eines Liebesfilms über diesen Abend."
+  },
+  {
+    "id": "rc_mild_058",
+    "level": "mild",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Wer als Erstes mit den Händen ein Herz formt, bekommt Applaus."
+  },
+  {
+    "id": "rc_mild_059",
+    "level": "mild",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Spielt 30 Sekunden „Ich sehe was, was du nicht siehst“ – nur mit romantischen Dingen.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_mild_060",
+    "level": "mild",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Jede Person macht der Person links von sich ein Kompliment."
+  },
+  {
+    "id": "rc_mild_061",
+    "level": "mild",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Tauscht für eine Runde die Plätze im Uhrzeigersinn."
+  },
+  {
+    "id": "rc_mild_062",
+    "level": "mild",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Singt gemeinsam einen Refrain – so laut, wie ihr euch traut."
+  },
+  {
+    "id": "rc_mild_063",
+    "level": "mild",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Die Person, die dran ist, macht eine Pose – alle anderen machen sie nach."
+  },
+  {
+    "id": "rc_mild_064",
+    "level": "mild",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Ratet, welchen Promi die Person, die dran ist, gerade pantomimisch darstellt."
+  },
+  {
+    "id": "rc_mild_065",
+    "level": "mild",
+    "category": "group",
+    "intensity": 3,
+    "text": "Alle: Jede Person sagt in einem Wort, was sie an diesem Abend mag."
+  },
+  {
+    "id": "rc_mild_066",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Bring {other} in 30 Sekunden zum Lächeln – ohne Berührung.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_mild_067",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Erfinde drei Anmachsprüche mit Essen und probier den besten an {other} aus."
+  },
+  {
+    "id": "rc_mild_068",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Mach {other} 20 Sekunden lang Komplimente in Reimform.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_mild_069",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Zwinkere jeder Person in der Runde einmal zu."
+  },
+  {
+    "id": "rc_mild_070",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Sag {other} in 10 Sekunden so viele nette Adjektive wie möglich.",
+    "seconds": 10
+  },
+  {
+    "id": "rc_mild_071",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Flirte 20 Sekunden lang mit einem Gegenstand deiner Wahl.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_mild_072",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Erfinde einen Spitznamen für dich selbst, der unwiderstehlich klingt."
+  },
+  {
+    "id": "rc_mild_073",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Spielt ein 30-Sekunden-Speed-Date, du und {other}.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_mild_074",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Schreib {other} eine Liebesbotschaft auf einen Zettel – höchstens fünf Wörter."
+  },
+  {
+    "id": "rc_mild_075",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Erklär {other} in 20 Sekunden, warum ihr ein gutes Team wärt.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_mild_076",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Zeig drei verschiedene Flirt-Blicke – die Runde vergibt Punkte."
+  },
+  {
+    "id": "rc_mild_077",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Lass dir von der Runde einen Promi nennen und flirte 15 Sekunden in dessen Stil.",
+    "seconds": 15
+  },
+  {
+    "id": "rc_mild_078",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Sag {other} das netteste Kompliment, das dir in 5 Sekunden einfällt.",
+    "seconds": 5
+  },
+  {
+    "id": "rc_mild_079",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Spiel 20 Sekunden lang eine Bedienung im Café, die mit {other} flirtet.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_mild_080",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Verrate der Runde deinen besten Flirt-Tipp in einem Satz."
+  },
+  {
+    "id": "rc_mild_081",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Wirf {other} 10 Sekunden lang einen schmachtenden Blick zu.",
+    "seconds": 10
+  },
+  {
+    "id": "rc_mild_082",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Beschreib ein perfektes Date mit {other} in drei Wörtern – {other} darf ein Wort ändern."
+  },
+  {
+    "id": "rc_mild_083",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Mach einen Flirt-Spruch, der mit „Bist du …“ beginnt."
+  },
+  {
+    "id": "rc_mild_084",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Liefert euch ein 30-Sekunden-Anmachspruch-Duell, du und {other} – immer abwechselnd.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_mild_085",
+    "level": "mild",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Mach {other} ein Kompliment in einer Fremdsprache."
+  },
+  {
+    "id": "rc_mild_086",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Beschreib in 20 Sekunden den romantischsten Ort, den du kennst.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_mild_087",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Summ das romantischste Lied, das dir einfällt."
+  },
+  {
+    "id": "rc_mild_088",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Schreib in 60 Sekunden einen Vierzeiler über die Liebe.",
+    "seconds": 60
+  },
+  {
+    "id": "rc_mild_089",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Plane laut in 30 Sekunden ein Date für zehn Euro.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_mild_090",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Erzähl die Handlung deines liebsten Liebesfilms in drei Sätzen."
+  },
+  {
+    "id": "rc_mild_091",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Nenn drei Dinge, die eine Beziehung für dich perfekt machen."
+  },
+  {
+    "id": "rc_mild_092",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Stellt eine berühmte Filmszene ohne Worte nach, du und {other} – wenn {other} mitmacht."
+  },
+  {
+    "id": "rc_mild_093",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Forme mit deinen Händen ein Herz und widme es jemandem in der Runde."
+  },
+  {
+    "id": "rc_mild_094",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Trag ein erfundenes Liebesgedicht so dramatisch wie möglich vor."
+  },
+  {
+    "id": "rc_mild_095",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Beschreib in 20 Sekunden dein Traum-Hochzeitsfest.",
+    "seconds": 20
+  },
+  {
+    "id": "rc_mild_096",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Erklär in 30 Sekunden, warum Liebe wie Pizza ist.",
+    "seconds": 30
+  },
+  {
+    "id": "rc_mild_097",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Nenn in 15 Sekunden fünf romantische Gesten.",
+    "seconds": 15
+  },
+  {
+    "id": "rc_mild_098",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Halte eine kurze Rede auf die Liebe – ganz ohne Glas, nur mit Worten."
+  },
+  {
+    "id": "rc_mild_099",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Sag ein berühmtes Filmzitat über die Liebe so überzeugend, dass die Runde klatscht."
+  },
+  {
+    "id": "rc_mild_100",
+    "level": "mild",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Zeig an einem Stuhl, wie du jemanden zum Tanzen auffordern würdest."
+  }
+]

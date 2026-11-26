@@ -1,3 +1,4 @@
+import { GAME_MODES } from '@/features/game-modes/registry';
 import { useGameStore } from '@/store';
 
 import { addPlayers, resetStores } from '../helpers/stores';
@@ -56,7 +57,15 @@ describe('game store', () => {
 
     it('does not start modes that are not available yet', () => {
       addPlayers('Lena', 'Max');
-      expect(game().startGame('random-challenges', 'mild')).toBe(false);
+      const mode = GAME_MODES['random-challenges'];
+      const original = mode.status;
+      mode.status = 'coming-soon';
+      try {
+        expect(game().startGame('random-challenges', 'mild')).toBe(false);
+      } finally {
+        mode.status = original;
+      }
+      expect(game().startGame('random-challenges', 'mild')).toBe(true);
     });
 
     it('starts with the selected level and remembers it', () => {
@@ -204,6 +213,20 @@ describe('game store', () => {
       const firstResult = result.players.find((p) => p.id === first)!;
       expect(firstResult.truths + firstResult.passed).toBe(2);
       expect(result.players.reduce((sum, p) => sum + p.dares, 0)).toBe(1);
+    });
+
+    it('plays "Random Challenges" with done/passed counts', () => {
+      addPlayers('Lena', 'Max');
+      expect(game().startGame('random-challenges', 'extreme')).toBe(true);
+      expect(game().session?.current?.questionId).toMatch(/^rc_extreme_/);
+      game().answer();
+      game().pass();
+      game().skip();
+      game().endGame();
+      const result = game().lastResult!;
+      expect(result.modeId).toBe('random-challenges');
+      expect(result.players.reduce((sum, p) => sum + p.answered, 0)).toBe(1);
+      expect(result.players.reduce((sum, p) => sum + p.passed, 0)).toBe(1);
     });
 
     it('ignores game actions when no game is running', () => {
