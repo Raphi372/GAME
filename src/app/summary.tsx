@@ -16,11 +16,17 @@ export default function SummaryScreen() {
   if (!result) return <Redirect href="/" />;
 
   const meta = LEVELS[result.level];
-  // A mixed round is summed up like Spicy Questions: answered, passed, skipped.
-  const mode = getGameMode(result.mixed ? DEFAULT_MODE_ID : result.modeId);
-  const group = mode.group;
-  const isChoice = Boolean(mode.choice);
+  const mixed = result.mixed;
+  const mode = getGameMode(mixed ? DEFAULT_MODE_ID : result.modeId);
+  const group = mixed ? undefined : mode.group;
+  const isChoice = !mixed && Boolean(mode.choice);
   const single = mode.singleCopy ?? DEFAULT_SINGLE_COPY;
+  // Mixed rounds show the counters of the modes that were part of the round.
+  const mixHas = {
+    single: result.modeIds.some((id) => getGameMode(id).turnStyle === 'single-player'),
+    confessions: result.modeIds.some((id) => getGameMode(id).group?.tally === 'confessed'),
+    picks: result.modeIds.some((id) => getGameMode(id).group?.tally === 'picked'),
+  };
   const totals = result.players.reduce(
     (sum, player) => ({
       answered: sum.answered + player.answered,
@@ -29,20 +35,36 @@ export default function SummaryScreen() {
       tally: sum.tally + (group ? player[group.tally] : 0),
       truths: sum.truths + player.truths,
       dares: sum.dares + player.dares,
+      confessed: sum.confessed + player.confessed,
+      picked: sum.picked + player.picked,
     }),
-    { answered: 0, passed: 0, skipped: 0, tally: 0, truths: 0, dares: 0 },
+    { answered: 0, passed: 0, skipped: 0, tally: 0, truths: 0, dares: 0, confessed: 0, picked: 0 },
   );
   // Spicy Questions ranks by answered questions, group modes by their tally,
-  // "Wahrheit oder Pflicht" by dares done.
+  // "Wahrheit oder Pflicht" by dares done, a mixed round by answers plus confessions.
   const score = (player: (typeof result.players)[number]) =>
-    group ? player[group.tally] : isChoice ? player.dares : player.answered;
+    mixed
+      ? player.answered + player.confessed
+      : group
+      ? player[group.tally]
+      : isChoice
+      ? player.dares
+      : player.answered;
   const ranked = [...result.players].sort((a, b) => score(b) - score(a));
   const best = Math.max(0, ...result.players.map(score));
   // Everyone with the highest score – a tie names all of them.
   const leaders = best > 0 ? result.players.filter((player) => score(player) === best) : [];
   const minutes = Math.max(1, Math.round(result.durationMs / 60000));
 
-  const stats = isChoice
+  const stats = mixed
+    ? [
+        { label: t('summary.rounds'), value: result.turnsCompleted },
+        ...(mixHas.single ? [{ label: t('summary.answered'), value: totals.answered }] : []),
+        ...(mixHas.confessions ? [{ label: t('summary.confessions'), value: totals.confessed }] : []),
+        ...(mixHas.picks ? [{ label: t('summary.picks'), value: totals.picked }] : []),
+        ...(mixHas.single ? [{ label: t('summary.passed'), value: totals.passed }] : []),
+      ]
+    : isChoice
     ? [
         { label: t('summary.rounds'), value: result.turnsCompleted },
         { label: t('summary.truths'), value: totals.truths },
@@ -147,7 +169,20 @@ export default function SummaryScreen() {
                 {player.name}
               </AppText>
               <AppText variant="caption" color={colors.textSecondary}>
-                {isChoice
+                {mixed
+                  ? [
+                      mixHas.single ? t('summary.mixAnswered', { count: player.answered }) : null,
+                      mixHas.confessions ? t('summary.mixConfessed', { count: player.confessed }) : null,
+                      mixHas.picks
+                        ? player.picked === 1
+                          ? t('summary.pickLineOne')
+                          : t('summary.pickLine', { count: player.picked })
+                        : null,
+                      mixHas.single ? t('summary.mixPassed', { count: player.passed }) : null,
+                    ]
+                      .filter(Boolean)
+                      .join(' · ')
+                  : isChoice
                   ? t('summary.todLine', { truths: player.truths, dares: player.dares, passed: player.passed })
                   : group
                   ? player[group.tally] === 1

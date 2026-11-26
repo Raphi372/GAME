@@ -9,7 +9,7 @@ import {
   minPlayersFor,
   type GameModeId,
 } from '@/features/game-modes/registry';
-import { isMixedRound, type RoundSettings } from '@/features/gameplay/engine/round';
+import { isMixedRound, ROUND_LENGTHS, type RoundSettings } from '@/features/gameplay/engine/round';
 import {
   changeLevel as changeSessionLevel,
   chooseCard as chooseSessionCard,
@@ -80,6 +80,8 @@ export interface GameResult {
   modeId: GameModeId;
   /** The round mixed several modes. */
   mixed: boolean;
+  /** Modes the round was played with. */
+  modeIds: GameModeId[];
   level: SpicyLevel;
   turnsCompleted: number;
   durationMs: number;
@@ -173,7 +175,8 @@ function toLastRound(value: unknown): LastRound {
   const length = finiteNumber(value.length);
   const mixModeIds = playableModeIds(value.mixModeIds);
   return {
-    length: length !== null && Number.isInteger(length) && length > 0 ? length : null,
+    // Only lengths the level screen offers – anything else would start a round nobody chose.
+    length: (ROUND_LENGTHS as readonly number[]).includes(length ?? NaN) ? length : null,
     escalate: value.escalate === true,
     mixModeIds: mixModeIds.length >= 2 ? mixModeIds : DEFAULT_LAST_ROUND.mixModeIds,
   };
@@ -284,6 +287,7 @@ export function buildResult(session: GameSession, players: readonly Player[], no
   return {
     modeId: session.modeId,
     mixed: isMixedRound(session.round),
+    modeIds: session.round.modeIds,
     level: session.level,
     turnsCompleted: session.turnsCompleted,
     durationMs: Math.max(0, now - session.startedAt),

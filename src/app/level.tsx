@@ -73,7 +73,9 @@ export default function LevelScreen() {
     const setup = {
       length,
       escalate: escalate && canEscalate(length, level),
-      ...(mixed ? { modeIds: mixPlayable } : {}),
+      // The whole selection: the store leaves out modes the group is too small for, but
+      // remembers them for the next (bigger) round.
+      ...(mixed ? { modeIds: mixModes } : {}),
     };
     if (!startGame(mixed ? (mixPlayable[0] ?? modeId) : modeId, level, setup)) return;
     feedback('level');

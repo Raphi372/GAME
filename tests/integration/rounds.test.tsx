@@ -1,5 +1,6 @@
 import { userEvent } from '@testing-library/react-native';
-import { renderRouter, screen } from 'expo-router/testing-library';
+import { renderRouter, screen, within } from 'expo-router/testing-library';
+import { Dimensions, StyleSheet, type TextStyle } from 'react-native';
 
 import { useGameStore, useSettingsStore } from '@/store';
 
@@ -117,6 +118,15 @@ describe('custom rounds', () => {
     await user.press(screen.getByRole('button', { name: 'Spiel starten' }));
     expect(router.getPathname()).toBe('/game');
     expect(session()?.round.modeIds).toEqual(['spicy-questions', 'random-challenges']);
+    // Left out for this small group, but still selected for the next, bigger round.
+    expect(useGameStore.getState().lastRound.mixModeIds).toEqual(['spicy-questions', 'most-likely', 'random-challenges']);
+
+    // The level sheet speaks for the whole round, not just the current card's mode.
+    await user.press(screen.getByRole('button', { name: /^Level: / }));
+    const sheet = await screen.findByTestId('level-sheet');
+    // Compact cards carry the count in their accessible name.
+    expect(within(sheet).getAllByRole('radio', { name: /210 Karten$/ })).toHaveLength(3);
+    await user.press(within(sheet).getByRole('radio', { name: /^Mild\./ }));
 
     const seen = new Set<string>();
     for (let card = 0; card < 6; card += 1) {
@@ -135,3 +145,56 @@ describe('custom rounds', () => {
     expect(await screen.findByText('Laufendes Spiel · Gemischte Runde')).toBeOnTheScreen();
   });
 });
+
+describe('custom rounds on a tablet', () => {
+  const phone = Dimensions.get('window');
+
+  beforeEach(async () => {
+    await resetStores();
+    useSettingsStore.getState().confirmAge();
+    const tablet = { ...phone, width: 1032, height: 1376 };
+    Dimensions.set({ window: tablet, screen: tablet });
+  });
+
+  afterEach(() => Dimensions.set({ window: phone, screen: phone }));
+
+  const fontSize = (text: string) =>
+    (StyleSheet.flatten(screen.getByText(text).props.style) as TextStyle).fontSize;
+
+  it('plays a mixed round in the big layout and sums it up with every counter', async () => {
+    addPlayers('Lena', 'Max', 'Sophie');
+    useGameStore.setState({
+      lastRound: { length: 10, escalate: false, mixModeIds: ['spicy-questions', 'never-have-i-ever'] },
+    });
+    const user = userEvent.setup();
+    const router = await renderRouter(APP_DIR, { initialUrl: '/level?mode=mix' });
+    expect(await screen.findByText('Wie spicy wird’s?')).toBeOnTheScreen();
+    expect(fontSize('Wie spicy wird’s?')).toBe(34);
+
+    await user.press(screen.getByRole('button', { name: 'Spiel starten' }));
+    expect(router.getPathname()).toBe('/game');
+    expect(fontSize('Karte 1 von 10')).toBe(16);
+
+    for (let card = 0; card < 10; card += 1) {
+      if (session()!.modeId === 'never-have-i-ever') {
+        await user.press(screen.getByRole('checkbox', { name: 'Lena hat es schon getan' }));
+        await user.press(screen.getByRole('button', { name: 'Nächste Karte' }));
+      } else {
+        await user.press(screen.getByRole('button', { name: 'Nächste Frage' }));
+      }
+    }
+
+    expect(await screen.findByText('Was für eine Nacht!')).toBeOnTheScreen();
+    const result = useGameStore.getState().lastResult!;
+    expect(result.mixed).toBe(true);
+    const confessions = result.players.reduce((sum, player) => sum + player.confessed, 0);
+    const answered = result.players.reduce((sum, player) => sum + player.answered, 0);
+    expect(confessions + answered).toBe(10);
+    expect(screen.getByText('Geständnisse')).toBeOnTheScreen();
+    expect(screen.getByText('Beantwortet')).toBeOnTheScreen();
+    expect(screen.queryByText('Gewählt')).not.toBeOnTheScreen();
+    const lena = result.players.find((player) => player.name === 'Lena')!;
+    expect(screen.getByText(new RegExp(`${lena.answered} beantwortet · ${lena.confessed} gestanden`))).toBeOnTheScreen();
+  });
+});
+

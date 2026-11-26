@@ -344,4 +344,13 @@ describe('rounds in the game store', () => {
     expect(repaired.session?.dealtByMode).toEqual({});
     expect(repaired.lastRound).toEqual({ length: null, escalate: true, mixModeIds: DEFAULT_LAST_ROUND.mixModeIds });
   });
+
+  it('only remembers round lengths the level screen offers', () => {
+    const lengthOf = (length: unknown) => sanitizeGameData({ lastRound: { length } }).lastRound?.length;
+    expect(lengthOf(10)).toBe(10);
+    expect(lengthOf(30)).toBe(30);
+    expect(lengthOf(7)).toBeNull();
+    expect(lengthOf(1000)).toBeNull();
+    expect(lengthOf('20')).toBeNull();
+  });
 });

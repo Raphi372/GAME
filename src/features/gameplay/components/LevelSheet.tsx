@@ -13,6 +13,8 @@ interface LevelSheetProps {
   visible: boolean;
   current: SpicyLevel;
   modeId: GameModeId;
+  /** Mixed round: descriptions and counts for all of its modes, not the current card's. */
+  mixed?: boolean;
   getCount: (level: SpicyLevel) => number;
   onSelect: (level: SpicyLevel) => void;
   onClose: () => void;
@@ -23,6 +25,7 @@ export function LevelSheet({
   visible,
   current,
   modeId,
+  mixed = false,
   getCount,
   onSelect,
   onClose,
@@ -101,6 +104,12 @@ export function LevelSheet({
                 modeId={modeId}
                 selected={meta.id === current}
                 questionCount={getCount(meta.id)}
+                {...(mixed
+                  ? {
+                      descriptionKey: `mix.level.${meta.id}.description` as const,
+                      countLabel: t('mode.unit.cards', { count: getCount(meta.id) }),
+                    }
+                  : {})}
                 onPress={() => choose(meta.id)}
               />
             ))}
