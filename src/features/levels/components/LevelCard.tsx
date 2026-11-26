@@ -17,6 +17,8 @@ interface LevelCardProps {
   selected: boolean;
   onPress: () => void;
   questionCount: number;
+  /** The players' own cards for this level (shown as "+ 3 eigene"). */
+  customCount?: number;
   compact?: boolean;
   modeId?: GameModeId;
   testID?: string;
@@ -27,6 +29,7 @@ export function LevelCard({
   selected,
   onPress,
   questionCount,
+  customCount = 0,
   compact = false,
   modeId = 'spicy-questions',
   testID,
@@ -37,7 +40,9 @@ export function LevelCard({
   const name = t(meta.nameKey);
   const tagline = t(meta.taglineKey);
   const description = t(levelDescriptionKey(level, modeId));
-  const count = t(cardCountKey(modeId), { count: questionCount });
+  const builtInCount = t(cardCountKey(modeId), { count: questionCount });
+  const count =
+    customCount > 0 ? `${builtInCount} ${t('level.customSuffix', { count: customCount })}` : builtInCount;
 
   return (
     <Animated.View

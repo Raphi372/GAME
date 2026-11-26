@@ -12,6 +12,8 @@ export const QUESTION_CATEGORIES = [
   'desire',
   'secrets',
   'hypothetical',
+  /** Cards the players wrote themselves (never used by the built-in decks). */
+  'custom',
 ] as const;
 export type QuestionCategory = (typeof QUESTION_CATEGORIES)[number];
 

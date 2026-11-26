@@ -64,6 +64,7 @@ export default function RootLayout() {
           <Stack.Screen name="game" options={{ animation: fade, gestureEnabled: false }} />
           <Stack.Screen name="summary" options={{ animation: fade, gestureEnabled: false }} />
           <Stack.Screen name="premium" options={{ presentation: 'modal' }} />
+          <Stack.Screen name="custom-cards" />
           <Stack.Screen name="settings/index" />
         </Stack.Protected>
         <Stack.Protected guard={!ageConfirmed}>

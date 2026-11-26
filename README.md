@@ -156,6 +156,19 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 ### Vorbereitet (noch nicht aktiv)
 - **Premium/Freemium** – Preis-Konfiguration, Entitlements, Kauf-Schnittstelle, Werbe-Regeln.
   Es werden **keine Zahlungen** abgewickelt oder simuliert.
+- **Eigene Karten (Premium)** – fertig gebaut, aber gesperrt, bis Premium-Käufe eingebaut sind.
+  Startseite und Level-Auswahl führen zu „Eigene Karten“; ohne Premium erklärt der Bildschirm
+  die Funktion und verlinkt zur Premium-Seite. Mit Premium:
+  - eigene Karten je Spielmodus und Level anlegen, bearbeiten und löschen (nur auf dem Gerät);
+  - „Ich hab noch nie …“ / „Wer würde am ehesten …?“ ergänzt die App selbst (in der App-Sprache),
+    ebenso fehlende Satzzeichen; „Mitspieler einfügen“ setzt einen zufälligen Mitspieler ein
+    (nicht in Gruppenmodi); bei Wahrheit oder Pflicht wählt man die Art, bei Random Challenges
+    optional einen Timer (15/30/60 s);
+  - Inhaltsregeln: Karten mit Trinkaufforderung, Bezug auf Minderjährige oder Zwang („gegen den
+    Willen“, „ohne zu fragen“) werden mit Erklärung abgelehnt;
+  - eigene Karten mischen sich ins normale Deck (Kategorie „Eigene Karte“), die Level-Auswahl
+    zeigt „+ 3 eigene“. Ohne Premium bleiben gespeicherte Karten erhalten, werden aber nicht
+    gespielt.
 
 ---
 
@@ -201,6 +214,7 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 │   │   ├── question-decks/      # Laden/Validieren der Fragen, Pakete, Platzhalter
 │   │   ├── game-modes/          # Registry aller Spielmodi
 │   │   ├── premium/             # Preise, Entitlements, Kauf-Interface, Werbe-Regeln
+│   │   ├── custom-cards/        # Eigene Karten: Modell, Prüfregeln, Editor & Liste (Premium)
 │   │   └── settings/            # Einstellungs-Zeilen
 │   ├── data/questions/          # Spicy Questions: mild.json, hot.json, extreme.json
 │   │   ├── never-have-i-ever/   # Ich hab noch nie: mild.json, hot.json, extreme.json
@@ -211,7 +225,8 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 │   ├── hooks/                   # useMotion (Animationen + „Bewegung reduzieren“)
 │   ├── i18n/                    # de.ts (Quelle), en.ts, useTranslation
 │   ├── services/                # Storage, Haptik, Sound, Feedback, Zufallsquelle
-│   ├── store/                   # Zustand-Stores (Spiel + Einstellungen), Hydrierung
+│   ├── store/                   # Zustand-Stores (Spiel, Einstellungen, eigene Karten,
+│   │                            # Premium-Status), Hydrierung, spielbares Deck
 │   ├── theme/                   # Farben, Typografie, Abstände, Motion, Glow
 │   ├── types/                   # Gemeinsame Typen
 │   └── utils/                   # Zufall (inkl. Seed-RNG), IDs
@@ -295,7 +310,8 @@ leeres/durchgespieltes Deck, lokale Speicherung inkl. App-Neustart und korrupter
 Einstellungen, Sprache, 18+-Sperre, Datenlöschung sowie der komplette Spielablauf
 aller fünf Spielmodi über die echten Routen (inkl. Wahl Wahrheit/Pflicht, Spielerauswahl und
 Zählern in den Gruppenmodi, dem 3‑2‑1‑Countdown und dem Challenge-Timer) und die englischen
-Karten inklusive Sprachwechsel mitten im Spiel.
+Karten inklusive Sprachwechsel mitten im Spiel sowie die eigenen Karten (gesperrt ohne Premium;
+mit simuliertem Premium-Status: Anlegen, Ablehnen, Bearbeiten, Löschen, Anzeige im Spiel).
 
 Die **GitHub-Actions-CI** (`.github/workflows/ci.yml`) führt bei jedem Push/PR Typecheck,
 Lint, Fragen-Validierung und Tests aus und baut anschließend Android-, iOS- und Web-Bundles
@@ -477,7 +493,11 @@ Neuen Modus aktivieren:
 ### Premium (`src/features/premium`)
 - `plans.ts` – geplante Preise (2,99 €/Monat, 14,99 €/Jahr, 12,99 € Lifetime) und Store-Produkt-IDs,
   `PURCHASES_ENABLED = false`.
-- `entitlements.ts` – `free`/`premium`-Tiers; Fragenpakete haben ein `tier`.
+- `entitlements.ts` – `free`/`premium`-Tiers; Fragenpakete haben ein `tier`;
+  `canUseFeature()` sagt, ob eine Premium-Funktion (z. B. `customQuestions`) nutzbar ist.
+- `store/entitlementsStore.ts` – aktueller Premium-Status, **nicht gespeichert** und immer
+  `free`. Nur eine echte Kauf-/Wiederherstellen-Implementierung darf `setEntitlements()` aufrufen;
+  Tests setzen den Status direkt.
 - `purchases.ts` – Interface `PurchaseService`; MVP-Implementierung gibt immer
   `unavailable` zurück.
 - `adPolicy.ts` – `canShowAd()` verbietet Werbung während einer Runde (MVP: gar keine Werbung).
@@ -494,8 +514,8 @@ eine Sprache, wird auf Deutsch zurückgegriffen. Feste Kartenanfänge („Ich ha
 ## Datenschutz & Sicherheit
 
 - Keine Registrierung, kein Konto, kein Server, keine Analyse-/Werbe-/Tracking-SDKs.
-- Lokal gespeichert werden nur: Spielernamen, Spielstand, Einstellungen, Zeitpunkt der
-  Altersbestätigung. **Antworten werden nie gespeichert.** In den Gruppenmodi enthält der
+- Lokal gespeichert werden nur: Spielernamen, eigene Karten, Spielstand, Einstellungen,
+  Zeitpunkt der Altersbestätigung. **Antworten werden nie gespeichert.** In den Gruppenmodi enthält der
   Spielstand nur Zähler, wie oft jemand angetippt wurde (nicht bei welcher Karte); mit dem
   Spielende wird der Spielstand gelöscht.
 - Keine Berechtigungen für Kamera, Mikrofon, Kontakte oder Standort (Mikrofon- und
@@ -530,8 +550,8 @@ eine Sprache, wird auf Deutsch zurückgegriffen. Feste Kartenanfänge („Ich ha
 ## Bekannte Einschränkungen & nächste Schritte
 
 **Noch nicht umgesetzt (bewusst für spätere Releases):**
-- Premium-Käufe (Store-Integration, z. B. via StoreKit/Play Billing), eigene Fragen,
-  individuelle Spielrunden.
+- Premium-Käufe (Store-Integration, z. B. via StoreKit/Play Billing) – damit werden auch die
+  bereits gebauten eigenen Karten nutzbar –, individuelle Spielrunden.
 - Backend, Accounts, Online-Multiplayer.
 
 **Vor der Veröffentlichung:**

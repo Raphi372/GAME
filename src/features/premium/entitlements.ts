@@ -23,3 +23,11 @@ export const PREMIUM_FEATURES = [
   'adFree',
 ] as const;
 export type PremiumFeature = (typeof PREMIUM_FEATURES)[number];
+
+/**
+ * Every premium feature needs an active Premium entitlement. Entitlements only ever
+ * come from a real store purchase (see `purchases.ts`) – never from the app itself.
+ */
+export function canUseFeature(_feature: PremiumFeature, entitlements: Entitlements): boolean {
+  return entitlements.premium;
+}

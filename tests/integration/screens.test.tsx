@@ -3,7 +3,7 @@ import { userEvent } from '@testing-library/react-native';
 import { renderRouter, screen, within } from 'expo-router/testing-library';
 
 import { STORAGE_KEYS } from '@/services/storage';
-import { useGameStore, useSettingsStore } from '@/store';
+import { useCustomCardsStore, useEntitlementsStore, useGameStore, useSettingsStore } from '@/store';
 
 import { addPlayers, flushPromises, resetStores } from '../helpers/stores';
 
@@ -136,6 +136,9 @@ describe('settings screen', () => {
 
   it('deletes all local data', async () => {
     addPlayers('Lena', 'Max');
+    useEntitlementsStore.setState({ entitlements: { premium: true } });
+    useCustomCardsStore.getState().addCard({ modeId: 'spicy-questions', level: 'mild', body: 'Meine eigene Frage' });
+    expect(useCustomCardsStore.getState().cards).toHaveLength(1);
     const user = userEvent.setup();
     await renderRouter(APP_DIR, { initialUrl: '/settings' });
     await user.press(await screen.findByRole('button', { name: 'Alle lokalen Daten löschen' }));
@@ -143,6 +146,7 @@ describe('settings screen', () => {
     expect(sheet).toBeOnTheScreen();
     await user.press(screen.getByRole('button', { name: 'Löschen' }));
     expect(useGameStore.getState().players).toEqual([]);
+    expect(useCustomCardsStore.getState().cards).toEqual([]);
     expect(useSettingsStore.getState().ageConfirmedAt).toBeNull();
     expect(await screen.findByText('Bist du 18 oder älter?')).toBeOnTheScreen();
   });

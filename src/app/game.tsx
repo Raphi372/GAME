@@ -1,5 +1,5 @@
 import { Redirect, useFocusEffect, useRouter } from 'expo-router';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { BackHandler, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { AppText, Button, ConfirmSheet, IconButton, Screen } from '@/components/ui';
@@ -20,10 +20,10 @@ import {
   remainingByKind,
 } from '@/features/gameplay/engine/session';
 import { LEVELS } from '@/features/levels/levels';
-import { getDeck, renderQuestionText, splitLead } from '@/features/question-decks';
+import { renderQuestionText, splitLead } from '@/features/question-decks';
 import { useTranslation } from '@/i18n';
 import { feedback } from '@/services/feedback';
-import { useGameStore } from '@/store';
+import { getPlayableDeck, useCustomCardsStore, useEntitlementsStore, useGameStore } from '@/store';
 import { colors, spacing } from '@/theme';
 import type { SpicyLevel } from '@/types';
 
@@ -43,6 +43,18 @@ export default function GameScreen() {
   const changeLevel = useGameStore((state) => state.changeLevel);
   const reshuffle = useGameStore((state) => state.reshuffle);
   const endGame = useGameStore((state) => state.endGame);
+  const refreshDecks = useGameStore((state) => state.refreshDecks);
+  // Re-render when the players' own cards or the Premium state change.
+  useCustomCardsStore((state) => state.cards);
+  useEntitlementsStore((state) => state.entitlements);
+
+  // The card on the table may have been deleted (own cards) – deal a new one then.
+  const cardMissing =
+    session?.current?.questionId != null &&
+    getCurrentQuestion(session, (level) => getPlayableDeck(session.modeId, level, locale)) === null;
+  useEffect(() => {
+    if (cardMissing) refreshDecks();
+  }, [cardMissing, refreshDecks]);
 
   const [levelSheetOpen, setLevelSheetOpen] = useState(false);
   const [endSheetOpen, setEndSheetOpen] = useState(false);
@@ -70,7 +82,7 @@ export default function GameScreen() {
   const mode = getGameMode(session.modeId);
   const group = mode.turnStyle === 'group' ? mode.group : undefined;
   const isGroup = group !== undefined;
-  const deckFor = (level: SpicyLevel) => getDeck(session.modeId, level, { locale });
+  const deckFor = (level: SpicyLevel) => getPlayableDeck(session.modeId, level, locale);
   const deck = deckFor(session.level);
   const meta = LEVELS[session.level];
   const question = getCurrentQuestion(session, deckFor);

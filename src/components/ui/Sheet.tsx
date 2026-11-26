@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react';
-import { Animated, Modal, Pressable, StyleSheet, View } from 'react-native';
+import { Animated, KeyboardAvoidingView, Modal, Platform, Pressable, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useMotion } from '@/hooks/useMotion';
@@ -45,7 +45,11 @@ export function Sheet({ visible, onClose, children, accent = colors.primary, tes
       statusBarTranslucent
       navigationBarTranslucent
     >
-      <View style={styles.root} testID={testID}>
+      <KeyboardAvoidingView
+        style={styles.root}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        testID={testID}
+      >
         <Pressable
           style={StyleSheet.absoluteFill}
           onPress={onClose}
@@ -65,7 +69,7 @@ export function Sheet({ visible, onClose, children, accent = colors.primary, tes
           <View style={[styles.accentLine, { backgroundColor: accent }]} />
           {children}
         </Animated.View>
-      </View>
+      </KeyboardAvoidingView>
     </Modal>
   );
 }
