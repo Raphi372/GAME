@@ -60,8 +60,6 @@ const DECKS = [
     endsWithAny: ['.', '!'],
     /** Challenges with body contact involving others (incl. "Alle: …") need an opt-in. */
     consent: 'others',
-    /** Group challenges must not rank players by their looks. */
-    noLooksRanking: true,
   },
 ];
 
@@ -72,8 +70,14 @@ const CONSENT = /(nur wenn|wenn \{other\}|wenn ihr beide|nur bei einem klaren ja
 /** Body contact (stricter list for challenges, where dancing alone is common). */
 const CONTACT = /(küss|kuss auf|einen kuss|massier|massage|umarm|im arm|schoß|streichel|berühr|nacken|schulter|kuschel|knabber|lippen|hals|puls|herzschlag|fütter|polonaise|wange an wange|slow dance|tango|tanzt .*eng|eng mit|verbundenen augen|augen verbinden|hand reich|die hand von|hand aufs herz|ins ohr|am ohr)/i;
 const OPT_IN = new RegExp(`${CONSENT.source}|freiwillig|wollen|will|mitmachen`, 'i');
-/** Group votes must never rank real players by their looks or sex appeal. */
-const LOOKS_RANKING = /(am besten aussieht|besten aussehen|heißeste ausstrahlung|attraktivst|hübschest|schönste[nrs]? (körper|gesicht|augen|po|figur)|sexiest(e|en) (person|spieler))/i;
+/**
+ * No deck may make the round compare its players by looks or sex appeal
+ * ("Wen findest du hier am attraktivsten?") – talking about yourself is fine.
+ */
+const LOOKS = /(attraktivst|hübschest|sexiest|am besten aussieht|besten aussehen|heißeste[nrs]? (ausstrahlung|körper|look|figur|promi-doppelgänger)|schönste[nrs]? (lippen|lächeln|augen|gesicht|körper|po|figur|haare|beine|hände))/i;
+const PICKS_PLAYER = /(\bhier\b|\b(aus|in) (der|dieser) runde\b|\bdieser runde\b|^wer würde am ehesten |^alle:)/i;
+const ABOUT_SELF = /\b(an dir selbst|dir selbst)\b/i;
+const ranksLooks = (text) => LOOKS.test(text) && PICKS_PLAYER.test(text) && !ABOUT_SELF.test(text);
 const involvesOthers = (text) =>
   text.includes('{other}') || text.startsWith('Alle:') || /\b(person|personen|jemand|jemanden)\b/i.test(text);
 
@@ -130,8 +134,8 @@ for (const deck of DECKS) {
       if (q.seconds !== undefined && !(Number.isInteger(q.seconds) && q.seconds >= 5 && q.seconds <= 120)) {
         errors.push(`${where}: seconds must be a whole number between 5 and 120`);
       }
-      if (deck.noLooksRanking && LOOKS_RANKING.test(q.text)) {
-        errors.push(`${where}: ranks players by their looks – rephrase around behaviour instead`);
+      if (ranksLooks(q.text)) {
+        errors.push(`${where}: compares players by their looks – rephrase around behaviour instead`);
       }
       if (deck.consent === 'others' && involvesOthers(q.text) && CONTACT.test(q.text) && !OPT_IN.test(q.text)) {
         errors.push(`${where}: challenge involves body contact with others but does not ask for consent`);

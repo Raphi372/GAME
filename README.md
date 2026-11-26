@@ -127,7 +127,8 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 - **„Wer wurde gewählt?“** – antippen, wer die meisten Stimmen hat (bei Gleichstand mehrere);
   die App zählt mit, Auswertung „Am häufigsten gewählt“.
 - Mindestens **3 Spieler**. Die Inhalte zielen auf echte Personen der Runde und sind deshalb
-  bewusst respektvoll: keine Beleidigungen, kein Body-Shaming, keine Untreue-Unterstellungen.
+  bewusst respektvoll: keine Beleidigungen, kein Body-Shaming, keine Untreue-Unterstellungen
+  und kein Vergleich nach Aussehen.
 
 ### Spieler
 - 2 bis 20 Spieler (bei „Wer würde am ehesten?“ mindestens 3), Namen hinzufügen, bearbeiten, entfernen.
@@ -393,12 +394,14 @@ Beispiel „Ich hab noch nie“:
 Danach `npm run validate:questions` und `npm test` ausführen. Der Validator prüft für alle
 Spielmodi IDs, Duplikate (auch textlich und modusübergreifend), Kategorien, Länge,
 Platzhalter, das jeweilige Format („Ich hab noch nie …“, „Wer würde am ehesten …?“,
-Wahrheit/Pflicht), die Mindestanzahl von 100 Karten pro Level und – bei Pflicht-Aufgaben – dass
-jede Berührung einer anderen Person nur mit deren Einverständnis vorgesehen ist.
+Wahrheit/Pflicht), die Mindestanzahl von 100 Karten pro Level und – bei Pflicht-Aufgaben und
+Challenges – dass jede Berührung einer anderen Person nur mit deren Einverständnis vorgesehen ist.
+In allen Decks lehnt er außerdem Karten ab, die die Runde Mitspieler nach Aussehen oder Sex-Appeal
+vergleichen lassen („Wen findest du hier am attraktivsten?“) – über sich selbst zu sprechen ist erlaubt.
 
 **Inhaltsrichtlinien:** nur Erwachsene, nichts mit Minderjährigen oder Schul-/Jugendbezug in
 intimen Kontexten, nichts Nicht-Einvernehmliches, keine Diskriminierung oder Demütigung, keine
-Trinkaufforderungen. Fragen sind Gesprächsanlässe, keine Handlungsanweisungen.
+Vergleiche von Mitspielern nach Aussehen, keine Trinkaufforderungen. Fragen sind Gesprächsanlässe, keine Handlungsanweisungen.
 
 Neue Kategorie? In `src/types/index.ts` (`QUESTION_CATEGORIES`), in beiden Übersetzungsdateien
 (`category.<name>`) und im Validator ergänzen.
