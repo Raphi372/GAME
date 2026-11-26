@@ -1,6 +1,7 @@
 import { act, userEvent } from '@testing-library/react-native';
 import { renderRouter, screen } from 'expo-router/testing-library';
 
+import { FEATURES } from '@/config/features';
 import { useCustomCardsStore, useEntitlementsStore, useGameStore, useSettingsStore } from '@/store';
 
 import { addPlayers, resetStores } from '../helpers/stores';
@@ -15,7 +16,11 @@ describe('own cards', () => {
   beforeEach(async () => {
     await resetStores();
     useSettingsStore.getState().confirmAge();
+    // Premium is switched off for the store release; these tests cover the feature itself.
+    jest.replaceProperty(FEATURES, 'premium', true);
   });
+
+  afterEach(() => jest.restoreAllMocks());
 
   it('are a Premium feature – without Premium the screen explains it and links to Premium', async () => {
     const user = userEvent.setup();
@@ -117,5 +122,37 @@ describe('own cards', () => {
     await renderRouter(APP_DIR, { initialUrl: '/game' });
     expect(await screen.findByText('Was ist dein Lieblingswitz?')).toBeOnTheScreen();
     expect(screen.getByText('Eigene Karte')).toBeOnTheScreen();
+  });
+});
+
+describe('while Premium is switched off (store release)', () => {
+  beforeEach(async () => {
+    await resetStores();
+    useSettingsStore.getState().confirmAge();
+    jest.replaceProperty(FEATURES, 'premium', false);
+  });
+
+  afterEach(() => jest.restoreAllMocks());
+
+  it('shows no way to Premium or to own cards on the home screen', async () => {
+    await renderRouter(APP_DIR, { initialUrl: '/' });
+    expect(await screen.findByTestId('play-now')).toBeOnTheScreen();
+    expect(screen.queryByRole('button', { name: 'Premium' })).not.toBeOnTheScreen();
+    expect(screen.queryByTestId('home-custom-cards')).not.toBeOnTheScreen();
+    expect(screen.getByRole('button', { name: 'Einstellungen' })).toBeOnTheScreen();
+  });
+
+  it('shows no link to own cards on the level screen', async () => {
+    addPlayers('Ana', 'Ben');
+    await renderRouter(APP_DIR, { initialUrl: '/level' });
+    expect(await screen.findByTestId('level-mild')).toBeOnTheScreen();
+    expect(screen.queryByTestId('level-custom-cards')).not.toBeOnTheScreen();
+  });
+
+  it.each(['/premium', '/custom-cards'])('sends a deep link to %s to the home screen', async (url) => {
+    const router = await renderRouter(APP_DIR, { initialUrl: url });
+    expect(await screen.findByTestId('play-now')).toBeOnTheScreen();
+    expect(router.getPathname()).toBe('/');
+    expect(screen.queryByTestId('custom-cards-locked')).not.toBeOnTheScreen();
   });
 });

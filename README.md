@@ -172,9 +172,13 @@ Englisch) liegen in [`docs/store/screenshots/`](docs/store/screenshots/) – sie
 ### Vorbereitet (noch nicht aktiv)
 - **Premium/Freemium** – Preis-Konfiguration, Entitlements, Kauf-Schnittstelle, Werbe-Regeln.
   Es werden **keine Zahlungen** abgewickelt oder simuliert.
+- **Ausgeblendet bis zu echten Käufen:** Premium-Vorschau und „Eigene Karten“ sind in der
+  Store-Version nicht sichtbar (`src/config/features.ts`, `FEATURES.premium = false`), weil
+  die Stores nicht freischaltbare Funktionen ablehnen. Eingeschaltet wird der Schalter
+  zusammen mit `PURCHASES_ENABLED`.
 - **Eigene Karten (Premium)** – fertig gebaut, aber gesperrt, bis Premium-Käufe eingebaut sind.
-  Startseite und Level-Auswahl führen zu „Eigene Karten“; ohne Premium erklärt der Bildschirm
-  die Funktion und verlinkt zur Premium-Seite. Mit Premium:
+  Bei eingeschaltetem Premium-Schalter führen Startseite und Level-Auswahl zu „Eigene Karten“;
+  ohne Premium erklärt der Bildschirm die Funktion und verlinkt zur Premium-Seite. Mit Premium:
   - eigene Karten je Spielmodus und Level anlegen, bearbeiten und löschen (nur auf dem Gerät);
   - „Ich hab noch nie …“ / „Wer würde am ehesten …?“ ergänzt die App selbst (in der App-Sprache),
     ebenso fehlende Satzzeichen; „Mitspieler einfügen“ setzt einen zufälligen Mitspieler ein
@@ -222,7 +226,8 @@ Englisch) liegen in [`docs/store/screenshots/`](docs/store/screenshots/) – sie
 │   │   ├── premium.tsx          # Premium-Vorschau (ohne Kauf)
 │   │   └── settings/            # Einstellungen, Datenschutz, Fair Play, Über
 │   ├── components/ui/           # Designsystem-Komponenten (Button, Sheet, Screen, …)
-│   ├── config/legal.ts          # Anbieterdaten für die Datenschutzhinweise (vor Release ausfüllen)
+│   ├── config/                  # legal.ts: Anbieterdaten (vor Release ausfüllen),
+│   │                            # features.ts: Premium-Schalter (aus bis zu echten Käufen)
 │   ├── features/
 │   │   ├── gameplay/engine/     # Reine Spiellogik: Deck, Rotation, Session (ohne React)
 │   │   ├── gameplay/components/ # Fragekarte, Spieler-Banner, Level-Sheet, …
@@ -333,7 +338,8 @@ Einstellungen, Sprache, 18+-Sperre, Datenlöschung sowie der komplette Spielabla
 aller fünf Spielmodi über die echten Routen (inkl. Wahl Wahrheit/Pflicht, Spielerauswahl und
 Zählern in den Gruppenmodi, dem 3‑2‑1‑Countdown und dem Challenge-Timer) und die englischen
 Karten inklusive Sprachwechsel mitten im Spiel sowie die eigenen Karten (gesperrt ohne Premium;
-mit simuliertem Premium-Status: Anlegen, Ablehnen, Bearbeiten, Löschen, Anzeige im Spiel).
+mit simuliertem Premium-Status: Anlegen, Ablehnen, Bearbeiten, Löschen, Anzeige im Spiel) und
+die Store-Version mit ausgeblendetem Premium (keine Verweise, Deep Links führen zur Startseite).
 
 Die **GitHub-Actions-CI** (`.github/workflows/ci.yml`) führt bei jedem Push/PR Typecheck,
 Lint, Fragen-Validierung und Tests aus und baut anschließend Android-, iOS- und Web-Bundles
@@ -537,6 +543,8 @@ Neuen Modus aktivieren:
 ### Premium (`src/features/premium`)
 - `plans.ts` – geplante Preise (2,99 €/Monat, 14,99 €/Jahr, 12,99 € Lifetime) und Store-Produkt-IDs,
   `PURCHASES_ENABLED = false`.
+- `src/config/features.ts` – `FEATURES.premium` blendet Premium-Seite und „Eigene Karten“ ein;
+  muss immer gleich `PURCHASES_ENABLED` sein (Test in `premium-modes.test.ts`).
 - `entitlements.ts` – `free`/`premium`-Tiers; Fragenpakete haben ein `tier`;
   `canUseFeature()` sagt, ob eine Premium-Funktion (z. B. `customQuestions`) nutzbar ist.
 - `store/entitlementsStore.ts` – aktueller Premium-Status, **nicht gespeichert** und immer
@@ -608,8 +616,8 @@ eine Sprache, wird auf Deutsch zurückgegriffen. Feste Kartenanfänge („Ich ha
   Anbieterdaten in `src/config/legal.ts` eintragen.
 - Die Checkliste in [`docs/store/README.md`](docs/store/README.md) abarbeiten: Bundle-ID,
   `eas init`, Store-Einträge, Datenschutz- und Support-URL, Fragebögen.
-- Premium-Vorschau für die erste Store-Version klären: Apple lehnt Platzhalter-Funktionen
-  oft ab (Details in `docs/store/README.md`).
+- Kommen Käufe dazu: `FEATURES.premium` und `PURCHASES_ENABLED` gemeinsam einschalten und die
+  Store-Angaben neu prüfen (Details in `docs/store/README.md`).
 - Test auf echten iOS- und Android-Geräten (inkl. Screenreader, großer Schrift, älterer Geräte).
 - Lizenz des Projekts festlegen. Die verwendeten Schriften stehen unter der SIL Open Font
   License, die Icons (Ionicons) unter MIT.

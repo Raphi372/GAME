@@ -14,6 +14,7 @@ import { useEffect } from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 
 import { AppText, Button, Screen } from '@/components/ui';
+import { FEATURES } from '@/config/features';
 import { useMotion } from '@/hooks/useMotion';
 import { translate } from '@/i18n';
 import { useSettingsStore, useStoresHydrated } from '@/store';
@@ -69,8 +70,11 @@ export default function RootLayout() {
           <Stack.Screen name="level" />
           <Stack.Screen name="game" options={{ animation: fade, gestureEnabled: false }} />
           <Stack.Screen name="summary" options={{ animation: fade, gestureEnabled: false }} />
-          <Stack.Screen name="premium" options={{ presentation: 'modal' }} />
-          <Stack.Screen name="custom-cards" />
+          {/* Hidden until real purchases exist – deep links then land on the home screen. */}
+          <Stack.Protected guard={FEATURES.premium}>
+            <Stack.Screen name="premium" options={{ presentation: 'modal' }} />
+            <Stack.Screen name="custom-cards" />
+          </Stack.Protected>
           <Stack.Screen name="settings/index" />
         </Stack.Protected>
         <Stack.Protected guard={!ageConfirmed}>

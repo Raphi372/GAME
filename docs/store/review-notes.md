@@ -18,7 +18,7 @@ How to test:
 Notes:
 - No account or login is needed; there is no demo account.
 - The app works fully offline. It sends no data anywhere: no analytics, no ads, no tracking.
-- There are no in-app purchases. The "Premium" screen only previews planned features and clearly states that purchases are not possible yet.
+- There are no in-app purchases and no locked content: every feature in this version is free.
 - The app never asks anyone to drink alcohol. Every task can be declined, tasks involving touch require a clear yes, and the EXTREME level asks the whole group for consent first.
 - Card content is text only (no images, no nudity). It covers flirting, dating and personal questions for adults. The app is intended exclusively for users aged 18 and over.
 ```
@@ -36,7 +36,7 @@ So testet ihr:
 Hinweise:
 - Kein Konto und kein Login nötig; es gibt keinen Demo-Zugang.
 - Die App funktioniert komplett offline und sendet keine Daten: keine Analyse, keine Werbung, kein Tracking.
-- Es gibt keine In-App-Käufe. Der Premium-Bildschirm zeigt nur geplante Funktionen und sagt deutlich, dass noch keine Käufe möglich sind.
+- Es gibt keine In-App-Käufe und keine gesperrten Inhalte: Alles in dieser Version ist kostenlos.
 - Die App fordert nie zum Alkoholtrinken auf. Jede Aufgabe darf abgelehnt werden, Aufgaben mit Berührung nur mit klarem Ja, und vor EXTREME stimmt die ganze Runde zu.
 - Die Karten sind reiner Text (keine Bilder, keine Nacktheit) mit Flirt-, Dating- und persönlichen Fragen für Erwachsene. Die App ist ausschließlich für Personen ab 18 Jahren gedacht.
 ```

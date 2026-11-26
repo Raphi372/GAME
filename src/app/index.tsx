@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Animated, Easing, StyleSheet, View } from 'react-native';
 
 import { AppText, Button, IconButton, Logo, Screen, SectionTitle } from '@/components/ui';
+import { FEATURES } from '@/config/features';
 import { ModeCard } from '@/features/game-modes/ModeCard';
 import { listGameModes, type GameModeId } from '@/features/game-modes/registry';
 import { ResumeCard } from '@/features/gameplay/components/ResumeCard';
@@ -51,14 +52,18 @@ export default function HomeScreen() {
     <Screen
       header={
         <View style={styles.topBar}>
-          <Button
-            label={t('home.premium')}
-            icon="diamond-outline"
-            variant="secondary"
-            size="sm"
-            onPress={() => router.push('/premium')}
-            style={styles.premium}
-          />
+          {FEATURES.premium ? (
+            <Button
+              label={t('home.premium')}
+              icon="diamond-outline"
+              variant="secondary"
+              size="sm"
+              onPress={() => router.push('/premium')}
+              style={styles.premium}
+            />
+          ) : (
+            <View />
+          )}
           <IconButton icon="settings-outline" label={t('home.settings')} onPress={() => router.push('/settings')} />
         </View>
       }
@@ -105,16 +110,18 @@ export default function HomeScreen() {
         ))}
       </View>
 
-      <Button
-        label={t('home.customCards')}
-        hint={t('home.customCardsHint')}
-        icon="create-outline"
-        variant="secondary"
-        size="md"
-        onPress={() => router.push('/custom-cards')}
-        style={styles.custom}
-        testID="home-custom-cards"
-      />
+      {FEATURES.premium ? (
+        <Button
+          label={t('home.customCards')}
+          hint={t('home.customCardsHint')}
+          icon="create-outline"
+          variant="secondary"
+          size="md"
+          onPress={() => router.push('/custom-cards')}
+          style={styles.custom}
+          testID="home-custom-cards"
+        />
+      ) : null}
 
       <AppText variant="caption" color={colors.textMuted} align="center" style={styles.footer}>
         {t('home.footer')}
