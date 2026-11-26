@@ -105,6 +105,24 @@ describe('"Ich hab noch nie" deck', () => {
     expect(all.length).toBeGreaterThanOrEqual(1500);
   });
 
+  it('never lets the round compare players by their looks', () => {
+    const modes = [
+      'spicy-questions',
+      'never-have-i-ever',
+      'most-likely',
+      'truth-or-dare',
+      'random-challenges',
+    ] as const;
+    const looks =
+      /(attraktivst|hübschest|sexiest|am besten aussieht|besten aussehen|heißeste[nrs]? (ausstrahlung|körper|look|figur|promi-doppelgänger)|schönste[nrs]? (lippen|lächeln|augen|gesicht|körper|po|figur|haare|beine|hände))/i;
+    const picksPlayer = /(\bhier\b|\b(aus|in) (der|dieser) runde\b|\bdieser runde\b|^wer würde am ehesten |^alle:)/i;
+    const aboutSelf = /\b(an dir selbst|dir selbst)\b/i;
+    const offending = modes
+      .flatMap((mode) => SPICY_LEVELS.flatMap((level) => getDeck(mode, level)))
+      .filter((card) => looks.test(card.text) && picksPlayer.test(card.text) && !aboutSelf.test(card.text));
+    expect(offending.map((card) => card.text)).toEqual([]);
+  });
+
   it('contains no drinking instructions', () => {
     const all = SPICY_LEVELS.flatMap((level) => getDeck('never-have-i-ever', level));
     all.forEach((card) => expect(card.text).not.toMatch(/\b(trink|shot|schluck|ex(e|t)?n)/i));
