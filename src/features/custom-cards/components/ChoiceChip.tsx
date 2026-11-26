@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet } from 'react-native';
 
 import { AppText } from '@/components/ui';
+import { spaceKeyPress } from '@/components/ui/keyboard';
 import { feedback } from '@/services/feedback';
 import { colors, minTouchSize, radius, spacing } from '@/theme';
 
@@ -17,16 +18,18 @@ interface ChoiceChipProps {
 
 /** A pill that behaves like a radio button (one choice out of a row). */
 export function ChoiceChip({ label, selected, onPress, accent = colors.primary, a11yLabel, testID }: ChoiceChipProps) {
+  const choose = () => {
+    feedback('select');
+    onPress();
+  };
   return (
     <Pressable
       role="radio"
       aria-checked={selected}
       aria-label={a11yLabel ?? label}
       testID={testID}
-      onPress={() => {
-        feedback('select');
-        onPress();
-      }}
+      onPress={choose}
+      {...spaceKeyPress(choose)}
       style={({ pressed }) => [
         styles.chip,
         selected && { borderColor: accent, backgroundColor: `${accent}29` },

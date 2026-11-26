@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { AppText, Avatar, Icon } from '@/components/ui';
+import { spaceKeyPress } from '@/components/ui/keyboard';
 import { feedback } from '@/services/feedback';
 import { colors, minTouchSize, radius, spacing } from '@/theme';
 import type { Player } from '@/types';
@@ -57,6 +58,10 @@ export function PlayerPicker({
               role="checkbox"
               aria-checked={selected}
               aria-label={toggleLabel(player)}
+              {...spaceKeyPress(() => {
+                feedback('select');
+                onToggle(player.id);
+              })}
               onPress={() => {
                 feedback('select');
                 onToggle(player.id);

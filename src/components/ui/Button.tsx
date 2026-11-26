@@ -2,7 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Animated, Pressable, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 
 import { feedback, type FeedbackEvent } from '@/services/feedback';
-import { brandGradient, colors, glow, minTouchSize, radius, spacing } from '@/theme';
+import { brandGradient, colors, glow, minTouchSize, radius, readableWithWhite, spacing } from '@/theme';
 
 import { AppText } from './AppText';
 import { Icon, type IconName } from './Icon';
@@ -107,7 +107,8 @@ export function Button({
       >
         {variant === 'primary' ? (
           <LinearGradient
-            colors={[gradient[0], gradient[1]]}
+            // Darkened just enough for the white label to stay readable (WCAG AA).
+            colors={[readableWithWhite(gradient[0]), readableWithWhite(gradient[1])]}
             start={{ x: 0, y: 0.5 }}
             end={{ x: 1, y: 0.5 }}
             style={styles.gradient}

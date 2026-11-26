@@ -13,7 +13,7 @@ export default function PrivacyScreen() {
   const { t, intlLocale } = useTranslation();
   const updated = new Intl.DateTimeFormat(intlLocale, { dateStyle: 'long' }).format(PRIVACY_LAST_UPDATED);
   return (
-    <Screen header={<Header title={t('privacy.title')} />}>
+    <Screen focusableScroll header={<Header title={t('privacy.title')} />}>
       <Surface style={styles.draft}>
         <AppText variant="caption" color={colors.warning}>
           {`⚠️ ${t('privacy.draftNote')}`}

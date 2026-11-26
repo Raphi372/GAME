@@ -23,7 +23,7 @@ export default function PremiumScreen() {
   const total = countBuiltInCards(playableModes);
 
   return (
-    <Screen header={<Header />}>
+    <Screen focusableScroll header={<Header />}>
       <View style={styles.hero}>
         <LinearGradient colors={[brandGradient[0], brandGradient[1]]} style={styles.badge}>
           <Icon name="diamond" size={30} color={colors.textOnAccent} />

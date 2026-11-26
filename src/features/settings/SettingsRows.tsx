@@ -1,7 +1,8 @@
 import { Children, Fragment, type ReactNode } from 'react';
-import { Platform, Pressable, StyleSheet, Switch, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 
 import { AppText, Icon, Surface, type IconName } from '@/components/ui';
+import { spaceKeyPress } from '@/components/ui/keyboard';
 import { feedback } from '@/services/feedback';
 import { colors, minTouchSize, palette, spacing } from '@/theme';
 
@@ -40,6 +41,7 @@ export function SwitchRow({ label, hint, value, onValueChange, icon }: SwitchRow
       aria-checked={value}
       accessibilityHint={hint}
       onPress={() => toggle(!value)}
+      {...spaceKeyPress(() => toggle(!value))}
       style={({ pressed }) => [styles.row, pressed && styles.pressed]}
     >
       <Icon name={icon} size={20} color={colors.lilacOrText} />
@@ -51,15 +53,13 @@ export function SwitchRow({ label, hint, value, onValueChange, icon }: SwitchRow
           </AppText>
         ) : null}
       </View>
-      <View aria-hidden importantForAccessibility="no-hide-descendants">
-        <Switch
-          value={value}
-          onValueChange={toggle}
-          trackColor={{ false: palette.graphite, true: palette.neonPurple }}
-          thumbColor={value ? palette.white : palette.mist}
-          ios_backgroundColor={palette.graphite}
-          {...WEB_SWITCH_PROPS}
-        />
+      {/* Purely visual – a second, focusable switch inside the row would be announced twice. */}
+      <View
+        aria-hidden
+        importantForAccessibility="no-hide-descendants"
+        style={[styles.track, value && styles.trackOn]}
+      >
+        <View style={[styles.thumb, value && styles.thumbOn]} />
       </View>
     </Pressable>
   );
@@ -118,6 +118,10 @@ export function RadioRow({ label, selected, onPress }: RadioRowProps) {
         feedback('select');
         onPress();
       }}
+      {...spaceKeyPress(() => {
+        feedback('select');
+        onPress();
+      })}
       style={({ pressed }) => [styles.row, pressed && styles.pressed]}
     >
       <View style={styles.text}>
@@ -130,8 +134,6 @@ export function RadioRow({ label, selected, onPress }: RadioRowProps) {
   );
 }
 
-/** react-native-web uses its own prop for the active thumb colour. */
-const WEB_SWITCH_PROPS: object = Platform.OS === 'web' ? { activeThumbColor: palette.white } : {};
 
 const styles = StyleSheet.create({
   group: { paddingVertical: spacing.xs, paddingHorizontal: spacing.lg },
@@ -144,6 +146,19 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.sm,
   },
   pressed: { opacity: 0.7 },
+  track: {
+    width: 50,
+    height: 30,
+    borderRadius: 15,
+    padding: 3,
+    justifyContent: 'center',
+    backgroundColor: palette.graphite,
+    borderWidth: 1,
+    borderColor: colors.border,
+  },
+  trackOn: { backgroundColor: palette.neonPurple, borderColor: palette.neonPurple },
+  thumb: { width: 22, height: 22, borderRadius: 11, backgroundColor: palette.mist },
+  thumbOn: { alignSelf: 'flex-end', backgroundColor: palette.white },
   text: { flex: 1, gap: spacing.xxs },
   radio: {
     width: 24,

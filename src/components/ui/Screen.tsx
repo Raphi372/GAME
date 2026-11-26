@@ -16,6 +16,11 @@ interface ScreenProps {
   accent?: string;
   secondaryAccent?: string;
   contentStyle?: StyleProp<ViewStyle>;
+  /**
+   * Text-only pages (no buttons in the scroll area): lets keyboard users focus the
+   * scroll area to scroll it (web).
+   */
+  focusableScroll?: boolean;
   testID?: string;
 }
 
@@ -28,6 +33,7 @@ export function Screen({
   accent,
   secondaryAccent,
   contentStyle,
+  focusableScroll = false,
   testID,
 }: ScreenProps) {
   const insets = useSafeAreaInsets();
@@ -39,7 +45,7 @@ export function Screen({
   return (
     <View style={styles.root} testID={testID}>
       <AmbientBackground accent={accent} secondary={secondaryAccent} />
-      <View style={[styles.column, { paddingTop: insets.top + spacing.sm }]}>
+      <View role="main" style={[styles.column, { paddingTop: insets.top + spacing.sm }]}>
         {header ? <View style={[styles.header, padding]}>{header}</View> : null}
         {scroll ? (
           <ScrollView
@@ -47,6 +53,7 @@ export function Screen({
             contentContainerStyle={[styles.scrollContent, padding, contentStyle]}
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
+            focusable={focusableScroll}
           >
             {children}
           </ScrollView>

@@ -40,6 +40,7 @@ export function ConfirmSheet({
       visible={visible}
       onClose={onCancel}
       accent={destructive ? colors.danger : accent}
+      label={title}
       testID={testID}
     >
       <View style={styles.text}>

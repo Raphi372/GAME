@@ -2,6 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Animated, Pressable, StyleSheet, View } from 'react-native';
 
 import { AppText, Icon } from '@/components/ui';
+import { spaceKeyPress } from '@/components/ui/keyboard';
 import { cardCountKey } from '@/features/game-modes/labels';
 import type { GameModeId } from '@/features/game-modes/registry';
 import { usePressScale } from '@/components/ui/usePressScale';
@@ -51,6 +52,10 @@ export function LevelCard({
       <Pressable
         role="radio"
         aria-checked={selected}
+        {...spaceKeyPress(() => {
+          feedback('select');
+          onPress();
+        })}
         aria-label={`${name}. ${tagline} ${compact ? '' : description} ${count}`.trim()}
         onPressIn={onPressIn}
         onPressOut={onPressOut}

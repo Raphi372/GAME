@@ -16,7 +16,7 @@ const RULES: { icon: IconName; id: string }[] = [
 export default function FairPlayScreen() {
   const { t } = useTranslation();
   return (
-    <Screen header={<Header title={t('fairPlay.title')} subtitle={t('fairPlay.intro')} />}>
+    <Screen focusableScroll header={<Header title={t('fairPlay.title')} subtitle={t('fairPlay.intro')} />}>
       <View style={styles.list}>
         {RULES.map((rule) => (
           <Surface key={rule.id} style={styles.card}>

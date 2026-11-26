@@ -134,6 +134,12 @@ describe('settings screen', () => {
     expect(router.getPathname()).toBe('/age-gate');
   });
 
+  it('shows each setting as a single switch (no nested controls)', async () => {
+    await renderRouter(APP_DIR, { initialUrl: '/settings' });
+    expect(await screen.findByRole('switch', { name: 'Sound' })).toBeOnTheScreen();
+    expect(screen.getAllByRole('switch', { includeHiddenElements: true })).toHaveLength(3);
+  });
+
   it('deletes all local data', async () => {
     addPlayers('Lena', 'Max');
     useEntitlementsStore.setState({ entitlements: { premium: true } });

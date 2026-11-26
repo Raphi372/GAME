@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { Animated, KeyboardAvoidingView, Modal, Platform, Pressable, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -12,15 +12,29 @@ interface SheetProps {
   children: ReactNode;
   /** Accent colour of the top glow line. */
   accent?: string;
+  /** Accessible name of the dialog (usually its title). */
+  label?: string;
   testID?: string;
 }
 
 /** Bottom sheet built on the platform Modal (accessible, closes on back button / backdrop tap). */
-export function Sheet({ visible, onClose, children, accent = colors.primary, testID }: SheetProps) {
+export function Sheet({ visible, onClose, children, accent = colors.primary, label, testID }: SheetProps) {
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
   const { enabled: motion } = useMotion();
   const [translateY] = useState(() => new Animated.Value(motion ? 60 : 0));
+
+  // Web: react-native-web's Modal renders the dialog element itself and takes no label –
+  // name it after the sheet's title so screen readers announce what opened.
+  const nameDialog = useCallback(
+    (node: unknown) => {
+      if (Platform.OS !== 'web' || !label) return;
+      const element = node as { closest?: (selector: string) => Element | null } | null;
+      // The dialog element carries aria-modal from the start; its role is added a moment later.
+      element?.closest?.('[aria-modal="true"]')?.setAttribute('aria-label', label);
+    },
+    [label],
+  );
 
   useEffect(() => {
     if (!visible) return;
@@ -59,7 +73,7 @@ export function Sheet({ visible, onClose, children, accent = colors.primary, tes
           <View style={styles.backdrop} />
         </Pressable>
         <Animated.View
-          aria-modal
+          ref={nameDialog}
           style={[
             styles.panel,
             { paddingBottom: Math.max(insets.bottom, spacing.lg) + spacing.sm },

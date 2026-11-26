@@ -6,7 +6,7 @@ import { AppText } from './AppText';
 
 export function SectionTitle({ children }: { children: string }) {
   return (
-    <AppText variant="overline" color={colors.textMuted} role="heading" style={styles.title}>
+    <AppText variant="overline" color={colors.textMuted} role="heading" aria-level={2} style={styles.title}>
       {children}
     </AppText>
   );
