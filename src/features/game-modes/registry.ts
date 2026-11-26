@@ -1,6 +1,6 @@
 import type { GroupTally } from '@/features/gameplay/engine/session';
 import type { TranslationKey } from '@/i18n';
-import type { CardKind, SpicyLevel } from '@/types';
+import type { CardKind, Locale, SpicyLevel } from '@/types';
 
 /**
  * Game mode registry.
@@ -93,8 +93,8 @@ export interface GameModeDefinition {
   turnStyle: TurnStyle;
   usesSpicyLevels: boolean;
   cardUnit: CardUnit;
-  /** Fixed lead-in a card may start with, highlighted on the card (content language). */
-  cardLead?: string;
+  /** Fixed lead-in a card may start with, highlighted on the card – one per content language. */
+  cardLead?: Readonly<Record<Locale, string>>;
   /** Label shown above cards that have no lead-in (e.g. "Challenge"). */
   cardLabel?: TranslationKey;
   /** Single-player modes: custom button and summary texts. */
@@ -132,7 +132,7 @@ export const GAME_MODES: Record<GameModeId, GameModeDefinition> = {
     turnStyle: 'group',
     usesSpicyLevels: true,
     cardUnit: 'statements',
-    cardLead: 'Ich hab noch nie',
+    cardLead: { de: 'Ich hab noch nie', en: 'Never have I ever' },
     howTo: 'nhie.howTo',
     levelDescriptions: {
       mild: 'nhie.level.mild.description',
@@ -181,7 +181,7 @@ export const GAME_MODES: Record<GameModeId, GameModeDefinition> = {
     turnStyle: 'group',
     usesSpicyLevels: true,
     cardUnit: 'questions',
-    cardLead: 'Wer würde am ehesten',
+    cardLead: { de: 'Wer würde am ehesten', en: 'Who is most likely to' },
     howTo: 'mlt.howTo',
     levelDescriptions: {
       mild: 'mlt.level.mild.description',
@@ -213,7 +213,7 @@ export const GAME_MODES: Record<GameModeId, GameModeDefinition> = {
     turnStyle: 'single-player',
     usesSpicyLevels: true,
     cardUnit: 'challenges',
-    cardLead: 'Alle:',
+    cardLead: { de: 'Alle:', en: 'Everyone:' },
     cardLabel: 'rc.cardLabel',
     howTo: 'rc.howTo',
     levelDescriptions: {

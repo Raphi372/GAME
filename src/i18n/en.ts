@@ -75,7 +75,7 @@ export const en: Record<TranslationKey, string> = {
   'level.subtitle': 'You can switch the level at any time during the game.',
   'level.mild.name': 'Mild',
   'level.mild.tagline': 'Let’s warm up.',
-  'level.mild.description': 'Flirty questions, sympathy, first confessions and funny dating moments.',
+  'level.mild.description': 'Flirty questions, first impressions, first confessions and funny dating moments.',
   'level.hot.name': 'Hot',
   'level.hot.tagline': 'Things are heating up.',
   'level.hot.description': 'Cheeky questions, dating secrets, kissing stories and flirty confessions.',
@@ -297,7 +297,7 @@ export const en: Record<TranslationKey, string> = {
   'summary.todLine': 'Truths: {truths} · Dares: {dares} · Passed: {passed}',
 
   'mode.unit.challenges': '{count} challenges',
-  'rc.howTo': 'Whoever’s turn it is gets a random challenge – sometimes alone, sometimes with the whole group (“Alle”). Many have a timer. Join in only with a clear yes, passing is always allowed, nobody drinks.',
+  'rc.howTo': 'Whoever’s turn it is gets a random challenge – sometimes alone, sometimes with the whole group (“Everyone”). Many have a timer. Join in only with a clear yes, passing is always allowed, nobody drinks.',
   'rc.cardLabel': 'Challenge',
   'rc.next': 'Done',
   'rc.nextHint': 'Next person’s turn',

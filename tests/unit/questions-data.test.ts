@@ -105,7 +105,7 @@ describe('"Ich hab noch nie" deck', () => {
     expect(all.length).toBeGreaterThanOrEqual(1500);
   });
 
-  it('never lets the round compare players by their looks', () => {
+  it('never lets the round compare players by their looks or sex appeal', () => {
     const modes = [
       'spicy-questions',
       'never-have-i-ever',
@@ -117,9 +117,17 @@ describe('"Ich hab noch nie" deck', () => {
       /(attraktivst|hübschest|sexiest|am besten aussieht|besten aussehen|heißeste[nrs]? (ausstrahlung|körper|look|figur|promi-doppelgänger)|schönste[nrs]? (lippen|lächeln|augen|gesicht|körper|po|figur|haare|beine|hände))/i;
     const picksPlayer = /(\bhier\b|\b(aus|in) (der|dieser) runde\b|\bdieser runde\b|^wer würde am ehesten |^alle:)/i;
     const aboutSelf = /\b(an dir selbst|dir selbst)\b/i;
+    const sexAppeal = /(verführerischst|beste[nr]? kisser|küsst[^.?!]*am besten)/i;
+    const ownPerformance = /\b(dein|deine|deinen|deiner|eure|euren|eurer)\s+verführerischst/i;
+    const ranks = (text: string) =>
+      (looks.test(text) || (sexAppeal.test(text) && !ownPerformance.test(text))) &&
+      picksPlayer.test(text) &&
+      !aboutSelf.test(text);
+    expect(ranks('Wer aus dieser Runde küsst deiner Meinung nach am besten?')).toBe(true);
+    expect(ranks('Wirf jeder Person in der Runde deinen verführerischsten Blick zu.')).toBe(false);
     const offending = modes
       .flatMap((mode) => SPICY_LEVELS.flatMap((level) => getDeck(mode, level)))
-      .filter((card) => looks.test(card.text) && picksPlayer.test(card.text) && !aboutSelf.test(card.text));
+      .filter((card) => ranks(card.text));
     expect(offending.map((card) => card.text)).toEqual([]);
   });
 
@@ -135,6 +143,11 @@ describe('"Ich hab noch nie" deck', () => {
     });
     expect(splitLead('Andere Frage?', 'Ich hab noch nie')).toEqual({ lead: null, rest: 'Andere Frage?' });
     expect(splitLead('Text', '')).toEqual({ lead: null, rest: 'Text' });
+    // One lead per content language.
+    expect(splitLead('Never have I ever lied.', ['Ich hab noch nie', 'Never have I ever'])).toEqual({
+      lead: 'Never have I ever',
+      rest: 'lied.',
+    });
   });
 });
 
@@ -245,6 +258,83 @@ describe('"Random Challenges" deck', () => {
   });
 });
 
+describe('English content', () => {
+  const modes = [
+    'spicy-questions',
+    'never-have-i-ever',
+    'most-likely',
+    'truth-or-dare',
+    'random-challenges',
+  ] as const;
+  const pairs = modes.flatMap((mode) =>
+    SPICY_LEVELS.flatMap((level) => {
+      const de = getDeck(mode, level, { locale: 'de' });
+      const en = getDeck(mode, level, { locale: 'en' });
+      return de.map((card, index) => ({ mode, de: card, en: en[index]! }));
+    }),
+  );
+
+  it('translates every card and keeps ids, categories, kinds and timers', () => {
+    for (const mode of modes) {
+      for (const level of SPICY_LEVELS) {
+        const de = getDeck(mode, level, { locale: 'de' });
+        const en = getDeck(mode, level, { locale: 'en' });
+        expect(en.map(({ text: _text, ...meta }) => meta)).toEqual(de.map(({ text: _text, ...meta }) => meta));
+      }
+    }
+    expect(countBuiltInCards(modes, 'en')).toBe(countBuiltInCards(modes, 'de'));
+    expect(new Set(pairs.map((pair) => pair.en.text.toLowerCase())).size).toBe(pairs.length);
+  });
+
+  it('keeps placeholders, numbers and the card format of the German original', () => {
+    const numbers = (text: string) => (text.match(/\d+/g) ?? []).sort().join(',');
+    for (const { mode, de, en } of pairs) {
+      expect(en.text).not.toBe(de.text);
+      expect(en.text.includes('{other}')).toBe(de.text.includes('{other}'));
+      expect(numbers(en.text)).toBe(numbers(de.text));
+      expect(en.text.endsWith('?')).toBe(de.text.endsWith('?'));
+      expect(en.text.startsWith('Everyone: ')).toBe(de.text.startsWith('Alle: '));
+      if (mode === 'never-have-i-ever') expect(en.text).toMatch(/^Never have I ever .+\.$/);
+      if (mode === 'most-likely') expect(en.text).toMatch(/^Who is most likely to .+\?$/);
+    }
+  });
+
+  it('keeps the consent wording wherever the German card needs consent', () => {
+    // Same rule as the validator: touching another player needs an explicit opt-in.
+    const touch = /(küss|kuss|massier|umarm|schoß|streich|berühr|hand|nacken|schulter|ohr|kuschel|knabber|lippen|knie|hals|tanz)/i;
+    const contact =
+      /(küss|kuss auf|einen kuss|massier|massage|umarm|im arm|schoß|streichel|berühr|nacken|schulter|kuschel|knabber|lippen|hals|puls|herzschlag|fütter|polonaise|wange an wange|slow dance|tango|tanzt .*eng|eng mit|verbundenen augen|augen verbinden|hand reich|die hand von|hand aufs herz|ins ohr|am ohr)/i;
+    const others = (text: string) =>
+      text.includes('{other}') || text.startsWith('Alle:') || /\b(person|personen|jemand|jemanden)\b/i.test(text);
+    const askedEn =
+      /(only if|only with|if \{other\}|if you both|if they|clear yes|agree|consent|permission|\bmay\b|decide|\bwants?\b|would like|feels? like|okay with|plays along|join in|who want|offers|say no|turn it down|turn you down|decline|veto|stop you|last word|without (any )?touching|optional|voluntar|passing is allowed)/i;
+    const needsConsent = pairs.filter(
+      ({ mode, de }) =>
+        (mode === 'truth-or-dare' && de.kind === 'dare' && de.text.includes('{other}') && touch.test(de.text)) ||
+        (mode === 'random-challenges' && others(de.text) && contact.test(de.text)),
+    );
+    expect(needsConsent.length).toBeGreaterThan(50);
+    expect(needsConsent.filter(({ en }) => !askedEn.test(en.text)).map(({ en }) => en.id)).toEqual([]);
+  });
+
+  it('contains no drinking or nudity and never compares players by looks or sex appeal', () => {
+    const banned = /\b(drink|drinks|drinking|shots?|sips?|chug|booze|alcohol|tipsy|drunk|naked|nude|undress)\b/i;
+    const looks = /(most attractive|best[- ]looking|prettiest|hottest (aura|body|look)|most beautiful (lips|smile|eyes|face))/i;
+    const picksPlayer = /(\bhere\b|\bin (this|the) group\b|^who is most likely to |^everyone:)/i;
+    const aboutSelf = /\b(yourself|of your own)\b/i;
+    const sexAppeal = /(most seductive|best kisser|kisses the best|sexiest (person|one|player|voice))/i;
+    const ownPerformance = /\byour\s+(most seductive|sexiest)/i;
+    pairs.forEach(({ en }) => expect(en.text).not.toMatch(banned));
+    const ranking = pairs.filter(
+      ({ en }) =>
+        (looks.test(en.text) || (sexAppeal.test(en.text) && !ownPerformance.test(en.text))) &&
+        picksPlayer.test(en.text) &&
+        !aboutSelf.test(en.text),
+    );
+    expect(ranking.map(({ en }) => en.text)).toEqual([]);
+  });
+});
+
 describe('question parsing', () => {
   it('skips invalid and duplicate entries instead of crashing', () => {
     const { questions, issues } = parseQuestions(
@@ -298,12 +388,16 @@ describe('deck loading', () => {
     ).toEqual(['f1', 'p1']);
   });
 
-  it('falls back to German content for other UI languages', () => {
+  it('ships content in German and English', () => {
     expect(hasContentInLocale('de')).toBe(true);
-    expect(hasContentInLocale('en')).toBe(false);
-    expect(getDeck('spicy-questions', 'mild', { locale: 'en' })).toEqual(
-      getDeck('spicy-questions', 'mild', { locale: 'de' }),
-    );
+    expect(hasContentInLocale('en')).toBe(true);
+    expect(getDeck('spicy-questions', 'mild', { locale: 'en' })[0]?.text).toBe('What’s your biggest turn-on?');
+  });
+
+  it('falls back to German when a deck has no content in the UI language', () => {
+    expect(getDeck('spicy-questions', 'mild', { packs: [freePack], locale: 'en' }).map((q) => q.id)).toEqual([
+      'f1',
+    ]);
   });
 
   it('returns an empty deck when a mode has no pack', () => {

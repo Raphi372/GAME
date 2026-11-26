@@ -96,8 +96,9 @@ export default function GameScreen() {
         fallbackTargetName: t('game.fallbackTarget'),
       })
     : '';
-  const { lead, rest } = splitLead(fullText, mode.cardLead ?? '');
-  // "Alle:" → "Alle" above the text; otherwise an optional mode label ("Challenge").
+  const { lead, rest } = splitLead(fullText, Object.values(mode.cardLead ?? {}));
+  // "Alle:" / "Everyone:" → shown above the text without the colon; otherwise an optional
+  // mode label ("Challenge").
   const displayLead = lead?.replace(/:$/, '') ?? (mode.cardLabel ? t(mode.cardLabel) : null);
   const single = mode.singleCopy ?? DEFAULT_SINGLE_COPY;
   const categoryLabel = question ? t(`category.${question.category}`) : '';

@@ -19,12 +19,18 @@ export function renderQuestionText(text: string, context: RenderContext): string
 }
 
 /**
- * Splits a fixed lead-in (e.g. "Ich hab noch nie") from the rest of a card text so
- * the UI can style it separately. Returns `lead: null` if the text doesn't start with it.
+ * Splits a fixed lead-in (e.g. "Ich hab noch nie" / "Never have I ever") from the rest of
+ * a card text so the UI can style it separately. Several leads (one per content language)
+ * may be passed. Returns `lead: null` if the text starts with none of them.
  */
-export function splitLead(text: string, lead: string): { lead: string | null; rest: string } {
-  if (lead && text.startsWith(`${lead} `)) {
-    return { lead, rest: text.slice(lead.length + 1) };
+export function splitLead(
+  text: string,
+  leads: string | readonly string[],
+): { lead: string | null; rest: string } {
+  for (const lead of typeof leads === 'string' ? [leads] : leads) {
+    if (lead && text.startsWith(`${lead} `)) {
+      return { lead, rest: text.slice(lead.length + 1) };
+    }
   }
   return { lead: null, rest: text };
 }

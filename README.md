@@ -5,7 +5,8 @@
 SPICY NIGHT ist eine Partyspiel-App für Erwachsene (18+) im Dark-Luxury-Design. Eine Runde
 fügt ihre Mitspieler hinzu, wählt einen Spielmodus und eines von drei Spicy-Levels und bekommt
 zufällige Karten rund um Flirt, Dating, Geständnisse und Intimität – mit fairer
-Spielerrotation, ohne Wiederholungen und komplett offline.
+Spielerrotation, ohne Wiederholungen und komplett offline. Alle 1560 Karten gibt es auf
+Deutsch und Englisch.
 
 **Spielmodi:** 🔥 *Spicy Questions* (Fragen an die Person, die dran ist), 🎲 *Wahrheit oder Pflicht*
 (die Person wählt selbst), ⚡ *Random Challenges* (zufällige Aufgaben, teils mit Timer),
@@ -146,7 +147,8 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 
 ### Einstellungen
 - Sound, Vibration, Animationen an/aus (lokal gespeichert)
-- Sprache: Deutsch (Standard) / English (UI vollständig übersetzt, Fragen derzeit nur Deutsch)
+- Sprache: Deutsch (Standard) / English – Oberfläche und alle Karten; der Wechsel geht auch mitten
+  im Spiel, die aktuelle Karte und der Spielstand bleiben erhalten
 - Fair Play & Hinweise, Datenschutz, Über SPICY NIGHT
 - Altersbestätigung 18+ (anzeigen & widerrufen)
 - Alle lokalen Daten löschen
@@ -204,7 +206,8 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 │   │   ├── never-have-i-ever/   # Ich hab noch nie: mild.json, hot.json, extreme.json
 │   │   ├── most-likely/         # Wer würde am ehesten?: mild.json, hot.json, extreme.json
 │   │   ├── truth-or-dare/       # Wahrheit oder Pflicht: mild.json, hot.json, extreme.json
-│   │   └── random-challenges/   # Random Challenges: mild.json, hot.json, extreme.json
+│   │   ├── random-challenges/   # Random Challenges: mild.json, hot.json, extreme.json
+│   │   └── en/                  # Englische Texte je Modus: en/<modus>/<level>.json
 │   ├── hooks/                   # useMotion (Animationen + „Bewegung reduzieren“)
 │   ├── i18n/                    # de.ts (Quelle), en.ts, useTranslation
 │   ├── services/                # Storage, Haptik, Sound, Feedback, Zufallsquelle
@@ -291,7 +294,8 @@ Spieler hinzufügen/umbenennen/entfernen, faire Rotation, Überspringen, Passen,
 leeres/durchgespieltes Deck, lokale Speicherung inkl. App-Neustart und korrupter Daten,
 Einstellungen, Sprache, 18+-Sperre, Datenlöschung sowie der komplette Spielablauf
 aller fünf Spielmodi über die echten Routen (inkl. Wahl Wahrheit/Pflicht, Spielerauswahl und
-Zählern in den Gruppenmodi, dem 3‑2‑1‑Countdown und dem Challenge-Timer).
+Zählern in den Gruppenmodi, dem 3‑2‑1‑Countdown und dem Challenge-Timer) und die englischen
+Karten inklusive Sprachwechsel mitten im Spiel.
 
 Die **GitHub-Actions-CI** (`.github/workflows/ci.yml`) führt bei jedem Push/PR Typecheck,
 Lint, Fragen-Validierung und Tests aus und baut anschließend Android-, iOS- und Web-Bundles
@@ -359,6 +363,20 @@ mit transparentem Hintergrund und ca. 66 % Safe-Zone).
 | Wahrheit oder Pflicht | `src/data/questions/truth-or-dare/{mild,hot,extreme}.json` | `tod_mild_`, … | Pflichtfeld `kind`: `truth` (endet mit „?“) oder `dare` (endet mit „.“/„!“); je Level mind. 40 von jeder Art; `{other}` erlaubt; Pflichten mit Berührung brauchen eine Einverständnis-Formulierung |
 | Random Challenges | `src/data/questions/random-challenges/{mild,hot,extreme}.json` | `rc_mild_`, … | Endet mit „.“ oder „!“; optionales Feld `seconds` (ganze Zahl 5–120) für den Timer; Gruppen-Challenges beginnen mit „Alle: “; `{other}` erlaubt; Körperkontakt mit anderen nur mit Einverständnis-Formulierung; kein Bewerten von Aussehen |
 
+**Englische Texte:** Für jede deutsche Datei gibt es `src/data/questions/en/<modus>/<level>.json`
+(`<modus>` = `spicy-questions`, `never-have-i-ever`, `most-likely`, `truth-or-dare`,
+`random-challenges`). Sie enthält nur die Texte, Schlüssel ist die ID der deutschen Karte:
+
+```json
+{
+  "nhie_mild_008": "Never have I ever winked at someone."
+}
+```
+
+Kategorie, Art (`kind`), Timer (`seconds`) und Intensität kommen immer aus der deutschen Datei,
+die IDs sind in beiden Sprachen gleich – deshalb übersteht ein laufendes Spiel den Sprachwechsel.
+Wer eine deutsche Karte ergänzt, muss auch die englische Übersetzung anlegen.
+
 Jede Datei ist ein Array pro Level, z. B. für Spicy Questions:
 
 ```json
@@ -397,7 +415,13 @@ Platzhalter, das jeweilige Format („Ich hab noch nie …“, „Wer würde am 
 Wahrheit/Pflicht), die Mindestanzahl von 100 Karten pro Level und – bei Pflicht-Aufgaben und
 Challenges – dass jede Berührung einer anderen Person nur mit deren Einverständnis vorgesehen ist.
 In allen Decks lehnt er außerdem Karten ab, die die Runde Mitspieler nach Aussehen oder Sex-Appeal
-vergleichen lassen („Wen findest du hier am attraktivsten?“) – über sich selbst zu sprechen ist erlaubt.
+vergleichen lassen („Wen findest du hier am attraktivsten?“, „Wer hier wirkt am verführerischsten?“,
+„… der beste Kisser“) – über sich selbst zu sprechen oder etwas vorzuführen („Zeig deinen
+verführerischsten Blick“) ist erlaubt.
+Für die englischen Texte prüft er, dass jede deutsche Karte genau eine Übersetzung hat, dass
+Platzhalter, Zahlen (wichtig für Timer-Texte), Fragezeichen und das Format übereinstimmen
+(„Never have I ever …“, „Who is most likely to …?“, „Everyone: …“), dass jede
+Einverständnis-Formulierung erhalten bleibt und dass kein Trinken vorkommt.
 
 **Inhaltsrichtlinien:** nur Erwachsene, nichts mit Minderjährigen oder Schul-/Jugendbezug in
 intimen Kontexten, nichts Nicht-Einvernehmliches, keine Diskriminierung oder Demütigung, keine
@@ -460,7 +484,10 @@ Neuen Modus aktivieren:
 
 ### Internationalisierung (`src/i18n`)
 `de.ts` ist die Quelle aller Schlüssel; `en.ts` muss (per TypeScript erzwungen) jeden Schlüssel
-liefern. Fragen-Pakete haben ein `locale`; fehlt eine Sprache, wird auf Deutsch zurückgegriffen.
+liefern. Fragen-Pakete haben ein `locale`: Die englischen Pakete entstehen in
+`question-decks/packs.ts` aus den deutschen Paketen, indem nur die Texte ersetzt werden. Fehlt
+eine Sprache, wird auf Deutsch zurückgegriffen. Feste Kartenanfänge („Ich hab noch nie“ /
+„Never have I ever“) stehen pro Sprache in der Registry (`cardLead`).
 
 ---
 
@@ -505,7 +532,6 @@ liefern. Fragen-Pakete haben ein `locale`; fehlt eine Sprache, wird auf Deutsch 
 **Noch nicht umgesetzt (bewusst für spätere Releases):**
 - Premium-Käufe (Store-Integration, z. B. via StoreKit/Play Billing), eigene Fragen,
   individuelle Spielrunden.
-- Englische Fragen-Inhalte (die Oberfläche ist übersetzt, die Fragen sind Deutsch).
 - Backend, Accounts, Online-Multiplayer.
 
 **Vor der Veröffentlichung:**
