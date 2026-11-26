@@ -33,19 +33,25 @@ export function ChallengeTimer({ seconds, accent, resetKey }: ChallengeTimerProp
   const start = () => {
     stop();
     const key = resetKey;
-    let remaining = seconds;
-    setState({ key, remaining, done: false });
+    // Count against the clock, not the ticks: JS timers pause while the app is in the
+    // background, the remaining time must still be right afterwards.
+    const endsAt = Date.now() + seconds * 1000;
+    let shown = seconds;
+    setState({ key, remaining: shown, done: false });
     feedback('tap');
     timer.current = setInterval(() => {
-      remaining -= 1;
+      const remaining = Math.ceil((endsAt - Date.now()) / 1000);
       if (remaining > 0) {
-        setState({ key, remaining, done: false });
+        if (remaining !== shown) {
+          shown = remaining;
+          setState({ key, remaining, done: false });
+        }
         return;
       }
       stop();
       feedback('level');
       setState({ key, remaining: null, done: true });
-    }, 1000);
+    }, 250);
   };
 
   if (current.remaining !== null) {

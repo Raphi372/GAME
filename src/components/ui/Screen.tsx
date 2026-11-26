@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { ScrollView, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
+import { Platform, ScrollView, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { colors, maxContentWidth, spacing } from '@/theme';
@@ -53,7 +53,7 @@ export function Screen({
             contentContainerStyle={[styles.scrollContent, padding, contentStyle]}
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
-            focusable={focusableScroll}
+            focusable={Platform.OS === 'web' && focusableScroll}
           >
             {children}
           </ScrollView>

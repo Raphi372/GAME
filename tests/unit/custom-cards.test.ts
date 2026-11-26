@@ -93,8 +93,12 @@ describe('custom card validation', () => {
     expect(error('Wer hier war als Minderjährige verliebt')).toBe('minors');
     expect(error('Küss {other} gegen den Willen')).toBe('consent');
     expect(error('Force {other} to dance')).toBe('consent');
+    expect(error('Wer hier war unter 18 verliebt')).toBe('minors');
     // Harmless words that only look similar stay allowed.
     expect(error('Was ist dein liebstes Getränk')).toBe('Was ist dein liebstes Getränk?');
+    expect(error('Wie viele Exen hast du')).toBe('Wie viele Exen hast du?');
+    expect(error('Wer hier ist unter 180 cm groß')).toBe('Wer hier ist unter 180 cm groß?');
+    expect(error('Was hilft bei Schluckauf')).toBe('Was hilft bei Schluckauf?');
   });
 });
 

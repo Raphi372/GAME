@@ -36,7 +36,9 @@ export default function SummaryScreen() {
   const score = (player: (typeof result.players)[number]) =>
     group ? player[group.tally] : isChoice ? player.dares : player.answered;
   const ranked = [...result.players].sort((a, b) => score(b) - score(a));
-  const top = ranked[0] && score(ranked[0]) > 0 ? ranked[0] : null;
+  const best = Math.max(0, ...result.players.map(score));
+  // Everyone with the highest score – a tie names all of them.
+  const leaders = best > 0 ? result.players.filter((player) => score(player) === best) : [];
   const minutes = Math.max(1, Math.round(result.durationMs / 60000));
 
   const stats = isChoice
@@ -108,14 +110,20 @@ export default function SummaryScreen() {
         ))}
       </View>
 
-      {top ? (
+      {leaders.length > 0 ? (
         <Surface style={[styles.daring, { borderColor: `${meta.accent}66` }]}>
-          <Avatar name={top.name} colorIndex={top.colorIndex} size={48} />
+          <View style={styles.leaderAvatars}>
+            {leaders.slice(0, 3).map((leader, index) => (
+              <View key={leader.id} style={index > 0 ? styles.leaderOverlap : null}>
+                <Avatar name={leader.name} colorIndex={leader.colorIndex} size={leaders.length > 1 ? 40 : 48} />
+              </View>
+            ))}
+          </View>
           <View style={styles.flex}>
             <AppText variant="overline" color={meta.accent}>
               {`🏆 ${t(group ? group.copy.summaryTop : isChoice ? 'summary.mostDares' : single.summaryTop)}`}
             </AppText>
-            <AppText variant="h2">{top.name}</AppText>
+            <AppText variant="h2">{leaders.map((leader) => leader.name).join(' & ')}</AppText>
           </View>
         </Surface>
       ) : null}
@@ -158,6 +166,8 @@ const styles = StyleSheet.create({
     gap: spacing.md,
     borderRadius: radius.lg,
   },
+  leaderAvatars: { flexDirection: 'row' },
+  leaderOverlap: { marginLeft: -12 },
   flex: { flex: 1 },
   players: { gap: spacing.sm },
   playerRow: {

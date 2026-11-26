@@ -59,10 +59,11 @@ export const MAX_TIMER_SECONDS = 120;
  * the built-in decks: the game works without alcohol, never involves minors and never
  * makes anybody do something against their will.
  */
+// "Exen" is left out on purpose: it is also the plural of "Ex" (ex-partners).
 const DRINKING =
-  /\b(trink\w*|getrunken|schluck\w*|shots?|sauf\w*|besoffen|betrunken|alkohol\w*|exen|drink\w*|drunk|tipsy|chug\w*|booze|alcohol\w*)\b/i;
+  /\b(trink\w*|getrunken|schluck(?!auf)\w*|shots?|sauf\w*|besoffen|betrunken|alkohol\w*|drink\w*|drunk|tipsy|chug\w*|booze|alcohol\w*)\b/i;
 const MINORS =
-  /(minderjährig|unter 18|unter achtzehn|under 18|underage|\bminors?\b|schulmädchen|schuljunge|schoolgirl|schoolboy|\bloli\b|lolita|jailbait)/i;
+  /(minderjährig|\bunter 18\b|unter achtzehn|\bunder 18\b|underage|\bminors?\b|schulmädchen|schuljunge|schoolgirl|schoolboy|\bloli\b|lolita|jailbait)/i;
 const NO_CONSENT =
   /(gegen (den|deinen|ihren|seinen|euren) willen|ohne (zu fragen|erlaubnis|einverständnis|zustimmung)|\bzwing\w*|\bgezwungen|against (their|her|his|your) will|without (asking|consent|permission)|\bforc(e|ed|es|ing)\b)/i;
 const PLACEHOLDER = /\{[^}]*\}/g;

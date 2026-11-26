@@ -48,8 +48,15 @@ export function Button({
 }: ButtonProps) {
   const { scale, onPressIn, onPressOut } = usePressScale();
   const height = HEIGHTS[size];
+  // Primary buttons: pure white on the gradient, which is darkened for white text (WCAG AA).
   const textColor =
-    variant === 'ghost' ? colors.textSecondary : variant === 'danger' ? colors.danger : colors.text;
+    variant === 'primary'
+      ? colors.textOnAccent
+      : variant === 'ghost'
+      ? colors.textSecondary
+      : variant === 'danger'
+      ? colors.danger
+      : colors.text;
 
   const content = (
     <View

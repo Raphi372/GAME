@@ -24,7 +24,14 @@ import {
 } from '@/features/players/validation';
 import { getRng } from '@/services/randomSource';
 import { persistStorage, STORAGE_KEYS } from '@/services/storage';
-import { isSpicyLevel, type CardKind, type Player, type SpicyLevel } from '@/types';
+import {
+  isCardKind,
+  isSpicyLevel,
+  SPICY_LEVELS,
+  type CardKind,
+  type Player,
+  type SpicyLevel,
+} from '@/types';
 import { createId } from '@/utils/id';
 
 import { getPlayableDeck } from './decks';
@@ -103,16 +110,84 @@ function isPlayer(value: unknown): value is Player {
   );
 }
 
-function isSessionLike(value: unknown): value is GameSession {
-  if (typeof value !== 'object' || value === null) return false;
-  const session = value as Record<string, unknown>;
-  return (
-    typeof session.id === 'string' &&
-    isGameModeId(session.modeId) &&
-    isSpicyLevel(session.level) &&
-    typeof session.turnCounts === 'object' &&
-    typeof session.playedByLevel === 'object'
-  );
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+function finiteNumber(value: unknown): number | null {
+  return typeof value === 'number' && Number.isFinite(value) ? value : null;
+}
+
+function stringOrNull(value: unknown): string | null {
+  return typeof value === 'string' ? value : null;
+}
+
+/** Keeps only the known, numeric counters of a stored player's statistics. */
+function toStats(value: unknown): PlayerStats {
+  const stats = emptyStats();
+  if (!isRecord(value)) return stats;
+  for (const key of Object.keys(stats) as (keyof PlayerStats)[]) {
+    const count = finiteNumber(value[key]);
+    if (count !== null && count >= 0) stats[key] = count;
+  }
+  return stats;
+}
+
+/**
+ * Turns stored data into a well-formed session (missing or broken parts get safe
+ * defaults) – or `null` if it is not a session at all. Older app versions and
+ * corrupted storage must never stop the app from starting.
+ */
+export function toSession(value: unknown, now = Date.now()): GameSession | null {
+  if (!isRecord(value)) return null;
+  if (typeof value.id !== 'string' || !isGameModeId(value.modeId) || !isSpicyLevel(value.level)) return null;
+
+  const storedPlayed = isRecord(value.playedByLevel) ? value.playedByLevel : {};
+  const playedByLevel = Object.fromEntries(
+    SPICY_LEVELS.map((level) => {
+      const ids = storedPlayed[level];
+      return [level, Array.isArray(ids) ? ids.filter((id): id is string => typeof id === 'string') : []];
+    }),
+  ) as Record<SpicyLevel, string[]>;
+
+  const turnCounts: Record<string, number> = {};
+  if (isRecord(value.turnCounts)) {
+    for (const [id, count] of Object.entries(value.turnCounts)) {
+      const number = finiteNumber(count);
+      if (number !== null && number >= 0) turnCounts[id] = number;
+    }
+  }
+
+  const stats: Record<string, PlayerStats> = {};
+  if (isRecord(value.stats)) {
+    for (const [id, entry] of Object.entries(value.stats)) stats[id] = toStats(entry);
+  }
+
+  const storedCurrent = value.current;
+  const current =
+    isRecord(storedCurrent) && typeof storedCurrent.playerId === 'string'
+      ? {
+          playerId: storedCurrent.playerId,
+          questionId: stringOrNull(storedCurrent.questionId),
+          targetPlayerId: stringOrNull(storedCurrent.targetPlayerId),
+          ...(isCardKind(storedCurrent.kind) || storedCurrent.kind === null
+            ? { kind: storedCurrent.kind as CardKind | null }
+            : {}),
+        }
+      : null;
+
+  return {
+    id: value.id,
+    modeId: value.modeId,
+    level: value.level,
+    startedAt: finiteNumber(value.startedAt) ?? now,
+    playedByLevel,
+    turnCounts,
+    lastPlayerId: stringOrNull(value.lastPlayerId),
+    current,
+    turnsCompleted: Math.max(0, finiteNumber(value.turnsCompleted) ?? 0),
+    stats,
+  };
 }
 
 export function buildResult(session: GameSession, players: readonly Player[], now: number): GameResult {
@@ -138,12 +213,19 @@ export function sanitizeGameData(persisted: unknown): Partial<GameData> {
     result.players = data.players.filter(isPlayer).slice(0, getGameMode('spicy-questions').maxPlayers);
   }
   if (isSpicyLevel(data.lastLevel)) result.lastLevel = data.lastLevel;
-  if (isSessionLike(data.session)) {
+  const session = toSession(data.session);
+  if (session) {
     const players = result.players ?? [];
-    result.session =
-      players.length >= 2
-        ? repairSession(data.session, contextFor(players, data.session.modeId))
-        : null;
+    let repaired: GameSession | null = null;
+    if (players.length >= getGameMode(session.modeId).minPlayers) {
+      try {
+        repaired = repairSession(session, contextFor(players, session.modeId));
+      } catch (error) {
+        // Never block the app start because of a broken saved game – start without it.
+        if (__DEV__) console.warn('[game] discarded a saved game that could not be restored', error);
+      }
+    }
+    result.session = repaired;
   }
   return result;
 }
