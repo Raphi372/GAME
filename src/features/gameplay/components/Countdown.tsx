@@ -2,9 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { Animated, Easing, StyleSheet, View } from 'react-native';
 
 import { AppText, Button } from '@/components/ui';
+import { useLayout } from '@/hooks/useLayout';
 import { useMotion } from '@/hooks/useMotion';
 import { feedback } from '@/services/feedback';
-import { durations, fonts, NATIVE_DRIVER, spacing } from '@/theme';
+import { durations, fonts, NATIVE_DRIVER, scaled, spacing } from '@/theme';
 
 /** Time per step of the countdown in ms. */
 export const COUNTDOWN_STEP_MS = 800;
@@ -20,10 +21,14 @@ interface CountdownProps {
 }
 
 /** "3 · 2 · 1 – zeigen": helps everybody point at the same time. */
+/** Fixed height, so the screen does not jump between the numbers and "Los!". */
+const DISPLAY_HEIGHT = 48;
+
 export function Countdown({ label, hint, goLabel, accent, resetKey }: CountdownProps) {
   const [state, setState] = useState<{ key: string; value: number | null }>({ key: '', value: null });
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
   const { enabled: motion } = useMotion();
+  const layout = useLayout();
   const [scale] = useState(() => new Animated.Value(1));
   const value = state.key === resetKey ? state.value : null;
 
@@ -87,7 +92,11 @@ export function Countdown({ label, hint, goLabel, accent, resetKey }: CountdownP
   }
 
   return (
-    <View style={styles.display} aria-live="assertive" testID="countdown-display">
+    <View
+      style={[styles.display, { height: scaled(DISPLAY_HEIGHT, layout.scale) }]}
+      aria-live="assertive"
+      testID="countdown-display"
+    >
       <Animated.View style={{ transform: [{ scale }] }}>
         <AppText style={[styles.number, { color: accent }]} maxFontSizeMultiplier={1.2}>
           {value > 0 ? String(value) : goLabel}
@@ -98,6 +107,6 @@ export function Countdown({ label, hint, goLabel, accent, resetKey }: CountdownP
 }
 
 const styles = StyleSheet.create({
-  display: { height: 48, alignItems: 'center', justifyContent: 'center', marginVertical: spacing.xs },
+  display: { alignItems: 'center', justifyContent: 'center', marginVertical: spacing.xs },
   number: { fontFamily: fonts.displayBlack, fontSize: 34, lineHeight: 44 },
 });

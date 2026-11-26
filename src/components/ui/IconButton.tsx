@@ -1,7 +1,8 @@
 import { Animated, Pressable, StyleSheet } from 'react-native';
 
+import { useLayout } from '@/hooks/useLayout';
 import { feedback } from '@/services/feedback';
-import { colors, minTouchSize, radius } from '@/theme';
+import { colors, minTouchSize, radius, scaled } from '@/theme';
 
 import { Icon, type IconName } from './Icon';
 import { usePressScale } from './usePressScale';
@@ -29,6 +30,8 @@ export function IconButton({
   testID,
 }: IconButtonProps) {
   const { scale, onPressIn, onPressOut } = usePressScale(0.9);
+  const layout = useLayout();
+  const box = scaled(size, layout.scale);
   const color = tone === 'danger' ? colors.danger : tone === 'accent' ? colors.accent : colors.text;
   return (
     <Animated.View style={[{ transform: [{ scale }] }, disabled && styles.disabled]}>
@@ -48,7 +51,7 @@ export function IconButton({
         testID={testID}
         style={({ pressed }) => [
           styles.base,
-          { width: size, height: size },
+          { width: box, height: box },
           pressed && styles.pressed,
         ]}
       >

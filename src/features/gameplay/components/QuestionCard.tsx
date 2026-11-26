@@ -12,6 +12,7 @@ import {
 
 import { AppText, Chip } from '@/components/ui';
 import { LEVELS } from '@/features/levels/levels';
+import { useLayout } from '@/hooks/useLayout';
 import { useMotion } from '@/hooks/useMotion';
 import { colors, durations, fonts, glow, NATIVE_DRIVER, radius, spacing } from '@/theme';
 import type { SpicyLevel } from '@/types';
@@ -31,12 +32,15 @@ interface QuestionCardProps {
   style?: StyleProp<ViewStyle>;
 }
 
-function questionFontSize(text: string, width: number): number {
-  const base = width < 360 ? 22 : width > 600 ? 30 : 26;
+/** Before the layout scale – AppText scales it up on wide windows (30 → 36 pt on tablets). */
+function questionFontSize(text: string, width: number, wide: boolean): number {
+  const base = wide ? 30 : width < 360 ? 22 : 26;
   if (text.length > 110) return base - 4;
   if (text.length > 75) return base - 2;
   return base;
 }
+
+const CARD_MAX_HEIGHT = 540;
 
 export function QuestionCard({
   cardKey,
@@ -51,6 +55,7 @@ export function QuestionCard({
 }: QuestionCardProps) {
   const meta = LEVELS[level];
   const { width, height } = useWindowDimensions();
+  const { wide, scale } = useLayout();
   const { enabled: motion } = useMotion();
   const [progress] = useState(() => new Animated.Value(1));
 
@@ -70,7 +75,7 @@ export function QuestionCard({
     return () => animation.stop();
   }, [cardKey, motion, progress]);
 
-  const fontSize = questionFontSize(text, width);
+  const fontSize = questionFontSize(text, width, wide);
   const animatedStyle = {
     opacity: progress.interpolate({ inputRange: [0, 0.4, 1], outputRange: [0, 0.85, 1] }),
     transform: [
@@ -83,7 +88,13 @@ export function QuestionCard({
 
   return (
     <Animated.View
-      style={[styles.wrapper, glow(meta.accent, 44, 0, '38'), style, animatedStyle]}
+      style={[
+        styles.wrapper,
+        { maxHeight: CARD_MAX_HEIGHT * scale },
+        glow(meta.accent, 44, 0, '38'),
+        style,
+        animatedStyle,
+      ]}
       accessible
       aria-label={accessibilityLabel}
       aria-live="polite"
@@ -103,9 +114,10 @@ export function QuestionCard({
             styles.card,
             compact && styles.cardCompact,
             {
+              // Tablets: a bigger card for the bigger text, so the screen does not look empty.
               minHeight: compact
-                ? Math.max(190, Math.min(height * 0.26, 300))
-                : Math.max(220, Math.min(height * 0.38, 400)),
+                ? Math.max(190, Math.min(height * (wide ? 0.3 : 0.26), 300 * scale))
+                : Math.max(220, Math.min(height * (wide ? 0.42 : 0.38), 400 * scale)),
             },
           ]}
         >
@@ -143,7 +155,7 @@ export function QuestionCard({
 }
 
 const styles = StyleSheet.create({
-  wrapper: { borderRadius: radius.card, maxHeight: 540 },
+  wrapper: { borderRadius: radius.card },
   border: { flexGrow: 1, borderRadius: radius.card, padding: 1.5 },
   card: {
     flexGrow: 1,

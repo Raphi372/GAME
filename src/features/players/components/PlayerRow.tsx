@@ -2,13 +2,14 @@ import { useState } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 
 import { AppText, Avatar, IconButton } from '@/components/ui';
+import { useLayout } from '@/hooks/useLayout';
 import { useTranslation } from '@/i18n';
 import { feedback } from '@/services/feedback';
-import { colors, fonts, radius, spacing } from '@/theme';
+import { colors, fonts, radius, scaled, spacing } from '@/theme';
 import type { Player } from '@/types';
 
 import { MAX_NAME_LENGTH, type ValidationResult } from '../validation';
-import { playerErrorMessage } from './AddPlayerForm';
+import { INPUT_FONT_SIZE, playerErrorMessage } from './AddPlayerForm';
 
 interface PlayerRowProps {
   player: Player;
@@ -17,6 +18,9 @@ interface PlayerRowProps {
   removeDisabled?: boolean;
   removeDisabledHint?: string;
 }
+
+/** Avatar width plus gap: the error lines up with the name. */
+const ERROR_INDENT = 56;
 
 export function PlayerRow({
   player,
@@ -29,6 +33,7 @@ export function PlayerRow({
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(player.name);
   const [error, setError] = useState<string | null>(null);
+  const { scale } = useLayout();
 
   const startEditing = () => {
     setDraft(player.name);
@@ -67,7 +72,7 @@ export function PlayerRow({
             autoCorrect={false}
             returnKeyType="done"
             selectionColor={colors.accent}
-            style={styles.input}
+            style={[styles.input, { fontSize: scaled(INPUT_FONT_SIZE, scale) }]}
             maxFontSizeMultiplier={1.4}
           />
         ) : (
@@ -109,7 +114,7 @@ export function PlayerRow({
         )}
       </View>
       {error ? (
-        <AppText variant="caption" color={colors.danger} role="alert" style={styles.error}>
+        <AppText variant="caption" color={colors.danger} role="alert" style={{ marginLeft: scaled(ERROR_INDENT, scale) }}>
           {error}
         </AppText>
       ) : null}
@@ -135,9 +140,7 @@ const styles = StyleSheet.create({
     minHeight: 44,
     color: colors.text,
     fontFamily: fonts.bodyBold,
-    fontSize: 17,
     borderBottomWidth: 1,
     borderBottomColor: colors.accent,
   },
-  error: { marginLeft: 56 },
 });

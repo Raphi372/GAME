@@ -2,9 +2,10 @@ import { Animated, Pressable, StyleSheet, View } from 'react-native';
 
 import { AppText, Chip, Icon } from '@/components/ui';
 import { usePressScale } from '@/components/ui/usePressScale';
+import { useLayout } from '@/hooks/useLayout';
 import { useTranslation } from '@/i18n';
 import { feedback } from '@/services/feedback';
-import { colors, radius, spacing } from '@/theme';
+import { colors, radius, scaled, spacing } from '@/theme';
 
 import { cardCountKey, modeTaglineKey, modeTitleKey } from './labels';
 import type { GameModeDefinition } from './registry';
@@ -15,16 +16,19 @@ interface ModeCardProps {
   onPress: () => void;
 }
 
+const EMOJI_BOX = 52;
+
 export function ModeCard({ mode, questionCount, onPress }: ModeCardProps) {
   const { t } = useTranslation();
   const { scale, onPressIn, onPressOut } = usePressScale(0.98);
+  const box = scaled(EMOJI_BOX, useLayout().scale);
   const title = t(modeTitleKey(mode.id));
   const tagline = t(modeTaglineKey(mode.id));
   const available = mode.status === 'available';
 
   const body = (
     <View style={[styles.card, available ? styles.available : styles.unavailable]}>
-      <View style={[styles.emojiBox, available && styles.emojiBoxActive]}>
+      <View style={[styles.emojiBox, { width: box, height: box }, available && styles.emojiBoxActive]}>
         <AppText variant="h2" aria-hidden maxFontSizeMultiplier={1}>
           {mode.emoji}
         </AppText>
@@ -86,8 +90,6 @@ const styles = StyleSheet.create({
   available: { backgroundColor: colors.surfaceRaised, borderColor: colors.borderStrong },
   unavailable: { backgroundColor: 'rgba(21, 17, 28, 0.6)', borderColor: colors.border },
   emojiBox: {
-    width: 52,
-    height: 52,
     borderRadius: radius.md,
     alignItems: 'center',
     justifyContent: 'center',

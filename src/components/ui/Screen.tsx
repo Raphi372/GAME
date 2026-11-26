@@ -2,7 +2,8 @@ import type { ReactNode } from 'react';
 import { Platform, ScrollView, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { colors, maxContentWidth, spacing } from '@/theme';
+import { useLayout } from '@/hooks/useLayout';
+import { colors, spacing } from '@/theme';
 
 import { AmbientBackground } from './AmbientBackground';
 
@@ -24,7 +25,7 @@ interface ScreenProps {
   testID?: string;
 }
 
-/** Base layout: ambient background, safe areas, centred max-width column. */
+/** Base layout: ambient background, safe areas, centred max-width column (wider on tablets). */
 export function Screen({
   children,
   header,
@@ -37,15 +38,20 @@ export function Screen({
   testID,
 }: ScreenProps) {
   const insets = useSafeAreaInsets();
+  const layout = useLayout();
+  const gutter = layout.wide ? spacing.xxxl : spacing.xl;
   const padding = {
-    paddingLeft: Math.max(insets.left, spacing.xl),
-    paddingRight: Math.max(insets.right, spacing.xl),
+    paddingLeft: Math.max(insets.left, gutter),
+    paddingRight: Math.max(insets.right, gutter),
   };
 
   return (
     <View style={styles.root} testID={testID}>
       <AmbientBackground accent={accent} secondary={secondaryAccent} />
-      <View role="main" style={[styles.column, { paddingTop: insets.top + spacing.sm }]}>
+      <View
+        role="main"
+        style={[styles.column, { maxWidth: layout.contentWidth, paddingTop: insets.top + spacing.sm }]}
+      >
         {header ? <View style={[styles.header, padding]}>{header}</View> : null}
         {scroll ? (
           <ScrollView
@@ -80,7 +86,7 @@ export function Screen({
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.background },
-  column: { flex: 1, width: '100%', maxWidth: maxContentWidth, alignSelf: 'center' },
+  column: { flex: 1, width: '100%', alignSelf: 'center' },
   flex: { flex: 1 },
   header: { paddingBottom: spacing.sm },
   scrollContent: { paddingBottom: spacing.xxl, flexGrow: 1 },

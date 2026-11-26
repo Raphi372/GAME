@@ -2,9 +2,10 @@ import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { Animated, KeyboardAvoidingView, Modal, Platform, Pressable, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { useLayout } from '@/hooks/useLayout';
 import { useMotion } from '@/hooks/useMotion';
 import { useTranslation } from '@/i18n';
-import { colors, durations, maxContentWidth, NATIVE_DRIVER, radius, spacing } from '@/theme';
+import { colors, durations, NATIVE_DRIVER, radius, spacing } from '@/theme';
 
 interface SheetProps {
   visible: boolean;
@@ -22,6 +23,7 @@ export function Sheet({ visible, onClose, children, accent = colors.primary, lab
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
   const { enabled: motion } = useMotion();
+  const { contentWidth } = useLayout();
   const [translateY] = useState(() => new Animated.Value(motion ? 60 : 0));
 
   // Web: react-native-web's Modal renders the dialog element itself and takes no label –
@@ -76,6 +78,7 @@ export function Sheet({ visible, onClose, children, accent = colors.primary, lab
           ref={nameDialog}
           style={[
             styles.panel,
+            { maxWidth: contentWidth },
             { paddingBottom: Math.max(insets.bottom, spacing.lg) + spacing.sm },
             { transform: [{ translateY }] },
           ]}
@@ -93,7 +96,6 @@ const styles = StyleSheet.create({
   backdrop: { flex: 1, backgroundColor: colors.overlay },
   panel: {
     width: '100%',
-    maxWidth: maxContentWidth,
     alignSelf: 'center',
     backgroundColor: colors.surface,
     borderTopLeftRadius: radius.xl,

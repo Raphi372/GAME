@@ -6,10 +6,11 @@ import { modeTitleKey } from '@/features/game-modes/labels';
 import type { GameModeId } from '@/features/game-modes/registry';
 import { LEVELS } from '@/features/levels/levels';
 import { OTHER_PLAYER_PLACEHOLDER } from '@/features/question-decks/templates';
+import { useLayout } from '@/hooks/useLayout';
 import { useTranslation, type TranslateFn } from '@/i18n';
 import { feedback } from '@/services/feedback';
 import { useCustomCardsStore } from '@/store';
-import { colors, fonts, radius, spacing } from '@/theme';
+import { colors, fonts, radius, scaleTextStyle, spacing } from '@/theme';
 import { CARD_KINDS, type CardKind, type SpicyLevel } from '@/types';
 
 import {
@@ -25,6 +26,8 @@ import {
   type CustomCardError,
 } from '../model';
 import { ChoiceChip } from './ChoiceChip';
+
+const INPUT_TEXT = { fontSize: 16, lineHeight: 22 };
 
 export function customCardErrorMessage(t: TranslateFn, error: CustomCardError): string {
   switch (error) {
@@ -56,6 +59,7 @@ export function CustomCardEditor({ modeId, level, card, onClose }: CustomCardEdi
   );
   const [seconds, setSeconds] = useState<number | undefined>(card?.seconds);
   const [error, setError] = useState<string | null>(null);
+  const { scale } = useLayout();
   const meta = LEVELS[level];
   const lead = requiredLead(modeId, locale);
 
@@ -111,7 +115,7 @@ export function CustomCardEditor({ modeId, level, card, onClose }: CustomCardEdi
           aria-label={t('custom.inputLabel')}
           maxLength={CUSTOM_CARD_MAX_LENGTH + 20}
           selectionColor={colors.accent}
-          style={[styles.input, error ? styles.inputError : null]}
+          style={[styles.input, scaleTextStyle(INPUT_TEXT, scale), error ? styles.inputError : null]}
           maxFontSizeMultiplier={1.4}
           testID="custom-card-input"
         />
@@ -197,8 +201,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surfaceRaised,
     color: colors.text,
     fontFamily: fonts.body,
-    fontSize: 16,
-    lineHeight: 22,
     paddingHorizontal: spacing.md,
     paddingTop: spacing.md,
     paddingBottom: spacing.md,

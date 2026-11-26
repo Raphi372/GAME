@@ -21,6 +21,7 @@ import {
 } from '@/features/gameplay/engine/session';
 import { LEVELS } from '@/features/levels/levels';
 import { renderQuestionText, splitLead } from '@/features/question-decks';
+import { useLayout } from '@/hooks/useLayout';
 import { useTranslation } from '@/i18n';
 import { feedback } from '@/services/feedback';
 import { getPlayableDeck, useCustomCardsStore, useEntitlementsStore, useGameStore } from '@/store';
@@ -33,6 +34,8 @@ export default function GameScreen() {
   const { width } = useWindowDimensions();
   /** Narrow phones: compact secondary buttons so the labels keep fitting. */
   const narrow = width < 380;
+  /** Tablets have room for a full-size card above the player picker as well. */
+  const { wide } = useLayout();
   const session = useGameStore((state) => state.session);
   const players = useGameStore((state) => state.players);
   const answer = useGameStore((state) => state.answer);
@@ -314,7 +317,7 @@ export default function GameScreen() {
                   : t('game.questionA11y', { name: player?.name ?? '', question: fullText })
               }
               compact={isGroup}
-              style={isGroup ? undefined : styles.card}
+              style={isGroup && !wide ? undefined : styles.card}
             />
             {question?.seconds ? (
               <ChallengeTimer seconds={question.seconds} accent={meta.accent} resetKey={cardKey} />

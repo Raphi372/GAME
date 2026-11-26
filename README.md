@@ -144,7 +144,13 @@ Englisch) liegen in [`docs/store/screenshots/`](docs/store/screenshots/) – sie
 - Haptisches Feedback und dezente Soundeffekte (unterbrechen keine laufende Musik und
   respektieren den Lautlos-Schalter).
 - Respektiert die Systemeinstellung **„Bewegung reduzieren“** und den eigenen Schalter.
-- Responsive bis Tablet-Breite, Accessibility-Labels/Rollen für Screenreader.
+- **Tablet-Layout:** Ab 700 pt Fensterbreite (iPad hoch und quer, große Android-Tablets,
+  Desktop-Browser) wird die Inhaltsspalte breiter (760 statt 560 pt) und Schrift, Symbole,
+  Buttons und Spielkarte wachsen um 20 %. Die Spielkarte füllt dort auch in den Gruppenmodi
+  den Bildschirm, die Kacheln bei „Wahrheit oder Pflicht“ werden größer. Entscheidend ist das
+  aktuelle Fenster, nicht das Gerät: In einem schmalen Split-Screen-Fenster bleibt das
+  Handy-Layout.
+- Accessibility-Labels/Rollen für Screenreader.
 
 ### Barrierefreiheit
 - Geprüft mit axe-core (WCAG 2.2 A/AA + Best Practices) über alle Bildschirme, Sheets und
@@ -244,16 +250,16 @@ Englisch) liegen in [`docs/store/screenshots/`](docs/store/screenshots/) – sie
 │   │   ├── truth-or-dare/       # Wahrheit oder Pflicht: mild.json, hot.json, extreme.json
 │   │   ├── random-challenges/   # Random Challenges: mild.json, hot.json, extreme.json
 │   │   └── en/                  # Englische Texte je Modus: en/<modus>/<level>.json
-│   ├── hooks/                   # useMotion (Animationen + „Bewegung reduzieren“)
+│   ├── hooks/                   # useMotion (Animationen + „Bewegung reduzieren“), useLayout
 │   ├── i18n/                    # de.ts (Quelle), en.ts, useTranslation
 │   ├── services/                # Storage, Haptik, Sound, Feedback, Zufallsquelle
 │   ├── store/                   # Zustand-Stores (Spiel, Einstellungen, eigene Karten,
 │   │                            # Premium-Status), Hydrierung, spielbares Deck
-│   ├── theme/                   # Farben, Typografie, Abstände, Motion, Glow
+│   ├── theme/                   # Farben, Typografie, Abstände, Motion, Glow, Tablet-Layout
 │   ├── types/                   # Gemeinsame Typen
 │   └── utils/                   # Zufall (inkl. Seed-RNG), IDs
 ├── tests/
-│   ├── unit/                    # Engine, Stores, Persistenz, Daten, i18n, Premium
+│   ├── unit/                    # Engine, Stores, Persistenz, Daten, i18n, Premium, Layout
 │   ├── integration/             # Komplette App mit echten Routen
 │   └── helpers/
 ├── assets/
@@ -591,6 +597,9 @@ eine Sprache, wird auf Deutsch zurückgegriffen. Feste Kartenanfänge („Ich ha
 - **Farben, Schriften, Abstände** nur aus `src/theme` verwenden; neue UI aus den
   Komponenten in `src/components/ui` zusammensetzen.
 - **Texte** nie hart codieren – immer `useTranslation()` und Schlüssel in `de.ts` + `en.ts`.
+- **Größen** immer für das Handy angeben: `AppText`, `Icon`, `IconButton`, `Avatar` und
+  `Button` skalieren auf Tablets selbst. Eigene feste Maße (Boxen, Mindesthöhen, Eingabefelder)
+  mit `scaled(size, useLayout().scale)` anpassen; `useLayout().wide` für Tablet-Varianten.
 - **Animationen** über `useMotion()` steuern, damit „Bewegung reduzieren“ respektiert wird;
   `NATIVE_DRIVER` aus `src/theme` verwenden.
 - **Spiellogik** in `features/gameplay/engine` halten und dort mit Seed-RNG testen.
