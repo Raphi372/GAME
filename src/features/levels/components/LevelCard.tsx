@@ -7,7 +7,7 @@ import { cardCountKey } from '@/features/game-modes/labels';
 import type { GameModeId } from '@/features/game-modes/registry';
 import { usePressScale } from '@/components/ui/usePressScale';
 import { useLayout } from '@/hooks/useLayout';
-import { useTranslation } from '@/i18n';
+import { useTranslation, type TranslationKey } from '@/i18n';
 import { feedback } from '@/services/feedback';
 import { colors, glow, radius, scaled, spacing } from '@/theme';
 import type { SpicyLevel } from '@/types';
@@ -23,6 +23,9 @@ interface LevelCardProps {
   customCount?: number;
   compact?: boolean;
   modeId?: GameModeId;
+  /** Mixed rounds: own description and card count text instead of the mode's. */
+  descriptionKey?: TranslationKey;
+  countLabel?: string;
   testID?: string;
 }
 
@@ -36,6 +39,8 @@ export function LevelCard({
   customCount = 0,
   compact = false,
   modeId = 'spicy-questions',
+  descriptionKey,
+  countLabel,
   testID,
 }: LevelCardProps) {
   const { t } = useTranslation();
@@ -44,8 +49,8 @@ export function LevelCard({
   const radioSize = scaled(RADIO_SIZE, useLayout().scale);
   const name = t(meta.nameKey);
   const tagline = t(meta.taglineKey);
-  const description = t(levelDescriptionKey(level, modeId));
-  const builtInCount = t(cardCountKey(modeId), { count: questionCount });
+  const description = t(descriptionKey ?? levelDescriptionKey(level, modeId));
+  const builtInCount = countLabel ?? t(cardCountKey(modeId), { count: questionCount });
   const count =
     customCount > 0 ? `${builtInCount} ${t('level.customSuffix', { count: customCount })}` : builtInCount;
 

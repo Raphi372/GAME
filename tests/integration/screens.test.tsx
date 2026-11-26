@@ -70,7 +70,9 @@ describe('level screen', () => {
   it('shows all three spicy levels with their question counts', async () => {
     await renderRouter(APP_DIR, { initialUrl: '/level' });
     const radios = await screen.findAllByRole('radio');
-    expect(radios).toHaveLength(3);
+    // Three levels – plus the round length options below them.
+    expect(radios.filter((radio) => /^level-/.test(radio.props.testID))).toHaveLength(3);
+    expect(radios.filter((radio) => /^round-length-/.test(radio.props.testID))).toHaveLength(4);
     expect(screen.getByText('Let’s warm up.')).toBeOnTheScreen();
     expect(screen.getByText('Things are heating up.')).toBeOnTheScreen();
     expect(screen.getByText('Are you ready?')).toBeOnTheScreen();

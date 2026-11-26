@@ -7,12 +7,14 @@ import {
   getGameMode,
   isGameModeId,
   MAX_PLAYERS,
+  minPlayersFor,
+  MIX_PARAM,
 } from '@/features/game-modes/registry';
 import { AddPlayerForm } from '@/features/players/components/AddPlayerForm';
 import { PlayerRow } from '@/features/players/components/PlayerRow';
 import { useTranslation } from '@/i18n';
 import { feedback } from '@/services/feedback';
-import { useGameStore } from '@/store';
+import { sessionMinPlayers, useGameStore } from '@/store';
 import { colors, spacing } from '@/theme';
 
 export default function PlayersScreen() {
@@ -27,10 +29,20 @@ export default function PlayersScreen() {
   const renamePlayer = useGameStore((state) => state.renamePlayer);
   const removePlayer = useGameStore((state) => state.removePlayer);
 
+  const mixModeIds = useGameStore((state) => state.lastRound.mixModeIds);
+
+  const mixed = !fromGame && params.mode === MIX_PARAM;
   const modeId = fromGame && session ? session.modeId : isGameModeId(params.mode) ? params.mode : DEFAULT_MODE_ID;
-  const mode = getGameMode(modeId);
-  const missing = Math.max(0, mode.minPlayers - players.length);
-  const removeLocked = fromGame && session !== null && players.length <= mode.minPlayers;
+  // A running game (also a mixed round) or a mixed round about to start needs fewer players
+  // than its pickiest mode: modes needing more are simply left out.
+  const minPlayers =
+    fromGame && session
+      ? sessionMinPlayers(session)
+      : mixed
+      ? minPlayersFor(mixModeIds)
+      : getGameMode(modeId).minPlayers;
+  const missing = Math.max(0, minPlayers - players.length);
+  const removeLocked = fromGame && session !== null && players.length <= minPlayers;
 
   return (
     <KeyboardAvoidingView
@@ -41,7 +53,7 @@ export default function PlayersScreen() {
         header={
           <Header
             title={t('players.title')}
-            subtitle={t('players.subtitle', { min: mode.minPlayers, max: MAX_PLAYERS })}
+            subtitle={t('players.subtitle', { min: minPlayers, max: MAX_PLAYERS })}
           />
         }
         footer={
@@ -58,7 +70,7 @@ export default function PlayersScreen() {
                 label={t('players.continue')}
                 icon="arrow-forward"
                 disabled={missing > 0}
-                onPress={() => router.push({ pathname: '/level', params: { mode: modeId } })}
+                onPress={() => router.push({ pathname: '/level', params: { mode: mixed ? MIX_PARAM : modeId } })}
                 testID="players-continue"
               />
             )}
@@ -81,13 +93,13 @@ export default function PlayersScreen() {
                   if (removePlayer(player.id)) feedback('pass');
                 }}
                 removeDisabled={removeLocked}
-                removeDisabledHint={t('players.removeLocked', { min: mode.minPlayers })}
+                removeDisabledHint={t('players.removeLocked', { min: minPlayers })}
               />
             ))
           )}
         </View>
         <AppText variant="caption" color={colors.textMuted} align="center" style={styles.note}>
-          {removeLocked ? t('players.removeLocked', { min: mode.minPlayers }) : t('players.localNote')}
+          {removeLocked ? t('players.removeLocked', { min: minPlayers }) : t('players.localNote')}
         </AppText>
       </Screen>
     </KeyboardAvoidingView>

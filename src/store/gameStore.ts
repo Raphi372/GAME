@@ -1,7 +1,15 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import { getGameMode, isGameModeId, isModePlayable, type GameModeId } from '@/features/game-modes/registry';
+import {
+  getGameMode,
+  isGameModeId,
+  isModePlayable,
+  listPlayableModeIds,
+  minPlayersFor,
+  type GameModeId,
+} from '@/features/game-modes/registry';
+import { isMixedRound, type RoundSettings } from '@/features/gameplay/engine/round';
 import {
   changeLevel as changeSessionLevel,
   chooseCard as chooseSessionCard,
@@ -9,6 +17,8 @@ import {
   completeTurn,
   emptyStats,
   createSession,
+  isSessionOver,
+  normalizeRound,
   repairSession,
   reshuffleLevel,
   skipQuestion,
@@ -37,11 +47,30 @@ import { createId } from '@/utils/id';
 import { getPlayableDeck } from './decks';
 import { useSettingsStore } from './settingsStore';
 
+/** Round options chosen before a game ("Runde anpassen"). */
+export interface RoundSetup {
+  /** Cards in the round; `null` = endless. */
+  length: number | null;
+  /** Start MILD and build up to the chosen level. */
+  escalate: boolean;
+  /** Mixed round: the modes to mix (at least two). */
+  modeIds?: GameModeId[];
+}
+
+/** Round options used most recently – pre-selected next time. */
+export interface LastRound {
+  length: number | null;
+  escalate: boolean;
+  /** Modes picked for the last mixed round. */
+  mixModeIds: GameModeId[];
+}
+
 export interface GameData {
   players: Player[];
   session: GameSession | null;
   /** Level chosen most recently – pre-selected next time. */
   lastLevel: SpicyLevel;
+  lastRound: LastRound;
 }
 
 export interface PlayerResult extends Player, PlayerStats {}
@@ -49,6 +78,8 @@ export interface PlayerResult extends Player, PlayerStats {}
 /** Summary of a finished game (kept in memory only, never persisted). */
 export interface GameResult {
   modeId: GameModeId;
+  /** The round mixed several modes. */
+  mixed: boolean;
   level: SpicyLevel;
   turnsCompleted: number;
   durationMs: number;
@@ -66,7 +97,8 @@ export interface GameState extends GameData {
   removePlayer: (id: string) => boolean;
   clearPlayers: () => void;
 
-  startGame: (modeId: GameModeId, level: SpicyLevel) => boolean;
+  /** Starts a game – optionally with a round length, escalation or mixed modes. */
+  startGame: (modeId: GameModeId, level: SpicyLevel, setup?: RoundSetup) => boolean;
   answer: () => void;
   pass: () => void;
   /**
@@ -88,7 +120,18 @@ export interface GameState extends GameData {
   resetAll: () => void;
 }
 
-export const INITIAL_GAME_DATA: GameData = { players: [], session: null, lastLevel: 'mild' };
+export const DEFAULT_LAST_ROUND: LastRound = {
+  length: null,
+  escalate: false,
+  mixModeIds: listPlayableModeIds(),
+};
+
+export const INITIAL_GAME_DATA: GameData = {
+  players: [],
+  session: null,
+  lastLevel: 'mild',
+  lastRound: DEFAULT_LAST_ROUND,
+};
 
 function contextFor(players: readonly Player[], modeId: GameModeId): SessionContext {
   const locale = useSettingsStore.getState().locale;
@@ -97,6 +140,42 @@ function contextFor(players: readonly Player[], modeId: GameModeId): SessionCont
     rng: getRng(),
     getDeck: (level) => getPlayableDeck(modeId, level, locale),
     choiceKinds: getGameMode(modeId).choice?.kinds,
+    forMode: (id) => ({
+      getDeck: (level) => getPlayableDeck(id, level, locale),
+      choiceKinds: getGameMode(id).choice?.kinds,
+      minPlayers: getGameMode(id).minPlayers,
+    }),
+  };
+}
+
+/** Players a running game needs at least – a mixed round only needs its smallest mode's. */
+export function sessionMinPlayers(session: GameSession): number {
+  return isMixedRound(session.round) ? minPlayersFor(session.round.modeIds) : getGameMode(session.modeId).minPlayers;
+}
+
+function playableModeIds(value: unknown): GameModeId[] {
+  return Array.isArray(value) ? [...new Set(value.filter(isGameModeId).filter(isModePlayable))] : [];
+}
+
+function toRound(value: unknown): Partial<RoundSettings> {
+  if (!isRecord(value)) return {};
+  const length = finiteNumber(value.length);
+  return {
+    length,
+    modeIds: playableModeIds(value.modeIds),
+    escalate: value.escalate === true,
+    ...(isSpicyLevel(value.peak) ? { peak: value.peak } : {}),
+  };
+}
+
+function toLastRound(value: unknown): LastRound {
+  if (!isRecord(value)) return DEFAULT_LAST_ROUND;
+  const length = finiteNumber(value.length);
+  const mixModeIds = playableModeIds(value.mixModeIds);
+  return {
+    length: length !== null && Number.isInteger(length) && length > 0 ? length : null,
+    escalate: value.escalate === true,
+    mixModeIds: mixModeIds.length >= 2 ? mixModeIds : DEFAULT_LAST_ROUND.mixModeIds,
   };
 }
 
@@ -176,10 +255,21 @@ export function toSession(value: unknown, now = Date.now()): GameSession | null 
         }
       : null;
 
+  const dealtByMode: Partial<Record<GameModeId, number>> = {};
+  if (isRecord(value.dealtByMode)) {
+    for (const [id, count] of Object.entries(value.dealtByMode)) {
+      const number = finiteNumber(count);
+      if (isGameModeId(id) && number !== null && number >= 0) dealtByMode[id] = number;
+    }
+  }
+
   return {
     id: value.id,
     modeId: value.modeId,
     level: value.level,
+    // Games saved before rounds existed are endless single-mode rounds.
+    round: normalizeRound(toRound(value.round), value.modeId, value.level),
+    dealtByMode,
     startedAt: finiteNumber(value.startedAt) ?? now,
     playedByLevel,
     turnCounts,
@@ -193,6 +283,7 @@ export function toSession(value: unknown, now = Date.now()): GameSession | null 
 export function buildResult(session: GameSession, players: readonly Player[], now: number): GameResult {
   return {
     modeId: session.modeId,
+    mixed: isMixedRound(session.round),
     level: session.level,
     turnsCompleted: session.turnsCompleted,
     durationMs: Math.max(0, now - session.startedAt),
@@ -213,11 +304,13 @@ export function sanitizeGameData(persisted: unknown): Partial<GameData> {
     result.players = data.players.filter(isPlayer).slice(0, getGameMode('spicy-questions').maxPlayers);
   }
   if (isSpicyLevel(data.lastLevel)) result.lastLevel = data.lastLevel;
+  if ('lastRound' in data) result.lastRound = toLastRound(data.lastRound);
   const session = toSession(data.session);
   if (session) {
     const players = result.players ?? [];
     let repaired: GameSession | null = null;
-    if (players.length >= getGameMode(session.modeId).minPlayers) {
+    // A round that was already over when the app closed is not resumed.
+    if (!isSessionOver(session) && players.length >= sessionMinPlayers(session)) {
       try {
         repaired = repairSession(session, contextFor(players, session.modeId));
       } catch (error) {
@@ -281,7 +374,7 @@ export const useGameStore = create<GameState>()(
           const { players, session } = get();
           if (!players.some((player) => player.id === id)) return false;
           const remaining = players.filter((player) => player.id !== id);
-          if (session && remaining.length < getGameMode(session.modeId).minPlayers) {
+          if (session && remaining.length < sessionMinPlayers(session)) {
             // Not enough players left for the running game: it ends.
             set({ players: remaining, session: null });
             return true;
@@ -292,15 +385,34 @@ export const useGameStore = create<GameState>()(
 
         clearPlayers: () => set({ players: [], session: null }),
 
-        startGame: (modeId, level) => {
-          const { players } = get();
-          const mode = getGameMode(modeId);
-          if (!isModePlayable(modeId) || players.length < mode.minPlayers) return false;
-          const session = createSession(
-            { id: createId('session', getRng()), modeId, level, now: Date.now() },
-            contextFor(players, modeId),
+        startGame: (modeId, level, setup) => {
+          const { players, lastRound } = get();
+          const mixing = (setup?.modeIds?.length ?? 0) > 1;
+          // Mixed rounds leave out modes that need more players than are here.
+          const modeIds = (mixing ? playableModeIds(setup?.modeIds) : [modeId]).filter(
+            (id) => isModePlayable(id) && players.length >= getGameMode(id).minPlayers,
           );
-          set({ session, lastLevel: level });
+          const first = modeIds[0];
+          if (!first) return false;
+          const session = createSession(
+            {
+              id: createId('session', getRng()),
+              modeId: first,
+              level,
+              now: Date.now(),
+              round: { length: setup?.length ?? null, escalate: setup?.escalate ?? false, modeIds },
+            },
+            contextFor(players, first),
+          );
+          set({
+            session,
+            lastLevel: level,
+            lastRound: {
+              length: session.round.length,
+              escalate: setup?.escalate ?? false,
+              mixModeIds: mixing ? playableModeIds(setup?.modeIds) : lastRound.mixModeIds,
+            },
+          });
           return true;
         },
 
@@ -335,7 +447,7 @@ export const useGameStore = create<GameState>()(
       name: STORAGE_KEYS.game,
       version: 1,
       storage: persistStorage,
-      partialize: ({ players, session, lastLevel }) => ({ players, session, lastLevel }),
+      partialize: ({ players, session, lastLevel, lastRound }) => ({ players, session, lastLevel, lastRound }),
       merge: (persisted, current) => ({ ...current, ...sanitizeGameData(persisted) }),
     },
   ),

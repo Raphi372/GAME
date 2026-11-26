@@ -18,19 +18,44 @@ interface ModeCardProps {
 
 const EMOJI_BOX = 52;
 
+/** A game mode on the home screen. */
 export function ModeCard({ mode, questionCount, onPress }: ModeCardProps) {
+  const { t } = useTranslation();
+  const available = mode.status === 'available';
+  return (
+    <ModeTile
+      emoji={mode.emoji}
+      title={t(modeTitleKey(mode.id))}
+      tagline={t(modeTaglineKey(mode.id))}
+      detail={available && questionCount ? t(cardCountKey(mode.id), { count: questionCount }) : undefined}
+      available={available}
+      onPress={onPress}
+    />
+  );
+}
+
+interface ModeTileProps {
+  emoji: string;
+  title: string;
+  tagline: string;
+  /** E.g. the number of cards, shown after the tagline. */
+  detail?: string;
+  available?: boolean;
+  onPress: () => void;
+  testID?: string;
+}
+
+/** Card layout shared by the game modes and the mixed round. */
+export function ModeTile({ emoji, title, tagline, detail, available = true, onPress, testID }: ModeTileProps) {
   const { t } = useTranslation();
   const { scale, onPressIn, onPressOut } = usePressScale(0.98);
   const box = scaled(EMOJI_BOX, useLayout().scale);
-  const title = t(modeTitleKey(mode.id));
-  const tagline = t(modeTaglineKey(mode.id));
-  const available = mode.status === 'available';
 
   const body = (
     <View style={[styles.card, available ? styles.available : styles.unavailable]}>
       <View style={[styles.emojiBox, { width: box, height: box }, available && styles.emojiBoxActive]}>
         <AppText variant="h2" aria-hidden maxFontSizeMultiplier={1}>
-          {mode.emoji}
+          {emoji}
         </AppText>
       </View>
       <View style={styles.text}>
@@ -38,9 +63,7 @@ export function ModeCard({ mode, questionCount, onPress }: ModeCardProps) {
           {title}
         </AppText>
         <AppText variant="caption" color={colors.textMuted} numberOfLines={2}>
-          {available && questionCount
-            ? `${tagline} · ${t(cardCountKey(mode.id), { count: questionCount })}`
-            : tagline}
+          {detail ? `${tagline} · ${detail}` : tagline}
         </AppText>
       </View>
       {available ? (
@@ -64,6 +87,7 @@ export function ModeCard({ mode, questionCount, onPress }: ModeCardProps) {
       <Pressable
         role="button"
         aria-label={`${title}. ${tagline}`}
+        testID={testID}
         onPressIn={onPressIn}
         onPressOut={onPressOut}
         onPress={() => {

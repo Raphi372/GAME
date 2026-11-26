@@ -3,6 +3,7 @@ export { AppText } from './AppText';
 export { Avatar } from './Avatar';
 export { Button, type ButtonProps } from './Button';
 export { Chip } from './Chip';
+export { ChoiceChip } from './ChoiceChip';
 export { ConfirmSheet } from './ConfirmSheet';
 export { Header } from './Header';
 export { Icon, type IconName } from './Icon';
