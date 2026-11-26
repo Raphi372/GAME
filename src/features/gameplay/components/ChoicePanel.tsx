@@ -3,6 +3,7 @@ import { Animated, Pressable, StyleSheet, useWindowDimensions, View } from 'reac
 
 import { AppText, Icon, type IconName } from '@/components/ui';
 import { usePressScale } from '@/components/ui/usePressScale';
+import { useLayout } from '@/hooks/useLayout';
 import { useTranslation, type TranslationKey } from '@/i18n';
 import { feedback } from '@/services/feedback';
 import { colors, fonts, glow, radius, spacing } from '@/theme';
@@ -14,6 +15,10 @@ interface KindStyle {
   icon: IconName;
   gradient: readonly [string, string];
 }
+
+const TILE_MIN_HEIGHT = 200;
+/** Tablets: big tiles to tap, so the choice fills the screen like a card does. */
+const TILE_MIN_HEIGHT_WIDE = 320;
 
 const KINDS: Record<CardKind, KindStyle> = {
   truth: {
@@ -49,6 +54,7 @@ function ChoiceTile({
   const { width } = useWindowDimensions();
   const style = KINDS[kind];
   const { scale, onPressIn, onPressOut } = usePressScale(0.96);
+  const layout = useLayout();
   // Wide display font: scale the label with the tile width so it never gets cut off.
   const labelSize = width < 360 ? 13 : 17;
   const disabled = remaining === 0;
@@ -81,7 +87,7 @@ function ChoiceTile({
           colors={[style.gradient[0], style.gradient[1]]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
-          style={styles.tile}
+          style={[styles.tile, { minHeight: layout.wide ? TILE_MIN_HEIGHT_WIDE : TILE_MIN_HEIGHT }]}
         >
           <Icon name={style.icon} size={34} color={colors.textOnAccent} />
           <AppText
@@ -132,7 +138,6 @@ const styles = StyleSheet.create({
   tileWrap: { flex: 1, borderRadius: radius.xl },
   pressable: { borderRadius: radius.xl, overflow: 'hidden' },
   tile: {
-    minHeight: 200,
     borderRadius: radius.xl,
     alignItems: 'center',
     justifyContent: 'center',

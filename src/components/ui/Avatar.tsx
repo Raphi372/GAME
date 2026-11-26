@@ -1,7 +1,8 @@
 import { StyleSheet, View } from 'react-native';
 
 import { avatarColor, initials } from '@/features/players/validation';
-import { blend, colors, fonts, readableOnDark } from '@/theme';
+import { useLayout } from '@/hooks/useLayout';
+import { blend, colors, fonts, readableOnDark, scaled } from '@/theme';
 
 import { AppText } from './AppText';
 
@@ -15,6 +16,8 @@ export const AVATAR_TEXT_CONTRAST = 6;
 
 export function Avatar({ name, colorIndex, size = 44 }: AvatarProps) {
   const color = avatarColor(colorIndex);
+  // The initials are scaled by AppText – the circle grows with them.
+  const box = scaled(size, useLayout().scale);
   // Initials sit on a translucent tint of the same colour – lighten them where needed.
   // 6:1 on a plain surface keeps them ≥ 4.5:1 on accent-tinted chips as well.
   const textColor = readableOnDark(
@@ -28,9 +31,9 @@ export function Avatar({ name, colorIndex, size = 44 }: AvatarProps) {
       style={[
         styles.base,
         {
-          width: size,
-          height: size,
-          borderRadius: size / 2,
+          width: box,
+          height: box,
+          borderRadius: box / 2,
           backgroundColor: `${color}2E`,
           borderColor: `${color}AA`,
         },

@@ -2,9 +2,10 @@ import { useRef, useState } from 'react';
 import { StyleSheet, TextInput, View, type TextInputInstance } from 'react-native';
 
 import { AppText, IconButton } from '@/components/ui';
+import { useLayout } from '@/hooks/useLayout';
 import { useTranslation, type TranslateFn } from '@/i18n';
 import { feedback } from '@/services/feedback';
-import { colors, fonts, radius, spacing } from '@/theme';
+import { colors, fonts, radius, scaled, spacing } from '@/theme';
 
 import { MAX_NAME_LENGTH, type PlayerNameError, type ValidationResult } from '../validation';
 import { MAX_PLAYERS } from '@/features/game-modes/registry';
@@ -27,12 +28,15 @@ interface AddPlayerFormProps {
   disabled?: boolean;
 }
 
+export const INPUT_FONT_SIZE = 17;
+
 export function AddPlayerForm({ onAdd, disabled = false }: AddPlayerFormProps) {
   const { t } = useTranslation();
   const [name, setName] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [focused, setFocused] = useState(false);
   const inputRef = useRef<TextInputInstance>(null);
+  const { scale } = useLayout();
 
   const submit = () => {
     const result = onAdd(name);
@@ -71,7 +75,7 @@ export function AddPlayerForm({ onAdd, disabled = false }: AddPlayerFormProps) {
           submitBehavior="submit"
           editable={!disabled}
           selectionColor={colors.accent}
-          style={styles.input}
+          style={[styles.input, { fontSize: scaled(INPUT_FONT_SIZE, scale) }]}
           maxFontSizeMultiplier={1.4}
         />
         <IconButton
@@ -113,7 +117,6 @@ const styles = StyleSheet.create({
     minHeight: 44,
     color: colors.text,
     fontFamily: fonts.bodyBold,
-    fontSize: 17,
   },
   error: { marginLeft: spacing.lg },
 });

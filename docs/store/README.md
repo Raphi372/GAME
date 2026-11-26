@@ -128,7 +128,7 @@ npm run store:screenshots
 Das Skript [`scripts/store-screenshots.mjs`](../../scripts/store-screenshots.mjs) überschreibt
 alle Bilder in `docs/store/screenshots/` und `google-play/feature-graphic.jpg`. Danach
 `npm test` laufen lassen – der Store-Test prüft die Bildgrößen. Die iPad-Bilder zeigen das
-echte Tablet-Layout (mittige Spalte wie in der App).
+Tablet-Layout der App (breitere Spalte, größere Schrift und Karten).
 
 Das Play-Store-Symbol `icon-512.png` ist eine verkleinerte Kopie von
 `assets/images/icon.png` und muss bei einem neuen App-Symbol mit erneuert werden.

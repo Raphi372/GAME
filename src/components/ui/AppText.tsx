@@ -1,6 +1,7 @@
-import { Text, type TextProps, type TextStyle } from 'react-native';
+import { StyleSheet, Text, type TextProps, type TextStyle } from 'react-native';
 
-import { colors, typography, type TypographyVariant } from '@/theme';
+import { useLayout } from '@/hooks/useLayout';
+import { colors, scaleTextStyle, typography, type TypographyVariant } from '@/theme';
 
 const DISPLAY_VARIANTS: readonly TypographyVariant[] = ['hero', 'h1', 'h2', 'h3', 'button', 'question'];
 export const TEXT_MAX_SCALE = 2;
@@ -15,7 +16,8 @@ export interface AppTextProps extends TextProps {
 /**
  * Text with design-system typography. Body text follows the system text size up to 200 %
  * (WCAG 1.4.4); large display styles (20–44 px already) cap at 125 % so long German words
- * in headlines are not broken in the middle.
+ * in headlines are not broken in the middle. On wide windows (tablets) every size – also
+ * one passed in `style` – grows with the layout scale.
  */
 export function AppText({
   variant = 'body',
@@ -26,10 +28,12 @@ export function AppText({
   ...rest
 }: AppTextProps) {
   const isDisplay = DISPLAY_VARIANTS.includes(variant);
+  const { scale } = useLayout();
+  const merged = [typography[variant], { color }, align ? { textAlign: align } : null, style];
   return (
     <Text
       maxFontSizeMultiplier={maxFontSizeMultiplier ?? (isDisplay ? DISPLAY_MAX_SCALE : TEXT_MAX_SCALE)}
-      style={[typography[variant], { color }, align ? { textAlign: align } : null, style]}
+      style={scale === 1 ? merged : scaleTextStyle(StyleSheet.flatten(merged) ?? {}, scale)}
       {...rest}
     />
   );

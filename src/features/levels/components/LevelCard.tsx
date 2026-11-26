@@ -6,9 +6,10 @@ import { spaceKeyPress } from '@/components/ui/keyboard';
 import { cardCountKey } from '@/features/game-modes/labels';
 import type { GameModeId } from '@/features/game-modes/registry';
 import { usePressScale } from '@/components/ui/usePressScale';
+import { useLayout } from '@/hooks/useLayout';
 import { useTranslation } from '@/i18n';
 import { feedback } from '@/services/feedback';
-import { colors, glow, radius, spacing } from '@/theme';
+import { colors, glow, radius, scaled, spacing } from '@/theme';
 import type { SpicyLevel } from '@/types';
 
 import { levelDescriptionKey, LEVELS } from '../levels';
@@ -25,6 +26,8 @@ interface LevelCardProps {
   testID?: string;
 }
 
+const RADIO_SIZE = 28;
+
 export function LevelCard({
   level,
   selected,
@@ -38,6 +41,7 @@ export function LevelCard({
   const { t } = useTranslation();
   const meta = LEVELS[level];
   const { scale, onPressIn, onPressOut } = usePressScale(0.975);
+  const radioSize = scaled(RADIO_SIZE, useLayout().scale);
   const name = t(meta.nameKey);
   const tagline = t(meta.taglineKey);
   const description = t(levelDescriptionKey(level, modeId));
@@ -95,6 +99,7 @@ export function LevelCard({
               <View
                 style={[
                   styles.radio,
+                  { width: radioSize, height: radioSize, borderRadius: radioSize / 2 },
                   { borderColor: selected ? meta.accent : colors.borderStrong },
                   selected && { backgroundColor: meta.accent },
                 ]}
@@ -134,9 +139,6 @@ const styles = StyleSheet.create({
   titleBlock: { flex: 1, gap: spacing.xxs },
   emoji: { fontSize: 18, lineHeight: 24, marginBottom: spacing.xxs },
   radio: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
     borderWidth: 2,
     alignItems: 'center',
     justifyContent: 'center',

@@ -1,8 +1,9 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { Animated, Pressable, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 
+import { useLayout } from '@/hooks/useLayout';
 import { feedback, type FeedbackEvent } from '@/services/feedback';
-import { brandGradient, colors, glow, minTouchSize, radius, readableWithWhite, spacing } from '@/theme';
+import { brandGradient, colors, glow, minTouchSize, radius, readableWithWhite, scaled, spacing } from '@/theme';
 
 import { AppText } from './AppText';
 import { Icon, type IconName } from './Icon';
@@ -47,7 +48,7 @@ export function Button({
   testID,
 }: ButtonProps) {
   const { scale, onPressIn, onPressOut } = usePressScale();
-  const height = HEIGHTS[size];
+  const height = scaled(HEIGHTS[size], useLayout().scale);
   // Primary buttons: pure white on the gradient, which is darkened for white text (WCAG AA).
   const textColor =
     variant === 'primary'

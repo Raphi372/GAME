@@ -2,8 +2,9 @@ import { useRouter } from 'expo-router';
 import type { ReactNode } from 'react';
 import { StyleSheet, View } from 'react-native';
 
+import { useLayout } from '@/hooks/useLayout';
 import { useTranslation } from '@/i18n';
-import { colors, spacing } from '@/theme';
+import { colors, minTouchSize, scaled, spacing } from '@/theme';
 
 import { AppText } from './AppText';
 import { IconButton } from './IconButton';
@@ -20,6 +21,9 @@ interface HeaderProps {
 export function Header({ title, subtitle, onBack, showBack = true, right }: HeaderProps) {
   const router = useRouter();
   const { t } = useTranslation();
+  const { scale } = useLayout();
+  /** Same size as the back button, so the right-hand content stays put. */
+  const spacer = scaled(minTouchSize, scale);
 
   const handleBack = () => {
     if (onBack) return onBack();
@@ -33,7 +37,7 @@ export function Header({ title, subtitle, onBack, showBack = true, right }: Head
         {showBack ? (
           <IconButton icon="chevron-back" label={t('common.back')} onPress={handleBack} />
         ) : (
-          <View style={styles.spacer} />
+          <View style={{ width: spacer, height: spacer }} />
         )}
         <View style={styles.right}>{right}</View>
       </View>
@@ -56,7 +60,6 @@ export function Header({ title, subtitle, onBack, showBack = true, right }: Head
 const styles = StyleSheet.create({
   container: { gap: spacing.lg },
   row: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  spacer: { width: 48, height: 48 },
   right: { flexDirection: 'row', gap: spacing.sm },
   titles: { gap: spacing.xs },
 });

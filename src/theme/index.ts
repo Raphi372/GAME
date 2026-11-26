@@ -4,3 +4,4 @@ export * from './spacing';
 export * from './motion';
 export * from './shadows';
 export * from './contrast';
+export * from './layout';
