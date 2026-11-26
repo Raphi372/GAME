@@ -4,8 +4,9 @@ import { Animated, Easing, StyleSheet, View } from 'react-native';
 
 import { AppText, Button, IconButton, Logo, Screen, SectionTitle } from '@/components/ui';
 import { FEATURES } from '@/config/features';
-import { ModeCard } from '@/features/game-modes/ModeCard';
-import { listGameModes, type GameModeId } from '@/features/game-modes/registry';
+import { ModeCard, ModeTile } from '@/features/game-modes/ModeCard';
+import { listGameModes, MIX_EMOJI, MIX_PARAM, type GameModeId } from '@/features/game-modes/registry';
+import { isMixedRound } from '@/features/gameplay/engine/round';
 import { ResumeCard } from '@/features/gameplay/components/ResumeCard';
 import { getDeckSize } from '@/features/question-decks';
 import { useMotion } from '@/hooks/useMotion';
@@ -44,6 +45,9 @@ export default function HomeScreen() {
   const modes = useMemo(() => listGameModes(), []);
   const totalQuestions = (modeId: GameModeId) =>
     SPICY_LEVELS.reduce((sum, level) => sum + getDeckSize(modeId, level), 0);
+  const allCards = modes
+    .filter((mode) => mode.status === 'available')
+    .reduce((sum, mode) => sum + totalQuestions(mode.id), 0);
 
   const startFlow = (modeId: GameModeId) =>
     router.push({ pathname: '/players', params: { mode: modeId } });
@@ -90,6 +94,7 @@ export default function HomeScreen() {
         <View style={styles.resume}>
           <ResumeCard
             modeId={session.modeId}
+            mixed={isMixedRound(session.round)}
             level={session.level}
             playerCount={playerCount}
             round={session.turnsCompleted + 1}
@@ -108,6 +113,14 @@ export default function HomeScreen() {
             onPress={() => startFlow(mode.id)}
           />
         ))}
+        <ModeTile
+          emoji={MIX_EMOJI}
+          title={t('mix.title')}
+          tagline={t('mix.tagline')}
+          detail={t('mode.unit.cards', { count: allCards })}
+          onPress={() => router.push({ pathname: '/players', params: { mode: MIX_PARAM } })}
+          testID="mode-mix"
+        />
       </View>
 
       {FEATURES.premium ? (

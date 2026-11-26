@@ -11,13 +11,15 @@ import type { SpicyLevel } from '@/types';
 
 interface ResumeCardProps {
   modeId: GameModeId;
+  /** A mixed round shows its own name instead of the current card's mode. */
+  mixed?: boolean;
   level: SpicyLevel;
   playerCount: number;
   round: number;
   onResume: () => void;
 }
 
-export function ResumeCard({ modeId, level, playerCount, round, onResume }: ResumeCardProps) {
+export function ResumeCard({ modeId, mixed = false, level, playerCount, round, onResume }: ResumeCardProps) {
   const { t } = useTranslation();
   const meta = LEVELS[level];
   return (
@@ -31,7 +33,7 @@ export function ResumeCard({ modeId, level, playerCount, round, onResume }: Resu
       <View style={[styles.stripe, { backgroundColor: meta.accent }]} />
       <View style={styles.text}>
         <AppText variant="overline" color={meta.accent} numberOfLines={1}>
-          {`${t('home.resumeOverline')} · ${t(modeTitleKey(modeId))}`}
+          {`${t('home.resumeOverline')} · ${mixed ? t('mix.title') : t(modeTitleKey(modeId))}`}
         </AppText>
         <AppText variant="bodyStrong">
           {t('home.resumeDetails', {

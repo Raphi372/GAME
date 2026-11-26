@@ -238,6 +238,10 @@ export const GAME_MODES: Record<GameModeId, GameModeDefinition> = {
 
 export const DEFAULT_MODE_ID: GameModeId = 'spicy-questions';
 
+/** Route parameter `mode=mix`: a mixed round of several modes. */
+export const MIX_PARAM = 'mix';
+export const MIX_EMOJI = '🎉';
+
 export function getGameMode(id: GameModeId): GameModeDefinition {
   return GAME_MODES[id];
 }
@@ -256,6 +260,11 @@ export function listGameModes(): GameModeDefinition[] {
 
 export function listPlayableModeIds(): GameModeId[] {
   return GAME_MODE_IDS.filter(isModePlayable);
+}
+
+/** Fewest players any of the modes needs – a mixed round leaves out modes needing more. */
+export function minPlayersFor(modeIds: readonly GameModeId[]): number {
+  return modeIds.length === 0 ? MIN_PLAYERS : Math.min(...modeIds.map((id) => GAME_MODES[id].minPlayers));
 }
 
 export function isGroupMode(id: GameModeId): boolean {

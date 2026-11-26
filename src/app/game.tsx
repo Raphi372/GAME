@@ -2,7 +2,8 @@ import { Redirect, useFocusEffect, useRouter } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { BackHandler, StyleSheet, useWindowDimensions, View } from 'react-native';
 
-import { AppText, Button, ConfirmSheet, IconButton, Screen } from '@/components/ui';
+import { AppText, Button, Chip, ConfirmSheet, IconButton, Screen } from '@/components/ui';
+import { modeTitleKey } from '@/features/game-modes/labels';
 import { DEFAULT_SINGLE_COPY, getGameMode } from '@/features/game-modes/registry';
 import { ChallengeTimer } from '@/features/gameplay/components/ChallengeTimer';
 import { ChoicePanel } from '@/features/gameplay/components/ChoicePanel';
@@ -14,10 +15,13 @@ import { PlayerPicker } from '@/features/gameplay/components/PlayerPicker';
 import { QuestionCard } from '@/features/gameplay/components/QuestionCard';
 import { TurnBanner } from '@/features/gameplay/components/TurnBanner';
 import { countRemaining } from '@/features/gameplay/engine/deck';
+import { isLevelUp, isMixedRound } from '@/features/gameplay/engine/round';
 import {
   getCurrentQuestion,
   isAwaitingChoice,
+  isSessionOver,
   remainingByKind,
+  roundProgress,
 } from '@/features/gameplay/engine/session';
 import { LEVELS } from '@/features/levels/levels';
 import { renderQuestionText, splitLead } from '@/features/question-decks';
@@ -94,6 +98,12 @@ export default function GameScreen() {
   const target = players.find((candidate) => candidate.id === current?.targetPlayerId);
   const remaining = countRemaining(deck, session.playedByLevel[session.level]);
   const round = session.turnsCompleted + 1;
+  const progress = roundProgress(session);
+  // Mixed rounds name the mode of each card – unless the card already starts with it
+  // ("Ich hab noch nie …", "Wer würde am ehesten …").
+  const showModeChip = isMixedRound(session.round) && !(group && mode.cardLead);
+  // Escalating round: the first card of a new level says so.
+  const levelUp = session.round.escalate && isLevelUp(session.round, session.turnsCompleted);
   // Choice modes ("Wahrheit oder Pflicht"): the player first picks a kind.
   const choiceKinds = mode.choice?.kinds;
   const awaitingChoice = isAwaitingChoice(session, { choiceKinds });
@@ -136,6 +146,18 @@ export default function GameScreen() {
     router.replace('/summary');
   };
 
+  /** Runs a turn action; after the last card of a fixed-length round it opens the summary. */
+  const thenFinishIfOver = (action: () => void) => () => {
+    action();
+    const next = useGameStore.getState().session;
+    if (next && isSessionOver(next)) {
+      feedback('success');
+      finish();
+    }
+  };
+  const answerTurn = thenFinishIfOver(answer);
+  const passTurn = thenFinishIfOver(pass);
+
   const choiceFooter = awaitingChoice ? (
     <>
       <Button
@@ -145,7 +167,7 @@ export default function GameScreen() {
         size="md"
         hint={t('game.passHint')}
         feedbackEvent="pass"
-        onPress={pass}
+        onPress={passTurn}
         testID="action-pass"
       />
       <AppText variant="caption" color={colors.textMuted} align="center">
@@ -160,7 +182,7 @@ export default function GameScreen() {
         hint={t('tod.doneHint')}
         gradient={meta.gradient}
         feedbackEvent="success"
-        onPress={answer}
+        onPress={answerTurn}
         testID="action-next"
       />
       <View style={styles.secondaryRow}>
@@ -183,7 +205,7 @@ export default function GameScreen() {
           size="md"
           hint={t('game.passHint')}
           feedbackEvent="pass"
-          onPress={pass}
+          onPress={passTurn}
           style={styles.half}
           dense={narrow}
           testID="action-pass"
@@ -203,7 +225,7 @@ export default function GameScreen() {
         hint={t(group.copy.nextHint)}
         gradient={meta.gradient}
         feedbackEvent="reveal"
-        onPress={() => nextGroupCard(selectedIds)}
+        onPress={thenFinishIfOver(() => nextGroupCard(selectedIds))}
         testID="action-next"
       />
       <Button
@@ -228,7 +250,7 @@ export default function GameScreen() {
         hint={t(single.nextHint)}
         gradient={meta.gradient}
         feedbackEvent="reveal"
-        onPress={answer}
+        onPress={answerTurn}
         testID="action-next"
       />
       <View style={styles.secondaryRow}>
@@ -251,7 +273,7 @@ export default function GameScreen() {
           size="md"
           hint={t('game.passHint')}
           feedbackEvent="pass"
-          onPress={pass}
+          onPress={passTurn}
           style={styles.half}
           dense={narrow}
           testID="action-pass"
@@ -288,6 +310,17 @@ export default function GameScreen() {
             overline={isGroup ? t('group.reader') : undefined}
           />
         ) : null}
+        {showModeChip || levelUp ? (
+          <View style={styles.badges} aria-live="polite" testID="round-badges">
+            {showModeChip ? <Chip label={`${mode.emoji} ${t(modeTitleKey(session.modeId))}`} color={meta.accent} /> : null}
+            {levelUp ? (
+              <Chip
+                label={t('round.levelUp', { level: `${meta.emoji} ${t(meta.nameKey).toLocaleUpperCase()}` })}
+                color={meta.accent}
+              />
+            ) : null}
+          </View>
+        ) : null}
         {exhausted ? (
           <ExhaustedCard
             level={session.level}
@@ -308,7 +341,7 @@ export default function GameScreen() {
               lead={kindLabel ?? displayLead ?? undefined}
               level={session.level}
               categoryLabel={categoryLabel}
-              footer={t('game.remaining', { round, count: remaining })}
+              footer={progress ? t('round.progress', progress) : t('game.remaining', { round, count: remaining })}
               accessibilityLabel={
                 kindLabel
                   ? t('tod.cardA11y', { kind: kindLabel, name: player?.name ?? '', text: fullText })
@@ -381,6 +414,7 @@ const styles = StyleSheet.create({
   topBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   content: { flex: 1, gap: spacing.xl, paddingTop: spacing.md },
   card: { flexGrow: 1 },
+  badges: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
   secondaryRow: { flexDirection: 'row', gap: spacing.md },
   half: { flex: 1 },
 });

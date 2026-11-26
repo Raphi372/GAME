@@ -1,9 +1,10 @@
 import { Pressable, StyleSheet } from 'react-native';
 
-import { AppText } from '@/components/ui';
-import { spaceKeyPress } from '@/components/ui/keyboard';
 import { feedback } from '@/services/feedback';
 import { colors, minTouchSize, radius, spacing } from '@/theme';
+
+import { AppText } from './AppText';
+import { spaceKeyPress } from './keyboard';
 
 interface ChoiceChipProps {
   label: string;
@@ -13,19 +14,34 @@ interface ChoiceChipProps {
   accent?: string;
   /** Accessible name, if it differs from the visible label. */
   a11yLabel?: string;
+  /** `checkbox` for rows where several chips can be on at once. */
+  kind?: 'radio' | 'checkbox';
+  disabled?: boolean;
   testID?: string;
 }
 
-/** A pill that behaves like a radio button (one choice out of a row). */
-export function ChoiceChip({ label, selected, onPress, accent = colors.primary, a11yLabel, testID }: ChoiceChipProps) {
+/** A pill that behaves like a radio button (one choice out of a row) or a checkbox. */
+export function ChoiceChip({
+  label,
+  selected,
+  onPress,
+  accent = colors.primary,
+  a11yLabel,
+  kind = 'radio',
+  disabled = false,
+  testID,
+}: ChoiceChipProps) {
   const choose = () => {
+    if (disabled) return;
     feedback('select');
     onPress();
   };
   return (
     <Pressable
-      role="radio"
+      role={kind}
       aria-checked={selected}
+      aria-disabled={disabled}
+      disabled={disabled}
       aria-label={a11yLabel ?? label}
       testID={testID}
       onPress={choose}
@@ -33,6 +49,7 @@ export function ChoiceChip({ label, selected, onPress, accent = colors.primary, 
       style={({ pressed }) => [
         styles.chip,
         selected && { borderColor: accent, backgroundColor: `${accent}29` },
+        disabled && styles.disabled,
         pressed && styles.pressed,
       ]}
     >
@@ -54,4 +71,5 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface,
   },
   pressed: { opacity: 0.75 },
+  disabled: { opacity: 0.45 },
 });

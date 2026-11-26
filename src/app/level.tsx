@@ -5,10 +5,19 @@ import { StyleSheet, View } from 'react-native';
 import { AppText, Button, ConfirmSheet, Header, Icon, Screen, Surface } from '@/components/ui';
 import { FEATURES } from '@/config/features';
 import { modeTitleKey } from '@/features/game-modes/labels';
-import { DEFAULT_MODE_ID, getGameMode, isGameModeId } from '@/features/game-modes/registry';
+import {
+  DEFAULT_MODE_ID,
+  getGameMode,
+  isGameModeId,
+  MIX_EMOJI,
+  MIX_PARAM,
+  type GameModeId,
+} from '@/features/game-modes/registry';
+import { canEscalate } from '@/features/gameplay/engine/round';
 import { LevelCard } from '@/features/levels/components/LevelCard';
 import { LEVELS, listLevels } from '@/features/levels/levels';
 import { getDeckSize } from '@/features/question-decks';
+import { RoundSettingsPanel } from '@/features/rounds/RoundSettingsPanel';
 import { useTranslation } from '@/i18n';
 import { feedback } from '@/services/feedback';
 import { getCustomQuestions, useCustomCardsStore, useEntitlementsStore, useGameStore } from '@/store';
@@ -19,9 +28,11 @@ export default function LevelScreen() {
   const router = useRouter();
   const { t, locale } = useTranslation();
   const params = useLocalSearchParams<{ mode?: string }>();
+  const mixed = params.mode === MIX_PARAM;
   const modeId = isGameModeId(params.mode) ? params.mode : DEFAULT_MODE_ID;
 
   const lastLevel = useGameStore((state) => state.lastLevel);
+  const lastRound = useGameStore((state) => state.lastRound);
   // Re-render when the players' own cards or the Premium state change (card counts).
   useCustomCardsStore((state) => state.cards);
   useEntitlementsStore((state) => state.entitlements);
@@ -29,12 +40,26 @@ export default function LevelScreen() {
   const startGame = useGameStore((state) => state.startGame);
 
   const [selected, setSelected] = useState<SpicyLevel>(lastLevel);
+  const [length, setLength] = useState<number | null>(lastRound.length);
+  const [escalate, setEscalate] = useState(lastRound.escalate);
+  const [mixModes, setMixModes] = useState<GameModeId[]>(lastRound.mixModeIds);
   /** EXTREME needs the group's consent once per visit of this screen. */
   const [consented, setConsented] = useState(false);
   const [consentFor, setConsentFor] = useState<'select' | 'start' | null>(null);
   const meta = LEVELS[selected];
   const mode = getGameMode(modeId);
-  const canStart = playerCount >= mode.minPlayers;
+  // Mixed rounds leave out modes the group is too small for and need two modes left.
+  const mixPlayable = mixModes.filter((id) => getGameMode(id).minPlayers <= playerCount);
+  const canStart = mixed ? mixPlayable.length >= 2 : playerCount >= mode.minPlayers;
+  const cardCount = (level: SpicyLevel) =>
+    mixed
+      ? mixPlayable.reduce(
+          (sum, id) => sum + getDeckSize(id, level, { locale }) + getCustomQuestions(id, level).length,
+          0,
+        )
+      : getDeckSize(modeId, level, { locale });
+  const toggleMixMode = (id: GameModeId) =>
+    setMixModes((current) => (current.includes(id) ? current.filter((entry) => entry !== id) : [...current, id]));
 
   const choose = (level: SpicyLevel) => {
     if (level === 'extreme' && !consented) {
@@ -45,7 +70,12 @@ export default function LevelScreen() {
   };
 
   const launch = (level: SpicyLevel) => {
-    if (!startGame(modeId, level)) return;
+    const setup = {
+      length,
+      escalate: escalate && canEscalate(length, level),
+      ...(mixed ? { modeIds: mixPlayable } : {}),
+    };
+    if (!startGame(mixed ? (mixPlayable[0] ?? modeId) : modeId, level, setup)) return;
     feedback('level');
     router.replace('/game');
   };
@@ -76,9 +106,9 @@ export default function LevelScreen() {
       }
     >
       <AppText variant="overline" color={colors.accent} style={styles.modeName}>
-        {`${mode.emoji} ${t(modeTitleKey(modeId))}`}
+        {mixed ? `${MIX_EMOJI} ${t('mix.title')}` : `${mode.emoji} ${t(modeTitleKey(modeId))}`}
       </AppText>
-      {mode.howTo ? (
+      {mode.howTo && !mixed ? (
         <Surface style={styles.howTo} testID="how-to">
           <Icon name="information-circle-outline" size={20} color={colors.lilacOrText} />
           <View style={styles.howToText}>
@@ -89,21 +119,35 @@ export default function LevelScreen() {
           </View>
         </Surface>
       ) : null}
-      <View style={styles.list} role="radiogroup">
+      <View style={styles.list} role="radiogroup" aria-label={t('level.title')}>
         {listLevels().map((level) => (
           <LevelCard
             key={level.id}
             level={level.id}
             selected={selected === level.id}
             modeId={modeId}
-            questionCount={getDeckSize(modeId, level.id, { locale })}
-            customCount={getCustomQuestions(modeId, level.id).length}
+            questionCount={cardCount(level.id)}
+            customCount={mixed ? 0 : getCustomQuestions(modeId, level.id).length}
+            {...(mixed
+              ? {
+                  descriptionKey: `mix.level.${level.id}.description` as const,
+                  countLabel: t('mode.unit.cards', { count: cardCount(level.id) }),
+                }
+              : {})}
             onPress={() => choose(level.id)}
             testID={`level-${level.id}`}
           />
         ))}
       </View>
-      {FEATURES.premium ? (
+      <RoundSettingsPanel
+        level={selected}
+        length={length}
+        onLengthChange={setLength}
+        escalate={escalate}
+        onEscalateChange={setEscalate}
+        mix={mixed ? { modeIds: mixModes, onToggle: toggleMixMode, playerCount } : undefined}
+      />
+      {FEATURES.premium && !mixed ? (
         <Button
           label={t('level.customLink')}
           hint={t('level.customLinkHint')}

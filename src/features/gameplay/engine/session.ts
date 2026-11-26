@@ -4,6 +4,17 @@ import { SPICY_LEVELS, type CardKind, type Player, type Question, type SpicyLeve
 import type { Rng } from '@/utils/random';
 
 import { drawQuestion, getRemainingQuestions } from './deck';
+import {
+  canEscalate,
+  defaultRound,
+  isMixedRound,
+  isRoundOver,
+  levelForTurn,
+  MAX_ROUND_LENGTH,
+  MIN_ROUND_LENGTH,
+  modeOrder,
+  type RoundSettings,
+} from './round';
 import { initialTurnCount, pickNextPlayer, pickOtherPlayer, type TurnCounts } from './rotation';
 
 export type TurnOutcome = 'answered' | 'passed' | 'skipped';
@@ -46,8 +57,14 @@ export interface CurrentTurn {
  */
 export interface GameSession {
   id: string;
+  /** Mode of the card on the table – in a mixed round it changes from card to card. */
   modeId: GameModeId;
+  /** Level of the card on the table – rises during an escalating round. */
   level: SpicyLevel;
+  /** How this round is played (length, mixed modes, escalation). */
+  round: RoundSettings;
+  /** Mixed rounds: cards dealt per mode, so every mode gets its turn. */
+  dealtByMode: Partial<Record<GameModeId, number>>;
   startedAt: number;
   /** Question ids already shown in this session, per level. */
   playedByLevel: Record<SpicyLevel, string[]>;
@@ -59,15 +76,24 @@ export interface GameSession {
   stats: Record<string, PlayerStats>;
 }
 
-export interface SessionContext {
-  players: readonly Player[];
+/** Deck and rules of one game mode. */
+export interface ModeContext {
   getDeck: (level: SpicyLevel) => readonly Question[];
-  rng: Rng;
   /**
    * Choice modes ("Wahrheit oder Pflicht"): the player first picks one of these
    * kinds, then a card of that kind is drawn. Omitted for all other modes.
    */
   choiceKinds?: readonly CardKind[];
+}
+
+export interface SessionContext extends ModeContext {
+  players: readonly Player[];
+  rng: Rng;
+  /**
+   * Deck and rules of any mode, with the players it needs – required for mixed rounds.
+   * Without it, the context's own deck is used for every card.
+   */
+  forMode?: (modeId: GameModeId) => ModeContext & { minPlayers: number };
 }
 
 export const emptyStats = (): PlayerStats => ({
@@ -95,6 +121,80 @@ function emptyPlayed(): Record<SpicyLevel, string[]> {
 function findQuestion(deck: readonly Question[], id: string | null): Question | undefined {
   if (!id) return undefined;
   return deck.find((question) => question.id === id);
+}
+
+/** The context for cards of `modeId` (the context itself when it has no `forMode`). */
+function ctxFor(ctx: SessionContext, modeId: GameModeId): SessionContext {
+  if (!ctx.forMode) return ctx;
+  const mode = ctx.forMode(modeId);
+  return { ...ctx, getDeck: mode.getDeck, choiceKinds: mode.choiceKinds };
+}
+
+/** Modes of a mixed round that work with the current number of players. */
+function eligibleModes(session: GameSession, ctx: SessionContext): GameModeId[] {
+  const forMode = ctx.forMode;
+  if (!forMode) return [session.modeId];
+  return session.round.modeIds.filter((modeId) => forMode(modeId).minPlayers <= ctx.players.length);
+}
+
+function hasCardsLeft(session: GameSession, modeCtx: SessionContext): boolean {
+  return getRemainingQuestions(modeCtx.getDeck(session.level), session.playedByLevel[session.level]).length > 0;
+}
+
+/**
+ * Deals the next turn of `playerId`. In a mixed round the mode is chosen first (see
+ * `modeOrder`); a mode without cards left at this level is passed over. `prefer` keeps
+ * the given mode if it still has cards (e.g. after a level change).
+ */
+function dealNext(
+  session: GameSession,
+  playerId: string,
+  ctx: SessionContext,
+  prefer: GameModeId | null = null,
+): GameSession {
+  if (!isMixedRound(session.round) || !ctx.forMode) {
+    return dealTurn(session, playerId, ctxFor(ctx, session.modeId));
+  }
+  const eligible = eligibleModes(session, ctx);
+  const ordered = modeOrder(eligible, session.dealtByMode, session.current ? session.modeId : null, ctx.rng);
+  const candidates = prefer && eligible.includes(prefer) ? [prefer, ...ordered.filter((id) => id !== prefer)] : ordered;
+  for (const modeId of candidates) {
+    const modeCtx = ctxFor(ctx, modeId);
+    if (!hasCardsLeft(session, modeCtx)) continue;
+    const dealt = dealTurn({ ...session, modeId }, playerId, modeCtx);
+    return { ...dealt, dealtByMode: { ...session.dealtByMode, [modeId]: (session.dealtByMode[modeId] ?? 0) + 1 } };
+  }
+  // Every mode has run out of cards at this level: show that with a playable mode.
+  const fallback = eligible.includes(session.modeId) ? session.modeId : (eligible[0] ?? session.modeId);
+  return dealTurn({ ...session, modeId: fallback }, playerId, ctxFor(ctx, fallback));
+}
+
+/** Clamps stored or chosen round settings to something playable. */
+export function normalizeRound(
+  round: Partial<RoundSettings> | undefined,
+  modeId: GameModeId,
+  level: SpicyLevel,
+): RoundSettings {
+  const base = defaultRound(modeId, level);
+  const length =
+    typeof round?.length === 'number' && Number.isInteger(round.length)
+      ? Math.min(MAX_ROUND_LENGTH, Math.max(MIN_ROUND_LENGTH, round.length))
+      : null;
+  const modeIds = [...new Set(round?.modeIds?.length ? round.modeIds : base.modeIds)];
+  if (!modeIds.includes(modeId)) modeIds.unshift(modeId);
+  const peak = round?.peak ?? level;
+  return { length, modeIds, peak, escalate: Boolean(round?.escalate) && canEscalate(length, peak) };
+}
+
+/** Card number (1-based) and total of a round with a fixed length; `null` if endless. */
+export function roundProgress(session: GameSession): { current: number; total: number } | null {
+  if (session.round.length === null) return null;
+  return { current: Math.min(session.turnsCompleted + 1, session.round.length), total: session.round.length };
+}
+
+/** True once a round with a fixed length has all its cards played. */
+export function isSessionOver(session: GameSession): boolean {
+  return isRoundOver(session.round, session.turnsCompleted);
 }
 
 /** Draws a card (optionally of one kind) for `playerId`; null if none is left. */
@@ -180,8 +280,11 @@ export function chooseCard(session: GameSession, kind: CardKind, ctx: SessionCon
 export interface CreateSessionOptions {
   id: string;
   modeId: GameModeId;
+  /** The chosen level – in an escalating round the level it builds up to. */
   level: SpicyLevel;
   now: number;
+  /** Round length, mixed modes and escalation; an endless single-mode round if omitted. */
+  round?: Partial<Pick<RoundSettings, 'length' | 'modeIds' | 'escalate'>>;
 }
 
 export function createSession(options: CreateSessionOptions, ctx: SessionContext): GameSession {
@@ -192,10 +295,13 @@ export function createSession(options: CreateSessionOptions, ctx: SessionContext
     stats[player.id] = emptyStats();
   }
 
+  const round = normalizeRound({ ...options.round, peak: options.level }, options.modeId, options.level);
   const base: GameSession = {
     id: options.id,
     modeId: options.modeId,
-    level: options.level,
+    level: levelForTurn(round, 0) ?? options.level,
+    round,
+    dealtByMode: {},
     startedAt: options.now,
     playedByLevel: emptyPlayed(),
     turnCounts,
@@ -211,7 +317,7 @@ export function createSession(options: CreateSessionOptions, ctx: SessionContext
     null,
     ctx.rng,
   );
-  return firstPlayer ? dealTurn(base, firstPlayer, ctx) : base;
+  return firstPlayer ? dealNext(base, firstPlayer, ctx) : base;
 }
 
 function bumpStat(
@@ -237,6 +343,8 @@ function advanceTurn(session: GameSession, ctx: SessionContext): GameSession {
     lastPlayerId: current.playerId,
     turnsCompleted: session.turnsCompleted + 1,
   };
+  // A round with a fixed length ends after its last card – nothing more is dealt.
+  if (isSessionOver(updated)) return { ...updated, current: null };
   const nextPlayer = pickNextPlayer(
     ctx.players.map((player) => player.id),
     turnCounts,
@@ -244,7 +352,9 @@ function advanceTurn(session: GameSession, ctx: SessionContext): GameSession {
     ctx.rng,
   );
   if (!nextPlayer) return { ...updated, current: null };
-  return dealTurn(updated, nextPlayer, ctx);
+  // Escalating round: the level rises with the card number.
+  const level = levelForTurn(updated.round, updated.turnsCompleted) ?? updated.level;
+  return dealNext({ ...updated, level }, nextPlayer, ctx);
 }
 
 /**
@@ -297,27 +407,31 @@ export function skipQuestion(session: GameSession, ctx: SessionContext): GameSes
   const updated = { ...session, stats: bumpStat(session.stats, current.playerId, 'skipped') };
   if (current.kind) {
     return (
-      drawCard(updated, current.playerId, ctx, current.kind) ?? {
+      drawCard(updated, current.playerId, ctxFor(ctx, session.modeId), current.kind) ?? {
         ...updated,
         current: { playerId: current.playerId, questionId: null, targetPlayerId: null, kind: null },
       }
     );
   }
-  return dealTurn(updated, current.playerId, ctx);
+  // Mixed rounds: the new card may come from another mode.
+  return dealNext(updated, current.playerId, ctx);
 }
 
-/** Switches the spicy level between rounds. The current player keeps their turn. */
+/**
+ * Switches the spicy level between rounds. The current player keeps their turn. A
+ * level picked by hand ends the automatic escalation – the group decides now.
+ */
 export function changeLevel(
   session: GameSession,
   level: SpicyLevel,
   ctx: SessionContext,
 ): GameSession {
   if (session.level === level) return session;
-  const updated: GameSession = { ...session, level };
+  const updated: GameSession = { ...session, level, round: { ...session.round, escalate: false } };
   const playerId = session.current?.playerId ?? pickFallbackPlayer(updated, ctx);
   if (!playerId) return { ...updated, current: null };
   // Do not use the old level's category for variety; it belongs to another deck.
-  return dealTurn({ ...updated, current: null }, playerId, ctx);
+  return dealNext({ ...updated, current: null }, playerId, ctx, session.modeId);
 }
 
 /** Resets the played questions of the current level and deals a fresh question. */
@@ -328,7 +442,7 @@ export function reshuffleLevel(session: GameSession, ctx: SessionContext): GameS
   };
   const playerId = session.current?.playerId ?? pickFallbackPlayer(updated, ctx);
   if (!playerId) return { ...updated, current: null };
-  return dealTurn(updated, playerId, ctx);
+  return dealNext(updated, playerId, ctx, session.modeId);
 }
 
 function pickFallbackPlayer(session: GameSession, ctx: SessionContext): string | null {
@@ -366,8 +480,10 @@ export function syncSessionPlayers(session: GameSession, ctx: SessionContext): G
 
   const current = session.current;
   if (!current) {
+    // A finished round stays finished.
+    if (isSessionOver(updated)) return updated;
     const playerId = pickFallbackPlayer(updated, ctx);
-    return playerId ? dealTurn(updated, playerId, ctx) : updated;
+    return playerId ? dealNext(updated, playerId, ctx) : updated;
   }
 
   if (!idSet.has(current.playerId)) {
@@ -375,6 +491,13 @@ export function syncSessionPlayers(session: GameSession, ctx: SessionContext): G
     const nextPlayer = pickFallbackPlayer(updated, ctx);
     if (!nextPlayer) return { ...updated, current: null };
     updated = { ...updated, current: { ...current, playerId: nextPlayer } };
+  }
+
+  // Mixed round: the card's mode needs more players than are left – deal another card.
+  if (updated.current && ctx.forMode && isMixedRound(updated.round)) {
+    if (ctx.forMode(updated.modeId).minPlayers > ids.length) {
+      return dealNext({ ...updated, current: null }, updated.current.playerId, ctx);
+    }
   }
 
   const active = updated.current;
@@ -396,17 +519,24 @@ export function syncSessionPlayers(session: GameSession, ctx: SessionContext): G
  * database): drops unknown ids and deals a new question if necessary.
  */
 export function repairSession(session: GameSession, ctx: SessionContext): GameSession {
+  const round = normalizeRound(session.round, session.modeId, session.level);
   const playedByLevel = emptyPlayed();
   for (const level of SPICY_LEVELS) {
-    const known = new Set(ctx.getDeck(level).map((question) => question.id));
+    // Mixed rounds share the played lists: a card id is known if any of the modes has it.
+    const known = new Set(
+      round.modeIds.flatMap((modeId) => ctxFor(ctx, modeId).getDeck(level).map((question) => question.id)),
+    );
     playedByLevel[level] = (session.playedByLevel?.[level] ?? []).filter((id) => known.has(id));
   }
-  let repaired = syncSessionPlayers({ ...session, playedByLevel }, ctx);
+  let repaired = syncSessionPlayers(
+    { ...session, round, dealtByMode: session.dealtByMode ?? {}, playedByLevel },
+    ctx,
+  );
 
   const current = repaired.current;
-  const deck = ctx.getDeck(repaired.level);
+  const deck = ctxFor(ctx, repaired.modeId).getDeck(repaired.level);
   if (current && current.questionId !== null && !findQuestion(deck, current.questionId)) {
-    repaired = dealTurn({ ...repaired, current: null }, current.playerId, ctx);
+    repaired = dealNext({ ...repaired, current: null }, current.playerId, ctx, repaired.modeId);
   }
   return repaired;
 }

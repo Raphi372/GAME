@@ -2,8 +2,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { StyleSheet, useWindowDimensions, View } from 'react-native';
 
-import { AppText, Button, ConfirmSheet, Header, Icon, Screen, Surface } from '@/components/ui';
-import { ChoiceChip } from '@/features/custom-cards/components/ChoiceChip';
+import { AppText, Button, ChoiceChip, ConfirmSheet, Header, Icon, Screen, Surface } from '@/components/ui';
 import { CustomCardEditor } from '@/features/custom-cards/components/CustomCardEditor';
 import { CustomCardRow } from '@/features/custom-cards/components/CustomCardRow';
 import type { CustomCard } from '@/features/custom-cards/model';

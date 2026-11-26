@@ -132,6 +132,20 @@ Englisch) liegen in [`docs/store/screenshots/`](docs/store/screenshots/) – sie
   bewusst respektvoll: keine Beleidigungen, kein Body-Shaming, keine Untreue-Unterstellungen
   und kein Vergleich nach Aussehen.
 
+### Individuelle Runden
+In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das nächste Spiel gemerkt):
+- **Rundenlänge:** Endlos, 10, 20 oder 30 Karten. Mit fester Länge zeigt die Karte „Karte 3 von
+  20“; nach der letzten Karte geht es automatisch zur Auswertung. Überspringen zählt nicht.
+- **Langsam steigern:** Die Runde startet MILD und wird gleichmäßig bis zum gewählten Level
+  heißer (z. B. 10 Karten bis EXTREME: 4 × MILD, 3 × HOT, 3 × EXTREME). Bei der ersten Karte eines
+  neuen Levels erscheint „Jetzt wird’s heißer: HOT“. Nur mit fester Länge und HOT/EXTREME als
+  Ziel; EXTREME braucht wie immer die Zustimmung der Runde. Wer das Level im Spiel von Hand
+  wechselt, beendet die Steigerung.
+- **Gemischte Runde** (eigene Karte auf der Startseite): mehrere Modi in einer Runde. Jeder
+  Modus kommt gleich oft dran, nie zweimal hintereinander; die Karte zeigt ihren Modus. Modi,
+  für die die Runde zu klein ist („Wer würde am ehesten?“ unter 3 Spielern), werden ausgelassen.
+  Mindestens zwei Modi müssen übrig bleiben.
+
 ### Spieler
 - 2 bis 20 Spieler (bei „Wer würde am ehesten?“ mindestens 3), Namen hinzufügen, bearbeiten, entfernen.
 - Validierung: keine leeren Namen, keine Duplikate (Groß-/Kleinschreibung egal), max. 20 Zeichen.
@@ -243,6 +257,7 @@ Englisch) liegen in [`docs/store/screenshots/`](docs/store/screenshots/) – sie
 │   │   ├── game-modes/          # Registry aller Spielmodi
 │   │   ├── premium/             # Preise, Entitlements, Kauf-Interface, Werbe-Regeln
 │   │   ├── custom-cards/        # Eigene Karten: Modell, Prüfregeln, Editor & Liste (Premium)
+│   │   ├── rounds/              # „Runde anpassen“: Länge, Steigerung, Modi mischen
 │   │   └── settings/            # Einstellungs-Zeilen
 │   ├── data/questions/          # Spicy Questions: mild.json, hot.json, extreme.json
 │   │   ├── never-have-i-ever/   # Ich hab noch nie: mild.json, hot.json, extreme.json
@@ -345,7 +360,8 @@ aller fünf Spielmodi über die echten Routen (inkl. Wahl Wahrheit/Pflicht, Spie
 Zählern in den Gruppenmodi, dem 3‑2‑1‑Countdown und dem Challenge-Timer) und die englischen
 Karten inklusive Sprachwechsel mitten im Spiel sowie die eigenen Karten (gesperrt ohne Premium;
 mit simuliertem Premium-Status: Anlegen, Ablehnen, Bearbeiten, Löschen, Anzeige im Spiel) und
-die Store-Version mit ausgeblendetem Premium (keine Verweise, Deep Links führen zur Startseite).
+die Store-Version mit ausgeblendetem Premium (keine Verweise, Deep Links führen zur Startseite)
+sowie individuelle Runden (Rundenlänge mit automatischer Auswertung, Steigerung, gemischte Modi).
 
 Die **GitHub-Actions-CI** (`.github/workflows/ci.yml`) führt bei jedem Push/PR Typecheck,
 Lint, Fragen-Validierung und Tests aus und baut anschließend Android-, iOS- und Web-Bundles
@@ -515,10 +531,15 @@ Tests als Seed-RNG.
 - `session.ts` – Zustandsübergänge: `createSession`, `completeTurn` (beantwortet/gepasst),
   `skipQuestion`, `changeLevel`, `reshuffleLevel`, `syncSessionPlayers`, `repairSession`.
   Eine Frage gilt beim Austeilen als gespielt – dadurch gibt es keine Wiederholungen.
+- `round.ts` – Rundeneinstellungen (`length`, `modeIds`, `escalate`, `peak`), Level je Karte
+  beim Steigern, Rundenende und die Reihenfolge der Modi in gemischten Runden. Die Session
+  trägt den Modus der aktuellen Karte (`modeId`); in gemischten Runden liefert der Kontext
+  über `forMode()` Deck und Regeln jedes Modus.
 
 ### Zustand & Persistenz (`src/store`)
-- `gameStore` – Spieler, laufende Session, zuletzt gewähltes Level (persistiert) und die
-  letzte Auswertung (nur im Speicher).
+- `gameStore` – Spieler, laufende Session, zuletzt gewähltes Level und Rundeneinstellungen
+  (persistiert) und die letzte Auswertung (nur im Speicher). Spielstände aus älteren
+  Versionen werden als endlose Runde eines Modus fortgesetzt.
 - `settingsStore` – Sound, Vibration, Animationen, Sprache, Altersbestätigung.
 - Persistiert per Zustand-`persist` in AsyncStorage. Gespeicherte Daten werden beim Laden
   validiert (`merge`/`sanitize`), eine Session wird gegen die aktuelle Fragen-Datenbank
@@ -617,7 +638,7 @@ eine Sprache, wird auf Deutsch zurückgegriffen. Feste Kartenanfänge („Ich ha
 
 **Noch nicht umgesetzt (bewusst für spätere Releases):**
 - Premium-Käufe (Store-Integration, z. B. via StoreKit/Play Billing) – damit werden auch die
-  bereits gebauten eigenen Karten nutzbar –, individuelle Spielrunden.
+  bereits gebauten eigenen Karten nutzbar.
 - Backend, Accounts, Online-Multiplayer.
 
 **Vor der Veröffentlichung:**

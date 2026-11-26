@@ -26,10 +26,13 @@ interface SwitchRowProps {
   value: boolean;
   onValueChange: (value: boolean) => void;
   icon: IconName;
+  disabled?: boolean;
+  testID?: string;
 }
 
-export function SwitchRow({ label, hint, value, onValueChange, icon }: SwitchRowProps) {
+export function SwitchRow({ label, hint, value, onValueChange, icon, disabled = false, testID }: SwitchRowProps) {
   const toggle = (next: boolean) => {
+    if (disabled) return;
     if (next) feedback('select');
     onValueChange(next);
   };
@@ -39,10 +42,13 @@ export function SwitchRow({ label, hint, value, onValueChange, icon }: SwitchRow
       role="switch"
       aria-label={label}
       aria-checked={value}
+      aria-disabled={disabled}
+      disabled={disabled}
       accessibilityHint={hint}
       onPress={() => toggle(!value)}
       {...spaceKeyPress(() => toggle(!value))}
-      style={({ pressed }) => [styles.row, pressed && styles.pressed]}
+      testID={testID}
+      style={({ pressed }) => [styles.row, disabled && styles.disabled, pressed && styles.pressed]}
     >
       <Icon name={icon} size={20} color={colors.lilacOrText} />
       <View style={styles.text}>
@@ -146,6 +152,7 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.sm,
   },
   pressed: { opacity: 0.7 },
+  disabled: { opacity: 0.5 },
   track: {
     width: 50,
     height: 30,

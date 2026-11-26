@@ -19,7 +19,6 @@ export const PREMIUM_FEATURES = [
   'extraPacks',
   'exclusiveCategories',
   'customQuestions',
-  'customRounds',
   'adFree',
 ] as const;
 export type PremiumFeature = (typeof PREMIUM_FEATURES)[number];

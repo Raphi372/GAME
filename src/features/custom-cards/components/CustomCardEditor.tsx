@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 
-import { AppText, Button, Sheet } from '@/components/ui';
+import { AppText, Button, ChoiceChip, Sheet } from '@/components/ui';
 import { modeTitleKey } from '@/features/game-modes/labels';
 import type { GameModeId } from '@/features/game-modes/registry';
 import { LEVELS } from '@/features/levels/levels';
@@ -25,7 +25,6 @@ import {
   type CustomCard,
   type CustomCardError,
 } from '../model';
-import { ChoiceChip } from './ChoiceChip';
 
 const INPUT_TEXT = { fontSize: 16, lineHeight: 22 };
 

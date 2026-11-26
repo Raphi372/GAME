@@ -2,7 +2,7 @@ import { Redirect, useRouter } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
 import { AppText, Avatar, Button, Screen, SectionTitle, Surface } from '@/components/ui';
-import { DEFAULT_SINGLE_COPY, getGameMode } from '@/features/game-modes/registry';
+import { DEFAULT_MODE_ID, DEFAULT_SINGLE_COPY, getGameMode, MIX_EMOJI, MIX_PARAM } from '@/features/game-modes/registry';
 import { LEVELS } from '@/features/levels/levels';
 import { useTranslation } from '@/i18n';
 import { useGameStore } from '@/store';
@@ -16,7 +16,8 @@ export default function SummaryScreen() {
   if (!result) return <Redirect href="/" />;
 
   const meta = LEVELS[result.level];
-  const mode = getGameMode(result.modeId);
+  // A mixed round is summed up like Spicy Questions: answered, passed, skipped.
+  const mode = getGameMode(result.mixed ? DEFAULT_MODE_ID : result.modeId);
   const group = mode.group;
   const isChoice = Boolean(mode.choice);
   const single = mode.singleCopy ?? DEFAULT_SINGLE_COPY;
@@ -71,7 +72,9 @@ export default function SummaryScreen() {
             label={t('summary.playAgain')}
             icon="refresh"
             gradient={meta.gradient}
-            onPress={() => router.replace({ pathname: '/level', params: { mode: result.modeId } })}
+            onPress={() =>
+              router.replace({ pathname: '/level', params: { mode: result.mixed ? MIX_PARAM : result.modeId } })
+            }
           />
           <Button
             label={t('summary.home')}
@@ -93,7 +96,13 @@ export default function SummaryScreen() {
           {t('summary.title')}
         </AppText>
         <AppText variant="caption" color={colors.textMuted} align="center">
-          {`${meta.emoji} ${t(meta.nameKey).toLocaleUpperCase()} · ${t('summary.duration', { minutes })}`}
+          {[
+            result.mixed ? `${MIX_EMOJI} ${t('mix.title')}` : null,
+            `${meta.emoji} ${t(meta.nameKey).toLocaleUpperCase()}`,
+            t('summary.duration', { minutes }),
+          ]
+            .filter(Boolean)
+            .join(' · ')}
         </AppText>
       </View>
 

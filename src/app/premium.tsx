@@ -13,7 +13,6 @@ const FEATURE_ICONS: Record<PremiumFeature, IconName> = {
   extraPacks: 'albums-outline',
   exclusiveCategories: 'sparkles-outline',
   customQuestions: 'create-outline',
-  customRounds: 'options-outline',
   adFree: 'ban-outline',
 };
 

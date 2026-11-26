@@ -67,7 +67,7 @@ describe('local persistence', () => {
     useGameStore.getState().startGame('spicy-questions', 'hot');
     await flushPromises();
     const stored = await readStored(STORAGE_KEYS.game);
-    expect(Object.keys(stored!.state).sort()).toEqual(['lastLevel', 'players', 'session']);
+    expect(Object.keys(stored!.state).sort()).toEqual(['lastLevel', 'lastRound', 'players', 'session']);
     expect((stored!.state.players as { name: string }[]).map((p) => p.name)).toEqual(['Lena', 'Max']);
   });
 
