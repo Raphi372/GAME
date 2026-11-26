@@ -16,24 +16,36 @@ export default function SummaryScreen() {
   if (!result) return <Redirect href="/" />;
 
   const meta = LEVELS[result.level];
-  const group = getGameMode(result.modeId).group;
+  const mode = getGameMode(result.modeId);
+  const group = mode.group;
+  const isChoice = Boolean(mode.choice);
   const totals = result.players.reduce(
     (sum, player) => ({
       answered: sum.answered + player.answered,
       passed: sum.passed + player.passed,
       skipped: sum.skipped + player.skipped,
       tally: sum.tally + (group ? player[group.tally] : 0),
+      truths: sum.truths + player.truths,
+      dares: sum.dares + player.dares,
     }),
-    { answered: 0, passed: 0, skipped: 0, tally: 0 },
+    { answered: 0, passed: 0, skipped: 0, tally: 0, truths: 0, dares: 0 },
   );
-  // Spicy Questions ranks by answered questions, group modes by their tally.
+  // Spicy Questions ranks by answered questions, group modes by their tally,
+  // "Wahrheit oder Pflicht" by dares done.
   const score = (player: (typeof result.players)[number]) =>
-    group ? player[group.tally] : player.answered;
+    group ? player[group.tally] : isChoice ? player.dares : player.answered;
   const ranked = [...result.players].sort((a, b) => score(b) - score(a));
   const top = ranked[0] && score(ranked[0]) > 0 ? ranked[0] : null;
   const minutes = Math.max(1, Math.round(result.durationMs / 60000));
 
-  const stats = group
+  const stats = isChoice
+    ? [
+        { label: t('summary.rounds'), value: result.turnsCompleted },
+        { label: t('summary.truths'), value: totals.truths },
+        { label: t('summary.dares'), value: totals.dares },
+        { label: t('summary.passed'), value: totals.passed },
+      ]
+    : group
     ? [
         { label: t('summary.rounds'), value: result.turnsCompleted },
         { label: t(group.copy.summaryStat), value: totals.tally },
@@ -100,7 +112,7 @@ export default function SummaryScreen() {
           <Avatar name={top.name} colorIndex={top.colorIndex} size={48} />
           <View style={styles.flex}>
             <AppText variant="overline" color={meta.accent}>
-              {`🏆 ${t(group ? group.copy.summaryTop : 'summary.mostDaring')}`}
+              {`🏆 ${t(group ? group.copy.summaryTop : isChoice ? 'summary.mostDares' : 'summary.mostDaring')}`}
             </AppText>
             <AppText variant="h2">{top.name}</AppText>
           </View>
@@ -112,16 +124,20 @@ export default function SummaryScreen() {
         {ranked.map((player) => (
           <View key={player.id} style={styles.playerRow}>
             <Avatar name={player.name} colorIndex={player.colorIndex} size={40} />
-            <AppText variant="bodyStrong" style={styles.flex} numberOfLines={1}>
-              {player.name}
-            </AppText>
-            <AppText variant="caption" color={colors.textSecondary}>
-              {group
-                ? player[group.tally] === 1
-                  ? t(group.copy.summaryLineOne)
-                  : t(group.copy.summaryLine, { count: player[group.tally] })
-                : t('summary.playerLine', { answered: player.answered, passed: player.passed })}
-            </AppText>
+            <View style={styles.flex}>
+              <AppText variant="bodyStrong" numberOfLines={1}>
+                {player.name}
+              </AppText>
+              <AppText variant="caption" color={colors.textSecondary}>
+                {isChoice
+                  ? t('summary.todLine', { truths: player.truths, dares: player.dares, passed: player.passed })
+                  : group
+                  ? player[group.tally] === 1
+                    ? t(group.copy.summaryLineOne)
+                    : t(group.copy.summaryLine, { count: player[group.tally] })
+                  : t('summary.playerLine', { answered: player.answered, passed: player.passed })}
+              </AppText>
+            </View>
           </View>
         ))}
       </View>

@@ -7,8 +7,9 @@ fügt ihre Mitspieler hinzu, wählt einen Spielmodus und eines von drei Spicy-Le
 zufällige Karten rund um Flirt, Dating, Geständnisse und Intimität – mit fairer
 Spielerrotation, ohne Wiederholungen und komplett offline.
 
-**Spielmodi:** 🔥 *Spicy Questions* (Fragen an die Person, die dran ist), 🙊 *Ich hab noch nie*
-und 👀 *Wer würde am ehesten?* (in beiden liest eine Person vor, die ganze Runde spielt mit).
+**Spielmodi:** 🔥 *Spicy Questions* (Fragen an die Person, die dran ist), 🎲 *Wahrheit oder Pflicht*
+(die Person wählt selbst), 🙊 *Ich hab noch nie* und 👀 *Wer würde am ehesten?* (in beiden liest eine
+Person vor, die ganze Runde spielt mit).
 
 > **Fair Play ist eingebaut:** Niemand muss antworten („Ich passe“ ist immer erlaubt), kein
 > Alkohol ist nötig, und für EXTREME fragt die App vorher nach dem Einverständnis der Gruppe.
@@ -52,6 +53,10 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 | :-: | :-: | :-: | :-: |
 | <img src="docs/screenshots/11-nhie-level.jpg" width="190"> | <img src="docs/screenshots/10-nhie-game.jpg" width="190"> | <img src="docs/screenshots/12-mlt-game.jpg" width="190"> | <img src="docs/screenshots/13-mlt-summary.jpg" width="190"> |
 
+| Wahrheit oder Pflicht – Wahl | Wahrheit oder Pflicht – Pflicht | Einstellungen |
+| :-: | :-: | :-: |
+| <img src="docs/screenshots/14-tod-choice.jpg" width="190"> | <img src="docs/screenshots/15-tod-dare.jpg" width="190"> | <img src="docs/screenshots/09-settings.jpg" width="190"> |
+
 > **Platzhalter für Store-Screenshots:** Für App Store / Google Play werden später eigene
 > Marketing-Screenshots in den geforderten Gerätegrößen benötigt (z. B. 6,9″ iPhone,
 > Android-Phone, Tablet). Ablageort-Vorschlag: `docs/store/`.
@@ -77,6 +82,17 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 - **Spieler mitten im Spiel hinzufügen/umbenennen/entfernen** – die Rotation bleibt fair.
 - **Spielstand bleibt erhalten** (auch nach App-Neustart) und kann auf der Startseite
   fortgesetzt werden. Am Ende gibt es eine Auswertung mit Statistik.
+
+### Spielmodus „Wahrheit oder Pflicht“
+- **330 eigenständige Karten** (110 pro Level: 50 Wahrheiten, 60 Pflichten).
+- Wer dran ist, **wählt** „Wahrheit“ (ehrliche Frage) oder „Pflicht“ (Aufgabe von höchstens etwa
+  einer Minute); danach „Erledigt“, „Andere Karte“ (gleiche Art) oder „Ich passe“ – auch schon
+  vor der Wahl.
+- Ist eine Art im Level aufgebraucht, wird sie ausgegraut; sind beide leer, kann neu gemischt werden.
+- **Sicherheitsregeln für Pflichten:** kein Alkohol, keine Nacktheit, nichts Demütigendes, kein
+  Vorlesen privater Chats. Jede Berührung einer anderen Person nur mit deren ausdrücklichem Ja –
+  das prüfen Validator und Tests automatisch.
+- Auswertung mit Wahrheiten, Pflichten, Gepasst und „Die meisten Pflichten“.
 
 ### Spielmodus „Ich hab noch nie“
 - **300 eigenständige Aussagen** (100 pro Level), alle im Format „Ich hab noch nie …“.
@@ -117,8 +133,7 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 - Alle lokalen Daten löschen
 
 ### Vorbereitet (noch nicht aktiv)
-- **Weitere Spielmodi** (Wahrheit oder Pflicht, Random Challenges) – im Menü als „Bald“
-  sichtbar, Architektur vorhanden.
+- **Weiterer Spielmodus** Random Challenges – im Menü als „Bald“ sichtbar, Architektur vorhanden.
 - **Premium/Freemium** – Preis-Konfiguration, Entitlements, Kauf-Schnittstelle, Werbe-Regeln.
   Es werden **keine Zahlungen** abgewickelt oder simuliert.
 
@@ -169,7 +184,8 @@ Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
 │   │   └── settings/            # Einstellungs-Zeilen
 │   ├── data/questions/          # Spicy Questions: mild.json, hot.json, extreme.json
 │   │   ├── never-have-i-ever/   # Ich hab noch nie: mild.json, hot.json, extreme.json
-│   │   └── most-likely/         # Wer würde am ehesten?: mild.json, hot.json, extreme.json
+│   │   ├── most-likely/         # Wer würde am ehesten?: mild.json, hot.json, extreme.json
+│   │   └── truth-or-dare/       # Wahrheit oder Pflicht: mild.json, hot.json, extreme.json
 │   ├── hooks/                   # useMotion (Animationen + „Bewegung reduzieren“)
 │   ├── i18n/                    # de.ts (Quelle), en.ts, useTranslation
 │   ├── services/                # Storage, Haptik, Sound, Feedback, Zufallsquelle
@@ -255,8 +271,8 @@ Abgedeckt sind u. a.: Level-Auswahl, Fragen laden, Zufallsauswahl, keine Wiederh
 Spieler hinzufügen/umbenennen/entfernen, faire Rotation, Überspringen, Passen, Levelwechsel,
 leeres/durchgespieltes Deck, lokale Speicherung inkl. App-Neustart und korrupter Daten,
 Einstellungen, Sprache, 18+-Sperre, Datenlöschung sowie der komplette Spielablauf
-aller drei Spielmodi über die echten Routen (inkl. Spielerauswahl und Zählern in den Gruppenmodi sowie
-dem 3‑2‑1‑Countdown).
+aller vier Spielmodi über die echten Routen (inkl. Wahl Wahrheit/Pflicht, Spielerauswahl und
+Zählern in den Gruppenmodi sowie dem 3‑2‑1‑Countdown).
 
 Die **GitHub-Actions-CI** (`.github/workflows/ci.yml`) führt bei jedem Push/PR Typecheck,
 Lint, Fragen-Validierung und Tests aus und baut anschließend Android-, iOS- und Web-Bundles
@@ -321,6 +337,7 @@ mit transparentem Hintergrund und ca. 66 % Safe-Zone).
 | Spicy Questions | `src/data/questions/{mild,hot,extreme}.json` | `mild_`, `hot_`, `extreme_` | Platzhalter `{other}` erlaubt |
 | Ich hab noch nie | `src/data/questions/never-have-i-ever/{mild,hot,extreme}.json` | `nhie_mild_`, … | Text beginnt immer mit „Ich hab noch nie “, keine Platzhalter |
 | Wer würde am ehesten? | `src/data/questions/most-likely/{mild,hot,extreme}.json` | `mlt_mild_`, … | „Wer würde am ehesten … ?“, endet mit „?“, keine Platzhalter, respektvoll gegenüber realen Personen |
+| Wahrheit oder Pflicht | `src/data/questions/truth-or-dare/{mild,hot,extreme}.json` | `tod_mild_`, … | Pflichtfeld `kind`: `truth` (endet mit „?“) oder `dare` (endet mit „.“/„!“); je Level mind. 40 von jeder Art; `{other}` erlaubt; Pflichten mit Berührung brauchen eine Einverständnis-Formulierung |
 
 Jede Datei ist ein Array pro Level, z. B. für Spicy Questions:
 
@@ -356,8 +373,9 @@ Beispiel „Ich hab noch nie“:
 
 Danach `npm run validate:questions` und `npm test` ausführen. Der Validator prüft für alle
 Spielmodi IDs, Duplikate (auch textlich und modusübergreifend), Kategorien, Länge,
-Platzhalter, das jeweilige Format („Ich hab noch nie …“, „Wer würde am ehesten …?“) und die
-Mindestanzahl von 100 Karten pro Level.
+Platzhalter, das jeweilige Format („Ich hab noch nie …“, „Wer würde am ehesten …?“,
+Wahrheit/Pflicht), die Mindestanzahl von 100 Karten pro Level und – bei Pflicht-Aufgaben – dass
+jede Berührung einer anderen Person nur mit deren Einverständnis vorgesehen ist.
 
 **Inhaltsrichtlinien:** nur Erwachsene, nichts mit Minderjährigen oder Schul-/Jugendbezug in
 intimen Kontexten, nichts Nicht-Einvernehmliches, keine Diskriminierung oder Demütigung, keine
@@ -392,6 +410,9 @@ Tests als Seed-RNG.
 Jeder Modus hat ID, Status (`available`/`coming-soon`), Zugstil, Karteneinheit
 („Fragen“/„Aussagen“), optionalen Karten-Vorspann und Spielerzahlen.
 - `single-player` (Spicy Questions): die Person, die dran ist, antwortet, passt oder überspringt.
+- `single-player` mit `choice` (Wahrheit oder Pflicht): Die Runde beginnt im Wahlzustand
+  (`isAwaitingChoice`); `chooseCard()` zieht eine Karte der gewählten Art, „Andere Karte“ bleibt
+  bei der Art, `completeTurn()` zählt zusätzlich `truths`/`dares`.
 - `group` (Ich hab noch nie, Wer würde am ehesten?): die Person, die dran ist, liest vor;
   `completeGroupRound()` erhöht für alle markierten Spieler den Zähler des Modus
   (`group.tally`: `confessed` bzw. `picked`) und gibt die nächste Karte an die nächste Person.
@@ -457,8 +478,7 @@ liefern. Fragen-Pakete haben ein `locale`; fehlt eine Sprache, wird auf Deutsch 
 ## Bekannte Einschränkungen & nächste Schritte
 
 **Noch nicht umgesetzt (bewusst für spätere Releases):**
-- Spielmodi *Wahrheit oder Pflicht* und *Random Challenges* (nur als „Bald“ im Menü;
-  Architektur vorhanden, Inhalte fehlen).
+- Spielmodus *Random Challenges* (nur als „Bald“ im Menü; Architektur vorhanden, Inhalte fehlen).
 - Premium-Käufe (Store-Integration, z. B. via StoreKit/Play Billing), eigene Fragen,
   individuelle Spielrunden.
 - Englische Fragen-Inhalte (die Oberfläche ist übersetzt, die Fragen sind Deutsch).

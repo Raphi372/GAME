@@ -7,6 +7,9 @@ import mltMildData from '@/data/questions/most-likely/mild.json';
 import nhieExtremeData from '@/data/questions/never-have-i-ever/extreme.json';
 import nhieHotData from '@/data/questions/never-have-i-ever/hot.json';
 import nhieMildData from '@/data/questions/never-have-i-ever/mild.json';
+import todExtremeData from '@/data/questions/truth-or-dare/extreme.json';
+import todHotData from '@/data/questions/truth-or-dare/hot.json';
+import todMildData from '@/data/questions/truth-or-dare/mild.json';
 import type { GameModeId } from '@/features/game-modes/registry';
 import type { ContentTier } from '@/features/premium/entitlements';
 import type { Locale, Question, SpicyLevel } from '@/types';
@@ -51,6 +54,9 @@ export const BUILTIN_PACKS: readonly QuestionPack[] = [
   buildPack('most-likely.mild.base', 'most-likely', 'mild', mltMildData),
   buildPack('most-likely.hot.base', 'most-likely', 'hot', mltHotData),
   buildPack('most-likely.extreme.base', 'most-likely', 'extreme', mltExtremeData),
+  buildPack('truth-or-dare.mild.base', 'truth-or-dare', 'mild', todMildData),
+  buildPack('truth-or-dare.hot.base', 'truth-or-dare', 'hot', todHotData),
+  buildPack('truth-or-dare.extreme.base', 'truth-or-dare', 'extreme', todExtremeData),
 ];
 
 /** Content is authored in German first; other locales fall back to it. */

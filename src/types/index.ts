@@ -15,6 +15,10 @@ export const QUESTION_CATEGORIES = [
 ] as const;
 export type QuestionCategory = (typeof QUESTION_CATEGORIES)[number];
 
+/** Card kinds for modes where the player chooses (Wahrheit oder Pflicht). */
+export const CARD_KINDS = ['truth', 'dare'] as const;
+export type CardKind = (typeof CARD_KINDS)[number];
+
 /** Optional intensity within a level: 1 = soft, 3 = bold. */
 export type QuestionIntensity = 1 | 2 | 3;
 
@@ -28,6 +32,8 @@ export interface Question {
    */
   text: string;
   intensity?: QuestionIntensity;
+  /** Only in choice modes: "truth" (a question) or "dare" (a task). */
+  kind?: CardKind;
 }
 
 export interface Player {
@@ -46,4 +52,8 @@ export function isSpicyLevel(value: unknown): value is SpicyLevel {
 
 export function isQuestionCategory(value: unknown): value is QuestionCategory {
   return typeof value === 'string' && (QUESTION_CATEGORIES as readonly string[]).includes(value);
+}
+
+export function isCardKind(value: unknown): value is CardKind {
+  return typeof value === 'string' && (CARD_KINDS as readonly string[]).includes(value);
 }

@@ -56,7 +56,7 @@ describe('game store', () => {
 
     it('does not start modes that are not available yet', () => {
       addPlayers('Lena', 'Max');
-      expect(game().startGame('truth-or-dare', 'mild')).toBe(false);
+      expect(game().startGame('random-challenges', 'mild')).toBe(false);
     });
 
     it('starts with the selected level and remembers it', () => {
@@ -85,6 +85,8 @@ describe('game store', () => {
         skipped: 1,
         confessed: 0,
         picked: 0,
+        truths: 0,
+        dares: 0,
       });
 
       game().answer();
@@ -184,11 +186,32 @@ describe('game store', () => {
       expect(game().session).toBeNull();
     });
 
+    it('plays "Wahrheit oder Pflicht" with a choice per turn', () => {
+      addPlayers('Lena', 'Max');
+      expect(game().startGame('truth-or-dare', 'hot')).toBe(true);
+      expect(game().session?.current?.questionId).toBeNull();
+      const first = game().session!.current!.playerId;
+      game().chooseCard('truth');
+      expect(game().session?.current?.questionId).toMatch(/^tod_hot_/);
+      expect(game().session?.current?.kind).toBe('truth');
+      game().answer();
+      game().chooseCard('dare');
+      game().answer();
+      game().pass();
+      game().endGame();
+      const result = game().lastResult!;
+      expect(result.turnsCompleted).toBe(3);
+      const firstResult = result.players.find((p) => p.id === first)!;
+      expect(firstResult.truths + firstResult.passed).toBe(2);
+      expect(result.players.reduce((sum, p) => sum + p.dares, 0)).toBe(1);
+    });
+
     it('ignores game actions when no game is running', () => {
       expect(() => {
         game().answer();
         game().pass();
         game().nextGroupCard(['x']);
+        game().chooseCard('truth');
         game().skip();
         game().changeLevel('hot');
         game().reshuffle();

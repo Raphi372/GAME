@@ -7,6 +7,9 @@ import mltExtreme from '@/data/questions/most-likely/extreme.json';
 import mltHot from '@/data/questions/most-likely/hot.json';
 import mltMild from '@/data/questions/most-likely/mild.json';
 import nhieMild from '@/data/questions/never-have-i-ever/mild.json';
+import todExtreme from '@/data/questions/truth-or-dare/extreme.json';
+import todHot from '@/data/questions/truth-or-dare/hot.json';
+import todMild from '@/data/questions/truth-or-dare/mild.json';
 import {
   countBuiltInCards,
   getDeck,
@@ -85,12 +88,12 @@ describe('"Ich hab noch nie" deck', () => {
   });
 
   it('has unique ids and texts across all game modes', () => {
-    const modes = ['spicy-questions', 'never-have-i-ever', 'most-likely'] as const;
+    const modes = ['spicy-questions', 'never-have-i-ever', 'most-likely', 'truth-or-dare'] as const;
     const all = modes.flatMap((mode) => SPICY_LEVELS.flatMap((level) => getDeck(mode, level)));
     expect(new Set(all.map((card) => card.id)).size).toBe(all.length);
     expect(new Set(all.map((card) => card.text.toLowerCase())).size).toBe(all.length);
     expect(countBuiltInCards(modes)).toBe(all.length);
-    expect(all.length).toBeGreaterThanOrEqual(900);
+    expect(all.length).toBeGreaterThanOrEqual(1200);
   });
 
   it('contains no drinking instructions', () => {
@@ -135,6 +138,47 @@ describe('"Wer würde am ehesten?" deck', () => {
   });
 });
 
+describe('"Wahrheit oder Pflicht" deck', () => {
+  const todFiles = { mild: todMild, hot: todHot, extreme: todExtreme };
+  const dares = SPICY_LEVELS.flatMap((level) =>
+    getDeck('truth-or-dare', level).filter((card) => card.kind === 'dare'),
+  );
+
+  it.each(SPICY_LEVELS)('%s has at least 100 cards with enough truths and dares', (level) => {
+    const { questions, issues } = parseQuestions(todFiles[level], level);
+    expect(issues).toEqual([]);
+    expect(questions.length).toBeGreaterThanOrEqual(100);
+    expect(questions.filter((q) => q.kind === 'truth').length).toBeGreaterThanOrEqual(40);
+    expect(questions.filter((q) => q.kind === 'dare').length).toBeGreaterThanOrEqual(40);
+  });
+
+  it('truths are questions and dares are tasks', () => {
+    for (const level of SPICY_LEVELS) {
+      for (const card of getDeck('truth-or-dare', level)) {
+        expect(card.id.startsWith(`tod_${level}_`)).toBe(true);
+        if (card.kind === 'truth') expect(card.text.endsWith('?')).toBe(true);
+        else expect(card.text).toMatch(/[.!]$/);
+      }
+    }
+  });
+
+  it('asks for consent whenever a dare touches another player', () => {
+    const touch = /(küss|kuss|massier|umarm|schoß|streich|berühr|hand|nacken|schulter|ohr|kuschel|knabber|lippen|knie|hals|tanz)/i;
+    const consent = /(nur wenn|wenn \{other\}|wenn ihr beide|nur bei einem klaren ja|nur mit|einverstanden|zustimm|erlaubnis|darf|entscheid|wollt|möchte|mag|lust|reicht|letzte wort|ablehnen|ohne berührung)/i;
+    const offending = dares.filter(
+      (card) => card.text.includes('{other}') && touch.test(card.text) && !consent.test(card.text),
+    );
+    expect(offending.map((card) => card.id)).toEqual([]);
+  });
+
+  it('contains no drinking, nudity or reading of private chats', () => {
+    const banned = /(\btrink|\bschluck|\bshot|nackt|auszieh|chatverlauf|nachrichten vor)/i;
+    for (const level of SPICY_LEVELS) {
+      getDeck('truth-or-dare', level).forEach((card) => expect(card.text).not.toMatch(banned));
+    }
+  });
+});
+
 describe('question parsing', () => {
   it('skips invalid and duplicate entries instead of crashing', () => {
     const { questions, issues } = parseQuestions(
@@ -145,12 +189,13 @@ describe('question parsing', () => {
         { id: 'mild_3', level: 'mild', category: 'unknown', text: 'Falsche Kategorie?' },
         { id: 'mild_4', level: 'mild', category: 'flirty', text: '' },
         { id: 'mild_5', level: 'mild', category: 'flirty', text: 'Intensität?', intensity: 7 },
+        { id: 'mild_6', level: 'mild', category: 'flirty', text: 'Falsche Art?', kind: 'joke' },
         'kein Objekt',
       ],
       'mild',
     );
     expect(questions.map((q) => q.id)).toEqual(['mild_1']);
-    expect(issues).toHaveLength(6);
+    expect(issues).toHaveLength(7);
   });
 
   it('reports non-array input', () => {
@@ -195,6 +240,6 @@ describe('deck loading', () => {
   });
 
   it('returns an empty deck for modes without content', () => {
-    expect(getDeck('truth-or-dare', 'mild')).toEqual([]);
+    expect(getDeck('random-challenges', 'mild')).toEqual([]);
   });
 });

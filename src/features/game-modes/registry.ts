@@ -1,6 +1,6 @@
 import type { GroupTally } from '@/features/gameplay/engine/session';
 import type { TranslationKey } from '@/i18n';
-import type { SpicyLevel } from '@/types';
+import type { CardKind, SpicyLevel } from '@/types';
 
 /**
  * Game mode registry.
@@ -30,12 +30,11 @@ export type GameModeStatus = 'available' | 'coming-soon';
  */
 export type TurnStyle = 'single-player' | 'group';
 
-/** How a mode calls its cards in the UI ("110 Fragen" vs. "100 Aussagen"). */
-export type CardUnit = 'questions' | 'statements';
+/** How a mode calls its cards in the UI ("110 Fragen", "100 Aussagen", "110 Karten"). */
+export type CardUnit = 'questions' | 'statements' | 'cards';
 
 /** UI copy of a group mode (all translation keys, checked by TypeScript). */
 export interface GroupModeCopy {
-  howTo: TranslationKey;
   pickerTitle: TranslationKey;
   pickerHint: TranslationKey;
   /** Accessible name of a player chip, receives `{name}`. */
@@ -47,7 +46,11 @@ export interface GroupModeCopy {
   /** Receives `{count}`. */
   summaryLine: TranslationKey;
   summaryLineOne: TranslationKey;
-  levelDescriptions: Record<SpicyLevel, TranslationKey>;
+}
+
+/** Rules of a choice mode: the active player picks a kind, then gets a card of it. */
+export interface ChoiceModeConfig {
+  kinds: readonly CardKind[];
 }
 
 /** Rules of a group mode: one person reads aloud, everybody plays along. */
@@ -70,6 +73,12 @@ export interface GameModeDefinition {
   cardLead?: string;
   /** Required for `turnStyle: 'group'`. */
   group?: GroupModeConfig;
+  /** Player picks the kind of card first ("Wahrheit oder Pflicht"). */
+  choice?: ChoiceModeConfig;
+  /** Short rules shown before the game ("So geht's"). */
+  howTo?: TranslationKey;
+  /** Mode-specific level descriptions; defaults to the Spicy Questions texts. */
+  levelDescriptions?: Record<SpicyLevel, TranslationKey>;
   minPlayers: number;
   maxPlayers: number;
 }
@@ -96,11 +105,16 @@ export const GAME_MODES: Record<GameModeId, GameModeDefinition> = {
     usesSpicyLevels: true,
     cardUnit: 'statements',
     cardLead: 'Ich hab noch nie',
+    howTo: 'nhie.howTo',
+    levelDescriptions: {
+      mild: 'nhie.level.mild.description',
+      hot: 'nhie.level.hot.description',
+      extreme: 'nhie.level.extreme.description',
+    },
     group: {
       tally: 'confessed',
       countdown: false,
       copy: {
-        howTo: 'nhie.howTo',
         pickerTitle: 'nhie.whoHas',
         pickerHint: 'nhie.whoHasHint',
         toggleLabel: 'nhie.confessToggle',
@@ -110,11 +124,6 @@ export const GAME_MODES: Record<GameModeId, GameModeDefinition> = {
         summaryTop: 'summary.mostConfessions',
         summaryLine: 'summary.confessionLine',
         summaryLineOne: 'summary.confessionLineOne',
-        levelDescriptions: {
-          mild: 'nhie.level.mild.description',
-          hot: 'nhie.level.hot.description',
-          extreme: 'nhie.level.extreme.description',
-        },
       },
     },
     minPlayers: MIN_PLAYERS,
@@ -123,10 +132,17 @@ export const GAME_MODES: Record<GameModeId, GameModeDefinition> = {
   'truth-or-dare': {
     id: 'truth-or-dare',
     emoji: '🎲',
-    status: 'coming-soon',
+    status: 'available',
     turnStyle: 'single-player',
     usesSpicyLevels: true,
-    cardUnit: 'questions',
+    cardUnit: 'cards',
+    howTo: 'tod.howTo',
+    levelDescriptions: {
+      mild: 'tod.level.mild.description',
+      hot: 'tod.level.hot.description',
+      extreme: 'tod.level.extreme.description',
+    },
+    choice: { kinds: ['truth', 'dare'] },
     minPlayers: MIN_PLAYERS,
     maxPlayers: MAX_PLAYERS,
   },
@@ -138,11 +154,16 @@ export const GAME_MODES: Record<GameModeId, GameModeDefinition> = {
     usesSpicyLevels: true,
     cardUnit: 'questions',
     cardLead: 'Wer würde am ehesten',
+    howTo: 'mlt.howTo',
+    levelDescriptions: {
+      mild: 'mlt.level.mild.description',
+      hot: 'mlt.level.hot.description',
+      extreme: 'mlt.level.extreme.description',
+    },
     group: {
       tally: 'picked',
       countdown: true,
       copy: {
-        howTo: 'mlt.howTo',
         pickerTitle: 'mlt.pickerTitle',
         pickerHint: 'mlt.pickerHint',
         toggleLabel: 'mlt.toggle',
@@ -152,11 +173,6 @@ export const GAME_MODES: Record<GameModeId, GameModeDefinition> = {
         summaryTop: 'summary.mostPicked',
         summaryLine: 'summary.pickLine',
         summaryLineOne: 'summary.pickLineOne',
-        levelDescriptions: {
-          mild: 'mlt.level.mild.description',
-          hot: 'mlt.level.hot.description',
-          extreme: 'mlt.level.extreme.description',
-        },
       },
     },
     minPlayers: 3,

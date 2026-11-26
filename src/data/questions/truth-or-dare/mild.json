@@ -1,0 +1,882 @@
+[
+  {
+    "id": "tod_mild_001",
+    "level": "mild",
+    "kind": "truth",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Was war das schönste Kompliment, das du je bekommen hast?"
+  },
+  {
+    "id": "tod_mild_002",
+    "level": "mild",
+    "kind": "truth",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Welches Kompliment hörst du am liebsten?"
+  },
+  {
+    "id": "tod_mild_003",
+    "level": "mild",
+    "kind": "truth",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Welcher Song bringt dich sofort in Flirtlaune?"
+  },
+  {
+    "id": "tod_mild_004",
+    "level": "mild",
+    "kind": "truth",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Welche Promi-Stimme findest du unwiderstehlich?"
+  },
+  {
+    "id": "tod_mild_005",
+    "level": "mild",
+    "kind": "truth",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Was ist dein größtes Talent beim Flirten?"
+  },
+  {
+    "id": "tod_mild_006",
+    "level": "mild",
+    "kind": "truth",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Was machst du, wenn dir jemand gefällt – sofort ansprechen oder abwarten?"
+  },
+  {
+    "id": "tod_mild_007",
+    "level": "mild",
+    "kind": "truth",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Welche Sprache findest du am sexiesten?"
+  },
+  {
+    "id": "tod_mild_008",
+    "level": "mild",
+    "kind": "truth",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Was war der letzte Grund, warum du rot geworden bist?"
+  },
+  {
+    "id": "tod_mild_009",
+    "level": "mild",
+    "kind": "truth",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Wann hast du zuletzt jemandem ein ehrliches Kompliment gemacht?"
+  },
+  {
+    "id": "tod_mild_010",
+    "level": "mild",
+    "kind": "truth",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Was wäre dein Dating-App-Profilspruch in genau fünf Wörtern?"
+  },
+  {
+    "id": "tod_mild_011",
+    "level": "mild",
+    "kind": "truth",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Was würdest du auf einem ersten Date niemals bestellen?"
+  },
+  {
+    "id": "tod_mild_012",
+    "level": "mild",
+    "kind": "truth",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Welche Dating-Regel brichst du immer wieder?"
+  },
+  {
+    "id": "tod_mild_013",
+    "level": "mild",
+    "kind": "truth",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Wie lange hat deine kürzeste Beziehung gehalten?"
+  },
+  {
+    "id": "tod_mild_014",
+    "level": "mild",
+    "kind": "truth",
+    "category": "dating",
+    "intensity": 1,
+    "text": "Was war dein ungewöhnlichster Ort für ein Date?"
+  },
+  {
+    "id": "tod_mild_015",
+    "level": "mild",
+    "kind": "truth",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Bist du schon einmal bei einem Date eingeschlafen?"
+  },
+  {
+    "id": "tod_mild_016",
+    "level": "mild",
+    "kind": "truth",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Welche Kleinigkeit macht dich bei einem Date sofort skeptisch?"
+  },
+  {
+    "id": "tod_mild_017",
+    "level": "mild",
+    "kind": "truth",
+    "category": "dating",
+    "intensity": 2,
+    "text": "Welche Serie würdest du mit einem Date schauen, um es zu testen?"
+  },
+  {
+    "id": "tod_mild_018",
+    "level": "mild",
+    "kind": "truth",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Wie würde dein perfekter Sonntag zu zweit aussehen?"
+  },
+  {
+    "id": "tod_mild_019",
+    "level": "mild",
+    "kind": "truth",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Welche Frage stellst du dir selbst vor einem Date?"
+  },
+  {
+    "id": "tod_mild_020",
+    "level": "mild",
+    "kind": "truth",
+    "category": "dating",
+    "intensity": 3,
+    "text": "Was ist dein Lieblingsort für ein Date?"
+  },
+  {
+    "id": "tod_mild_021",
+    "level": "mild",
+    "kind": "truth",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Welche Person in deinem Handy hat den lustigsten Kontaktnamen?"
+  },
+  {
+    "id": "tod_mild_022",
+    "level": "mild",
+    "kind": "truth",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Was ist deine heimliche Lieblingsserie, die du niemandem verrätst?"
+  },
+  {
+    "id": "tod_mild_023",
+    "level": "mild",
+    "kind": "truth",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Wie lautet dein peinlichster Spitzname?"
+  },
+  {
+    "id": "tod_mild_024",
+    "level": "mild",
+    "kind": "truth",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Was war dein schlimmster Haarschnitt vor einem Date?"
+  },
+  {
+    "id": "tod_mild_025",
+    "level": "mild",
+    "kind": "truth",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Was ist dein Guilty-Pleasure-Liebesfilm?"
+  },
+  {
+    "id": "tod_mild_026",
+    "level": "mild",
+    "kind": "truth",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Welches Emoji beschreibt dein Liebesleben gerade am besten?"
+  },
+  {
+    "id": "tod_mild_027",
+    "level": "mild",
+    "kind": "truth",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Was war dein peinlichster Moment auf einer Party?"
+  },
+  {
+    "id": "tod_mild_028",
+    "level": "mild",
+    "kind": "truth",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Was ist die verrückteste Ausrede, die du je fürs Zuspätkommen benutzt hast?"
+  },
+  {
+    "id": "tod_mild_029",
+    "level": "mild",
+    "kind": "truth",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Was ist dein Signature-Move auf der Tanzfläche?"
+  },
+  {
+    "id": "tod_mild_030",
+    "level": "mild",
+    "kind": "truth",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Hast du schon einmal so getan, als würdest du jemanden nicht erkennen?"
+  },
+  {
+    "id": "tod_mild_031",
+    "level": "mild",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Was ist die süßeste Nachricht, die du je bekommen hast?"
+  },
+  {
+    "id": "tod_mild_032",
+    "level": "mild",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Was ist das Kitschigste, das du je für jemanden gemacht hast?"
+  },
+  {
+    "id": "tod_mild_033",
+    "level": "mild",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Hast du schon einmal einen Liebesbrief bekommen – von wem?"
+  },
+  {
+    "id": "tod_mild_034",
+    "level": "mild",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Was war das romantischste Geschenk, das du je gemacht hast?"
+  },
+  {
+    "id": "tod_mild_035",
+    "level": "mild",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Welchen Promi würdest du gern einmal zum Abendessen ausführen?"
+  },
+  {
+    "id": "tod_mild_036",
+    "level": "mild",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Hattest du schon einmal einen Crush auf jemanden aus dem Fernsehen?"
+  },
+  {
+    "id": "tod_mild_037",
+    "level": "mild",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Was ist dein bester Trick gegen Liebeskummer?"
+  },
+  {
+    "id": "tod_mild_038",
+    "level": "mild",
+    "kind": "truth",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Was würdest du einer oder einem Ex heute gern noch sagen – in einem Satz?"
+  },
+  {
+    "id": "tod_mild_039",
+    "level": "mild",
+    "kind": "truth",
+    "category": "group",
+    "intensity": 1,
+    "text": "Welche Person aus der Runde würdest du als Erstes um Dating-Rat fragen?"
+  },
+  {
+    "id": "tod_mild_040",
+    "level": "mild",
+    "kind": "truth",
+    "category": "group",
+    "intensity": 1,
+    "text": "Wessen Profil hast du zuletzt heimlich durchgescrollt?"
+  },
+  {
+    "id": "tod_mild_041",
+    "level": "mild",
+    "kind": "truth",
+    "category": "group",
+    "intensity": 1,
+    "text": "Wem aus dieser Runde würdest du dein entsperrtes Handy eine Stunde überlassen?"
+  },
+  {
+    "id": "tod_mild_042",
+    "level": "mild",
+    "kind": "truth",
+    "category": "group",
+    "intensity": 2,
+    "text": "Was war dein erster Gedanke, als du heute in die Runde geschaut hast?"
+  },
+  {
+    "id": "tod_mild_043",
+    "level": "mild",
+    "kind": "truth",
+    "category": "group",
+    "intensity": 2,
+    "text": "Welche Person hier hat dich beim Kennenlernen am meisten überrascht?"
+  },
+  {
+    "id": "tod_mild_044",
+    "level": "mild",
+    "kind": "truth",
+    "category": "group",
+    "intensity": 3,
+    "text": "Mit wem hier hattest du das lustigste Gespräch beim Kennenlernen?"
+  },
+  {
+    "id": "tod_mild_045",
+    "level": "mild",
+    "kind": "truth",
+    "category": "group",
+    "intensity": 3,
+    "text": "Was ist das Netteste, das du heute über jemanden hier gedacht, aber nicht gesagt hast?"
+  },
+  {
+    "id": "tod_mild_046",
+    "level": "mild",
+    "kind": "truth",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Welche Eigenschaft hättest du gern von deinem Schwarm?"
+  },
+  {
+    "id": "tod_mild_047",
+    "level": "mild",
+    "kind": "truth",
+    "category": "personal",
+    "intensity": 1,
+    "text": "Wann warst du zuletzt so richtig verknallt?"
+  },
+  {
+    "id": "tod_mild_048",
+    "level": "mild",
+    "kind": "truth",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Welches Outfit trägst du, wenn du richtig gut aussehen willst?"
+  },
+  {
+    "id": "tod_mild_049",
+    "level": "mild",
+    "kind": "truth",
+    "category": "personal",
+    "intensity": 2,
+    "text": "Welche Eigenschaft an dir wird beim ersten Treffen am meisten unterschätzt?"
+  },
+  {
+    "id": "tod_mild_050",
+    "level": "mild",
+    "kind": "truth",
+    "category": "personal",
+    "intensity": 3,
+    "text": "Wer aus deinem Freundeskreis wäre das perfekte Paar mit dir?"
+  },
+  {
+    "id": "tod_mild_051",
+    "level": "mild",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Mach {other} drei ehrliche Komplimente hintereinander."
+  },
+  {
+    "id": "tod_mild_052",
+    "level": "mild",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Erfinde einen Anmachspruch für {other} und trag ihn vor."
+  },
+  {
+    "id": "tod_mild_053",
+    "level": "mild",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Mach dein bestes Flirt-Gesicht und halte es zehn Sekunden lang."
+  },
+  {
+    "id": "tod_mild_054",
+    "level": "mild",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 1,
+    "text": "Gib {other} einen netten Spitznamen, der bis zum Spielende gilt – wenn {other} ihn mag."
+  },
+  {
+    "id": "tod_mild_055",
+    "level": "mild",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Versuch, {other} nur mit einem Blick zum Lachen zu bringen."
+  },
+  {
+    "id": "tod_mild_056",
+    "level": "mild",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Nenn drei Dinge, die {other} besonders gut kann."
+  },
+  {
+    "id": "tod_mild_057",
+    "level": "mild",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 2,
+    "text": "Zeig, wie du jemanden in einer Bar ansprechen würdest – mit {other} als Übungspartner, wenn {other} mag."
+  },
+  {
+    "id": "tod_mild_058",
+    "level": "mild",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Halte 15 Sekunden Augenkontakt mit {other}, ohne zu lachen."
+  },
+  {
+    "id": "tod_mild_059",
+    "level": "mild",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Mach einen Werbeslogan für {other}."
+  },
+  {
+    "id": "tod_mild_060",
+    "level": "mild",
+    "kind": "dare",
+    "category": "flirty",
+    "intensity": 3,
+    "text": "Sag {other} einen Satz, der wie ein Glückskeks klingt."
+  },
+  {
+    "id": "tod_mild_061",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Sprich die nächste Minute nur in Reimen."
+  },
+  {
+    "id": "tod_mild_062",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Sing den Refrain eines Liebeslieds – mit ganz viel Gefühl."
+  },
+  {
+    "id": "tod_mild_063",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Tanz 20 Sekunden lang zu einem Song, den die Runde aussucht."
+  },
+  {
+    "id": "tod_mild_064",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Spiel dein letztes Date pantomimisch nach."
+  },
+  {
+    "id": "tod_mild_065",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Imitiere jemanden aus der Runde, bis die anderen erraten, wer es ist."
+  },
+  {
+    "id": "tod_mild_066",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Erzähl einen Witz – lacht niemand, erzählst du noch einen."
+  },
+  {
+    "id": "tod_mild_067",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Mach zehn Kniebeugen und sag bei jeder ein Kompliment an die Runde."
+  },
+  {
+    "id": "tod_mild_068",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Sprich die nächsten zwei Runden mit einem Akzent deiner Wahl."
+  },
+  {
+    "id": "tod_mild_069",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Stell dich vor, als wärst du Kandidat oder Kandidatin in einer Dating-Show."
+  },
+  {
+    "id": "tod_mild_070",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Halte eine 30-sekündige Liebeserklärung an dein Lieblingsessen."
+  },
+  {
+    "id": "tod_mild_071",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 1,
+    "text": "Erzähl in 30 Sekunden die Handlung deines Lieblingsfilms, ohne den Titel zu nennen."
+  },
+  {
+    "id": "tod_mild_072",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Mach einen Heiratsantrag an die Fernbedienung oder einen anderen Gegenstand."
+  },
+  {
+    "id": "tod_mild_073",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Tanz einen Slow Dance mit einem Kissen."
+  },
+  {
+    "id": "tod_mild_074",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Sprich eine Minute lang, ohne die Wörter „ich“ und „ja“ zu benutzen."
+  },
+  {
+    "id": "tod_mild_075",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Imitiere einen Promi beim Flirten."
+  },
+  {
+    "id": "tod_mild_076",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Spiel einen Werbespot, der dich als perfektes Date anpreist."
+  },
+  {
+    "id": "tod_mild_077",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Mach 15 Sekunden lang Beatbox."
+  },
+  {
+    "id": "tod_mild_078",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Sag deinen Namen rückwärts und mach dir danach selbst ein Kompliment."
+  },
+  {
+    "id": "tod_mild_079",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Lauf einmal wie auf dem Laufsteg durch den Raum."
+  },
+  {
+    "id": "tod_mild_080",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Sing „Happy Birthday“ für {other} – auch wenn heute kein Geburtstag ist."
+  },
+  {
+    "id": "tod_mild_081",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 2,
+    "text": "Erfinde ein Gericht, das nach Liebe schmeckt, und beschreib es."
+  },
+  {
+    "id": "tod_mild_082",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Beschreib dein Traum-Date nur mit Geräuschen."
+  },
+  {
+    "id": "tod_mild_083",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Zeig deine beste Superhelden-Pose und halte sie zehn Sekunden lang."
+  },
+  {
+    "id": "tod_mild_084",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Spiel 20 Sekunden Luftgitarre zu einem Liebeslied."
+  },
+  {
+    "id": "tod_mild_085",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Erzähl die nächste Runde alles wie ein Märchenerzähler."
+  },
+  {
+    "id": "tod_mild_086",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Gib der Runde einen Tipp fürs erste Date – im Stil eines Sportkommentators."
+  },
+  {
+    "id": "tod_mild_087",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Mach drei Komplimente an dich selbst, ohne zu lachen."
+  },
+  {
+    "id": "tod_mild_088",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Imitiere ein Tier beim Flirten – die Runde rät, welches."
+  },
+  {
+    "id": "tod_mild_089",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Sag „Ich liebe dich“ in drei verschiedenen Sprachen."
+  },
+  {
+    "id": "tod_mild_090",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Versuch zehn Sekunden lang auf einem Bein zu stehen und dabei zu flirten."
+  },
+  {
+    "id": "tod_mild_091",
+    "level": "mild",
+    "kind": "dare",
+    "category": "funny",
+    "intensity": 3,
+    "text": "Spiel ein 30-Sekunden-Telefonat mit deinem Schwarm und sprich beide Rollen."
+  },
+  {
+    "id": "tod_mild_092",
+    "level": "mild",
+    "kind": "dare",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Erfinde ein kurzes Gedicht über {other}."
+  },
+  {
+    "id": "tod_mild_093",
+    "level": "mild",
+    "kind": "dare",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Stell eine Szene aus einem Liebesfilm nach – die Runde rät den Film."
+  },
+  {
+    "id": "tod_mild_094",
+    "level": "mild",
+    "kind": "dare",
+    "category": "romance",
+    "intensity": 1,
+    "text": "Erzähl {other} einen erfundenen, kitschigen Kennenlern-Moment von euch beiden."
+  },
+  {
+    "id": "tod_mild_095",
+    "level": "mild",
+    "kind": "dare",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Schreib ein vierzeiliges Gedicht über die heutige Nacht."
+  },
+  {
+    "id": "tod_mild_096",
+    "level": "mild",
+    "kind": "dare",
+    "category": "romance",
+    "intensity": 2,
+    "text": "Spiel einen nervösen ersten Kuss nach – mit deiner eigenen Hand."
+  },
+  {
+    "id": "tod_mild_097",
+    "level": "mild",
+    "kind": "dare",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Schick einem Menschen deiner Wahl eine Sprachnachricht mit einem ehrlichen Kompliment."
+  },
+  {
+    "id": "tod_mild_098",
+    "level": "mild",
+    "kind": "dare",
+    "category": "romance",
+    "intensity": 3,
+    "text": "Nenn in 15 Sekunden fünf Dinge, die dich an einem Date begeistern."
+  },
+  {
+    "id": "tod_mild_099",
+    "level": "mild",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Sag jeder Person in der Runde ein Kompliment."
+  },
+  {
+    "id": "tod_mild_100",
+    "level": "mild",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Mach ein Selfie mit {other} mit dem albernsten Gesicht, das ihr schafft – wenn {other} einverstanden ist."
+  },
+  {
+    "id": "tod_mild_101",
+    "level": "mild",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Lass dir von {other} die Frisur für die nächste Runde stylen – wenn ihr beide Lust habt."
+  },
+  {
+    "id": "tod_mild_102",
+    "level": "mild",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 1,
+    "text": "Tausch für eine Runde den Platz mit {other}."
+  },
+  {
+    "id": "tod_mild_103",
+    "level": "mild",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Sing die erste Zeile eines Songs und lass die Runde weitersingen."
+  },
+  {
+    "id": "tod_mild_104",
+    "level": "mild",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Zeichne {other} in 30 Sekunden – egal wie gut."
+  },
+  {
+    "id": "tod_mild_105",
+    "level": "mild",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Erfinde einen Namen für eure Runde und einen passenden Schlachtruf."
+  },
+  {
+    "id": "tod_mild_106",
+    "level": "mild",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 2,
+    "text": "Begrüß jede Person in der Runde, als hättest du sie ewig nicht gesehen."
+  },
+  {
+    "id": "tod_mild_107",
+    "level": "mild",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 3,
+    "text": "Lies {other} frei erfunden aus der Hand – wenn {other} dir die Hand reicht."
+  },
+  {
+    "id": "tod_mild_108",
+    "level": "mild",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 3,
+    "text": "Schreib mit dem Finger einen Namen in die Luft – die Runde muss raten."
+  },
+  {
+    "id": "tod_mild_109",
+    "level": "mild",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 3,
+    "text": "Zeig der Runde deinen besten Tanzschritt."
+  },
+  {
+    "id": "tod_mild_110",
+    "level": "mild",
+    "kind": "dare",
+    "category": "group",
+    "intensity": 3,
+    "text": "Erzähl wie ein Nachrichtensprecher von deinem heutigen Abend."
+  }
+]

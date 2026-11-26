@@ -40,7 +40,23 @@ const DECKS = [
     startsWith: 'Wer würde am ehesten ',
     endsWith: '?',
   },
+  {
+    mode: 'truth-or-dare',
+    dir: 'src/data/questions/truth-or-dare',
+    idPrefix: (level) => `tod_${level}_`,
+    minPerLevel: 100,
+    placeholders: ['{other}'],
+    /** Every card is a truth (question) or a dare (task); both need enough cards. */
+    kinds: { truth: { min: 40, endsWith: ['?'] }, dare: { min: 40, endsWith: ['.', '!'] } },
+    /** Dares that touch another player must ask for consent in the text. */
+    consent: true,
+  },
 ];
+
+/** Physical contact with another player … */
+const TOUCH = /(küss|kuss|massier|umarm|schoß|streich|berühr|hand|nacken|schulter|ohr|kuschel|knabber|lippen|knie|hals|tanz)/i;
+/** … must come with an explicit opt-in for that player. */
+const CONSENT = /(nur wenn|wenn \{other\}|wenn ihr beide|nur bei einem klaren ja|nur mit|einverstanden|zustimm|erlaubnis|darf|entscheid|wollt|möchte|mag|lust|reicht|letzte wort|ablehnen|ohne berührung)/i;
 
 const errors = [];
 const ids = new Set();
@@ -89,6 +105,19 @@ for (const deck of DECKS) {
       if (deck.endsWith && !q.text.endsWith(deck.endsWith)) {
         errors.push(`${where}: text must end with "${deck.endsWith}"`);
       }
+      if (deck.kinds) {
+        const rule = deck.kinds[q.kind];
+        if (!rule) {
+          errors.push(`${where}: kind must be one of ${Object.keys(deck.kinds).join(', ')}`);
+        } else if (!rule.endsWith.some((end) => q.text.endsWith(end))) {
+          errors.push(`${where}: a ${q.kind} must end with ${rule.endsWith.join(' or ')}`);
+        }
+      } else if (q.kind !== undefined) {
+        errors.push(`${where}: "kind" is only allowed in decks with truth/dare cards`);
+      }
+      if (deck.consent && q.kind === 'dare' && q.text.includes('{other}') && TOUCH.test(q.text) && !CONSENT.test(q.text)) {
+        errors.push(`${where}: dare involves another player physically but does not ask for consent`);
+      }
       for (const placeholder of q.text.match(/\{[^}]*\}/g) ?? []) {
         if (!deck.placeholders.includes(placeholder)) {
           errors.push(`${where}: placeholder ${placeholder} not allowed in ${deck.mode}`);
@@ -98,6 +127,12 @@ for (const deck of DECKS) {
       if (texts.has(key)) errors.push(`${where}: duplicate text (also ${texts.get(key)})`);
       texts.set(key, where);
     });
+    if (deck.kinds) {
+      for (const [kind, rule] of Object.entries(deck.kinds)) {
+        const count = data.filter((q) => q.kind === kind).length;
+        if (count < rule.min) errors.push(`${name}: only ${count} "${kind}" cards (minimum ${rule.min})`);
+      }
+    }
     total += data.length;
     console.log(`✓ ${deck.mode} / ${level}: ${data.length}`);
   }

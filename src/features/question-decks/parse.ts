@@ -1,4 +1,5 @@
 import {
+  isCardKind,
   isQuestionCategory,
   isSpicyLevel,
   type Question,
@@ -41,7 +42,7 @@ export function parseQuestions(raw: unknown, expectedLevel?: SpicyLevel): ParseR
       issues.push({ index, reason: 'not an object' });
       return;
     }
-    const { id, level, category, text, intensity } = entry;
+    const { id, level, category, text, intensity, kind } = entry;
     if (typeof id !== 'string' || id.trim() === '') {
       issues.push({ index, reason: 'missing id' });
       return;
@@ -66,6 +67,10 @@ export function parseQuestions(raw: unknown, expectedLevel?: SpicyLevel): ParseR
       issues.push({ index, reason: `invalid intensity for ${id}` });
       return;
     }
+    if (kind !== undefined && !isCardKind(kind)) {
+      issues.push({ index, reason: `invalid kind for ${id}` });
+      return;
+    }
     seenIds.add(id);
     questions.push({
       id,
@@ -73,6 +78,7 @@ export function parseQuestions(raw: unknown, expectedLevel?: SpicyLevel): ParseR
       category,
       text: text.trim(),
       ...(intensity !== undefined ? { intensity } : {}),
+      ...(kind !== undefined ? { kind } : {}),
     });
   });
   return { questions, issues };
