@@ -121,7 +121,8 @@ describe('settings screen', () => {
     await renderRouter(APP_DIR, { initialUrl: '/settings' });
     await user.press(await screen.findByRole('radio', { name: 'English' }));
     expect(await screen.findByText('Settings')).toBeOnTheScreen();
-    expect(screen.getByText('Questions are currently available in German only.')).toBeOnTheScreen();
+    // All cards exist in English, so no "German only" note is shown.
+    expect(screen.queryByText('Questions are currently available in German only.')).not.toBeOnTheScreen();
   });
 
   it('revoking the age confirmation brings back the age gate', async () => {

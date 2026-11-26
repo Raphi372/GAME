@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
- * Validates all question decks (src/data/questions/**).
+ * Validates all question decks (src/data/questions/**) and their English
+ * translations (src/data/questions/en/<mode>/<level>.json: { "<id>": "<text>" }).
  * Used by CI and when adding new content:  npm run validate:questions
  */
 import { readFileSync } from 'node:fs';
@@ -22,6 +23,7 @@ const DECKS = [
     idPrefix: (level) => `${level}_`,
     minPerLevel: 100,
     placeholders: ['{other}'],
+    en: {},
   },
   {
     mode: 'never-have-i-ever',
@@ -30,6 +32,7 @@ const DECKS = [
     minPerLevel: 100,
     placeholders: [],
     startsWith: 'Ich hab noch nie ',
+    en: { startsWith: 'Never have I ever ' },
   },
   {
     mode: 'most-likely',
@@ -39,6 +42,7 @@ const DECKS = [
     placeholders: [],
     startsWith: 'Wer würde am ehesten ',
     endsWith: '?',
+    en: { startsWith: 'Who is most likely to ', endsWith: '?' },
   },
   {
     mode: 'truth-or-dare',
@@ -50,6 +54,7 @@ const DECKS = [
     kinds: { truth: { min: 40, endsWith: ['?'] }, dare: { min: 40, endsWith: ['.', '!'] } },
     /** Dares that touch another player must ask for consent in the text. */
     consent: true,
+    en: {},
   },
   {
     mode: 'random-challenges',
@@ -60,6 +65,7 @@ const DECKS = [
     endsWithAny: ['.', '!'],
     /** Challenges with body contact involving others (incl. "Alle: …") need an opt-in. */
     consent: 'others',
+    en: { groupLead: ['Alle: ', 'Everyone: '] },
   },
 ];
 
@@ -77,15 +83,96 @@ const OPT_IN = new RegExp(`${CONSENT.source}|freiwillig|wollen|will|mitmachen`, 
 const LOOKS = /(attraktivst|hübschest|sexiest|am besten aussieht|besten aussehen|heißeste[nrs]? (ausstrahlung|körper|look|figur|promi-doppelgänger)|schönste[nrs]? (lippen|lächeln|augen|gesicht|körper|po|figur|haare|beine|hände))/i;
 const PICKS_PLAYER = /(\bhier\b|\b(aus|in) (der|dieser) runde\b|\bdieser runde\b|^wer würde am ehesten |^alle:)/i;
 const ABOUT_SELF = /\b(an dir selbst|dir selbst)\b/i;
-const ranksLooks = (text) => LOOKS.test(text) && PICKS_PLAYER.test(text) && !ABOUT_SELF.test(text);
+/** … the same goes for sex appeal ("am verführerischsten", "der beste Kisser") … */
+const SEX_APPEAL = /(verführerischst|beste[nr]? kisser|küsst[^.?!]*am besten)/i;
+/** … while showing off yourself ("deinen verführerischsten Blick") rates nobody. */
+const OWN_PERFORMANCE = /\b(dein|deine|deinen|deiner|eure|euren|eurer)\s+verführerischst/i;
+const ranksLooks = (text) =>
+  (LOOKS.test(text) || (SEX_APPEAL.test(text) && !OWN_PERFORMANCE.test(text))) &&
+  PICKS_PLAYER.test(text) &&
+  !ABOUT_SELF.test(text);
 const involvesOthers = (text) =>
   text.includes('{other}') || text.startsWith('Alle:') || /\b(person|personen|jemand|jemanden)\b/i.test(text);
+/** German cards whose text must ask for consent – their translation has to keep it. */
+const needsConsent = (deck, q) =>
+  (deck.consent === true && q.kind === 'dare' && q.text.includes('{other}') && TOUCH.test(q.text)) ||
+  (deck.consent === 'others' && involvesOthers(q.text) && CONTACT.test(q.text));
+
+/** English counterparts of the content rules. */
+const EN_CONSENT = /(only if|only with|if \{other\}|if you both|if they|clear yes|agree|consent|permission|\bmay\b|decide|\bwants?\b|would like|feels? like|okay with|plays along|join in|who want|offers|say no|turn it down|turn you down|decline|veto|stop you|last word|without (any )?touching|optional|voluntar|passing is allowed)/i;
+const EN_LOOKS = /(most attractive|best[- ]looking|prettiest|hottest (aura|body|look|figure|celebrity look-alike)|most beautiful (lips|smile|eyes|face|body|hair|legs|hands)|looks the best)/i;
+const EN_PICKS_PLAYER = /(\bhere\b|\bin (this|the) group\b|^who is most likely to |^everyone:)/i;
+const EN_ABOUT_SELF = /\b(yourself|of your own)\b/i;
+const EN_SEX_APPEAL = /(most seductive|best kisser|kisses the best|sexiest (person|one|player|voice))/i;
+const EN_OWN_PERFORMANCE = /\byour\s+(most seductive|sexiest)/i;
+const EN_DRINKING = /\b(drink|drinks|drinking|shots?|sips?|chug|booze|alcohol|tipsy|drunk)\b/i;
+const numbersIn = (text) => (text.match(/\d+/g) ?? []).sort().join(',');
+/** Which placeholders a text uses (a translation may use "them" instead of a second {other}). */
+const placeholdersIn = (text) => [...new Set(text.match(/\{[^}]*\}/g) ?? [])].sort().join(',');
 
 const errors = [];
 const ids = new Set();
 const texts = new Map();
 const normalize = (text) => text.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
 let total = 0;
+let totalEn = 0;
+const textsEn = new Map();
+
+/** Checks the English file of one deck level against its German source cards. */
+function validateEnglish(deck, level, source) {
+  const name = `src/data/questions/en/${deck.mode}/${level}.json`;
+  let data;
+  try {
+    data = JSON.parse(readFileSync(join(root, name), 'utf8'));
+  } catch (error) {
+    errors.push(`${name}: cannot be read or parsed (${error.message})`);
+    return;
+  }
+  if (!data || typeof data !== 'object' || Array.isArray(data)) {
+    errors.push(`${name}: must be an object { "<id>": "<text>" }`);
+    return;
+  }
+  const sourceIds = new Set(source.map((q) => q.id));
+  for (const id of Object.keys(data)) {
+    if (!sourceIds.has(id)) errors.push(`${name}: "${id}" does not exist in the German deck`);
+  }
+  for (const q of source) {
+    const where = `${name}[${q.id}]`;
+    const text = data[q.id];
+    if (typeof text !== 'string' || text.trim().length < 10) {
+      errors.push(`${where}: translation missing or too short`);
+      continue;
+    }
+    if (text.length > 180) errors.push(`${where}: text longer than 180 characters`);
+    if (placeholdersIn(text) !== placeholdersIn(q.text)) errors.push(`${where}: placeholders differ from German`);
+    if (numbersIn(text) !== numbersIn(q.text)) errors.push(`${where}: numbers differ from German (timer texts!)`);
+    if (deck.en.startsWith && !text.startsWith(deck.en.startsWith)) {
+      errors.push(`${where}: text must start with "${deck.en.startsWith}"`);
+    }
+    if (deck.en.endsWith && !text.endsWith(deck.en.endsWith)) {
+      errors.push(`${where}: text must end with "${deck.en.endsWith}"`);
+    }
+    if (deck.en.groupLead && q.text.startsWith(deck.en.groupLead[0]) !== text.startsWith(deck.en.groupLead[1])) {
+      errors.push(`${where}: group cards start with "${deck.en.groupLead[1]}" exactly when the German one does`);
+    }
+    if (q.text.endsWith('?') !== text.endsWith('?')) errors.push(`${where}: question/statement differs from German`);
+    if ((deck.endsWithAny || q.kind === 'dare') && !['.', '!'].some((end) => text.endsWith(end))) {
+      errors.push(`${where}: a task must end with . or !`);
+    }
+    if (needsConsent(deck, q) && !EN_CONSENT.test(text)) {
+      errors.push(`${where}: the German card asks for consent – the translation must too`);
+    }
+    const enAppeal = EN_SEX_APPEAL.test(text) && !EN_OWN_PERFORMANCE.test(text);
+    if ((EN_LOOKS.test(text) || enAppeal) && EN_PICKS_PLAYER.test(text) && !EN_ABOUT_SELF.test(text)) {
+      errors.push(`${where}: compares players by their looks or sex appeal – rephrase around behaviour instead`);
+    }
+    if (EN_DRINKING.test(text)) errors.push(`${where}: no drinking in the game`);
+    const key = normalize(text);
+    if (textsEn.has(key)) errors.push(`${where}: duplicate text (also ${textsEn.get(key)})`);
+    textsEn.set(key, where);
+  }
+  totalEn += source.length;
+}
 
 for (const deck of DECKS) {
   for (const level of LEVELS) {
@@ -135,7 +222,7 @@ for (const deck of DECKS) {
         errors.push(`${where}: seconds must be a whole number between 5 and 120`);
       }
       if (ranksLooks(q.text)) {
-        errors.push(`${where}: compares players by their looks – rephrase around behaviour instead`);
+        errors.push(`${where}: compares players by their looks or sex appeal – rephrase around behaviour instead`);
       }
       if (deck.consent === 'others' && involvesOthers(q.text) && CONTACT.test(q.text) && !OPT_IN.test(q.text)) {
         errors.push(`${where}: challenge involves body contact with others but does not ask for consent`);
@@ -169,7 +256,8 @@ for (const deck of DECKS) {
       }
     }
     total += data.length;
-    console.log(`✓ ${deck.mode} / ${level}: ${data.length}`);
+    if (deck.en) validateEnglish(deck, level, data);
+    console.log(`✓ ${deck.mode} / ${level}: ${data.length}${deck.en ? ' (+ en)' : ''}`);
   }
 }
 
@@ -178,4 +266,4 @@ if (errors.length > 0) {
   for (const error of errors) console.error(`  - ${error}`);
   process.exit(1);
 }
-console.log(`\nAll ${total} cards are valid.`);
+console.log(`\nAll ${total} cards and ${totalEn} English translations are valid.`);

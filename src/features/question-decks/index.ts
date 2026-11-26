@@ -57,9 +57,15 @@ export function getDeckSize(modeId: GameModeId, level: SpicyLevel, options?: Dec
   return getDeck(modeId, level, options).length;
 }
 
-/** Number of built-in cards over all playable modes and levels (for marketing copy). */
-export function countBuiltInCards(modeIds: readonly GameModeId[]): number {
-  return BUILTIN_PACKS.filter((pack) => modeIds.includes(pack.modeId) && pack.tier === 'free').reduce(
+/** Number of built-in cards over all playable modes and levels in one language (for marketing copy). */
+export function countBuiltInCards(
+  modeIds: readonly GameModeId[],
+  locale: Locale = CONTENT_FALLBACK_LOCALE,
+): number {
+  const contentLocale = hasContentInLocale(locale) ? locale : CONTENT_FALLBACK_LOCALE;
+  return BUILTIN_PACKS.filter(
+    (pack) => modeIds.includes(pack.modeId) && pack.tier === 'free' && pack.locale === contentLocale,
+  ).reduce(
     (sum, pack) => sum + pack.questions.length,
     0,
   );
