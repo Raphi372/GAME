@@ -2,7 +2,8 @@
 
 Alles, was SPICY NIGHT für die Einreichung braucht – außer Käufen. Was nur du festlegen
 kannst (Anbieterdaten, Konten, URLs), ist unten als Checkliste markiert und steht bewusst
-nicht im Repository.
+nicht im Repository. Den kompletten Ablauf bis zur Einreichung fasst
+[`../RELEASE.md`](../RELEASE.md) zusammen; `npm run release:check` zeigt, was noch fehlt.
 
 ## Was liegt wo?
 
@@ -68,7 +69,10 @@ steht in `app.json` (`version`).
 
 1. App in App Store Connect anlegen (Bundle-ID wie in `app.json`, Hauptsprache Deutsch) und
    die Sprachen Englisch (USA), Spanisch (Spanien) und Spanisch (Mexiko) hinzufügen – über
-   Spanisch (Mexiko) erscheint der Eintrag in den lateinamerikanischen App Stores.
+   Spanisch (Mexiko) erscheint der Eintrag in den lateinamerikanischen App Stores. Die
+   Sprachen der App selbst (Deutsch, Englisch, Spanisch) stehen im Build
+   (`CFBundleLocalizations` über `expo-localization` in `app.json`) und erscheinen im App Store
+   automatisch.
 2. In `store.config.json` unter `apple` ergänzen: `copyright` (z. B. `"2026 Deine Firma"`)
    und je Sprache unter `info` die Felder `supportUrl` und `privacyPolicyUrl`. Bis dahin
    meldet `npx eas-cli@latest metadata:lint` genau diese fehlende `privacyPolicyUrl` –

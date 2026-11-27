@@ -1,6 +1,8 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getLocales } from 'expo-localization';
 
-import { detectDeviceLocale } from '@/i18n/deviceLocale';
+import { detectDeviceLocale, matchDeviceLocale } from '@/i18n/deviceLocale';
+import { STORAGE_KEYS } from '@/services/storage';
 import { initialSettings, useSettingsStore } from '@/store';
 
 import { resetStores } from '../helpers/stores';
@@ -61,5 +63,40 @@ describe('language of a fresh install', () => {
     useSettingsStore.getState().setLocale('de');
     useSettingsStore.getState().resetSettings();
     expect(useSettingsStore.getState().locale).toBe('es');
+  });
+});
+
+describe('language after a restart', () => {
+  beforeEach(() => resetStores());
+  afterEach(() => mockedLocales.mockImplementation(germanDevice));
+
+  async function restart(stored: Record<string, unknown>) {
+    await AsyncStorage.setItem(STORAGE_KEYS.settings, JSON.stringify({ state: stored, version: 1 }));
+    await useSettingsStore.persist.rehydrate();
+    return useSettingsStore.getState();
+  }
+
+  it('keeps the language picked in the app while the device language stays the same', async () => {
+    device('de');
+    expect(await restart({ locale: 'en', deviceLocale: 'de' })).toMatchObject({ locale: 'en', deviceLocale: 'de' });
+  });
+
+  it('follows a new device or app language from the system settings', async () => {
+    device('es', 'de');
+    expect(await restart({ locale: 'en', deviceLocale: 'de' })).toMatchObject({ locale: 'es', deviceLocale: 'es' });
+    // From a language the app does not speak to one it does.
+    device('de');
+    expect(await restart({ locale: 'en', deviceLocale: null })).toMatchObject({ locale: 'de', deviceLocale: 'de' });
+  });
+
+  it('ignores device languages the app does not speak', async () => {
+    device('fr');
+    expect(matchDeviceLocale()).toBeNull();
+    expect(await restart({ locale: 'de', deviceLocale: 'de' })).toMatchObject({ locale: 'de', deviceLocale: 'de' });
+  });
+
+  it('keeps the language of settings saved by an older version and only remembers the device', async () => {
+    device('es');
+    expect(await restart({ locale: 'en' })).toMatchObject({ locale: 'en', deviceLocale: 'es' });
   });
 });

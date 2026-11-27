@@ -212,7 +212,8 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
   im Spiel, die aktuelle Karte und der Spielstand bleiben erhalten
 - Beim ersten Start (und nach „Alle lokalen Daten löschen“) übernimmt die App die erste
   passende Gerätesprache (`expo-localization`); spricht das Gerät keine davon, startet sie auf
-  Englisch. Danach gilt die Wahl in den Einstellungen.
+  Englisch. Danach gilt die Wahl in den Einstellungen – bis sich die Gerätesprache oder die
+  App-Sprache in den Systemeinstellungen ändert (iOS, Android 13+): Dann folgt die App ihr.
 - Spanisch ist neutral für Spanien und Lateinamerika geschrieben: Wer das Handy hält, wird mit
   „tú“ angesprochen, die Runde wird beschrieben statt mit „vosotros“ oder „ustedes“ angeredet,
   und Spieler werden ohne männliche/weibliche Adjektive angesprochen („te dan nervios“ statt
@@ -315,15 +316,18 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
 │   ├── images/                  # App-Icon, Adaptive Icons, Splash, Favicon
 │   └── sounds/                  # Kurze UI-Sounds (WAV)
 ├── docs/
+│   ├── RELEASE.md               # Release-Checkliste: was erledigt ist, was nur du tun kannst
 │   ├── screenshots/             # Screenshots für dieses README
 │   └── store/                   # Store-Texte, -Screenshots, Fragebögen, Datenschutzerklärung
 ├── scripts/
 │   ├── validate-questions.mjs   # prüft die Fragen-Datenbank
 │   ├── store-screenshots.mjs    # erzeugt Store-Screenshots und Play-Grafik
 │   ├── readme-screenshots.mjs   # erzeugt die Screenshots für dieses README
+│   ├── release-check.mjs        # Vorabprüfung vor einer Einreichung (npm run release:check)
 │   └── lib/app-screens.mjs      # gemeinsame Helfer: Web-Build ausliefern, Spielstand vorbelegen
 ├── .github/workflows/ci.yml
 ├── app.json · eas.json · store.config.json (App-Store-Texte für EAS Metadata)
+├── CHANGELOG.md
 ├── jest.config.js · eslint.config.js · tsconfig.json
 ```
 
@@ -363,9 +367,10 @@ Versionen gewählt. `npx expo-doctor` prüft das Projekt.
 
 ```bash
 npm start            # Expo Dev Server (QR-Code mit Expo Go scannen)
-npm run android      # öffnet die App im Android-Emulator / auf dem Gerät
-npm run ios          # öffnet die App im iOS-Simulator (macOS)
+npm run android      # öffnet die App in Expo Go im Android-Emulator / auf dem Gerät
+npm run ios          # öffnet die App in Expo Go im iOS-Simulator (macOS)
 npm run web          # Web-Version im Browser
+npm run start:dev    # Dev Server für einen Entwicklungs-Build (npm run build:dev)
 ```
 
 Schritt für Schritt (Handy):
@@ -421,8 +426,14 @@ Vor dem ersten Store-Build prüfen bzw. anpassen (`app.json`):
 
 ### Test-Builds (intern verteilbar)
 ```bash
-npm run build:preview     # Android-APK + iOS-Build für interne Tester
+npm run build:preview         # Android-APK + iOS-Build für interne Tester
+npm run build:dev             # Entwicklungs-Build mit expo-dev-client (Handy/Tablet)
+npm run build:dev:simulator   # Entwicklungs-Build für den iOS-Simulator
 ```
+Für die tägliche Entwicklung reicht Expo Go; einen Entwicklungs-Build braucht es erst bei
+eigenem nativem Code (etwa echten In-App-Käufen). Die vollständige Release-Checkliste steht in
+[`docs/RELEASE.md`](docs/RELEASE.md), `npm run release:check` zeigt, was im Repository noch
+fehlt.
 
 ### Android (Google Play)
 ```bash
@@ -651,6 +662,10 @@ Wörterbüchern, `cardLead` in der Registry, Kartentexte in `src/data/questions/
   Spielende wird der Spielstand gelöscht.
 - Keine Berechtigungen für Kamera, Mikrofon, Kontakte oder Standort (Mikrofon- und
   Speicher-Berechtigungen sind auf Android explizit blockiert).
+- Keine Android-Sicherung in die Cloud (`android.allowBackup: false`) – Spielernamen landen
+  auch nicht im Google-Backup.
+- iOS-Privacy-Manifest (`ios.privacyManifests`): kein Tracking, keine erfassten Daten, nur
+  die Standard-Gründe für die von React Native genutzten APIs.
 - „Alle lokalen Daten löschen“ in den Einstellungen.
 - Die Datenschutzhinweise in der App sind eine **Vorlage** und müssen vor Veröffentlichung
   rechtlich geprüft werden. Die Anbieterdaten kommen in `src/config/legal.ts`; solange sie
