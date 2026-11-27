@@ -16,7 +16,7 @@ Stand: 27. November 2026
 ## Kurz gesagt
 
 SPICY NIGHT funktioniert ohne Konto und ohne Internet. Alles, was du eingibst, bleibt auf
-deinem Gerät. Wir erhalten keine Daten von dir.
+deinem Gerät. Wir erhalten keine Daten von dir – außer du schreibst uns selbst eine E-Mail.
 
 ## Verantwortliche Stelle
 
@@ -74,10 +74,20 @@ Teilen-Menü in deinen Fotos sicherst, fragt iOS einmal, ob die App Fotos hinzuf
 Unter **Einstellungen → Daten** kannst du jederzeit alle lokal gespeicherten Daten löschen.
 Beim Deinstallieren der App werden sie ebenfalls entfernt.
 
-Weil wir keine Daten über dich erhalten, können wir dir auf Anfrage auch keine Auskunft
-über gespeicherte Daten geben – sie liegen ausschließlich auf deinem Gerät. Für Fragen zum
+Weil wir über die App keine Daten von dir erhalten, können wir dir zu den Daten der App auch
+keine Auskunft geben – sie liegen ausschließlich auf deinem Gerät. Für E-Mails, die du uns
+geschrieben hast, hast du die Rechte auf Auskunft, Berichtigung und Löschung. Für Fragen zum
 Datenschutz erreichst du uns unter der oben genannten Adresse. Du hast außerdem das Recht,
 dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren.
+
+## Kontakt per E-Mail
+
+Schreibst du uns eine E-Mail – über „Feedback senden“ in der App, die Hilfe-Seite der Website
+oder direkt –, verarbeiten wir deine E-Mail-Adresse und deine Nachricht, um dir zu antworten
+(Art. 6 Abs. 1 lit. b bzw. f DSGVO). Die App öffnet dafür nur dein E-Mail-Programm und füllt
+App-Version, Betriebssystem und Sprache vor; du siehst alles, bevor du die Nachricht
+abschickst, und kannst es löschen. Wir löschen deine Nachricht, sobald die Anfrage erledigt ist
+und keine gesetzliche Aufbewahrungspflicht besteht.
 
 ## Diese Website
 

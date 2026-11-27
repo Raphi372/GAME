@@ -92,9 +92,11 @@ interface LinkRowProps {
   onPress: () => void;
   hint?: string;
   tone?: 'default' | 'danger';
+  /** Opens another app (browser, e-mail) – shown with an "open" arrow instead of a chevron. */
+  external?: boolean;
 }
 
-export function LinkRow({ label, icon, onPress, hint, tone = 'default' }: LinkRowProps) {
+export function LinkRow({ label, icon, onPress, hint, tone = 'default', external = false }: LinkRowProps) {
   const color = tone === 'danger' ? colors.danger : colors.text;
   const { controlProps, hintProps } = useHintDescription(hint);
   return (
@@ -120,7 +122,7 @@ export function LinkRow({ label, icon, onPress, hint, tone = 'default' }: LinkRo
           </AppText>
         ) : null}
       </View>
-      <Icon name="chevron-forward" size={18} color={colors.textMuted} />
+      <Icon name={external ? 'open-outline' : 'chevron-forward'} size={18} color={colors.textMuted} />
     </Pressable>
   );
 }

@@ -38,7 +38,9 @@ npm run release:check   # zeigt, was im Repository noch fehlt (Anbieterdaten, UR
    eine eigene `supportEmail` eintragen, mit `npm run site:preview` ansehen und dann über
    GitHub Pages veröffentlichen (Settings → Pages → Quelle „GitHub Actions“, danach Actions →
    „Website“ → „Run workflow“) oder `dist-site/` bei einem Webhoster hochladen. Anschließend
-   trägt `npm run site:store-urls` die Adressen in `store.config.json` ein. Details:
+   trägt `npm run site:store-urls` die Adressen in `store.config.json` ein. Dieselben Angaben
+   schalten in der App „Hilfe & Kontakt“ (`url`) und „Feedback senden“ (Kontakt-E-Mail) frei;
+   sie werden beim Bauen übernommen – also vor dem App-Build eintragen. Details:
    [README → Website](../README.md#website-datenschutz--support).
 6. **`store.config.json`:** `apple.copyright` eintragen.
 7. **Spanisch gegenlesen lassen** (empfohlen): Die 1560 Karten und die Oberfläche hat Claude
@@ -72,7 +74,9 @@ npm run release:check   # zeigt, was im Repository noch fehlt (Anbieterdaten, UR
    ein kleines Handy (z. B. iPhone SE), auf dem die Vorschau verkleinert erscheint: Das
    gesicherte Bild muss trotzdem die ganze Karte randlos in voller Größe zeigen. Hat es dort
    Ränder oder fehlt etwas, in `src/features/share/shareImage.ts` für iOS
-   `useRenderInContext: true` an `captureRef` übergeben.
+   `useRenderInContext: true` an `captureRef` übergeben. In den Einstellungen einmal
+   **Hilfe & Kontakt** (öffnet die Hilfe-Seite in der App-Sprache) und **Feedback senden**
+   (E-Mail-Entwurf mit Version, System und Sprache an die Kontaktadresse) antippen.
 6. **Bauen und einreichen:**
    ```bash
    npm run build:ios && npm run submit:ios

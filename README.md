@@ -252,8 +252,25 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
   und Spieler werden ohne männliche/weibliche Adjektive angesprochen („te dan nervios“ statt
   „estás nervioso/nerviosa“)
 - Fair Play & Hinweise, Datenschutz, Über SPICY NIGHT
+- Hilfe & Kontakt und Feedback senden – sobald Website und Kontakt-E-Mail eingetragen sind
 - Altersbestätigung 18+ (anzeigen & widerrufen)
 - Alle lokalen Daten löschen
+
+### Hilfe & Feedback
+- „Hilfe & Kontakt“ öffnet die Hilfe-Seite der [Website](#website-datenschutz--support) im
+  Browser, in der Sprache der App (`/<sprache>/support/`).
+- „Feedback senden“ öffnet das E-Mail-Programm mit einem Entwurf: Betreff, Platz für die
+  Nachricht und darunter, was bei Fehlern hilft – App-Version, System (z. B. „iOS 18.1“ oder
+  „Android 15 (API 35)“) und Sprache. Kein Gerätename, keine Kennung, keine Spieldaten.
+  Verschickt wird die E-Mail nur, wenn die Person sie selbst abschickt; die Angaben lassen sich
+  vorher löschen.
+- Öffnet sich kein Browser bzw. kein E-Mail-Programm, zeigt ein Hinweis die Adresse zum
+  Abschreiben (sie lässt sich markieren und kopieren).
+- Beide Einträge erscheinen erst, wenn die Adressen eingetragen sind – so führt nie ein Link
+  ins Leere: „Hilfe & Kontakt“ mit `url` in `site/site.config.json`, „Feedback senden“ mit
+  `supportEmail` dort oder einer E-Mail in den Anbieterdaten (`src/config/legal.json`). Es
+  zählen nur https-Adressen und gültige E-Mail-Adressen (`src/config/support.ts`). Die Werte
+  werden beim Bauen übernommen; nach einer Änderung braucht es einen neuen App-Build.
 
 ### Vorbereitet (noch nicht aktiv)
 - **Premium/Freemium** – Preis-Konfiguration, Entitlements, Kauf-Schnittstelle, Werbe-Regeln.
@@ -313,7 +330,8 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
 │   │   └── settings/            # Einstellungen, Datenschutz, Fair Play, Über
 │   ├── components/ui/           # Designsystem-Komponenten (Button, Sheet, Screen, …)
 │   ├── config/                  # legal.json: Anbieterdaten für App und Website (vor Release
-│   │                            # ausfüllen), features.ts: Premium-Schalter (aus bis zu echten Käufen)
+│   │                            # ausfüllen), features.ts: Premium-Schalter (aus bis zu echten Käufen),
+│   │                            # support.ts: Adressen für Hilfe & Feedback (aus legal.json und site/)
 │   ├── features/
 │   │   ├── gameplay/engine/     # Reine Spiellogik: Deck, Rotation, Session (ohne React)
 │   │   ├── gameplay/components/ # Fragekarte, Spieler-Banner, Level-Sheet, …
@@ -326,6 +344,7 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
 │   │   ├── rounds/              # „Runde anpassen“: Länge, Steigerung, Modi mischen
 │   │   ├── summary/             # Auswertung als Modell (Zahlen, Bestenliste) für Bildschirm und Bild
 │   │   ├── share/               # Ergebnisbild, Teilen-Sheet, Aufnahme + Teilen-Menü (Web: aus)
+│   │   ├── support/             # Feedback-E-Mail: Systemangabe und mailto-Link
 │   │   └── settings/            # Einstellungs-Zeilen
 │   ├── data/questions/          # Spicy Questions: mild.json, hot.json, extreme.json
 │   │   ├── never-have-i-ever/   # Ich hab noch nie: mild.json, hot.json, extreme.json
@@ -437,8 +456,10 @@ leeres/durchgespieltes Deck, lokale Speicherung inkl. App-Neustart und korrupter
 Einstellungen, Sprache, 18+-Sperre, die Einführung beim ersten Start, das Teilen des Ergebnisbilds
 (Namen standardmäßig aus, Aufnahme und Teilen-Menü, Fehlerfall, Aufräumen der Bilddatei,
 ausgeblendet ohne native Module), die Website (alle Seiten und Links, keine fremden Server,
-Entwurfs- und Release-Modus, Store-Adressen), das Ausblenden von Karten (in jedem Modus, bis
-zum leeren Deck, Liste, Zurückholen, Löschen), Datenlöschung sowie der komplette Spielablauf
+Entwurfs- und Release-Modus, Store-Adressen, dieselben Namen für Einstellungen wie in der App),
+das Ausblenden von Karten (in jedem Modus, bis zum leeren Deck, Liste, Zurückholen, Löschen),
+Hilfe & Feedback (nur mit eingetragenen Adressen, Hilfe-Seite in der App-Sprache, E-Mail-Entwurf
+mit Version, System und Sprache, Hinweis ohne E-Mail-Programm), Datenlöschung sowie der komplette Spielablauf
 aller fünf Spielmodi über die echten Routen (inkl. Wahl Wahrheit/Pflicht, Spielerauswahl und
 Zählern in den Gruppenmodi, dem 3‑2‑1‑Countdown und dem Challenge-Timer), die englischen und
 spanischen Karten inklusive Sprachwechsel mitten im Spiel, der Start in der Gerätesprache sowie die eigenen Karten (gesperrt ohne Premium;
@@ -554,6 +575,8 @@ von fremden Servern (die Schriften liegen bei) und erzwingt das per Content-Secu
 - `site/site.config.json` → `url` (Adresse der Website), `hosting` (Name und Anschrift des
   Hosting-Anbieters, steht in der Datenschutzerklärung), optional `supportEmail` (sonst die
   E-Mail aus den Anbieterdaten) und `appStoreUrl` / `googlePlayUrl`, sobald die App online ist.
+- Mit `url` und der Kontakt-E-Mail zeigt auch die App „Hilfe & Kontakt“ und „Feedback senden“
+  (siehe [Hilfe & Feedback](#hilfe--feedback)).
 
 Solange Angaben fehlen, tragen alle Seiten einen Vorlagen-Hinweis, sind für Suchmaschinen
 gesperrt, und `npm run site:build -- --release` bricht ab.
@@ -568,8 +591,9 @@ npm run site:store-urls   # trägt Website-, Support- und Datenschutz-Adressen i
 Actions“ wählen, dann unter Actions → „Website“ → „Run workflow“ starten (`.github/workflows/site.yml`
 baut im Release-Modus). Für private Repositorys setzt GitHub Pages einen kostenpflichtigen
 GitHub-Plan voraus; alternativ den Ordner `dist-site/` bei einem beliebigen Webhoster
-hochladen. `tests/unit/site.test.ts` prüft alle Seiten, Links, Entwurfs- und Release-Modus und
-die Store-Adressen.
+hochladen. `tests/unit/site.test.ts` prüft alle Seiten, Links, Entwurfs- und Release-Modus, die
+Store-Adressen und dass Hilfe-Seite und Datenschutzerklärung die Einstellungen genau so nennen
+wie die App.
 
 ---
 
@@ -752,6 +776,9 @@ Wörterbüchern, `cardLead` in der Registry, Kartentexte in `src/data/questions/
   `locales/`).
 - Ergebnis teilen: Das Bild entsteht auf dem Gerät und geht nur dorthin, wo die Person es im
   Teilen-Menü hinschickt; Namen stehen nur mit „Namen zeigen“ darauf (standardmäßig aus).
+- Feedback senden: Die App öffnet nur das E-Mail-Programm mit einem Entwurf (App-Version,
+  System, Sprache) und sendet selbst nichts. Die Datenschutzerklärung beschreibt den Kontakt
+  per E-Mail.
 - Keine Android-Sicherung in die Cloud (`android.allowBackup: false`) – Spielernamen landen
   auch nicht im Google-Backup.
 - iOS-Privacy-Manifest (`ios.privacyManifests`): kein Tracking, keine erfassten Daten, nur

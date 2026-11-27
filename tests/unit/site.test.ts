@@ -2,6 +2,10 @@
  * The website build (scripts/site.mjs): pages, links, privacy, draft and release mode, store
  * addresses. Every test builds into its own temporary folder – the repository stays untouched.
  */
+import { de } from '@/i18n/de';
+import { en } from '@/i18n/en';
+import { es } from '@/i18n/es';
+
 /*
  * Node's modules come in through small local types, like in store-listing.test.ts – the
  * project's type check stays without global Node types.
@@ -314,5 +318,30 @@ describe('store addresses', () => {
     expect(result.status).toBe(1);
     expect(result.stderr).toContain('„url“ fehlt');
     expect(readFileSync(file, 'utf8')).toBe(readFileSync(join(ROOT, 'store.config.json'), 'utf8'));
+  });
+});
+
+describe('website and app', () => {
+  const DICTIONARIES: Record<(typeof LANGUAGES)[number], Record<string, string>> = { de, en, es };
+  /** Every way into the settings named in bold, e.g. **Einstellungen → Daten**, split into its steps. */
+  const settingsPaths = (source: string) =>
+    [...source.matchAll(/\*\*([^*\n]*→[^*\n]*)\*\*/g)].map((match) => (match[1] ?? '').split(' → '));
+
+  it.each(LANGUAGES)('name the settings exactly like the app does (%s)', (language) => {
+    const dictionary = DICTIONARIES[language];
+    const labels = Object.values(dictionary);
+    const help = readFileSync(join(ROOT, `site/content/${language}.json`), 'utf8');
+    const privacy = readFileSync(join(ROOT, `docs/store/privacy-policy.${language}.md`), 'utf8');
+
+    const paths = [...settingsPaths(help), ...settingsPaths(privacy)];
+    expect(paths.length).toBeGreaterThan(3);
+    for (const [settings, ...steps] of paths) {
+      expect(settings).toBe(dictionary['settings.title']);
+      for (const step of steps) expect(labels).toContain(step);
+    }
+    // The help page and both privacy texts point to "Send feedback" by its name in the app.
+    expect(help).toContain(`**${dictionary['settings.title']} → ${dictionary['settings.feedback']}**`);
+    expect(privacy).toContain(dictionary['settings.feedback']);
+    expect(dictionary['privacy.sharing.body']).toContain(dictionary['settings.feedback']);
   });
 });
