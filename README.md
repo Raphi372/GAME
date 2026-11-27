@@ -143,8 +143,10 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
   wechselt, beendet die Steigerung.
 - **Gemischte Runde** (eigene Karte auf der Startseite): mehrere Modi in einer Runde. Jeder
   Modus kommt gleich oft dran, nie zweimal hintereinander; die Karte zeigt ihren Modus. Modi,
-  für die die Runde zu klein ist („Wer würde am ehesten?“ unter 3 Spielern), werden ausgelassen.
-  Mindestens zwei Modi müssen übrig bleiben.
+  für die die Runde zu klein ist („Wer würde am ehesten?“ unter 3 Spielern), werden ausgelassen
+  (aber für die nächste, größere Runde gemerkt). Mindestens zwei Modi müssen übrig bleiben. Die
+  Auswertung zeigt je nach Modi Beantwortet, Geständnisse, Gewählt und Gepasst; „Mutigste
+  Person“ zählt Antworten und Geständnisse.
 
 ### Spieler
 - 2 bis 20 Spieler (bei „Wer würde am ehesten?“ mindestens 3), Namen hinzufügen, bearbeiten, entfernen.
@@ -626,6 +628,8 @@ eine Sprache, wird auf Deutsch zurückgegriffen. Feste Kartenanfänge („Ich ha
 - **Spiellogik** in `features/gameplay/engine` halten und dort mit Seed-RNG testen.
 - **Tests:** `renderRouter` aus `expo-router/testing-library` aktiviert Jest-Fake-Timer – zum
   Abwarten von Speicher-Operationen `flushPromises()` aus `tests/helpers/stores.ts` nutzen.
+  Tests laufen in einem Handy-Fenster (390 × 844, `jest.setup.ts`); fürs Tablet-Layout das
+  Fenster im Test mit `Dimensions.set` umstellen und danach zurücksetzen.
 - **Barrierefreiheit:** interaktive Elemente brauchen `role` und `aria-label`; Icons sind
   dekorativ und werden vor Screenreadern versteckt. Auswahlfelder/Schalter/Ankreuzfelder
   bekommen zusätzlich `{...spaceKeyPress(onPress)}` (Leertaste im Web), Sheets ein `label`

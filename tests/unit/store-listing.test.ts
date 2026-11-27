@@ -1,8 +1,3 @@
-/// <reference types="node" />
-// Node types for reading the store files from disk (@types/node comes with Jest).
-import { existsSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
-
 import { listPlayableModeIds, MAX_PLAYERS, MIN_PLAYERS } from '@/features/game-modes/registry';
 import { countBuiltInCards } from '@/features/question-decks';
 import type { Locale } from '@/types';
@@ -13,8 +8,20 @@ import storeConfig from '../../store.config.json';
  * Store listing (App Store via EAS Metadata, Google Play as text files): limits of both
  * stores, wording that would get the listing rejected, and facts that must match the app.
  */
-const ROOT = join(__dirname, '../..');
-const STORE_DIR = join(ROOT, 'docs/store');
+/*
+ * The files are read with Node's `fs` through a small local type, so the project's type
+ * check stays limited to Jest and React Native globals (no global Node types in app code).
+ */
+declare const __dirname: string;
+interface FileSystem {
+  existsSync(path: string): boolean;
+  readFileSync(path: string): Uint8Array;
+  readFileSync(path: string, encoding: 'utf8'): string;
+}
+const { existsSync, readFileSync } = jest.requireActual<FileSystem>('fs');
+const join = (...parts: string[]) => parts.join('/');
+
+const STORE_DIR = join(__dirname, '../../docs/store');
 
 const LOCALES: { store: 'de-DE' | 'en-US'; app: Locale }[] = [
   { store: 'de-DE', app: 'de' },
@@ -119,25 +126,26 @@ describe('store listing', () => {
 /** Reads width and height from a PNG header or a JPEG start-of-frame segment. */
 function imageInfo(file: string): { type: 'png' | 'jpeg'; width: number; height: number; alpha: boolean } {
   const data = readFileSync(file);
-  if (data.subarray(1, 4).toString('latin1') === 'PNG') {
+  const view = new DataView(data.buffer, data.byteOffset, data.byteLength);
+  if (String.fromCharCode(...data.subarray(1, 4)) === 'PNG') {
     const colorType = data[25];
     return {
       type: 'png',
-      width: data.readUInt32BE(16),
-      height: data.readUInt32BE(20),
+      width: view.getUint32(16),
+      height: view.getUint32(20),
       alpha: colorType === 4 || colorType === 6,
     };
   }
   let offset = 2;
   while (offset < data.length) {
     const marker = data[offset + 1] ?? 0;
-    const length = data.readUInt16BE(offset + 2);
+    const length = view.getUint16(offset + 2);
     // SOF0–SOF15 without DHT (C4), JPG (C8) and DAC (CC).
     if (marker >= 0xc0 && marker <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(marker)) {
       return {
         type: 'jpeg',
-        height: data.readUInt16BE(offset + 5),
-        width: data.readUInt16BE(offset + 7),
+        height: view.getUint16(offset + 5),
+        width: view.getUint16(offset + 7),
         alpha: false,
       };
     }

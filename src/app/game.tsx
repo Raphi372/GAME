@@ -386,7 +386,14 @@ export default function GameScreen() {
         visible={levelSheetOpen}
         current={session.level}
         modeId={session.modeId}
-        getCount={(level) => deckFor(level).length}
+        mixed={isMixedRound(session.round)}
+        getCount={(level) =>
+          isMixedRound(session.round)
+            ? session.round.modeIds
+                .filter((id) => getGameMode(id).minPlayers <= players.length)
+                .reduce((sum, id) => sum + getPlayableDeck(id, level, locale).length, 0)
+            : deckFor(level).length
+        }
         onClose={() => setLevelSheetOpen(false)}
         onSelect={(level) => {
           setLevelSheetOpen(false);

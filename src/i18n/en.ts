@@ -195,6 +195,9 @@ export const en: Record<TranslationKey, string> = {
   'summary.playAgain': 'Play again',
   'summary.home': 'Main menu',
   'summary.duration': 'Playing time: {minutes} min',
+  'summary.mixAnswered': '{count} answered',
+  'summary.mixConfessed': '{count} confessed',
+  'summary.mixPassed': '{count} passed',
 
   'settings.title': 'Settings',
   'settings.section.experience': 'Experience',

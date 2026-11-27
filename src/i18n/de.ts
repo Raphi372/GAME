@@ -198,6 +198,9 @@ export const de = {
   'summary.playAgain': 'Nochmal spielen',
   'summary.home': 'Zum Menü',
   'summary.duration': 'Spieldauer: {minutes} Min.',
+  'summary.mixAnswered': '{count} beantwortet',
+  'summary.mixConfessed': '{count} gestanden',
+  'summary.mixPassed': '{count} gepasst',
 
   'settings.title': 'Einstellungen',
   'settings.section.experience': 'Spielgefühl',
