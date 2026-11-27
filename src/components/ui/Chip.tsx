@@ -10,6 +10,7 @@ interface ChipProps {
   style?: StyleProp<ViewStyle>;
 }
 
+/** Small label pill. It never grows wider than its row: long labels (large text) wrap. */
 export function Chip({ label, color = colors.primary, style }: ChipProps) {
   return (
     <View style={[styles.base, { borderColor: `${color}66`, backgroundColor: `${color}1F` }, style]}>
@@ -23,6 +24,7 @@ export function Chip({ label, color = colors.primary, style }: ChipProps) {
 const styles = StyleSheet.create({
   base: {
     alignSelf: 'flex-start',
+    maxWidth: '100%',
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.xs + 2,
     borderRadius: radius.pill,

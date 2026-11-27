@@ -62,7 +62,8 @@ export function ModeTile({ emoji, title, tagline, detail, available = true, onPr
         <AppText variant="h3" color={available ? colors.text : colors.textSecondary}>
           {title}
         </AppText>
-        <AppText variant="caption" color={colors.textMuted} numberOfLines={2}>
+        {/* No line limit: with large system text the description wraps instead of being cut. */}
+        <AppText variant="caption" color={colors.textMuted}>
           {detail ? `${tagline} · ${detail}` : tagline}
         </AppText>
       </View>

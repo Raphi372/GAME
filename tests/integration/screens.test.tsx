@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { userEvent } from '@testing-library/react-native';
 import { renderRouter, screen, within } from 'expo-router/testing-library';
+import { Dimensions, StyleSheet, type ViewStyle } from 'react-native';
 
 import { FEATURES } from '@/config/features';
 import { LEGAL } from '@/config/legal';
@@ -219,3 +220,43 @@ describe('privacy screen', () => {
     expect(screen.queryByText(/Anschrift und E-Mail-Adresse des Anbieters/)).not.toBeOnTheScreen();
   });
 });
+
+describe('summary layout', () => {
+  const phone = Dimensions.get('window');
+
+  beforeEach(async () => {
+    await resetStores();
+    useSettingsStore.getState().confirmAge();
+    addPlayers('Lena', 'Max');
+    useGameStore.getState().startGame('spicy-questions', 'mild');
+    useGameStore.getState().answer();
+    useGameStore.getState().endGame();
+  });
+
+  afterEach(() => Dimensions.set({ window: phone, screen: phone }));
+
+  const setWindow = (width: number, fontScale: number) => {
+    const window = { ...phone, width, fontScale };
+    Dimensions.set({ window, screen: window });
+  };
+  const tileWidths = () =>
+    screen.getAllByTestId('summary-stat').map((tile) => (StyleSheet.flatten(tile.props.style) as ViewStyle).flexBasis);
+
+  it('shows two tiles per row with normal text', async () => {
+    setWindow(390, 1);
+    await renderRouter(APP_DIR, { initialUrl: '/summary' });
+    expect(await screen.findByText('Was für eine Nacht!')).toBeOnTheScreen();
+    expect(new Set(tileWidths())).toEqual(new Set(['45%']));
+  });
+
+  it.each([
+    ['large system text', 390, 1.3],
+    ['a very narrow screen', 320, 1],
+  ])('shows one tile per row with %s, so long labels keep fitting', async (_case, width, fontScale) => {
+    setWindow(width, fontScale);
+    await renderRouter(APP_DIR, { initialUrl: '/summary' });
+    expect(await screen.findByText('Was für eine Nacht!')).toBeOnTheScreen();
+    expect(new Set(tileWidths())).toEqual(new Set(['100%']));
+  });
+});
+

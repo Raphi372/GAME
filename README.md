@@ -177,7 +177,8 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
 
 ### Barrierefreiheit
 - Geprüft mit axe-core (WCAG 2.2 A/AA + Best Practices) über alle Bildschirme, Sheets und
-  Spielmodi der Web-Version: keine Verstöße.
+  Spielmodi der Web-Version: keine Verstöße – zuletzt auch „Runde anpassen“, gemischte Runden
+  mit Regel-Hinweisen und das Tablet-Layout (Handy, 320-pt-Handy und Tablet).
 - Kontraste: Text auf den dunklen Flächen mindestens 4,5:1; weiße Knopfschrift auf den
   Verläufen ebenfalls – die Knopf-Verläufe werden dafür bei Bedarf minimal abgedunkelt
   (`readableWithWhite()` in `src/theme/contrast.ts`), Avatar-Initialen bei Bedarf aufgehellt.
@@ -185,10 +186,15 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
   Person angesagt, Countdown und „Zeit ist um!“ ebenfalls; Sheets sind benannte Dialoge.
 - Tastatur (Web): logische Tab-Reihenfolge, sichtbarer Fokus, Fokus bleibt im offenen Sheet,
   Escape schließt es; Auswahlfelder, Schalter und Ankreuzfelder reagieren auf Enter und
-  Leertaste; Textseiten lassen sich per Tastatur scrollen.
+  Leertaste; gesperrte Optionen werden übersprungen. Textseiten, Spielkarte und Auswertung
+  lassen sich per Tastatur scrollen, wenn sie über den Bildschirm hinausgehen.
+- Erklärungen unter Schaltern und Einstellungen (z. B. „Geht nur mit fester Rundenlänge.“)
+  lesen iOS und Android als Hinweis vor; im Web sind sie per `aria-describedby` verknüpft.
 - Seitensprache (`lang`) folgt der App-Sprache, Abschnittstitel sind Überschriften 2. Ebene.
 - Schriftgröße folgt der Systemeinstellung bis 200 % (Überschriften bis 125 %, damit lange
-  deutsche Wörter nicht mitten im Wort umbrechen); Tipp-Flächen mindestens 48 px.
+  deutsche Wörter nicht mitten im Wort umbrechen); Tipp-Flächen mindestens 48 px. Bei großer
+  Schrift brechen Beschreibungen und Chips um, statt abgeschnitten zu werden, und die
+  Kacheln der Auswertung stehen untereinander (ab 120 % Systemschrift oder unter 360 pt Breite).
 
 ### Einstellungen
 - Sound, Vibration, Animationen an/aus (lokal gespeichert)
