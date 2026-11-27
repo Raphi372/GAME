@@ -5,7 +5,7 @@
 > goes into App Store Connect and the Google Play Console as the privacy policy URL. It
 > matches the privacy screen inside the app (Settings → Privacy).
 
-Last updated: November 24, 2026
+Last updated: November 27, 2026
 
 ## In short
 
@@ -42,13 +42,20 @@ party can access it.
 No data is transmitted to us or to third parties. The app contains no advertising and no
 analytics, crash reporting or tracking services. It does not connect to the internet.
 
+**Sharing a result picture:** After a round you can create a picture of the results and send
+it from your device's share menu. The picture is created on your device and goes only to the
+app or person you choose there – we do not receive it. Names appear on it only if you turn
+them on for that picture (off by default). What happens to a picture you send is up to the
+app you hand it to.
+
 When you download the app, Apple (App Store) or Google (Google Play) process data according
 to their own privacy policies. We have no influence on that.
 
 ## Permissions
 
-The app does not need access to contacts, location, camera, microphone, photos or
-notifications.
+The app does not need access to contacts, location, camera, microphone or notifications.
+It cannot read your photos. Only if you save a result picture to your photos from the share
+menu does iOS ask once whether the app may add photos.
 
 ## Your control
 

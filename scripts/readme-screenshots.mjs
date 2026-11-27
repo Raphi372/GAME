@@ -2,8 +2,11 @@
 /**
  * README screenshots from the web build (phone window 390 × 844 at 2×, plus one tablet).
  *
- *   npx expo export --platform web --output-dir dist
+ *   EXPO_PUBLIC_SHARE_PREVIEW=1 npx expo export --platform web --output-dir dist
  *   node scripts/readme-screenshots.mjs dist docs/screenshots
+ *
+ * `EXPO_PUBLIC_SHARE_PREVIEW=1` shows "Ergebnis teilen" in the web build, which normally hides
+ * it (no image capture in the browser) – so the summary looks like in the apps.
  *
  * Needs Playwright with Chromium – see `scripts/lib/app-screens.mjs`. Every scene starts from
  * a fixed game state with hand-picked cards; some then tap through the app (open a sheet,
@@ -179,6 +182,29 @@ const SCENES = [
   { name: '19-settings', path: '/settings' },
   { name: '20-tablet', path: '/game', state: { session: mixedGame }, device: TABLET },
   { name: '21-intro', path: '/intro' },
+  {
+    name: '22-share',
+    path: '/game',
+    state: {
+      session: session({
+        modeId: 'spicy-questions',
+        level: 'hot',
+        card: 'hot_001',
+        turnsCompleted: 18,
+        startedAt: minutesAgo(47),
+        stats: {
+          p0: { answered: 5, passed: 1, skipped: 1 },
+          p1: { answered: 4, passed: 1 },
+          p2: { answered: 4, passed: 0, skipped: 1 },
+          p3: { answered: 3, passed: 0 },
+        },
+      }),
+    },
+    act: async (page) => {
+      await endGame(page);
+      await tap({ role: 'button', name: 'Ergebnis teilen' })(page);
+    },
+  },
 ];
 
 const server = serveBuild(distDir, PORT);

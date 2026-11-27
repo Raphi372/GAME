@@ -28,7 +28,7 @@
     "submit:android": "npx eas-cli@latest submit --profile production --platform android --latest",
     "store:metadata": "npx eas-cli@latest metadata:push",
     "store:screenshots": "expo export --platform web --output-dir dist && node scripts/store-screenshots.mjs dist docs/store",
-    "docs:screenshots": "expo export --platform web --output-dir dist && node scripts/readme-screenshots.mjs dist docs/screenshots"
+    "docs:screenshots": "EXPO_PUBLIC_SHARE_PREVIEW=1 expo export --platform web --output-dir dist && node scripts/readme-screenshots.mjs dist docs/screenshots"
   },
   "dependencies": {
     "@expo-google-fonts/manrope": "^0.4.3",
@@ -46,6 +46,7 @@
     "expo-linking": "~58.0.17",
     "expo-localization": "~58.0.5",
     "expo-router": "~58.0.33",
+    "expo-sharing": "~58.0.24",
     "expo-splash-screen": "~58.0.15",
     "expo-status-bar": "~58.0.5",
     "expo-system-ui": "~58.0.7",
@@ -55,6 +56,7 @@
     "react-native-safe-area-context": "~5.11.1",
     "react-native-screens": "~4.30.1",
     "react-native-svg": "15.16.0",
+    "react-native-view-shot": "6.1.1",
     "react-native-web": "^0.21.4",
     "zustand": "^5.1.0"
   },

@@ -1,0 +1,5 @@
+{
+  "ios": {
+    "NSPhotoLibraryAddUsageDescription": "Damit du ein Ergebnisbild über das Teilen-Menü in deinen Fotos sichern kannst. SPICY NIGHT kann deine Fotos nicht lesen."
+  }
+}

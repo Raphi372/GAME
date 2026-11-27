@@ -22,6 +22,7 @@ Notes:
 - The app never asks anyone to drink alcohol. Every task can be declined, tasks involving touch require a clear yes, and the EXTREME level asks the whole group for consent first.
 - Card content is text only (no images, no nudity). It covers flirting, dating and personal questions for adults. The app is intended exclusively for users aged 18 and over.
 - The app is available in German, English and Spanish. It starts in the device language (English for any other language) and can be switched under Settings → Language.
+- After a round, "Share the result" creates a picture of the results on the device and opens the system share sheet. Player names are off by default. The app never reads photos; iOS only asks for permission to add photos when someone chooses "Save Image" in the share sheet.
 ```
 
 ## Deutsch (zum Nachlesen)
@@ -41,4 +42,5 @@ Hinweise:
 - Die App fordert nie zum Alkoholtrinken auf. Jede Aufgabe darf abgelehnt werden, Aufgaben mit Berührung nur mit klarem Ja, und vor EXTREME stimmt die ganze Runde zu.
 - Die Karten sind reiner Text (keine Bilder, keine Nacktheit) mit Flirt-, Dating- und persönlichen Fragen für Erwachsene. Die App ist ausschließlich für Personen ab 18 Jahren gedacht.
 - Die App gibt es auf Deutsch, Englisch und Spanisch. Sie startet in der Gerätesprache (bei jeder anderen Sprache auf Englisch) und lässt sich unter Einstellungen → Sprache umstellen.
+- Nach einer Runde erstellt „Ergebnis teilen“ ein Bild der Auswertung auf dem Gerät und öffnet das Teilen-Menü des Systems. Spielernamen sind standardmäßig aus. Die App liest keine Fotos; iOS fragt nur dann nach der Erlaubnis, Fotos hinzuzufügen, wenn jemand im Teilen-Menü „Bild sichern“ wählt.
 ```

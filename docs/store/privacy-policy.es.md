@@ -6,7 +6,7 @@
 > de la política de privacidad. Coincide con la pantalla de privacidad de la app
 > (Ajustes → Privacidad).
 
-Última actualización: 24 de noviembre de 2026
+Última actualización: 27 de noviembre de 2026
 
 ## En resumen
 
@@ -43,13 +43,20 @@ dispositivo, ni nosotros ni terceros podemos acceder a ellos.
 No se transmite ningún dato, ni a nosotros ni a terceros. La app no contiene publicidad ni
 servicios de analítica, informes de errores o rastreo. No se conecta a internet.
 
+**Compartir una imagen del resultado:** Después de una ronda puedes crear una imagen del
+resultado y enviarla desde el menú de compartir de tu dispositivo. La imagen se crea en tu
+dispositivo y solo va a la app o la persona que elijas ahí; nosotros no la recibimos. Los
+nombres solo aparecen si los activas para esa imagen (desactivados por defecto). Lo que pase
+con una imagen enviada depende de la app a la que se la pases.
+
 Cuando descargas la app, Apple (App Store) o Google (Google Play) tratan datos según sus
 propias políticas de privacidad. No tenemos ninguna influencia sobre ello.
 
 ## Permisos
 
-La app no necesita acceso a contactos, ubicación, cámara, micrófono, fotos ni
-notificaciones.
+La app no necesita acceso a contactos, ubicación, cámara, micrófono ni notificaciones. No
+puede ver tus fotos. Solo si guardas una imagen del resultado en tus fotos desde el menú de
+compartir, iOS te pregunta una vez si la app puede añadir fotos.
 
 ## Tu control
 

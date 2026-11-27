@@ -1,0 +1,5 @@
+{
+  "ios": {
+    "NSPhotoLibraryAddUsageDescription": "Lets you save a result picture to your photos from the share menu. SPICY NIGHT cannot read your photos."
+  }
+}

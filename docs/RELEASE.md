@@ -18,6 +18,7 @@ npm run release:check   # zeigt, was im Repository noch fehlt (Anbieterdaten, UR
 | Exportkontrolle: keine eigene Verschlüsselung | `app.json` → `ios.config.usesNonExemptEncryption` |
 | App-Sprachen Deutsch, Englisch, Spanisch – erscheinen so im App Store, auf iOS und Android 13+ auch als App-Sprache in den Systemeinstellungen | `app.json` → `expo-localization` (`supportedLocales`) |
 | Keine Android-Sicherung in die Cloud – Spielernamen bleiben wirklich auf dem Gerät | `app.json` → `android.allowBackup: false` |
+| Erlaubnistext „Fotos hinzufügen“ (iOS fragt nur, wenn jemand ein Ergebnisbild über „Bild sichern“ ablegt) auf Deutsch, Englisch und Spanisch | `app.json` → `ios.infoPlist`, [`locales/`](../locales/) |
 | Gesperrte Android-Berechtigungen (Mikrofon, Speicher, Overlay) | `app.json` → `android.blockedPermissions` |
 | Store-Texte DE/EN/ES, Screenshots, Play-Grafiken, Fragebögen, Review-Hinweise, Datenschutzerklärung (Vorlage) | [`store/`](store/README.md) |
 | Build-Profile für Entwicklung, interne Tests und die Stores | `eas.json` |
@@ -57,7 +58,9 @@ npm run release:check   # zeigt, was im Repository noch fehlt (Anbieterdaten, UR
    `npm run store:screenshots` und `npm run docs:screenshots`.
 5. **Testen** mit einem internen Build (`npm run build:preview`) oder über TestFlight /
    den internen Play-Test-Track – mindestens einmal auf Deutsch, Englisch und Spanisch durch
-   Einführung, ein Spiel und die Auswertung.
+   Einführung, ein Spiel und die Auswertung. Dabei das **Ergebnis teilen** (mit und ohne
+   Namen, einmal an eine Messenger-App, einmal über „Bild sichern“ auf iOS): Das Bild muss
+   scharf und vollständig ankommen – das lässt sich nur auf echten Geräten prüfen.
 6. **Bauen und einreichen:**
    ```bash
    npm run build:ios && npm run submit:ios

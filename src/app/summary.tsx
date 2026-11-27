@@ -1,9 +1,12 @@
 import { Redirect, useRouter } from 'expo-router';
-import { StyleSheet, useWindowDimensions, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { AppText, Avatar, Button, Screen, SectionTitle, Surface } from '@/components/ui';
-import { DEFAULT_MODE_ID, DEFAULT_SINGLE_COPY, getGameMode, MIX_EMOJI, MIX_PARAM } from '@/features/game-modes/registry';
-import { LEVELS } from '@/features/levels/levels';
+import { MIX_EMOJI, MIX_PARAM } from '@/features/game-modes/registry';
+import { canShareResultImage, releaseResultImage } from '@/features/share/shareImage';
+import { ShareResultSheet } from '@/features/share/ShareResultSheet';
+import { summarize } from '@/features/summary/summaryModel';
 import { useTranslation } from '@/i18n';
 import { useGameStore } from '@/store';
 import { colors, fonts, radius, spacing } from '@/theme';
@@ -16,77 +19,19 @@ export default function SummaryScreen() {
   // Large system text or a very narrow screen: one tile per row, so long labels like
   // "GESTÄNDNISSE" keep fitting.
   const singleColumn = width < 360 || fontScale >= 1.2;
+  // Native apps only: the web build has no image capture.
+  const [canShare] = useState(canShareResultImage);
+  const [shareOpen, setShareOpen] = useState(false);
+  // A new sheet for every opening: names start hidden each time.
+  const [shareKey, setShareKey] = useState(0);
+  // The shared picture is only needed while the summary is open.
+  useEffect(() => releaseResultImage, []);
 
   if (!result) return <Redirect href="/" />;
 
-  const meta = LEVELS[result.level];
-  const mixed = result.mixed;
-  const mode = getGameMode(mixed ? DEFAULT_MODE_ID : result.modeId);
-  const group = mixed ? undefined : mode.group;
-  const isChoice = !mixed && Boolean(mode.choice);
-  const single = mode.singleCopy ?? DEFAULT_SINGLE_COPY;
-  // Mixed rounds show the counters of the modes that were part of the round.
-  const mixHas = {
-    single: result.modeIds.some((id) => getGameMode(id).turnStyle === 'single-player'),
-    confessions: result.modeIds.some((id) => getGameMode(id).group?.tally === 'confessed'),
-    picks: result.modeIds.some((id) => getGameMode(id).group?.tally === 'picked'),
-  };
-  const totals = result.players.reduce(
-    (sum, player) => ({
-      answered: sum.answered + player.answered,
-      passed: sum.passed + player.passed,
-      skipped: sum.skipped + player.skipped,
-      tally: sum.tally + (group ? player[group.tally] : 0),
-      truths: sum.truths + player.truths,
-      dares: sum.dares + player.dares,
-      confessed: sum.confessed + player.confessed,
-      picked: sum.picked + player.picked,
-    }),
-    { answered: 0, passed: 0, skipped: 0, tally: 0, truths: 0, dares: 0, confessed: 0, picked: 0 },
-  );
-  // Spicy Questions ranks by answered questions, group modes by their tally,
-  // "Wahrheit oder Pflicht" by dares done, a mixed round by answers plus confessions.
-  const score = (player: (typeof result.players)[number]) =>
-    mixed
-      ? player.answered + player.confessed
-      : group
-      ? player[group.tally]
-      : isChoice
-      ? player.dares
-      : player.answered;
-  const ranked = [...result.players].sort((a, b) => score(b) - score(a));
-  const best = Math.max(0, ...result.players.map(score));
-  // Everyone with the highest score – a tie names all of them.
-  const leaders = best > 0 ? result.players.filter((player) => score(player) === best) : [];
-  const minutes = Math.max(1, Math.round(result.durationMs / 60000));
-
-  const stats = mixed
-    ? [
-        { label: t('summary.rounds'), value: result.turnsCompleted },
-        ...(mixHas.single ? [{ label: t('summary.answered'), value: totals.answered }] : []),
-        ...(mixHas.confessions ? [{ label: t('summary.confessions'), value: totals.confessed }] : []),
-        ...(mixHas.picks ? [{ label: t('summary.picks'), value: totals.picked }] : []),
-        ...(mixHas.single ? [{ label: t('summary.passed'), value: totals.passed }] : []),
-      ]
-    : isChoice
-    ? [
-        { label: t('summary.rounds'), value: result.turnsCompleted },
-        { label: t('summary.truths'), value: totals.truths },
-        { label: t('summary.dares'), value: totals.dares },
-        { label: t('summary.passed'), value: totals.passed },
-      ]
-    : group
-    ? [
-        { label: t('summary.rounds'), value: result.turnsCompleted },
-        { label: t(group.copy.summaryStat), value: totals.tally },
-        { label: t('summary.skipped'), value: totals.skipped },
-      ]
-    : [
-        { label: t('summary.rounds'), value: result.turnsCompleted },
-        { label: t(single.summaryAnswered), value: totals.answered },
-        { label: t('summary.passed'), value: totals.passed },
-        { label: t('summary.skipped'), value: totals.skipped },
-      ];
+  const summary = summarize(result);
+  const { meta, mixed, group, isChoice, single, mixHas, ranked, leaders, minutes } = summary;
+  const stats = summary.stats.map((stat) => ({ label: t(stat.label), value: stat.value }));
 
   return (
     <Screen
@@ -158,11 +103,27 @@ export default function SummaryScreen() {
           </View>
           <View style={styles.flex}>
             <AppText variant="overline" color={meta.accent}>
-              {`🏆 ${t(group ? group.copy.summaryTop : isChoice ? 'summary.mostDares' : single.summaryTop)}`}
+              {`🏆 ${t(summary.topLabel)}`}
             </AppText>
             <AppText variant="h2">{leaders.map((leader) => leader.name).join(' & ')}</AppText>
           </View>
         </Surface>
+      ) : null}
+
+      {canShare ? (
+        <Button
+          label={t('share.button')}
+          hint={t('share.buttonHint')}
+          icon={Platform.OS === 'ios' ? 'share-outline' : 'share-social-outline'}
+          variant="secondary"
+          size="md"
+          style={styles.share}
+          onPress={() => {
+            setShareKey((key) => key + 1);
+            setShareOpen(true);
+          }}
+          testID="share-open"
+        />
       ) : null}
 
       <SectionTitle>{t('summary.playersTitle')}</SectionTitle>
@@ -200,6 +161,16 @@ export default function SummaryScreen() {
           </View>
         ))}
       </View>
+
+      {canShare ? (
+        <ShareResultSheet
+          key={shareKey}
+          visible={shareOpen}
+          onClose={() => setShareOpen(false)}
+          result={result}
+          summary={summary}
+        />
+      ) : null}
     </Screen>
   );
 }
@@ -218,6 +189,7 @@ const styles = StyleSheet.create({
     borderRadius: radius.lg,
   },
   leaderAvatars: { flexDirection: 'row' },
+  share: { marginTop: spacing.lg },
   leaderOverlap: { marginLeft: -12 },
   flex: { flex: 1 },
   players: { gap: spacing.sm },
