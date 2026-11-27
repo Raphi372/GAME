@@ -144,7 +144,9 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
 - **Gemischte Runde** (eigene Karte auf der Startseite): mehrere Modi in einer Runde. Jeder
   Modus kommt gleich oft dran, nie zweimal hintereinander; die Karte zeigt ihren Modus. Modi,
   für die die Runde zu klein ist („Wer würde am ehesten?“ unter 3 Spielern), werden ausgelassen
-  (aber für die nächste, größere Runde gemerkt). Mindestens zwei Modi müssen übrig bleiben. Die
+  (aber für die nächste, größere Runde gemerkt). Mindestens zwei Modi müssen übrig bleiben.
+  „So geht’s“ fasst die Regeln der gewählten Modi in je einem Satz zusammen; im Spiel erscheint
+  die Regel eines Modus unter seiner ersten Karte („Neu in dieser Runde: …“). Die
   Auswertung zeigt je nach Modi Beantwortet, Geständnisse, Gewählt und Gepasst; „Mutigste
   Person“ zählt Antworten und Geständnisse.
 

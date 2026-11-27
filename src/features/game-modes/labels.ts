@@ -11,6 +11,11 @@ export function modeTaglineKey(id: GameModeId): TranslationKey {
   return `mode.${id}.tagline`;
 }
 
+/** One-sentence rule of a mode, shown for mixed rounds. */
+export function modeRuleKey(id: GameModeId): TranslationKey {
+  return `mix.rule.${id}`;
+}
+
 /** "{count} Fragen" or "{count} Aussagen", depending on the mode. */
 export function cardCountKey(id: GameModeId): TranslationKey {
   return `mode.unit.${GAME_MODES[id].cardUnit}`;
