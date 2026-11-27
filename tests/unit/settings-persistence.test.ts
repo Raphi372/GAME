@@ -62,6 +62,17 @@ describe('local persistence', () => {
     expect(useSettingsStore.getState()).toMatchObject({ hapticsEnabled: false, locale: 'en', ageConfirmedAt: 7 });
   });
 
+  it('remembers the finished introduction and ignores a broken flag', async () => {
+    useSettingsStore.getState().completeIntro();
+    await flushPromises();
+    expect((await readStored(STORAGE_KEYS.settings))?.state.introSeen).toBe(true);
+
+    await AsyncStorage.setItem(STORAGE_KEYS.settings, JSON.stringify({ state: { introSeen: 'ja' }, version: 1 }));
+    useSettingsStore.setState({ introSeen: false });
+    await useSettingsStore.persist.rehydrate();
+    expect(useSettingsStore.getState().introSeen).toBe(false);
+  });
+
   it('stores players and the running game (and nothing else)', async () => {
     addPlayers('Lena', 'Max');
     useGameStore.getState().startGame('spicy-questions', 'hot');

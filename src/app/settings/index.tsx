@@ -81,6 +81,7 @@ export default function SettingsScreen() {
 
       <SectionTitle>{t('settings.section.info')}</SectionTitle>
       <SettingsGroup>
+        <LinkRow icon="help-circle-outline" label={t('settings.intro')} onPress={() => router.push('/intro?replay=1')} />
         <LinkRow icon="heart-outline" label={t('settings.fairPlay')} onPress={() => router.push('/settings/fair-play')} />
         <LinkRow icon="shield-checkmark-outline" label={t('settings.privacy')} onPress={() => router.push('/settings/privacy')} />
         <LinkRow icon="information-circle-outline" label={t('settings.about')} onPress={() => router.push('/settings/about')} />

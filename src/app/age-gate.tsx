@@ -50,7 +50,12 @@ export default function AgeGateScreen() {
             label={t('ageGate.confirm')}
             icon="flame"
             feedbackEvent="level"
-            onPress={() => confirmAge()}
+            onPress={() => {
+              // First confirmation on this device: a short introduction before the home screen.
+              const showIntro = !useSettingsStore.getState().introSeen;
+              confirmAge();
+              if (showIntro) router.replace('/intro');
+            }}
             testID="age-confirm"
           />
           <Button

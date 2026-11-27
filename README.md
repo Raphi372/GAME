@@ -61,9 +61,9 @@ festen Spielständen und lassen sich mit `npm run docs:screenshots` neu erzeugen
 | :-: | :-: | :-: | :-: |
 | <img src="docs/screenshots/13-random-challenges-timer.jpg" width="190"> | <img src="docs/screenshots/14-random-challenges-group.jpg" width="190"> | <img src="docs/screenshots/15-mixed-round.jpg" width="190"> | <img src="docs/screenshots/16-mixed-game.jpg" width="190"> |
 
-| Auswertung | Auswertung (gemischte Runde) | Einstellungen |
-| :-: | :-: | :-: |
-| <img src="docs/screenshots/17-summary.jpg" width="190"> | <img src="docs/screenshots/18-summary-mixed.jpg" width="190"> | <img src="docs/screenshots/19-settings.jpg" width="190"> |
+| Auswertung | Auswertung (gemischte Runde) | Einstellungen | Einführung beim ersten Start |
+| :-: | :-: | :-: | :-: |
+| <img src="docs/screenshots/17-summary.jpg" width="190"> | <img src="docs/screenshots/18-summary-mixed.jpg" width="190"> | <img src="docs/screenshots/19-settings.jpg" width="190"> | <img src="docs/screenshots/21-intro.jpg" width="190"> |
 
 **Tablet-Layout** (iPad 13″, gemischte Runde):
 
@@ -154,6 +154,16 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
   die Regel eines Modus unter seiner ersten Karte („Neu in dieser Runde: …“). Die
   Auswertung zeigt je nach Modi Beantwortet, Geständnisse, Gewählt und Gepasst; „Mutigste
   Person“ zählt Antworten und Geständnisse.
+
+### Einführung beim ersten Start
+- Direkt nach der ersten Altersbestätigung erklären drei kurze Schritte, wie eine Runde läuft,
+  welche Fair-Play-Regeln gelten (Passen, kein Alkohol, Berührungen nur mit Ja, Stopp ist Stopp)
+  und wo man Level und Runden anpasst.
+- Jederzeit überspringbar, mit Zurück-Schritt; danach erscheint sie nicht wieder – auch nicht nach
+  einem Widerruf der Altersbestätigung. Wer die App schon vorher benutzt hat, sieht sie nicht.
+- In den Einstellungen unter „Einführung ansehen“ jederzeit wieder aufrufbar.
+- Barrierefrei: Fortschritt als Text („Schritt 1 von 3“), Seitenwechsel werden angesagt,
+  auf dem Tablet steht der Inhalt mittig.
 
 ### Spieler
 - 2 bis 20 Spieler (bei „Wer würde am ehesten?“ mindestens 3), Namen hinzufügen, bearbeiten, entfernen.
@@ -380,7 +390,7 @@ npm run check                # alles zusammen
 Abgedeckt sind u. a.: Level-Auswahl, Fragen laden, Zufallsauswahl, keine Wiederholung,
 Spieler hinzufügen/umbenennen/entfernen, faire Rotation, Überspringen, Passen, Levelwechsel,
 leeres/durchgespieltes Deck, lokale Speicherung inkl. App-Neustart und korrupter Daten,
-Einstellungen, Sprache, 18+-Sperre, Datenlöschung sowie der komplette Spielablauf
+Einstellungen, Sprache, 18+-Sperre, die Einführung beim ersten Start, Datenlöschung sowie der komplette Spielablauf
 aller fünf Spielmodi über die echten Routen (inkl. Wahl Wahrheit/Pflicht, Spielerauswahl und
 Zählern in den Gruppenmodi, dem 3‑2‑1‑Countdown und dem Challenge-Timer), die englischen und
 spanischen Karten inklusive Sprachwechsel mitten im Spiel, der Start in der Gerätesprache sowie die eigenen Karten (gesperrt ohne Premium;

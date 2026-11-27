@@ -21,8 +21,11 @@ describe('app flow', () => {
     expect(router.getPathname()).toBe('/age-gate');
 
     await user.press(screen.getByRole('button', { name: 'Ich bin 18+' }));
-    expect(await screen.findByRole('button', { name: 'Play now' })).toBeOnTheScreen();
     expect(useSettingsStore.getState().ageConfirmedAt).not.toBeNull();
+    // First confirmation: a short introduction, then the home screen.
+    expect(await screen.findByText('So läuft eine Runde')).toBeOnTheScreen();
+    await user.press(screen.getByRole('button', { name: 'Überspringen' }));
+    expect(await screen.findByRole('button', { name: 'Play now' })).toBeOnTheScreen();
   });
 
   it('shows a friendly message for under-18s', async () => {
