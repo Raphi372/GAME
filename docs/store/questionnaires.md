@@ -18,11 +18,19 @@ Begründung: Apple zählt nur Daten als „erhoben“, die das Gerät verlassen.
 speichert Spielernamen, eigene Karten, Spielstand und Einstellungen ausschließlich lokal und
 baut keine Verbindung auf. Ergebnis im Store: **„Keine Daten erfasst“**.
 
+Das **Ergebnisbild** ändert daran nichts: Es entsteht auf dem Gerät, und die Person gibt es
+selbst über das Teilen-Menü des Systems an eine andere App weiter – weder wir noch ein
+Drittanbieter-SDK erhalten es. Namen stehen nur darauf, wenn sie eingeschaltet werden.
+
 Weitere Felder:
 
 - **Datenschutz-URL:** öffentliche Adresse von [`privacy-policy.de.md`](privacy-policy.de.md),
   [`privacy-policy.en.md`](privacy-policy.en.md) bzw. [`privacy-policy.es.md`](privacy-policy.es.md) (Pflicht).
 - **Tracking (App Tracking Transparency):** nicht nötig – die App trackt nicht.
+- **Fotos hinzufügen:** Die App fragt nie selbst nach Fotozugriff. Wählt jemand im
+  Teilen-Menü „Bild sichern“, fragt iOS mit dem Text aus `NSPhotoLibraryAddUsageDescription`
+  (`app.json`, übersetzt in `locales/`) nach der Erlaubnis, Fotos hinzuzufügen – lesen kann
+  die App die Mediathek nicht.
 - **Verschlüsselung (Export Compliance):** bereits beantwortet über
   `ios.config.usesNonExemptEncryption: false` in `app.json`.
 
@@ -67,7 +75,8 @@ sekundär **Unterhaltung**.
 
 Damit entfallen alle Folgefragen (Verschlüsselung bei der Übertragung, Löschanfragen). Google
 zählt – wie Apple – nur Daten, die das Gerät verlassen. Ergebnis im Store: **„Keine Daten
-erhoben“** und **„Keine Daten mit Dritten geteilt“**.
+erhoben“** und **„Keine Daten mit Dritten geteilt“**. Das Ergebnisbild gibt die Person
+selbst über das Teilen-Menü an eine andere App weiter; die App überträgt dabei nichts.
 
 ### App-Inhalte („App content“)
 
@@ -87,7 +96,9 @@ erhoben“** und **„Keine Daten mit Dritten geteilt“**.
   **keine** sexuellen Handlungen in Bild oder Ton.
 - **Gewalt, Angst, Glücksspiel, Drogen, Alkohol, Tabak:** Nein.
 - **Grobe Sprache:** höchstens vereinzelt mild.
-- **Nutzerinteraktion (Chat, Teilen von Inhalten, Standort, digitale Käufe):** Nein.
+- **Nutzerinteraktion (Chat, Teilen von Inhalten, Standort, digitale Käufe):** Nein. Das
+  Ergebnisbild wird nur an das Teilen-Menü des Systems übergeben; innerhalb der App tauschen
+  Nutzer nichts miteinander aus.
 
 IARC vergibt die Einstufung je Region selbst (z. B. USK, PEGI). Die Zielgruppe „18 und
 älter“ legst du unabhängig davon unter „Zielgruppe und Inhalte“ fest.

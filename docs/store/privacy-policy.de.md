@@ -6,7 +6,7 @@
 > als Datenschutz-URL eingetragen. Inhaltlich entspricht sie dem Datenschutz-Bildschirm
 > in der App (Einstellungen → Datenschutz).
 
-Stand: 24. November 2026
+Stand: 27. November 2026
 
 ## Kurz gesagt
 
@@ -44,13 +44,20 @@ Es werden keine Daten an uns oder an Dritte übertragen. Die App enthält keine 
 keine Analyse-, Absturzberichts- oder Tracking-Dienste. Sie baut keine Internetverbindung
 auf.
 
+**Ergebnisbild teilen:** Nach einer Runde kannst du ein Bild der Auswertung erstellen und
+über das Teilen-Menü deines Geräts verschicken. Das Bild entsteht auf deinem Gerät und
+geht nur an die App oder Person, die du dort selbst auswählst – wir erhalten es nicht.
+Namen stehen nur darauf, wenn du sie für dieses Bild einschaltest (standardmäßig aus). Was
+mit einem verschickten Bild geschieht, richtet sich nach der App, an die du es übergibst.
+
 Beim Herunterladen der App verarbeiten Apple (App Store) bzw. Google (Google Play) Daten
 nach ihren eigenen Datenschutzbestimmungen. Darauf haben wir keinen Einfluss.
 
 ## Berechtigungen
 
-Die App benötigt keinen Zugriff auf Kontakte, Standort, Kamera, Mikrofon, Fotos oder
-Benachrichtigungen.
+Die App benötigt keinen Zugriff auf Kontakte, Standort, Kamera, Mikrofon oder
+Benachrichtigungen. Deine Fotos kann sie nicht lesen. Nur wenn du ein Ergebnisbild über das
+Teilen-Menü in deinen Fotos sicherst, fragt iOS einmal, ob die App Fotos hinzufügen darf.
 
 ## Deine Kontrolle
 

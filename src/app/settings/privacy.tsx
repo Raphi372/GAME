@@ -6,7 +6,7 @@ import { useTranslation, type TranslationKey } from '@/i18n';
 import { colors, spacing } from '@/theme';
 
 /** Date of the last content change of the privacy notice. */
-export const PRIVACY_LAST_UPDATED = new Date(Date.UTC(2026, 10, 24));
+export const PRIVACY_LAST_UPDATED = new Date(Date.UTC(2026, 10, 27));
 
 const SECTIONS = ['summary', 'data', 'sharing', 'permissions', 'rights', 'contact'] as const;
 

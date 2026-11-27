@@ -8,11 +8,19 @@
     "scheme": "spicynight",
     "userInterfaceStyle": "dark",
     "backgroundColor": "#07050B",
+    "locales": {
+      "de": "./locales/de.json",
+      "en": "./locales/en.json",
+      "es": "./locales/es.json"
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.spicynight.app",
       "config": {
         "usesNonExemptEncryption": false
+      },
+      "infoPlist": {
+        "NSPhotoLibraryAddUsageDescription": "Lets you save a result picture to your photos from the share menu. SPICY NIGHT cannot read your photos."
       },
       "privacyManifests": {
         "NSPrivacyTracking": false,

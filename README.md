@@ -43,7 +43,8 @@ Runde spielt mit).
 ## Screenshots
 
 Echte Screenshots der App (Web-Build, Handy-Fenster 390 × 844). Sie entstehen per Skript aus
-festen Spielständen und lassen sich mit `npm run docs:screenshots` neu erzeugen.
+festen Spielständen und lassen sich mit `npm run docs:screenshots` neu erzeugen. „Ergebnis
+teilen“ gibt es nur in den Apps; für diese Bilder blendet das Skript den Knopf auch im Web ein.
 
 | Altersabfrage | Startseite | Spieler | Spicy-Levels |
 | :-: | :-: | :-: | :-: |
@@ -61,9 +62,13 @@ festen Spielständen und lassen sich mit `npm run docs:screenshots` neu erzeugen
 | :-: | :-: | :-: | :-: |
 | <img src="docs/screenshots/13-random-challenges-timer.jpg" width="190"> | <img src="docs/screenshots/14-random-challenges-group.jpg" width="190"> | <img src="docs/screenshots/15-mixed-round.jpg" width="190"> | <img src="docs/screenshots/16-mixed-game.jpg" width="190"> |
 
-| Auswertung | Auswertung (gemischte Runde) | Einstellungen | Einführung beim ersten Start |
+| Auswertung | Ergebnis teilen | Auswertung (gemischte Runde) | Einstellungen |
 | :-: | :-: | :-: | :-: |
-| <img src="docs/screenshots/17-summary.jpg" width="190"> | <img src="docs/screenshots/18-summary-mixed.jpg" width="190"> | <img src="docs/screenshots/19-settings.jpg" width="190"> | <img src="docs/screenshots/21-intro.jpg" width="190"> |
+| <img src="docs/screenshots/17-summary.jpg" width="190"> | <img src="docs/screenshots/22-share.jpg" width="190"> | <img src="docs/screenshots/18-summary-mixed.jpg" width="190"> | <img src="docs/screenshots/19-settings.jpg" width="190"> |
+
+| Einführung beim ersten Start |
+| :-: |
+| <img src="docs/screenshots/21-intro.jpg" width="190"> |
 
 **Tablet-Layout** (iPad 13″, gemischte Runde):
 
@@ -155,6 +160,21 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
   Auswertung zeigt je nach Modi Beantwortet, Geständnisse, Gewählt und Gepasst; „Mutigste
   Person“ zählt Antworten und Geständnisse.
 
+### Ergebnis teilen
+- Nach jeder Runde macht „Ergebnis teilen“ aus der Auswertung ein Bild im Hochformat (4:5,
+  auf aktuellen Handys 1080 × 1350 Pixel): Logo, Modus, Level, Spielerzahl, Dauer und bis zu
+  vier Zahlen der Runde. Verschickt wird es über das Teilen-Menü des Handys – WhatsApp,
+  Instagram, Nachrichten, „Bild sichern“ …
+- **Standardmäßig ohne Namen.** „Namen zeigen“ ergänzt die Bestenplatzierung („Mutigste
+  Person: Lena“) und steht bei jedem Öffnen wieder auf aus – mit dem Hinweis, dass alle in der
+  Runde einverstanden sein sollten.
+- Nichts wird hochgeladen: Das Bild entsteht auf dem Gerät, die App überträgt es nirgendwohin
+  und löscht die temporäre Datei, sobald die Auswertung geschlossen wird (spätestens beim
+  nächsten Teilen).
+- Die Vorschau zeigt genau das Bild, das verschickt wird; Screenreader lesen seinen Inhalt
+  vor. Im Web-Build (Browser-Demo) gibt es den Knopf nicht, weil der Browser kein Bild der
+  Ansicht aufnehmen kann.
+
 ### Einführung beim ersten Start
 - Direkt nach der ersten Altersbestätigung erklären drei kurze Schritte, wie eine Runde läuft,
   welche Fair-Play-Regeln gelten (Passen, kein Alkohol, Berührungen nur mit Ja, Stopp ist Stopp)
@@ -188,7 +208,9 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
 ### Barrierefreiheit
 - Geprüft mit axe-core (WCAG 2.2 A/AA + Best Practices) über alle Bildschirme, Sheets und
   Spielmodi der Web-Version: keine Verstöße – zuletzt auch „Runde anpassen“, gemischte Runden
-  mit Regel-Hinweisen und das Tablet-Layout (Handy, 320-pt-Handy und Tablet).
+  mit Regel-Hinweisen, das Tablet-Layout und das Teilen-Fenster samt Fehlerzustand (Handy,
+  iPhone SE, 320-pt-Handy und Tablet). Das Ergebnisbild ist für Screenreader ein Bild mit
+  vollständiger Beschreibung („Runden: 18, Beantwortet: 16 …“).
 - Kontraste: Text auf den dunklen Flächen mindestens 4,5:1; weiße Knopfschrift auf den
   Verläufen ebenfalls – die Knopf-Verläufe werden dafür bei Bedarf minimal abgedunkelt
   (`readableWithWhite()` in `src/theme/contrast.ts`), Avatar-Initialen bei Bedarf aufgehellt.
@@ -291,6 +313,8 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
 │   │   ├── premium/             # Preise, Entitlements, Kauf-Interface, Werbe-Regeln
 │   │   ├── custom-cards/        # Eigene Karten: Modell, Prüfregeln, Editor & Liste (Premium)
 │   │   ├── rounds/              # „Runde anpassen“: Länge, Steigerung, Modi mischen
+│   │   ├── summary/             # Auswertung als Modell (Zahlen, Bestenliste) für Bildschirm und Bild
+│   │   ├── share/               # Ergebnisbild, Teilen-Sheet, Aufnahme + Teilen-Menü (Web: aus)
 │   │   └── settings/            # Einstellungs-Zeilen
 │   ├── data/questions/          # Spicy Questions: mild.json, hot.json, extreme.json
 │   │   ├── never-have-i-ever/   # Ich hab noch nie: mild.json, hot.json, extreme.json
@@ -327,6 +351,7 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
 │   └── lib/app-screens.mjs      # gemeinsame Helfer: Web-Build ausliefern, Spielstand vorbelegen
 ├── .github/workflows/ci.yml
 ├── app.json · eas.json · store.config.json (App-Store-Texte für EAS Metadata)
+├── locales/                     # iOS-Systemtexte je Sprache (Erlaubnis „Fotos hinzufügen“)
 ├── CHANGELOG.md
 ├── jest.config.js · eslint.config.js · tsconfig.json
 ```
@@ -395,7 +420,9 @@ npm run check                # alles zusammen
 Abgedeckt sind u. a.: Level-Auswahl, Fragen laden, Zufallsauswahl, keine Wiederholung,
 Spieler hinzufügen/umbenennen/entfernen, faire Rotation, Überspringen, Passen, Levelwechsel,
 leeres/durchgespieltes Deck, lokale Speicherung inkl. App-Neustart und korrupter Daten,
-Einstellungen, Sprache, 18+-Sperre, die Einführung beim ersten Start, Datenlöschung sowie der komplette Spielablauf
+Einstellungen, Sprache, 18+-Sperre, die Einführung beim ersten Start, das Teilen des Ergebnisbilds
+(Namen standardmäßig aus, Aufnahme und Teilen-Menü, Fehlerfall, Aufräumen der Bilddatei,
+ausgeblendet ohne native Module), Datenlöschung sowie der komplette Spielablauf
 aller fünf Spielmodi über die echten Routen (inkl. Wahl Wahrheit/Pflicht, Spielerauswahl und
 Zählern in den Gruppenmodi, dem 3‑2‑1‑Countdown und dem Challenge-Timer), die englischen und
 spanischen Karten inklusive Sprachwechsel mitten im Spiel, der Start in der Gerätesprache sowie die eigenen Karten (gesperrt ohne Premium;
@@ -661,7 +688,12 @@ Wörterbüchern, `cardLead` in der Registry, Kartentexte in `src/data/questions/
   Spielstand nur Zähler, wie oft jemand angetippt wurde (nicht bei welcher Karte); mit dem
   Spielende wird der Spielstand gelöscht.
 - Keine Berechtigungen für Kamera, Mikrofon, Kontakte oder Standort (Mikrofon- und
-  Speicher-Berechtigungen sind auf Android explizit blockiert).
+  Speicher-Berechtigungen sind auf Android explizit blockiert). Fotos kann die App nicht
+  lesen; nur wenn jemand ein Ergebnisbild im Teilen-Menü über „Bild sichern“ ablegt, fragt
+  iOS einmal, ob sie Fotos hinzufügen darf (Text in `app.json` → `ios.infoPlist` und
+  `locales/`).
+- Ergebnis teilen: Das Bild entsteht auf dem Gerät und geht nur dorthin, wo die Person es im
+  Teilen-Menü hinschickt; Namen stehen nur mit „Namen zeigen“ darauf (standardmäßig aus).
 - Keine Android-Sicherung in die Cloud (`android.allowBackup: false`) – Spielernamen landen
   auch nicht im Google-Backup.
 - iOS-Privacy-Manifest (`ios.privacyManifests`): kein Tracking, keine erfassten Daten, nur
@@ -684,7 +716,12 @@ Wörterbüchern, `cardLead` in der Registry, Kartentexte in `src/data/questions/
   Native Einstellungen gehören in `app.json` bzw. Config-Plugins.
 - **Farben, Schriften, Abstände** nur aus `src/theme` verwenden; neue UI aus den
   Komponenten in `src/components/ui` zusammensetzen.
-- **Texte** nie hart codieren – immer `useTranslation()` und Schlüssel in `de.ts` + `en.ts`.
+- **Texte** nie hart codieren – immer `useTranslation()` und Schlüssel in `de.ts`, `en.ts`
+  und `es.ts`. iOS-Systemtexte (Erlaubnis-Dialoge) stehen in `locales/<sprache>.json`.
+- **Native Module, die schon beim Import ihr natives Gegenstück brauchen** (`expo-localization`,
+  `expo-sharing`), erst bei Bedarf per `require` in `try` laden – so blendet ein älterer
+  Entwicklungs-Build ohne das Modul die Funktion aus, statt beim Start abzustürzen.
+  Bildschirm-Aufnahmen gibt es nur nativ: `shareImage.web.ts` ersetzt das Modul im Web.
 - **Größen** immer für das Handy angeben: `AppText`, `Icon`, `IconButton`, `Avatar` und
   `Button` skalieren auf Tablets selbst. Eigene feste Maße (Boxen, Mindesthöhen, Eingabefelder)
   mit `scaled(size, useLayout().scale)` anpassen; `useLayout().wide` für Tablet-Varianten.
