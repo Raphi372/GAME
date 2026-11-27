@@ -30,7 +30,9 @@ const DEVICES = [
 const PLAYERS = {
   de: ['Lena', 'Max', 'Sophie', 'Jonas'],
   en: ['Emma', 'Noah', 'Mia', 'Leo'],
+  es: ['Lucía', 'Mateo', 'Valeria', 'Diego'],
 };
+const LOCALES = Object.keys(PLAYERS);
 
 /** One entry per screenshot: route plus the game state it starts from. */
 const SHOTS = [
@@ -51,7 +53,7 @@ function storage(locale, shot) {
 
 async function screenshots(browser) {
   for (const device of DEVICES) {
-    for (const locale of ['de', 'en']) {
+    for (const locale of LOCALES) {
       const dir = join(outDir, 'screenshots', device.id, locale);
       mkdirSync(dir, { recursive: true });
       for (const shot of SHOTS) {

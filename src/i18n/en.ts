@@ -219,6 +219,7 @@ export const en: Record<TranslationKey, string> = {
   'settings.section.language': 'Language',
   'settings.language.de': 'Deutsch',
   'settings.language.en': 'English',
+  'settings.language.es': 'Español',
   'settings.contentLanguageNote': 'Questions are currently available in German only.',
   'settings.section.info': 'Safety & info',
   'settings.fairPlay': 'Fair play & guidelines',

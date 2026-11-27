@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Validates all question decks (src/data/questions/**) and their English
- * translations (src/data/questions/en/<mode>/<level>.json: { "<id>": "<text>" }).
+ * Validates all question decks (src/data/questions/**) and their translations
+ * (src/data/questions/<en|es>/<mode>/<level>.json: { "<id>": "<text>" }).
  * Used by CI and when adding new content:  npm run validate:questions
  */
 import { readFileSync } from 'node:fs';
@@ -23,7 +23,7 @@ const DECKS = [
     idPrefix: (level) => `${level}_`,
     minPerLevel: 100,
     placeholders: ['{other}'],
-    en: {},
+    translations: { en: {}, es: {} },
   },
   {
     mode: 'never-have-i-ever',
@@ -32,7 +32,7 @@ const DECKS = [
     minPerLevel: 100,
     placeholders: [],
     startsWith: 'Ich hab noch nie ',
-    en: { startsWith: 'Never have I ever ' },
+    translations: { en: { startsWith: 'Never have I ever ' }, es: { startsWith: 'Yo nunca ' } },
   },
   {
     mode: 'most-likely',
@@ -42,7 +42,10 @@ const DECKS = [
     placeholders: [],
     startsWith: 'Wer würde am ehesten ',
     endsWith: '?',
-    en: { startsWith: 'Who is most likely to ', endsWith: '?' },
+    translations: {
+      en: { startsWith: 'Who is most likely to ', endsWith: '?' },
+      es: { startsWith: '¿Quién es más probable que ', endsWith: '?' },
+    },
   },
   {
     mode: 'truth-or-dare',
@@ -54,7 +57,7 @@ const DECKS = [
     kinds: { truth: { min: 40, endsWith: ['?'] }, dare: { min: 40, endsWith: ['.', '!'] } },
     /** Dares that touch another player must ask for consent in the text. */
     consent: true,
-    en: {},
+    translations: { en: {}, es: {} },
   },
   {
     mode: 'random-challenges',
@@ -65,7 +68,9 @@ const DECKS = [
     endsWithAny: ['.', '!'],
     /** Challenges with body contact involving others (incl. "Alle: …") need an opt-in. */
     consent: 'others',
-    en: { groupLead: ['Alle: ', 'Everyone: '] },
+    /** Challenges for the whole group start with this lead – in every language. */
+    groupLead: 'Alle: ',
+    translations: { en: { groupLead: 'Everyone: ' }, es: { groupLead: 'Todos: ' } },
   },
 ];
 
@@ -106,21 +111,94 @@ const EN_ABOUT_SELF = /\b(yourself|of your own)\b/i;
 const EN_SEX_APPEAL = /(most seductive|best kisser|kisses the best|sexiest (person|one|player|voice))/i;
 const EN_OWN_PERFORMANCE = /\byour\s+(most seductive|sexiest)/i;
 const EN_DRINKING = /\b(drink|drinks|drinking|shots?|sips?|chug|booze|alcohol|tipsy|drunk)\b/i;
+
+/**
+ * Spanish counterparts. JavaScript's \b only knows ASCII letters, so Spanish words are
+ * matched with Unicode-aware boundaries instead.
+ */
+const words = (source) => new RegExp(`(?<![\\p{L}\\p{N}])(?:${source})(?![\\p{L}\\p{N}])`, 'iu');
+const ES_CONSENT = /(solo si|sólo si|si \{other\}|si (los|las) dos|si ambos|si ambas|si quiere|si quieren|si le apetece|si les apetece|si te deja|si te dejan|sí claro|de acuerdo|acept|consentimiento|permiso|decid|decide|quiere|quieren|quiera|apetece|le parece bien|les parece bien|elige si|decir que no|dice que no|rechaz|negarse|veto|la última palabra|sin tocar|sin contacto|opcional|voluntari|se puede pasar|puede pasar)/iu;
+const ES_LOOKS = /(más atractiv|más guap|más lind|más bell|mejor aspecto|mejor cuerpo|mejor figura|(cuerpo|figura|aura|look|sonrisa|mirada|cara|boca|labios|ojos|pelo|cabello|piernas|manos|trasero) más (bonit|lind|herm|bell|sexy|atractiv))/iu;
+const ES_PICKS_PLAYER = new RegExp(
+  `${words('aquí|(en|de) (este|el|tu) grupo|del grupo|(en|de) la ronda').source}|^¿quién es más probable que |^todos:`,
+  'iu',
+);
+const ES_ABOUT_SELF = words('(ti|tú) mism[oa]s?');
+const ES_SEX_APPEAL = /(más seductor|besa mejor|mejor besador|besar mejor|más sexy)/iu;
+/** "tu/su mirada más seductora" – each player shows off their own (group cards say "su"). */
+const ES_OWN_PERFORMANCE = /(?<![\p{L}])(tus?|sus?)\s+\p{L}+\s+más\s+(seductor|seductora|sexy)/iu;
+const ES_DRINKING = words(
+  '(?!bebés?(?![\\p{L}]))beb\\p{L}*|tragos?|chupitos?|sorbos?|shots?|alcohol\\p{L}*|borrach\\p{L}*|emborrach\\p{L}*|ebri[oa]s?|cervezas?|tequilas?|vodka|whisky|cubatas?|brindis',
+);
+/** Neutral Spanish for Spain and Latin America: no "vosotros" and no "ustedes". */
+const ES_PLURAL_ADDRESS = new RegExp(
+  `${words('vosotr[oa]s|vuestr[oa]s?|ustedes|os|\\p{L}+(áis|éis)').source}|^todos: \\p{L}+[aei]d(?![\\p{L}])`,
+  'iu',
+);
+/** Words that are regional or vulgar somewhere in the Spanish-speaking world. */
+const ES_REGIONAL = words(
+  'coger|coge|cogí|cogido|cogida|cachond\\p{L}*|pinche|concha|chaqueta|papaya|bicho|culo|follar|joder|polvo|correrse|móvil|celular|ordenador|computadora|coche|carro|guay|chévere|mola|chaval\\p{L}*|pillar|pillad[oa]s?|ligar|ligue|liarse|morre\\p{L}*|enrollarse',
+);
+/**
+ * The player – and the person reading a "Yo nunca" card aloud – can be of any gender, so
+ * a card never calls them "nervioso" or "nerviosa": it says "te dan nervios" instead.
+ */
+const ES_GENDERED_ADDRESS = new RegExp(
+  `(?<![\\p{L}])(estás|estabas|estuviste|estarías|eres|eras|fuiste|serías|has estado|has sido|te sientes|te sentías|te sentiste|te sentirías|te has sentido|te pones|te pusiste|te has puesto|te pondrías|te quedas|te quedaste|te has quedado|te quedarías|te pone|te ponen|te puso|te pusieron|te hace sentir|te hizo sentir|te consideras|he estado|he sido|me he sentido|me he puesto|me he quedado|me sentí|me puse|me quedé)\\s+((muy|más|tan|demasiado|bastante|súper)\\s+)?(?!(una|uno|unas|unos|la|las|lo|los|esa|ese|eso|esas|esos|esta|este|esto|estas|estos|otra|otro|otras|otros|toda|todo|todas|todos|mucha|mucho|poca|poco|nada|algo|alguna|alguno|ninguna|ninguno|cada|para|contra|hacia|hasta|como|cuando|donde|nunca|ahora|ya|no|pronto|luego|temprano|despacio|todavía|medio|media|cerca|dentro|fuera|encima|arriba|abajo|afuera|adentro|contigo|conmigo|consigo|tanto|tanta|tu|tus|su|sus|mi|mis|capaz|parte|fan|pareja|cita|presa)(?![\\p{L}])|\\p{L}+(ando|iendo|yendo)(?![\\p{L}]))\\p{L}+[oa]s?(?![\\p{L}])`,
+  'iu',
+);
+const count = (text, char) => text.split(char).length - 1;
 const numbersIn = (text) => (text.match(/\d+/g) ?? []).sort().join(',');
 /** Which placeholders a text uses (a translation may use "them" instead of a second {other}). */
 const placeholdersIn = (text) => [...new Set(text.match(/\{[^}]*\}/g) ?? [])].sort().join(',');
+
+/** Content rules per translation language. */
+const LANGUAGES = {
+  en: {
+    name: 'English',
+    consent: EN_CONSENT,
+    drinking: EN_DRINKING,
+    ranksLooks: (text) =>
+      (EN_LOOKS.test(text) || (EN_SEX_APPEAL.test(text) && !EN_OWN_PERFORMANCE.test(text))) &&
+      EN_PICKS_PLAYER.test(text) &&
+      !EN_ABOUT_SELF.test(text),
+    extra: () => [],
+  },
+  es: {
+    name: 'Spanish',
+    consent: ES_CONSENT,
+    drinking: ES_DRINKING,
+    ranksLooks: (text) =>
+      (ES_LOOKS.test(text) || (ES_SEX_APPEAL.test(text) && !ES_OWN_PERFORMANCE.test(text))) &&
+      ES_PICKS_PLAYER.test(text) &&
+      !ES_ABOUT_SELF.test(text),
+    extra: (text) => [
+      ...(count(text, '¿') !== count(text, '?') ? ['every question opens with ¿ and closes with ?'] : []),
+      ...(count(text, '¡') !== count(text, '!') ? ['every exclamation opens with ¡ and closes with !'] : []),
+      ...(ES_PLURAL_ADDRESS.test(text)
+        ? [`"${text.match(ES_PLURAL_ADDRESS)[0]}" – no vosotros/ustedes: address one player with "tú" or describe the group`]
+        : []),
+      ...(ES_REGIONAL.test(text) ? [`"${text.match(ES_REGIONAL)[0]}" is regional or vulgar in parts of the Spanish-speaking world`] : []),
+      ...(ES_GENDERED_ADDRESS.test(text)
+        ? [`"${text.match(ES_GENDERED_ADDRESS)[0]}" – addresses the player with a gendered word, rephrase neutrally`]
+        : []),
+    ],
+  },
+};
 
 const errors = [];
 const ids = new Set();
 const texts = new Map();
 const normalize = (text) => text.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
 let total = 0;
-let totalEn = 0;
-const textsEn = new Map();
+const translated = Object.fromEntries(Object.keys(LANGUAGES).map((lang) => [lang, { total: 0, texts: new Map() }]));
 
-/** Checks the English file of one deck level against its German source cards. */
-function validateEnglish(deck, level, source) {
-  const name = `src/data/questions/en/${deck.mode}/${level}.json`;
+/** Checks one translation file of a deck level against its German source cards. */
+function validateTranslation(deck, level, source, lang) {
+  const rules = LANGUAGES[lang];
+  const format = deck.translations[lang];
+  const seen = translated[lang];
+  const name = `src/data/questions/${lang}/${deck.mode}/${level}.json`;
   let data;
   try {
     data = JSON.parse(readFileSync(join(root, name), 'utf8'));
@@ -146,32 +224,32 @@ function validateEnglish(deck, level, source) {
     if (text.length > 180) errors.push(`${where}: text longer than 180 characters`);
     if (placeholdersIn(text) !== placeholdersIn(q.text)) errors.push(`${where}: placeholders differ from German`);
     if (numbersIn(text) !== numbersIn(q.text)) errors.push(`${where}: numbers differ from German (timer texts!)`);
-    if (deck.en.startsWith && !text.startsWith(deck.en.startsWith)) {
-      errors.push(`${where}: text must start with "${deck.en.startsWith}"`);
+    if (format.startsWith && !text.startsWith(format.startsWith)) {
+      errors.push(`${where}: text must start with "${format.startsWith}"`);
     }
-    if (deck.en.endsWith && !text.endsWith(deck.en.endsWith)) {
-      errors.push(`${where}: text must end with "${deck.en.endsWith}"`);
+    if (format.endsWith && !text.endsWith(format.endsWith)) {
+      errors.push(`${where}: text must end with "${format.endsWith}"`);
     }
-    if (deck.en.groupLead && q.text.startsWith(deck.en.groupLead[0]) !== text.startsWith(deck.en.groupLead[1])) {
-      errors.push(`${where}: group cards start with "${deck.en.groupLead[1]}" exactly when the German one does`);
+    if (format.groupLead && q.text.startsWith(deck.groupLead) !== text.startsWith(format.groupLead)) {
+      errors.push(`${where}: group cards start with "${format.groupLead}" exactly when the German one does`);
     }
     if (q.text.endsWith('?') !== text.endsWith('?')) errors.push(`${where}: question/statement differs from German`);
     if ((deck.endsWithAny || q.kind === 'dare') && !['.', '!'].some((end) => text.endsWith(end))) {
       errors.push(`${where}: a task must end with . or !`);
     }
-    if (needsConsent(deck, q) && !EN_CONSENT.test(text)) {
+    if (needsConsent(deck, q) && !rules.consent.test(text)) {
       errors.push(`${where}: the German card asks for consent – the translation must too`);
     }
-    const enAppeal = EN_SEX_APPEAL.test(text) && !EN_OWN_PERFORMANCE.test(text);
-    if ((EN_LOOKS.test(text) || enAppeal) && EN_PICKS_PLAYER.test(text) && !EN_ABOUT_SELF.test(text)) {
+    if (rules.ranksLooks(text)) {
       errors.push(`${where}: compares players by their looks or sex appeal – rephrase around behaviour instead`);
     }
-    if (EN_DRINKING.test(text)) errors.push(`${where}: no drinking in the game`);
+    if (rules.drinking.test(text)) errors.push(`${where}: no drinking in the game`);
+    for (const problem of rules.extra(text)) errors.push(`${where}: ${problem}`);
     const key = normalize(text);
-    if (textsEn.has(key)) errors.push(`${where}: duplicate text (also ${textsEn.get(key)})`);
-    textsEn.set(key, where);
+    if (seen.texts.has(key)) errors.push(`${where}: duplicate text (also ${seen.texts.get(key)})`);
+    seen.texts.set(key, where);
   }
-  totalEn += source.length;
+  seen.total += source.length;
 }
 
 for (const deck of DECKS) {
@@ -256,8 +334,9 @@ for (const deck of DECKS) {
       }
     }
     total += data.length;
-    if (deck.en) validateEnglish(deck, level, data);
-    console.log(`✓ ${deck.mode} / ${level}: ${data.length}${deck.en ? ' (+ en)' : ''}`);
+    const langs = Object.keys(deck.translations);
+    for (const lang of langs) validateTranslation(deck, level, data, lang);
+    console.log(`✓ ${deck.mode} / ${level}: ${data.length} (+ ${langs.join(', ')})`);
   }
 }
 
@@ -266,4 +345,5 @@ if (errors.length > 0) {
   for (const error of errors) console.error(`  - ${error}`);
   process.exit(1);
 }
-console.log(`\nAll ${total} cards and ${totalEn} English translations are valid.`);
+const summary = Object.entries(translated).map(([lang, { total: n }]) => `${n} ${LANGUAGES[lang].name}`);
+console.log(`\nAll ${total} cards and their translations (${summary.join(', ')}) are valid.`);

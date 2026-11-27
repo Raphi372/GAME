@@ -13,6 +13,21 @@ import enSqMild from '@/data/questions/en/spicy-questions/mild.json';
 import enTodExtreme from '@/data/questions/en/truth-or-dare/extreme.json';
 import enTodHot from '@/data/questions/en/truth-or-dare/hot.json';
 import enTodMild from '@/data/questions/en/truth-or-dare/mild.json';
+import esMltExtreme from '@/data/questions/es/most-likely/extreme.json';
+import esMltHot from '@/data/questions/es/most-likely/hot.json';
+import esMltMild from '@/data/questions/es/most-likely/mild.json';
+import esNhieExtreme from '@/data/questions/es/never-have-i-ever/extreme.json';
+import esNhieHot from '@/data/questions/es/never-have-i-ever/hot.json';
+import esNhieMild from '@/data/questions/es/never-have-i-ever/mild.json';
+import esRcExtreme from '@/data/questions/es/random-challenges/extreme.json';
+import esRcHot from '@/data/questions/es/random-challenges/hot.json';
+import esRcMild from '@/data/questions/es/random-challenges/mild.json';
+import esSqExtreme from '@/data/questions/es/spicy-questions/extreme.json';
+import esSqHot from '@/data/questions/es/spicy-questions/hot.json';
+import esSqMild from '@/data/questions/es/spicy-questions/mild.json';
+import esTodExtreme from '@/data/questions/es/truth-or-dare/extreme.json';
+import esTodHot from '@/data/questions/es/truth-or-dare/hot.json';
+import esTodMild from '@/data/questions/es/truth-or-dare/mild.json';
 import extremeData from '@/data/questions/extreme.json';
 import hotData from '@/data/questions/hot.json';
 import mildData from '@/data/questions/mild.json';
@@ -93,23 +108,42 @@ const GERMAN_PACKS: readonly QuestionPack[] = [
   buildPack('random-challenges.extreme.base', 'random-challenges', 'extreme', rcExtremeData),
 ];
 
-/** English texts per German pack id. */
-const ENGLISH_TEXTS: Readonly<Record<string, Readonly<Record<string, string>>>> = {
-  'spicy-questions.mild.base': enSqMild,
-  'spicy-questions.hot.base': enSqHot,
-  'spicy-questions.extreme.base': enSqExtreme,
-  'never-have-i-ever.mild.base': enNhieMild,
-  'never-have-i-ever.hot.base': enNhieHot,
-  'never-have-i-ever.extreme.base': enNhieExtreme,
-  'most-likely.mild.base': enMltMild,
-  'most-likely.hot.base': enMltHot,
-  'most-likely.extreme.base': enMltExtreme,
-  'truth-or-dare.mild.base': enTodMild,
-  'truth-or-dare.hot.base': enTodHot,
-  'truth-or-dare.extreme.base': enTodExtreme,
-  'random-challenges.mild.base': enRcMild,
-  'random-challenges.hot.base': enRcHot,
-  'random-challenges.extreme.base': enRcExtreme,
+/** Translated texts per German pack id, for every language besides German. */
+const TRANSLATIONS: Readonly<Record<Exclude<Locale, 'de'>, Readonly<Record<string, Readonly<Record<string, string>>>>>> = {
+  en: {
+    'spicy-questions.mild.base': enSqMild,
+    'spicy-questions.hot.base': enSqHot,
+    'spicy-questions.extreme.base': enSqExtreme,
+    'never-have-i-ever.mild.base': enNhieMild,
+    'never-have-i-ever.hot.base': enNhieHot,
+    'never-have-i-ever.extreme.base': enNhieExtreme,
+    'most-likely.mild.base': enMltMild,
+    'most-likely.hot.base': enMltHot,
+    'most-likely.extreme.base': enMltExtreme,
+    'truth-or-dare.mild.base': enTodMild,
+    'truth-or-dare.hot.base': enTodHot,
+    'truth-or-dare.extreme.base': enTodExtreme,
+    'random-challenges.mild.base': enRcMild,
+    'random-challenges.hot.base': enRcHot,
+    'random-challenges.extreme.base': enRcExtreme,
+  },
+  es: {
+    'spicy-questions.mild.base': esSqMild,
+    'spicy-questions.hot.base': esSqHot,
+    'spicy-questions.extreme.base': esSqExtreme,
+    'never-have-i-ever.mild.base': esNhieMild,
+    'never-have-i-ever.hot.base': esNhieHot,
+    'never-have-i-ever.extreme.base': esNhieExtreme,
+    'most-likely.mild.base': esMltMild,
+    'most-likely.hot.base': esMltHot,
+    'most-likely.extreme.base': esMltExtreme,
+    'truth-or-dare.mild.base': esTodMild,
+    'truth-or-dare.hot.base': esTodHot,
+    'truth-or-dare.extreme.base': esTodExtreme,
+    'random-challenges.mild.base': esRcMild,
+    'random-challenges.hot.base': esRcHot,
+    'random-challenges.extreme.base': esRcExtreme,
+  },
 };
 
 /**
@@ -118,10 +152,12 @@ const ENGLISH_TEXTS: Readonly<Record<string, Readonly<Record<string, string>>>> 
  */
 export const BUILTIN_PACKS: readonly QuestionPack[] = [
   ...GERMAN_PACKS,
-  ...GERMAN_PACKS.flatMap((pack) => {
-    const texts = ENGLISH_TEXTS[pack.id];
-    return texts ? [translatePack(pack, 'en', texts)] : [];
-  }),
+  ...(Object.keys(TRANSLATIONS) as Exclude<Locale, 'de'>[]).flatMap((locale) =>
+    GERMAN_PACKS.flatMap((pack) => {
+      const texts = TRANSLATIONS[locale][pack.id];
+      return texts ? [translatePack(pack, locale, texts)] : [];
+    }),
+  ),
 ];
 
 /** Content is authored in German first; other locales fall back to it. */

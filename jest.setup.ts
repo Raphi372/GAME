@@ -15,6 +15,11 @@ jest.mock('expo-audio', () => ({
   setAudioModeAsync: jest.fn(() => Promise.resolve()),
 }));
 
+// Tests run on a German device; tests for the language detection set their own locales.
+jest.mock('expo-localization', () => ({
+  getLocales: jest.fn(() => [{ languageTag: 'de-DE', languageCode: 'de' }]),
+}));
+
 jest.mock('expo-haptics', () => ({
   impactAsync: jest.fn(() => Promise.resolve()),
   selectionAsync: jest.fn(() => Promise.resolve()),

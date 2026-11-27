@@ -2,6 +2,7 @@ import { renderQuestionText, requiresTargetPlayer } from '@/features/question-de
 import { translate } from '@/i18n';
 import { de } from '@/i18n/de';
 import { en } from '@/i18n/en';
+import { es } from '@/i18n/es';
 
 describe('question templates', () => {
   it('replaces {other} with the target player name', () => {
@@ -26,15 +27,34 @@ describe('translations', () => {
   it('uses German by default and interpolates parameters', () => {
     expect(translate('de', 'players.count', { count: 3, max: 20 })).toBe('3 von 20 Spielern');
     expect(translate('en', 'players.count', { count: 3, max: 20 })).toBe('3 of 20 players');
+    expect(translate('es', 'players.count', { count: 3, max: 20 })).toBe('3 de 20 jugadores');
   });
 
   it('keeps unknown placeholders', () => {
     expect(translate('de', 'players.count', { count: 1 })).toBe('1 von {max} Spielern');
   });
 
-  it('provides every German key in English (prepared translation)', () => {
-    const missing = Object.keys(de).filter((key) => !(key in en) || !en[key as keyof typeof en]);
+  it.each([
+    ['English', en],
+    ['Spanish', es],
+  ])('provides every German key in %s, with the same placeholders', (_name, dictionary) => {
+    const missing = Object.keys(de).filter((key) => !dictionary[key as keyof typeof de]);
     expect(missing).toEqual([]);
+    const params = (text: string) => [...new Set(text.match(/\{\w+\}/g) ?? [])].sort().join(',');
+    const mismatched = (Object.keys(de) as (keyof typeof de)[]).filter(
+      (key) => params(de[key]) !== params(dictionary[key]),
+    );
+    expect(mismatched).toEqual([]);
+  });
+
+  it('writes Spanish questions and exclamations with opening marks and without vosotros/ustedes', () => {
+    // The level taglines ("Are you ready?") stay English in every language, like the claim.
+    const brand = new Set([de['level.mild.tagline'], de['level.hot.tagline'], de['level.extreme.tagline']]);
+    for (const text of Object.values(es).filter((value) => !brand.has(value))) {
+      expect(text.split('¿').length).toBe(text.split('?').length);
+      expect(text.split('¡').length).toBe(text.split('!').length);
+      expect(text).not.toMatch(/(?<![\p{L}])(vosotr[oa]s|vuestr[oa]s?|ustedes|os)(?![\p{L}])|\p{L}(áis|éis)(?![\p{L}])/iu);
+    }
   });
 
   it('contains the three required game buttons', () => {

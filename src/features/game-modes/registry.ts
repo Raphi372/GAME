@@ -132,7 +132,7 @@ export const GAME_MODES: Record<GameModeId, GameModeDefinition> = {
     turnStyle: 'group',
     usesSpicyLevels: true,
     cardUnit: 'statements',
-    cardLead: { de: 'Ich hab noch nie', en: 'Never have I ever' },
+    cardLead: { de: 'Ich hab noch nie', en: 'Never have I ever', es: 'Yo nunca' },
     howTo: 'nhie.howTo',
     levelDescriptions: {
       mild: 'nhie.level.mild.description',
@@ -181,7 +181,7 @@ export const GAME_MODES: Record<GameModeId, GameModeDefinition> = {
     turnStyle: 'group',
     usesSpicyLevels: true,
     cardUnit: 'questions',
-    cardLead: { de: 'Wer würde am ehesten', en: 'Who is most likely to' },
+    cardLead: { de: 'Wer würde am ehesten', en: 'Who is most likely to', es: '¿Quién es más probable que' },
     howTo: 'mlt.howTo',
     levelDescriptions: {
       mild: 'mlt.level.mild.description',
@@ -213,7 +213,7 @@ export const GAME_MODES: Record<GameModeId, GameModeDefinition> = {
     turnStyle: 'single-player',
     usesSpicyLevels: true,
     cardUnit: 'challenges',
-    cardLead: { de: 'Alle:', en: 'Everyone:' },
+    cardLead: { de: 'Alle:', en: 'Everyone:', es: 'Todos:' },
     cardLabel: 'rc.cardLabel',
     howTo: 'rc.howTo',
     levelDescriptions: {
