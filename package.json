@@ -23,7 +23,8 @@
     "submit:ios": "npx eas-cli@latest submit --profile production --platform ios --latest",
     "submit:android": "npx eas-cli@latest submit --profile production --platform android --latest",
     "store:metadata": "npx eas-cli@latest metadata:push",
-    "store:screenshots": "expo export --platform web --output-dir dist && node scripts/store-screenshots.mjs dist docs/store"
+    "store:screenshots": "expo export --platform web --output-dir dist && node scripts/store-screenshots.mjs dist docs/store",
+    "docs:screenshots": "expo export --platform web --output-dir dist && node scripts/readme-screenshots.mjs dist docs/screenshots"
   },
   "dependencies": {
     "@expo-google-fonts/manrope": "^0.4.3",

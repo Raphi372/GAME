@@ -5,19 +5,15 @@
  *   npx expo export --platform web --output-dir dist
  *   node scripts/store-screenshots.mjs dist docs/store
  *
- * Needs Playwright with Chromium (`npm i -D playwright && npx playwright install chromium`
- * on a normal machine). Every screenshot starts from a fixed, hand-picked game state that is
- * written to the browser storage before the page loads – so the store images always show the
- * same harmless cards instead of a random draw.
+ * Needs Playwright with Chromium – see `scripts/lib/app-screens.mjs`. Every screenshot starts
+ * from a fixed, hand-picked game state, so the store images always show the same harmless
+ * cards instead of a random draw.
  */
-import { createReadStream, existsSync, mkdirSync, readFileSync, statSync } from 'node:fs';
-import { createServer } from 'node:http';
-import { createRequire } from 'node:module';
-import { extname, join, resolve } from 'node:path';
+import { mkdirSync, readFileSync } from 'node:fs';
+import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const require = createRequire(import.meta.url);
-const { chromium } = require('playwright');
+import { appStorage, chromium, makePlayers, makeSession, openScreen, serveBuild } from './lib/app-screens.mjs';
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const distDir = resolve(process.argv[2] ?? 'dist');
@@ -46,46 +42,11 @@ const SHOTS = [
   { name: '06-random-challenges', path: '/game', session: { modeId: 'random-challenges', level: 'mild', card: 'rc_mild_020' } },
 ];
 
-const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.ttf': 'font/ttf', '.ico': 'image/x-icon', '.wav': 'audio/wav' };
-
-/** Minimal static server with single-page-app fallback. */
-function serve(dir) {
-  return createServer((req, res) => {
-    const urlPath = decodeURIComponent((req.url ?? '/').split('?')[0]);
-    let file = join(dir, urlPath);
-    if (!file.startsWith(dir) || !existsSync(file) || statSync(file).isDirectory()) file = join(dir, 'index.html');
-    res.writeHead(200, { 'Content-Type': TYPES[extname(file)] ?? 'application/octet-stream' });
-    createReadStream(file).pipe(res);
-  }).listen(PORT, '127.0.0.1');
-}
-
 function storage(locale, shot) {
-  const now = Date.now();
-  const names = PLAYERS[locale];
-  const players = names.map((name, colorIndex) => ({ id: `p${colorIndex}`, name, colorIndex }));
+  const players = makePlayers(PLAYERS[locale]);
   const s = shot.session;
-  const session = s && {
-    id: 'store-shot',
-    modeId: s.modeId,
-    level: s.level,
-    startedAt: now,
-    playedByLevel: { mild: s.card ? [s.card] : [], hot: [], extreme: [] },
-    turnCounts: Object.fromEntries(players.map((p) => [p.id, 0])),
-    lastPlayerId: null,
-    current: { playerId: 'p0', questionId: s.card, targetPlayerId: null, ...(s.card ? {} : { kind: null }) },
-    turnsCompleted: 0,
-    stats: {},
-  };
-  return {
-    'spicy-night/settings': JSON.stringify({
-      state: { soundEnabled: false, hapticsEnabled: false, animationsEnabled: false, locale, ageConfirmedAt: now },
-      version: 1,
-    }),
-    'spicy-night/game': JSON.stringify({
-      state: { players, session, lastLevel: shot.lastLevel ?? s?.level ?? 'mild' },
-      version: 1,
-    }),
-  };
+  const session = s && makeSession({ players, modeId: s.modeId, level: s.level, card: s.card });
+  return appStorage({ locale, players, session, lastLevel: shot.lastLevel ?? s?.level ?? 'mild' });
 }
 
 async function screenshots(browser) {
@@ -94,25 +55,16 @@ async function screenshots(browser) {
       const dir = join(outDir, 'screenshots', device.id, locale);
       mkdirSync(dir, { recursive: true });
       for (const shot of SHOTS) {
-        const context = await browser.newContext({
+        const { page, close } = await openScreen(browser, {
+          url: `http://127.0.0.1:${PORT}${shot.path}`,
           viewport: { width: device.width, height: device.height },
-          deviceScaleFactor: device.scale,
-          reducedMotion: 'reduce',
+          scale: device.scale,
+          storage: storage(locale, shot),
         });
-        await context.addInitScript((items) => {
-          if (sessionStorage.getItem('seeded')) return;
-          localStorage.clear();
-          for (const [key, value] of Object.entries(items)) localStorage.setItem(key, value);
-          sessionStorage.setItem('seeded', '1');
-        }, storage(locale, shot));
-        const page = await context.newPage();
-        await page.goto(`http://127.0.0.1:${PORT}${shot.path}`);
-        await page.waitForLoadState('networkidle');
-        await page.waitForTimeout(1500);
         const file = join(dir, `${shot.name}.jpg`);
         await page.screenshot({ path: file, type: 'jpeg', quality: 88 });
         console.log(`✓ ${device.id}/${locale}/${shot.name}.jpg`);
-        await context.close();
+        await close();
       }
     }
   }
@@ -152,7 +104,7 @@ async function featureGraphic(browser) {
   await page.close();
 }
 
-const server = serve(distDir);
+const server = serveBuild(distDir, PORT);
 const browser = await chromium.launch();
 try {
   await screenshots(browser);

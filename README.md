@@ -42,27 +42,32 @@ Runde spielt mit).
 
 ## Screenshots
 
-Echte Screenshots der App (Web-Build, iPhone-Viewport 390 × 844):
+Echte Screenshots der App (Web-Build, Handy-Fenster 390 × 844). Sie entstehen per Skript aus
+festen Spielständen und lassen sich mit `npm run docs:screenshots` neu erzeugen.
 
 | Altersabfrage | Startseite | Spieler | Spicy-Levels |
 | :-: | :-: | :-: | :-: |
 | <img src="docs/screenshots/01-age-gate.jpg" width="190"> | <img src="docs/screenshots/02-home.jpg" width="190"> | <img src="docs/screenshots/03-players.jpg" width="190"> | <img src="docs/screenshots/04-levels.jpg" width="190"> |
 
-| Spiel (HOT) | Level wechseln | Spiel (EXTREME) | Auswertung |
+| Runde anpassen | Spiel (HOT, Karte 3 von 20) | Level wechseln | Spiel (EXTREME) |
 | :-: | :-: | :-: | :-: |
-| <img src="docs/screenshots/05-game.jpg" width="190"> | <img src="docs/screenshots/06-level-switch.jpg" width="190"> | <img src="docs/screenshots/07-game-extreme.jpg" width="190"> | <img src="docs/screenshots/08-summary.jpg" width="190"> |
+| <img src="docs/screenshots/05-round-settings.jpg" width="190"> | <img src="docs/screenshots/06-game.jpg" width="190"> | <img src="docs/screenshots/07-level-switch.jpg" width="190"> | <img src="docs/screenshots/08-game-extreme.jpg" width="190"> |
 
-| Ich hab noch nie – Level | Ich hab noch nie – Spiel | Wer würde am ehesten? | Auswertung (Gruppe) |
+| Ich hab noch nie | Wer würde am ehesten? | Wahrheit oder Pflicht – Wahl | Wahrheit oder Pflicht – Pflicht |
 | :-: | :-: | :-: | :-: |
-| <img src="docs/screenshots/11-nhie-level.jpg" width="190"> | <img src="docs/screenshots/10-nhie-game.jpg" width="190"> | <img src="docs/screenshots/12-mlt-game.jpg" width="190"> | <img src="docs/screenshots/13-mlt-summary.jpg" width="190"> |
+| <img src="docs/screenshots/09-never-have-i-ever.jpg" width="190"> | <img src="docs/screenshots/10-most-likely.jpg" width="190"> | <img src="docs/screenshots/11-truth-or-dare-choice.jpg" width="190"> | <img src="docs/screenshots/12-truth-or-dare-dare.jpg" width="190"> |
 
-| Wahrheit oder Pflicht – Wahl | Wahrheit oder Pflicht – Pflicht | Random Challenges – Timer | Random Challenges – Alle |
+| Random Challenges – Timer | Random Challenges – Alle | Gemischte Runde – So geht’s | Gemischte Runde – Spiel |
 | :-: | :-: | :-: | :-: |
-| <img src="docs/screenshots/14-tod-choice.jpg" width="190"> | <img src="docs/screenshots/15-tod-dare.jpg" width="190"> | <img src="docs/screenshots/16-rc-timer.jpg" width="190"> | <img src="docs/screenshots/17-rc-group.jpg" width="190"> |
+| <img src="docs/screenshots/13-random-challenges-timer.jpg" width="190"> | <img src="docs/screenshots/14-random-challenges-group.jpg" width="190"> | <img src="docs/screenshots/15-mixed-round.jpg" width="190"> | <img src="docs/screenshots/16-mixed-game.jpg" width="190"> |
 
-| Einstellungen |
-| :-: |
-| <img src="docs/screenshots/09-settings.jpg" width="190"> |
+| Auswertung | Auswertung (gemischte Runde) | Einstellungen |
+| :-: | :-: | :-: |
+| <img src="docs/screenshots/17-summary.jpg" width="190"> | <img src="docs/screenshots/18-summary-mixed.jpg" width="190"> | <img src="docs/screenshots/19-settings.jpg" width="190"> |
+
+**Tablet-Layout** (iPad 13″, gemischte Runde):
+
+<img src="docs/screenshots/20-tablet.jpg" width="420">
 
 Die **Store-Screenshots** in den von Apple und Google geforderten Größen (Deutsch und
 Englisch) liegen in [`docs/store/screenshots/`](docs/store/screenshots/) – siehe
@@ -290,7 +295,9 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
 │   └── store/                   # Store-Texte, -Screenshots, Fragebögen, Datenschutzerklärung
 ├── scripts/
 │   ├── validate-questions.mjs   # prüft die Fragen-Datenbank
-│   └── store-screenshots.mjs    # erzeugt Store-Screenshots und Play-Grafik
+│   ├── store-screenshots.mjs    # erzeugt Store-Screenshots und Play-Grafik
+│   ├── readme-screenshots.mjs   # erzeugt die Screenshots für dieses README
+│   └── lib/app-screens.mjs      # gemeinsame Helfer: Web-Build ausliefern, Spielstand vorbelegen
 ├── .github/workflows/ci.yml
 ├── app.json · eas.json · store.config.json (App-Store-Texte für EAS Metadata)
 ├── jest.config.js · eslint.config.js · tsconfig.json

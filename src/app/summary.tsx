@@ -117,14 +117,14 @@ export default function SummaryScreen() {
         <AppText variant="h1" align="center" role="heading">
           {t('summary.title')}
         </AppText>
+        {/* Own line for the mixed round, so the details below fit on one line on phones. */}
+        {result.mixed ? (
+          <AppText variant="caption" color={colors.textMuted} align="center">
+            {`${MIX_EMOJI} ${t('mix.title')}`}
+          </AppText>
+        ) : null}
         <AppText variant="caption" color={colors.textMuted} align="center">
-          {[
-            result.mixed ? `${MIX_EMOJI} ${t('mix.title')}` : null,
-            `${meta.emoji} ${t(meta.nameKey).toLocaleUpperCase()}`,
-            t('summary.duration', { minutes }),
-          ]
-            .filter(Boolean)
-            .join(' · ')}
+          {`${meta.emoji} ${t(meta.nameKey).toLocaleUpperCase()} · ${t('summary.duration', { minutes })}`}
         </AppText>
       </View>
 
