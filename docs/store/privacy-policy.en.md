@@ -16,7 +16,7 @@ Last updated: November 27, 2026
 ## In short
 
 SPICY NIGHT works without an account and without internet. Everything you enter stays on
-your device. We do not receive any data from you.
+your device. We do not receive any data from you – unless you write us an e-mail yourself.
 
 ## Controller
 
@@ -73,10 +73,19 @@ menu does iOS ask once whether the app may add photos.
 Under **Settings → Data** you can delete all locally stored data at any time. Uninstalling
 the app removes it as well.
 
-Because we do not receive any data about you, we cannot provide information about stored
-data on request either – it exists only on your device. For privacy questions, contact us at
+Because we do not receive any data from you through the app, we cannot provide information
+about the app's data either – it exists only on your device. For e-mails you have sent us, you
+have the rights of access, rectification and erasure. For privacy questions, contact us at
 the address above. You also have the right to lodge a complaint with a data protection
 supervisory authority.
+
+## Contact by e-mail
+
+If you write us an e-mail – with “Send feedback” in the app, from the help page of the website
+or directly – we process your e-mail address and your message to reply to you (Art. 6(1)(b)
+or (f) GDPR). The app only opens your e-mail app and fills in the app version, operating system
+and language; you see everything before you send the message and can delete it. We delete your
+message once the request has been dealt with and no statutory retention obligation applies.
 
 ## This website
 

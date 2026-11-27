@@ -22,6 +22,16 @@ Das **Ergebnisbild** ändert daran nichts: Es entsteht auf dem Gerät, und die P
 selbst über das Teilen-Menü des Systems an eine andere App weiter – weder wir noch ein
 Drittanbieter-SDK erhalten es. Namen stehen nur darauf, wenn sie eingeschaltet werden.
 
+Auch **„Feedback senden“** ändert nichts: Die App öffnet nur das E-Mail-Programm der Person
+mit einem Entwurf (App-Version, System, Sprache). Abschicken muss sie ihn selbst, über ihr
+eigenes E-Mail-Konto – die App überträgt nichts. Zählt man die eingehende E-Mail trotzdem
+als Erhebung, greift Apples Ausnahme für optionale Kundenservice-Anfragen, die nur
+gelegentlich vorkommen und nicht zur Hauptfunktion der App gehören
+([App privacy details](https://developer.apple.com/support/app-privacy-on-the-app-store),
+„Optional disclosure“). Wer vorsichtiger antworten möchte, gibt an: Kontaktinformationen →
+E-Mail-Adresse und Nutzerinhalte → Kundensupport, jeweils für App-Funktionalität, mit der
+Identität verknüpft, kein Tracking.
+
 Weitere Felder:
 
 - **Datenschutz-URL:** die Datenschutz-Seite der Website je Sprache (`/<sprache>/privacy/`,
@@ -79,6 +89,13 @@ Damit entfallen alle Folgefragen (Verschlüsselung bei der Übertragung, Löscha
 zählt – wie Apple – nur Daten, die das Gerät verlassen. Ergebnis im Store: **„Keine Daten
 erhoben“** und **„Keine Daten mit Dritten geteilt“**. Das Ergebnisbild gibt die Person
 selbst über das Teilen-Menü an eine andere App weiter; die App überträgt dabei nichts.
+
+**„Feedback senden“** öffnet nur das E-Mail-Programm mit einem vorausgefüllten Entwurf;
+verschickt wird die E-Mail von der Person selbst über ihr E-Mail-Konto. Google zählt als
+„erheben“ nur, was die App selbst vom Gerät überträgt – die Antwort bleibt daher „Nein“.
+Den Kontakt per E-Mail beschreibt die Datenschutzerklärung trotzdem. Wer vorsichtiger
+antworten möchte, gibt „Persönliche Daten → E-Mail-Adresse“ als erhoben und optional an
+(Zweck: App-Funktionalität) und beantwortet dann auch die Folgefragen.
 
 ### App-Inhalte („App content“)
 

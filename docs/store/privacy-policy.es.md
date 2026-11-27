@@ -16,7 +16,7 @@
 ## En resumen
 
 SPICY NIGHT funciona sin cuenta y sin internet. Todo lo que escribes se queda en tu
-dispositivo. No recibimos ningún dato tuyo.
+dispositivo. No recibimos ningún dato tuyo, salvo que tú nos escribas un correo.
 
 ## Responsable
 
@@ -73,10 +73,20 @@ compartir, iOS te pregunta una vez si la app puede añadir fotos.
 En **Ajustes → Datos** puedes borrar en cualquier momento todos los datos guardados
 localmente. Al desinstalar la app también se eliminan.
 
-Como no recibimos ningún dato sobre ti, tampoco podemos informarte bajo petición sobre datos
-guardados – solo existen en tu dispositivo. Para preguntas sobre privacidad, escríbenos a la
+Como a través de la app no recibimos ningún dato tuyo, tampoco podemos informarte sobre los
+datos de la app: solo existen en tu dispositivo. Sobre los correos que nos hayas enviado
+tienes derecho de acceso, rectificación y supresión. Para preguntas sobre privacidad, escríbenos a la
 dirección indicada arriba. También tienes derecho a presentar una reclamación ante una
 autoridad de control de protección de datos.
+
+## Contacto por correo electrónico
+
+Si nos escribes un correo (con “Enviar comentarios” en la app, desde la página de ayuda del
+sitio web o directamente), tratamos tu dirección de correo y tu mensaje para responderte (art.
+6, apdo. 1, letra b o f del RGPD). La app solo abre tu app de correo y rellena la versión de la
+app, el sistema operativo y el idioma; ves todo antes de enviar el mensaje y puedes borrarlo.
+Borramos tu mensaje cuando la consulta está resuelta y no existe ninguna obligación legal de
+conservarlo.
 
 ## Este sitio web
 

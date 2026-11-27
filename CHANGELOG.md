@@ -35,6 +35,9 @@ Erste Veröffentlichung im App Store und bei Google Play.
 - Barrierefrei: Screenreader-Beschriftungen, Tastaturbedienung im Web, große Schrift,
   „Bewegung reduzieren“.
 - Eigenes Tablet-Layout ab 700 pt Breite (iPad hoch und quer).
+- **Hilfe & Feedback** in den Einstellungen: „Hilfe & Kontakt“ öffnet die Hilfe-Seite der
+  Website, „Feedback senden“ eine E-Mail mit App-Version, System und Sprache – die App selbst
+  sendet nichts.
 
 ### Datenschutz
 - Ohne Konto, ohne Internet, ohne Werbung, ohne Tracking – alle Daten bleiben auf dem Gerät

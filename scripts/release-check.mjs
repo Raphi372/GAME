@@ -22,6 +22,11 @@ const legal = json('src/config/legal.json');
 const site = json('site/site.config.json');
 const changelog = existsSync(join(root, 'CHANGELOG.md')) ? read('CHANGELOG.md') : '';
 const filled = (value) => typeof value === 'string' && value.trim().length > 0;
+/** Same rule as scripts/site.mjs and src/config/support.ts. */
+const EMAIL = /[^\s@<>()"']+@[^\s@<>()"']+\.[a-z]{2,}/i;
+const contactEmail = filled(site.supportEmail)
+  ? new RegExp(`^${EMAIL.source}$`, 'i').test(site.supportEmail.trim())
+  : filled(legal.providerContact) && EMAIL.test(legal.providerContact);
 
 /** Blocking: the stores would reject the app or the app would ship with placeholders. */
 const blocking = [
@@ -51,7 +56,11 @@ const blocking = [
 const warnings = [
   {
     ok: filled(site.url) && filled(site.hosting),
-    text: 'Website (Datenschutz, Hilfe, Impressum): in site/site.config.json „url“ und „hosting“ eintragen, veröffentlichen und npm run site:store-urls ausführen – siehe docs/RELEASE.md',
+    text: 'Website (Datenschutz, Hilfe, Impressum): in site/site.config.json „url“ und „hosting“ eintragen, veröffentlichen und npm run site:store-urls ausführen – erst mit „url“ zeigt die App „Hilfe & Kontakt“; siehe docs/RELEASE.md',
+  },
+  {
+    ok: contactEmail,
+    text: 'Kontakt-E-Mail: „supportEmail“ in site/site.config.json oder eine E-Mail in den Anbieterdaten eintragen – sonst fehlen „Feedback senden“ in der App und der Kontakt auf der Website',
   },
   {
     ok: app.ios?.bundleIdentifier !== 'com.spicynight.app' && app.android?.package !== 'com.spicynight.app',

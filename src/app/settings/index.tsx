@@ -1,12 +1,14 @@
 import Constants from 'expo-constants';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Linking, Platform, StyleSheet, View } from 'react-native';
 
-import { AppText, Button, ConfirmSheet, Header, Screen, SectionTitle, Surface } from '@/components/ui';
+import { AppText, Button, ConfirmSheet, Header, Screen, SectionTitle, Sheet, Surface } from '@/components/ui';
+import { helpPageUrl, SUPPORT } from '@/config/support';
 import { describeHiddenCards } from '@/features/hidden-cards/describe';
 import { hasContentInLocale } from '@/features/question-decks';
 import { LinkRow, RadioRow, SettingsGroup, SwitchRow } from '@/features/settings/SettingsRows';
+import { feedbackMailUrl, systemLabel } from '@/features/support/feedbackMail';
 import { useMotion } from '@/hooks/useMotion';
 import { useTranslation } from '@/i18n';
 import { clearPersistedData } from '@/services/storage';
@@ -24,12 +26,41 @@ export default function SettingsScreen() {
   const hiddenIds = useHiddenCardsStore((state) => state.ids);
   const customCards = useCustomCardsStore((state) => state.cards);
   const hiddenCount = describeHiddenCards(hiddenIds, locale, customCards, '').length;
+  /**
+   * Shown when no browser or mail app answers: the address to copy instead. The text stays
+   * while the sheet closes, so it does not empty out during the fade.
+   */
+  const [fallback, setFallback] = useState({ title: '', body: '', address: '' });
+  const [fallbackOpen, setFallbackOpen] = useState(false);
+  const showFallback = (content: typeof fallback) => {
+    setFallback(content);
+    setFallbackOpen(true);
+  };
 
   const version = Constants.expoConfig?.version ?? '1.0.0';
   const confirmedOn =
     settings.ageConfirmedAt !== null
       ? new Intl.DateTimeFormat(intlLocale, { dateStyle: 'medium' }).format(settings.ageConfirmedAt)
       : null;
+
+  const openHelp = (websiteUrl: string) => {
+    const url = helpPageUrl(websiteUrl, locale);
+    Linking.openURL(url).catch(() =>
+      showFallback({ title: t('help.unavailableTitle'), body: t('help.unavailableBody'), address: url }),
+    );
+  };
+
+  const sendFeedback = (email: string) => {
+    const release = (Platform.constants as { Release?: string } | undefined)?.Release;
+    const body = t('feedback.body', {
+      version,
+      system: systemLabel(Platform.OS, Platform.Version, release),
+      language: t(`settings.language.${locale}`),
+    });
+    Linking.openURL(feedbackMailUrl(email, t('feedback.subject'), body)).catch(() =>
+      showFallback({ title: t('feedback.unavailableTitle'), body: t('feedback.unavailableBody'), address: email }),
+    );
+  };
 
   const deleteAll = () => {
     setDeleteOpen(false);
@@ -90,6 +121,25 @@ export default function SettingsScreen() {
         <LinkRow icon="heart-outline" label={t('settings.fairPlay')} onPress={() => router.push('/settings/fair-play')} />
         <LinkRow icon="shield-checkmark-outline" label={t('settings.privacy')} onPress={() => router.push('/settings/privacy')} />
         <LinkRow icon="information-circle-outline" label={t('settings.about')} onPress={() => router.push('/settings/about')} />
+        {/* Only once the website and the contact e-mail are filled in (src/config/support.ts). */}
+        {SUPPORT.websiteUrl ? (
+          <LinkRow
+            icon="help-buoy-outline"
+            label={t('settings.help')}
+            hint={t('settings.helpHint')}
+            external
+            onPress={() => openHelp(SUPPORT.websiteUrl!)}
+          />
+        ) : null}
+        {SUPPORT.email ? (
+          <LinkRow
+            icon="mail-outline"
+            label={t('settings.feedback')}
+            hint={t('settings.feedbackHint')}
+            external
+            onPress={() => sendFeedback(SUPPORT.email!)}
+          />
+        ) : null}
       </SettingsGroup>
 
       <SectionTitle>{t('settings.section.age')}</SectionTitle>
@@ -152,12 +202,30 @@ export default function SettingsScreen() {
         onConfirm={deleteAll}
         onCancel={() => setDeleteOpen(false)}
       />
+      <Sheet
+        visible={fallbackOpen}
+        onClose={() => setFallbackOpen(false)}
+        label={fallback.title}
+        testID="contact-fallback"
+      >
+        <View style={styles.fallback}>
+          <AppText variant="h2" role="heading">
+            {fallback.title}
+          </AppText>
+          <AppText color={colors.textSecondary}>{fallback.body}</AppText>
+          <AppText variant="bodyLarge" selectable>
+            {fallback.address}
+          </AppText>
+        </View>
+        <Button label={t('common.ok')} variant="ghost" size="md" onPress={() => setFallbackOpen(false)} />
+      </Sheet>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   note: { marginTop: spacing.sm, marginLeft: spacing.xs },
+  fallback: { gap: spacing.sm },
   ageBox: { gap: spacing.md, alignItems: 'flex-start' },
   footer: { marginTop: spacing.xxxl },
 });
