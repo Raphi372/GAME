@@ -77,6 +77,8 @@ export default function RootLayout() {
             <Stack.Screen name="custom-cards" />
           </Stack.Protected>
           <Stack.Screen name="settings/index" />
+          {/* Lists card texts – adult content, like the game. */}
+          <Stack.Screen name="settings/hidden-cards" />
         </Stack.Protected>
         <Stack.Protected guard={!ageConfirmed}>
           <Stack.Screen name="age-gate" options={{ animation: fade }} />

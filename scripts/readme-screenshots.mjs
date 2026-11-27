@@ -197,6 +197,17 @@ const SCENES = [
   { name: '20-tablet', path: '/game', state: { session: mixedGame }, device: TABLET },
   { name: '21-intro', path: '/intro' },
   {
+    name: '23-hidden-cards',
+    path: '/settings/hidden-cards',
+    // Hidden during a game with "Karte ausblenden" – newest first in the list.
+    storage: {
+      'spicy-night/hidden-cards': JSON.stringify({
+        state: { ids: ['rc_mild_020', 'nhie_mild_070', 'mild_019'] },
+        version: 1,
+      }),
+    },
+  },
+  {
     name: '22-share',
     path: '/game',
     state: {
@@ -231,7 +242,7 @@ try {
       url: `http://127.0.0.1:${PORT}${scene.path}`,
       viewport: device.viewport,
       scale: device.scale,
-      storage: appStorage({ players, ageConfirmedAt: AGE_CONFIRMED, ...scene.state }),
+      storage: { ...appStorage({ players, ageConfirmedAt: AGE_CONFIRMED, ...scene.state }), ...scene.storage },
     });
     if (scene.act) await scene.act(page);
     await page.screenshot({ path: join(outDir, `${scene.name}.jpg`), type: 'jpeg', quality: 82 });

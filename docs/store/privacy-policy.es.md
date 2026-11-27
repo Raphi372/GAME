@@ -35,6 +35,7 @@ La app guarda datos únicamente de forma local en tu dispositivo:
 
 - los nombres que escribes para los jugadores,
 - las cartas que escribes tú,
+- qué cartas has ocultado,
 - la partida actual (a quién le toca, qué cartas ya se jugaron),
 - tus ajustes (idioma, sonido, vibración, animaciones),
 - el momento en que confirmaste que tienes al menos 18 años.

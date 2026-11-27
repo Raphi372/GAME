@@ -13,4 +13,11 @@ export { useSettingsStore, DEFAULT_SETTINGS, initialSettings, type SettingsState
 export { useStoresHydrated } from './hydration';
 export { useCustomCardsStore, type CustomCardsState, type CustomCardResult } from './customCardsStore';
 export { useEntitlementsStore, type EntitlementsState } from './entitlementsStore';
-export { getCustomQuestions, getPlayableDeck } from './decks';
+export { getBuiltInDeck, getCustomQuestions, getPlayableDeck } from './decks';
+export {
+  useHiddenCardsStore,
+  hiddenCardIds,
+  sanitizeHiddenIds,
+  MAX_HIDDEN_CARDS,
+  type HiddenCardsState,
+} from './hiddenCardsStore';

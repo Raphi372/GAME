@@ -23,6 +23,8 @@ Erste Veröffentlichung im App Store und bei Google Play.
 ### Fair Play
 - „Ich passe“ ist immer erlaubt, kein Alkohol nötig, Aufgaben mit Berührung nur mit klarem Ja.
 - Kurze Einführung beim ersten Start, jederzeit in den Einstellungen wieder aufrufbar.
+- **Karten ausblenden:** Passt eine Karte nicht, kommt sie in keinem Spiel mehr vor;
+  in den Einstellungen lässt sie sich jederzeit zurückholen.
 
 ### Sprachen
 - Oberfläche und alle Karten auf Deutsch, Englisch und Spanisch (neutral für Spanien und

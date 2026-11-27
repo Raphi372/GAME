@@ -16,12 +16,11 @@ import {
 import { canEscalate } from '@/features/gameplay/engine/round';
 import { LevelCard } from '@/features/levels/components/LevelCard';
 import { LEVELS, listLevels } from '@/features/levels/levels';
-import { getDeckSize } from '@/features/question-decks';
 import { MixRules } from '@/features/rounds/MixRules';
 import { RoundSettingsPanel } from '@/features/rounds/RoundSettingsPanel';
 import { useTranslation } from '@/i18n';
 import { feedback } from '@/services/feedback';
-import { getCustomQuestions, useCustomCardsStore, useEntitlementsStore, useGameStore } from '@/store';
+import { getBuiltInDeck, getCustomQuestions, useCustomCardsStore, useEntitlementsStore, useGameStore, useHiddenCardsStore } from '@/store';
 import { colors, spacing } from '@/theme';
 import type { SpicyLevel } from '@/types';
 
@@ -36,6 +35,7 @@ export default function LevelScreen() {
   const lastRound = useGameStore((state) => state.lastRound);
   // Re-render when the players' own cards or the Premium state change (card counts).
   useCustomCardsStore((state) => state.cards);
+  useHiddenCardsStore((state) => state.ids);
   useEntitlementsStore((state) => state.entitlements);
   const playerCount = useGameStore((state) => state.players.length);
   const startGame = useGameStore((state) => state.startGame);
@@ -52,13 +52,14 @@ export default function LevelScreen() {
   // Mixed rounds leave out modes the group is too small for and need two modes left.
   const mixPlayable = mixModes.filter((id) => getGameMode(id).minPlayers <= playerCount);
   const canStart = mixed ? mixPlayable.length >= 2 : playerCount >= mode.minPlayers;
+  // Cards that can still come up – hidden ones ("Karte ausblenden") are not counted.
   const cardCount = (level: SpicyLevel) =>
     mixed
       ? mixPlayable.reduce(
-          (sum, id) => sum + getDeckSize(id, level, { locale }) + getCustomQuestions(id, level).length,
+          (sum, id) => sum + getBuiltInDeck(id, level, locale).length + getCustomQuestions(id, level).length,
           0,
         )
-      : getDeckSize(modeId, level, { locale });
+      : getBuiltInDeck(modeId, level, locale).length;
   const toggleMixMode = (id: GameModeId) =>
     setMixModes((current) => (current.includes(id) ? current.filter((entry) => entry !== id) : [...current, id]));
 
