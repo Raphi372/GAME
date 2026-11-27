@@ -288,8 +288,13 @@ export default function GameScreen() {
     </>
   );
 
+  // Keyboard users (web) must be able to scroll the card area on small screens: it becomes
+  // focusable when it holds no controls of its own (player picker, choice tiles, timer …).
+  const scrollHasControls = isGroup || awaitingChoice || exhausted || Boolean(question?.seconds);
+
   return (
     <Screen
+      focusableScroll={!scrollHasControls}
       accent={meta.gradient[0]}
       secondaryAccent={meta.gradient[1]}
       header={

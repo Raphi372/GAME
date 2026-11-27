@@ -1,5 +1,5 @@
 import { Redirect, useRouter } from 'expo-router';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { AppText, Avatar, Button, Screen, SectionTitle, Surface } from '@/components/ui';
 import { DEFAULT_MODE_ID, DEFAULT_SINGLE_COPY, getGameMode, MIX_EMOJI, MIX_PARAM } from '@/features/game-modes/registry';
@@ -12,6 +12,10 @@ export default function SummaryScreen() {
   const router = useRouter();
   const { t } = useTranslation();
   const result = useGameStore((state) => state.lastResult);
+  const { width, fontScale } = useWindowDimensions();
+  // Large system text or a very narrow screen: one tile per row, so long labels like
+  // "GESTÄNDNISSE" keep fitting.
+  const singleColumn = width < 360 || fontScale >= 1.2;
 
   if (!result) return <Redirect href="/" />;
 
@@ -86,6 +90,8 @@ export default function SummaryScreen() {
 
   return (
     <Screen
+      // Only text in the scroll area: keyboard users (web) scroll it via focus.
+      focusableScroll
       accent={meta.gradient[0]}
       secondaryAccent={meta.gradient[1]}
       footer={
@@ -130,7 +136,7 @@ export default function SummaryScreen() {
 
       <View style={styles.statsGrid}>
         {stats.map((stat) => (
-          <Surface key={stat.label} style={styles.stat}>
+          <Surface key={stat.label} style={[styles.stat, singleColumn && styles.statFull]} testID="summary-stat">
             <AppText style={styles.statValue} color={colors.text} maxFontSizeMultiplier={1.2}>
               {String(stat.value)}
             </AppText>
@@ -202,6 +208,7 @@ const styles = StyleSheet.create({
   hero: { alignItems: 'center', gap: spacing.sm, paddingVertical: spacing.xxl },
   statsGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.md },
   stat: { flexGrow: 1, flexBasis: '45%', alignItems: 'center', gap: spacing.xs },
+  statFull: { flexBasis: '100%' },
   statValue: { fontFamily: fonts.displayBlack, fontSize: 34, lineHeight: 40 },
   daring: {
     marginTop: spacing.lg,

@@ -1,11 +1,14 @@
 import { render, screen } from '@testing-library/react-native';
-import { Platform, Text } from 'react-native';
+import { Platform, StyleSheet, Text, type ViewStyle } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { Button, Screen } from '@/components/ui';
+import { Button, Chip, Screen } from '@/components/ui';
 import { AVATAR_TEXT_CONTRAST } from '@/components/ui/Avatar';
 import { spaceKeyPress } from '@/components/ui/keyboard';
+import { ModeCard } from '@/features/game-modes/ModeCard';
+import { getGameMode } from '@/features/game-modes/registry';
 import { AVATAR_COLORS } from '@/features/players/validation';
+import { LinkRow, SwitchRow } from '@/features/settings/SettingsRows';
 import { LEVELS } from '@/features/levels/levels';
 import { blend, brandGradient, colors, contrastRatio, readableOnDark, readableWithWhite } from '@/theme';
 
@@ -143,3 +146,55 @@ describe('keyboard-scrollable text pages', () => {
     expect(findScrollView(screen.toJSON() as HostNode | HostNode[] | null)?.props.focusable).toBe(true);
   });
 });
+
+describe('hints of setting rows', () => {
+  const rows = () => (
+    <>
+      <SwitchRow
+        label="Langsam steigern"
+        hint="Geht nur mit fester Rundenlänge."
+        value={false}
+        onValueChange={() => undefined}
+        icon="trending-up-outline"
+        disabled
+      />
+      <LinkRow label="Alle lokalen Daten löschen" hint="Alles wird entfernt." icon="trash-outline" onPress={() => undefined} />
+    </>
+  );
+
+  it('describe the control on the web (the visible hint is linked via aria-describedby)', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    await render(rows());
+    const switchHint = screen.getByText('Geht nur mit fester Rundenlänge.');
+    const linkHint = screen.getByText('Alles wird entfernt.');
+    expect(switchHint.props.nativeID).toBeTruthy();
+    expect(linkHint.props.nativeID).not.toBe(switchHint.props.nativeID);
+    expect(screen.getByRole('switch', { name: 'Langsam steigern' }).props['aria-describedby']).toBe(
+      switchHint.props.nativeID,
+    );
+    expect(screen.getByRole('button', { name: 'Alle lokalen Daten löschen' }).props['aria-describedby']).toBe(
+      linkHint.props.nativeID,
+    );
+  });
+
+  it('stay an accessibility hint on iOS and Android', async () => {
+    await render(rows());
+    const control = screen.getByRole('switch', { name: 'Langsam steigern' });
+    expect(control.props['aria-describedby']).toBeUndefined();
+    expect(control.props.accessibilityHint).toBe('Geht nur mit fester Rundenlänge.');
+  });
+});
+
+describe('large system text', () => {
+  it('never cuts off the descriptions of the game modes', async () => {
+    await render(<ModeCard mode={getGameMode('spicy-questions')} questionCount={330} onPress={() => undefined} />);
+    expect(screen.getByText(/Die Fragenrunde in drei Hitzestufen/).props.numberOfLines).toBeUndefined();
+  });
+
+  it('keeps chips inside their row, so long labels wrap instead of running off screen', async () => {
+    await render(<Chip label="Jetzt wird’s heißer: 🌶️🌶️ HOT" />);
+    const chip = screen.getByText('Jetzt wird’s heißer: 🌶️🌶️ HOT').parent;
+    expect((StyleSheet.flatten(chip?.props.style) as ViewStyle).maxWidth).toBe('100%');
+  });
+});
+

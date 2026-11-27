@@ -1,5 +1,5 @@
-import { Children, Fragment, type ReactNode } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Children, Fragment, useId, type ReactNode } from 'react';
+import { Platform, Pressable, StyleSheet, View } from 'react-native';
 
 import { AppText, Icon, Surface, type IconName } from '@/components/ui';
 import { spaceKeyPress } from '@/components/ui/keyboard';
@@ -20,6 +20,19 @@ export function SettingsGroup({ children }: { children: ReactNode }) {
   );
 }
 
+/**
+ * The visible hint of a row as the control's description: iOS and Android read
+ * `accessibilityHint`, the web needs `aria-describedby` (not in React Native's types).
+ */
+function useHintDescription(hint: string | undefined) {
+  const id = useId();
+  if (!hint) return { controlProps: {}, hintProps: {} };
+  return {
+    controlProps: Platform.OS === 'web' ? ({ 'aria-describedby': id } as object) : {},
+    hintProps: { nativeID: id },
+  };
+}
+
 interface SwitchRowProps {
   label: string;
   hint?: string;
@@ -31,6 +44,7 @@ interface SwitchRowProps {
 }
 
 export function SwitchRow({ label, hint, value, onValueChange, icon, disabled = false, testID }: SwitchRowProps) {
+  const { controlProps, hintProps } = useHintDescription(hint);
   const toggle = (next: boolean) => {
     if (disabled) return;
     if (next) feedback('select');
@@ -45,6 +59,7 @@ export function SwitchRow({ label, hint, value, onValueChange, icon, disabled = 
       aria-disabled={disabled}
       disabled={disabled}
       accessibilityHint={hint}
+      {...controlProps}
       onPress={() => toggle(!value)}
       {...spaceKeyPress(() => toggle(!value))}
       testID={testID}
@@ -54,7 +69,7 @@ export function SwitchRow({ label, hint, value, onValueChange, icon, disabled = 
       <View style={styles.text}>
         <AppText variant="bodyStrong">{label}</AppText>
         {hint ? (
-          <AppText variant="caption" color={colors.textMuted}>
+          <AppText variant="caption" color={colors.textMuted} {...hintProps}>
             {hint}
           </AppText>
         ) : null}
@@ -81,11 +96,13 @@ interface LinkRowProps {
 
 export function LinkRow({ label, icon, onPress, hint, tone = 'default' }: LinkRowProps) {
   const color = tone === 'danger' ? colors.danger : colors.text;
+  const { controlProps, hintProps } = useHintDescription(hint);
   return (
     <Pressable
       role="button"
       aria-label={label}
       accessibilityHint={hint}
+      {...controlProps}
       onPress={() => {
         feedback('tap');
         onPress();
@@ -98,7 +115,7 @@ export function LinkRow({ label, icon, onPress, hint, tone = 'default' }: LinkRo
           {label}
         </AppText>
         {hint ? (
-          <AppText variant="caption" color={colors.textMuted}>
+          <AppText variant="caption" color={colors.textMuted} {...hintProps}>
             {hint}
           </AppText>
         ) : null}
