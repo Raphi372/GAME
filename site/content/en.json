@@ -1,0 +1,97 @@
+{
+  "languageName": "English",
+  "skipLink": "Skip to content",
+  "navLabel": "Pages",
+  "languagesLabel": "Language",
+  "pages": {
+    "home": "Home",
+    "support": "Help & contact",
+    "privacy": "Privacy",
+    "imprint": "Legal notice"
+  },
+  "draft": "Template – do not publish like this. Still missing: {missing}.",
+  "missing": {
+    "provider": "provider details (src/config/legal.json)",
+    "hosting": "hosting provider (site/site.config.json)",
+    "supportEmail": "contact e-mail (site/site.config.json or in the provider details)"
+  },
+  "ageNotice": "SPICY NIGHT is intended exclusively for adults aged 18 and over.",
+  "home": {
+    "title": "SPICY NIGHT – The party game for adults",
+    "storesSoon": "Coming soon to the App Store and Google Play.",
+    "appStore": "On the App Store",
+    "googlePlay": "On Google Play",
+    "screenshotsTitle": "A look inside the app",
+    "screenshots": [
+      { "file": "01-home", "alt": "Home screen with the five game modes" },
+      { "file": "03-spicy-questions", "alt": "A question card from Spicy Questions with “I pass”" },
+      { "file": "05-never-have-i-ever", "alt": "A Never Have I Ever card that the whole group plays along with" }
+    ],
+    "help": "Questions about the app? Answers and contact details are under [Help & contact](support/)."
+  },
+  "support": {
+    "title": "Help & contact",
+    "description": "Answers to common questions about SPICY NIGHT and how to reach us.",
+    "contactTitle": "Contact",
+    "contactText": "A question, a bug or a card that doesn’t fit? Write to us – ideally with your device, operating system and app version (in the app under **Settings → About SPICY NIGHT**).",
+    "contactPlaceholder": "[contact e-mail]",
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "q": "Are there purchases or ads in the app?",
+        "a": "No. The current version has neither in-app purchases nor ads – all game modes and cards are included."
+      },
+      {
+        "q": "Do I need an account or internet?",
+        "a": "No. SPICY NIGHT works without an account and fully offline. You play on one device that is passed around the group."
+      },
+      {
+        "q": "How many people can play?",
+        "a": "2 to 20. “Who’s Most Likely?” needs at least 3 people."
+      },
+      {
+        "q": "Do you have to drink alcohol?",
+        "a": "No, no card asks for alcohol. “I pass” is always allowed, tasks involving touch only happen with a clear yes, and EXTREME only starts once the whole group agrees."
+      },
+      {
+        "q": "What data does the app store?",
+        "a": "Only on your device: player names, your own cards, the current game and your settings. Answers are never stored, and nothing is transmitted to us or third parties. More in the [privacy policy](../privacy/)."
+      },
+      {
+        "q": "How do I delete all data?",
+        "a": "In the app under **Settings → Data → Delete all local data**. Uninstalling the app removes it as well."
+      },
+      {
+        "q": "How do I change the language?",
+        "a": "SPICY NIGHT starts in your device’s language (German, English or Spanish). You can switch at any time under **Settings → Language** – even in the middle of a game."
+      },
+      {
+        "q": "Can I share the result of a round?",
+        "a": "Yes. After every round, “Share the result” turns the summary into a picture that you send from your phone’s share menu. Names only appear on it if your group turns them on."
+      },
+      {
+        "q": "Why does my iPhone ask for access to photos?",
+        "a": "Only when you save a result picture to your photos with “Save Image” in the share menu. The app may then add photos – it cannot read your photos."
+      },
+      {
+        "q": "Who is SPICY NIGHT for?",
+        "a": "Exclusively for adults aged 18 and over. The cards are about flirting, dating and personal questions – text only, no images and no nudity."
+      }
+    ]
+  },
+  "privacy": {
+    "description": "Privacy policy for the SPICY NIGHT app and this website: no accounts, no trackers, all data stays on your device."
+  },
+  "imprint": {
+    "title": "Legal notice",
+    "description": "Legal notice and contact details of the provider of SPICY NIGHT.",
+    "providerTitle": "Provider",
+    "contactTitle": "Contact",
+    "providerPlaceholder": ["[Name or company]", "[Street and number]", "[Postcode, city, country]"]
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "This page doesn’t exist (anymore).",
+    "back": "Go to the home page"
+  }
+}

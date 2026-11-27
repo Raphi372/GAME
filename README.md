@@ -32,11 +32,12 @@ Runde spielt mit).
 8. [Tests & Qualität](#tests--qualität)
 9. [Build-Prozess (iOS & Android)](#build-prozess-ios--android)
 10. [Store-Vorbereitung](#store-vorbereitung)
-11. [Fragen-Datenbank erweitern](#fragen-datenbank-erweitern)
-12. [Architektur](#architektur)
-13. [Datenschutz & Sicherheit](#datenschutz--sicherheit)
-14. [Hinweise für zukünftige Entwickler](#hinweise-für-zukünftige-entwickler)
-15. [Bekannte Einschränkungen & nächste Schritte](#bekannte-einschränkungen--nächste-schritte)
+11. [Website: Datenschutz & Support](#website-datenschutz--support)
+12. [Fragen-Datenbank erweitern](#fragen-datenbank-erweitern)
+13. [Architektur](#architektur)
+14. [Datenschutz & Sicherheit](#datenschutz--sicherheit)
+15. [Hinweise für zukünftige Entwickler](#hinweise-für-zukünftige-entwickler)
+16. [Bekannte Einschränkungen & nächste Schritte](#bekannte-einschränkungen--nächste-schritte)
 
 ---
 
@@ -301,8 +302,8 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
 │   │   ├── premium.tsx          # Premium-Vorschau (ohne Kauf)
 │   │   └── settings/            # Einstellungen, Datenschutz, Fair Play, Über
 │   ├── components/ui/           # Designsystem-Komponenten (Button, Sheet, Screen, …)
-│   ├── config/                  # legal.ts: Anbieterdaten (vor Release ausfüllen),
-│   │                            # features.ts: Premium-Schalter (aus bis zu echten Käufen)
+│   ├── config/                  # legal.json: Anbieterdaten für App und Website (vor Release
+│   │                            # ausfüllen), features.ts: Premium-Schalter (aus bis zu echten Käufen)
 │   ├── features/
 │   │   ├── gameplay/engine/     # Reine Spiellogik: Deck, Rotation, Session (ohne React)
 │   │   ├── gameplay/components/ # Fragekarte, Spieler-Banner, Level-Sheet, …
@@ -339,6 +340,8 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
 │   ├── brand/                   # SVG-Quellen von Logo/Icon
 │   ├── images/                  # App-Icon, Adaptive Icons, Splash, Favicon
 │   └── sounds/                  # Kurze UI-Sounds (WAV)
+├── site/                        # Website: Texte je Sprache (content/), Stylesheet, Einstellungen
+│                                # (site.config.json) – gebaut von scripts/site.mjs
 ├── docs/
 │   ├── RELEASE.md               # Release-Checkliste: was erledigt ist, was nur du tun kannst
 │   ├── screenshots/             # Screenshots für dieses README
@@ -348,8 +351,9 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
 │   ├── store-screenshots.mjs    # erzeugt Store-Screenshots und Play-Grafik
 │   ├── readme-screenshots.mjs   # erzeugt die Screenshots für dieses README
 │   ├── release-check.mjs        # Vorabprüfung vor einer Einreichung (npm run release:check)
+│   ├── site.mjs                 # baut die Website (Datenschutz, Hilfe, Impressum) nach dist-site/
 │   └── lib/app-screens.mjs      # gemeinsame Helfer: Web-Build ausliefern, Spielstand vorbelegen
-├── .github/workflows/ci.yml
+├── .github/workflows/           # ci.yml (bei jedem Push), site.yml (Website veröffentlichen, von Hand)
 ├── app.json · eas.json · store.config.json (App-Store-Texte für EAS Metadata)
 ├── locales/                     # iOS-Systemtexte je Sprache (Erlaubnis „Fotos hinzufügen“)
 ├── CHANGELOG.md
@@ -422,7 +426,8 @@ Spieler hinzufügen/umbenennen/entfernen, faire Rotation, Überspringen, Passen,
 leeres/durchgespieltes Deck, lokale Speicherung inkl. App-Neustart und korrupter Daten,
 Einstellungen, Sprache, 18+-Sperre, die Einführung beim ersten Start, das Teilen des Ergebnisbilds
 (Namen standardmäßig aus, Aufnahme und Teilen-Menü, Fehlerfall, Aufräumen der Bilddatei,
-ausgeblendet ohne native Module), Datenlöschung sowie der komplette Spielablauf
+ausgeblendet ohne native Module), die Website (alle Seiten und Links, keine fremden Server,
+Entwurfs- und Release-Modus, Store-Adressen), Datenlöschung sowie der komplette Spielablauf
 aller fünf Spielmodi über die echten Routen (inkl. Wahl Wahrheit/Pflicht, Spielerauswahl und
 Zählern in den Gruppenmodi, dem 3‑2‑1‑Countdown und dem Challenge-Timer), die englischen und
 spanischen Karten inklusive Sprachwechsel mitten im Spiel, der Start in der Gerätesprache sowie die eigenen Karten (gesperrt ohne Premium;
@@ -506,12 +511,54 @@ Alles für App Store und Google Play außer Käufen liegt in [`docs/store/`](doc
   Neu erzeugen mit `npm run store:screenshots`.
 - **Fragebögen:** App-Datenschutz („Keine Daten erfasst“), Data safety („Keine Daten
   erhoben“), Altersfreigabe 18+, IARC, App-Inhalte – mit fertigen Antworten.
-- **Review-Hinweise** für Apple und eine **Datenschutzerklärung** (DE/EN/ES) zum Veröffentlichen.
+- **Review-Hinweise** für Apple und eine **Datenschutzerklärung** (DE/EN/ES) – veröffentlicht
+  über die [Website](#website-datenschutz--support).
 - **Checkliste** mit allem, was vor der Einreichung noch von dir kommt: Bundle-ID,
-  Anbieterdaten in `src/config/legal.ts`, Datenschutz- und Support-URL, Konten.
+  Anbieterdaten in `src/config/legal.json`, Website-Adresse, Konten.
 
 `tests/unit/store-listing.test.ts` hält die Store-Texte innerhalb der Limits, ohne sexuelle
 oder Trink-Begriffe und mit denselben Zahlen wie die App.
+
+---
+
+## Website: Datenschutz & Support
+
+Beide Stores verlangen eine öffentlich erreichbare Datenschutzerklärung, Apple zusätzlich eine
+Support-Seite. Dafür baut `npm run site:build` eine kleine statische Website nach `dist-site/` –
+auf Deutsch, Englisch und Spanisch, im Look der App:
+
+| Seite | Adresse | Inhalt |
+| --- | --- | --- |
+| Start | `/de/`, `/en/`, `/es/` | App-Vorstellung aus den Store-Texten, Screenshots, Store-Links (sobald eingetragen) |
+| Hilfe & Kontakt | `/<sprache>/support/` | Kontakt-E-Mail und zehn häufige Fragen |
+| Datenschutz | `/<sprache>/privacy/` | die Datenschutzerklärung aus `docs/store/`, inklusive Abschnitt zur Website |
+| Impressum | `/<sprache>/imprint/` | Anbieterangaben und Kontakt |
+
+Die Wurzeladresse öffnet die Sprache des Browsers. Die Website setzt keine Cookies, lädt nichts
+von fremden Servern (die Schriften liegen bei) und erzwingt das per Content-Security-Policy.
+
+**Einmal ausfüllen:**
+- `src/config/legal.json` → `providerContact`: Anbieter mit Anschrift und E-Mail, eine Zeile pro
+  Angabe. Dieselben Daten zeigt die App unter Einstellungen → Datenschutz.
+- `site/site.config.json` → `url` (Adresse der Website), `hosting` (Name und Anschrift des
+  Hosting-Anbieters, steht in der Datenschutzerklärung), optional `supportEmail` (sonst die
+  E-Mail aus den Anbieterdaten) und `appStoreUrl` / `googlePlayUrl`, sobald die App online ist.
+
+Solange Angaben fehlen, tragen alle Seiten einen Vorlagen-Hinweis, sind für Suchmaschinen
+gesperrt, und `npm run site:build -- --release` bricht ab.
+
+```bash
+npm run site:build        # baut dist-site/
+npm run site:preview      # baut und zeigt die Website unter http://localhost:4173
+npm run site:store-urls   # trägt Website-, Support- und Datenschutz-Adressen in store.config.json ein
+```
+
+**Veröffentlichen:** über GitHub Pages – einmalig unter Settings → Pages als Quelle „GitHub
+Actions“ wählen, dann unter Actions → „Website“ → „Run workflow“ starten (`.github/workflows/site.yml`
+baut im Release-Modus). Für private Repositorys setzt GitHub Pages einen kostenpflichtigen
+GitHub-Plan voraus; alternativ den Ordner `dist-site/` bei einem beliebigen Webhoster
+hochladen. `tests/unit/site.test.ts` prüft alle Seiten, Links, Entwurfs- und Release-Modus und
+die Store-Adressen.
 
 ---
 
@@ -700,9 +747,11 @@ Wörterbüchern, `cardLead` in der Registry, Kartentexte in `src/data/questions/
   die Standard-Gründe für die von React Native genutzten APIs.
 - „Alle lokalen Daten löschen“ in den Einstellungen.
 - Die Datenschutzhinweise in der App sind eine **Vorlage** und müssen vor Veröffentlichung
-  rechtlich geprüft werden. Die Anbieterdaten kommen in `src/config/legal.ts`; solange sie
-  fehlen, zeigt der Datenschutz-Bildschirm einen sichtbaren Vorlagen-Hinweis. Eine
-  passende Datenschutzerklärung zum Veröffentlichen liegt in `docs/store/`.
+  rechtlich geprüft werden. Die Anbieterdaten kommen in `src/config/legal.json`; solange sie
+  fehlen, zeigen der Datenschutz-Bildschirm und die Website einen sichtbaren Vorlagen-Hinweis.
+  Die passende Datenschutzerklärung liegt in `docs/store/` und wird als
+  [Website](#website-datenschutz--support) veröffentlicht – ohne Cookies, Tracker oder
+  Inhalte von fremden Servern.
 - Die Altersabfrage ist eine einfache Selbstauskunft und **ersetzt keine rechtliche Prüfung**
   der Altersfreigabe in den Stores.
 
@@ -749,7 +798,7 @@ Wörterbüchern, `cardLead` in der Registry, Kartentexte in `src/data/questions/
 
 **Vor der Veröffentlichung:**
 - Rechtliche Prüfung von Datenschutzhinweisen, Impressum/Anbieterangaben und Altersfreigabe;
-  Anbieterdaten in `src/config/legal.ts` eintragen.
+  Anbieterdaten in `src/config/legal.json` eintragen.
 - Die Checkliste in [`docs/store/README.md`](docs/store/README.md) abarbeiten: Bundle-ID,
   `eas init`, Store-Einträge, Datenschutz- und Support-URL, Fragebögen.
 - Kommen Käufe dazu: `FEATURES.premium` und `PURCHASES_ENABLED` gemeinsam einschalten und die

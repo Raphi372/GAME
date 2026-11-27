@@ -21,6 +21,7 @@ npm run release:check   # zeigt, was im Repository noch fehlt (Anbieterdaten, UR
 | Erlaubnistext „Fotos hinzufügen“ (iOS fragt nur, wenn jemand ein Ergebnisbild über „Bild sichern“ ablegt) auf Deutsch, Englisch und Spanisch | `app.json` → `ios.infoPlist`, [`locales/`](../locales/) |
 | Gesperrte Android-Berechtigungen (Mikrofon, Speicher, Overlay) | `app.json` → `android.blockedPermissions` |
 | Store-Texte DE/EN/ES, Screenshots, Play-Grafiken, Fragebögen, Review-Hinweise, Datenschutzerklärung (Vorlage) | [`store/`](store/README.md) |
+| Website mit Datenschutz, Hilfe & Kontakt und Impressum (DE/EN/ES) – ohne Cookies, Tracker und fremde Server | `site/`, `npm run site:build`, `.github/workflows/site.yml` |
 | Build-Profile für Entwicklung, interne Tests und die Stores | `eas.json` |
 
 ## Einmalig – nur du
@@ -29,19 +30,26 @@ npm run release:check   # zeigt, was im Repository noch fehlt (Anbieterdaten, UR
 2. **Bundle-ID / Paketname** endgültig festlegen (aktuell Platzhalter `com.spicynight.app` in
    `app.json`) – nach dem ersten Upload nicht mehr änderbar.
 3. **EAS verknüpfen:** `npx eas-cli@latest login` und `npx eas-cli@latest init`.
-4. **Rechtliches:** Anbieterdaten in `src/config/legal.ts` (`providerContact`), Datenschutz-
-   erklärung ([DE](store/privacy-policy.de.md), [EN](store/privacy-policy.en.md),
-   [ES](store/privacy-policy.es.md)) prüfen lassen, Platzhalter füllen und öffentlich
-   erreichbar machen; Support-Seite mit Kontakt.
-5. **`store.config.json`:** `apple.copyright` sowie je Sprache `privacyPolicyUrl` und
-   `supportUrl` eintragen.
-6. **Spanisch gegenlesen lassen** (empfohlen): Die 1560 Karten und die Oberfläche hat Claude
+4. **Rechtliches:** Anbieterdaten in `src/config/legal.json` (`providerContact`) eintragen;
+   Datenschutzerklärung ([DE](store/privacy-policy.de.md), [EN](store/privacy-policy.en.md),
+   [ES](store/privacy-policy.es.md)) und Impressum prüfen lassen.
+5. **Website veröffentlichen** (Datenschutz- und Support-Seite für beide Stores): in
+   `site/site.config.json` die Adresse (`url`), den Hosting-Anbieter (`hosting`) und bei Bedarf
+   eine eigene `supportEmail` eintragen, mit `npm run site:preview` ansehen und dann über
+   GitHub Pages veröffentlichen (Settings → Pages → Quelle „GitHub Actions“, danach Actions →
+   „Website“ → „Run workflow“) oder `dist-site/` bei einem Webhoster hochladen. Anschließend
+   trägt `npm run site:store-urls` die Adressen in `store.config.json` ein. Details:
+   [README → Website](../README.md#website-datenschutz--support).
+6. **`store.config.json`:** `apple.copyright` eintragen.
+7. **Spanisch gegenlesen lassen** (empfohlen): Die 1560 Karten und die Oberfläche hat Claude
    übersetzt; eine spanischsprachige Person sollte vor allem EXTREME einmal durchsehen.
-7. **App Store Connect und Play Console:** App anlegen, Sprachen, Fragebögen, Altersfreigabe
+8. **App Store Connect und Play Console:** App anlegen, Sprachen, Fragebögen, Altersfreigabe
    und Store-Einträge nach [`store/README.md`](store/README.md). Neue private Play-Konten
    brauchen vor der Produktion einen geschlossenen Test.
+9. Sobald die App in den Stores ist: `appStoreUrl` und `googlePlayUrl` in
+   `site/site.config.json` eintragen und die Website neu veröffentlichen.
 
-`npm run release:check` meldet die Punkte 2 bis 5, solange sie offen sind.
+`npm run release:check` meldet die Punkte 2 bis 6, solange sie offen sind.
 
 ## Bei jedem Release
 
