@@ -50,6 +50,23 @@ describe('sharing the result picture', () => {
     expect(viewShot.releaseCapture).toHaveBeenCalledTimes(2);
   });
 
+  it('deletes a picture that is finished only after the summary closed – and shares nothing', async () => {
+    let finishCapture: (uri: string) => void = () => {};
+    viewShot.captureRef.mockImplementationOnce(
+      () =>
+        new Promise<string>((resolve) => {
+          finishCapture = resolve;
+        }),
+    );
+    const sharing$ = share.shareResultImage(card, 'Share');
+    share.releaseResultImage(); // the summary closes while the picture is being made
+    finishCapture('file:///tmp/late.png');
+    await sharing$;
+
+    expect(viewShot.releaseCapture).toHaveBeenCalledWith('file:///tmp/late.png');
+    expect(sharing.shareAsync).not.toHaveBeenCalled();
+  });
+
   it('passes on a failed capture without opening the share menu', async () => {
     viewShot.captureRef.mockRejectedValueOnce(new Error('capture failed'));
     await expect(share.shareResultImage(card, 'Share')).rejects.toThrow('capture failed');
@@ -60,6 +77,14 @@ describe('sharing the result picture', () => {
     expect(webShare.canShareResultImage()).toBe(false);
     await expect(webShare.shareResultImage()).rejects.toThrow('not available on the web');
     expect(() => webShare.releaseResultImage()).not.toThrow();
+  });
+
+  it('is unavailable in a development build without the capture module', () => {
+    // react-native-view-shot loads without its native part – the check has to look for it.
+    const reactNative = jest.requireActual<typeof import('react-native')>('react-native');
+    jest.spyOn(reactNative.TurboModuleRegistry, 'get').mockReturnValue(null);
+    jest.spyOn(reactNative.NativeModules, 'RNViewShot', 'get').mockReturnValue(undefined);
+    expect(share.canShareResultImage()).toBe(false);
   });
 
   // Last: replaces the shared mock of expo-sharing for this file.

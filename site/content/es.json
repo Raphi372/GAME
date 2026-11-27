@@ -13,7 +13,8 @@
   "missing": {
     "provider": "datos del responsable (src/config/legal.json)",
     "hosting": "proveedor de alojamiento (site/site.config.json)",
-    "supportEmail": "correo de contacto (site/site.config.json o en los datos del responsable)"
+    "supportEmail": "correo de contacto (site/site.config.json o en los datos del responsable)",
+    "url": "dirección del sitio web (site/site.config.json)"
   },
   "ageNotice": "SPICY NIGHT está dirigido exclusivamente a personas adultas de 18 años o más.",
   "home": {

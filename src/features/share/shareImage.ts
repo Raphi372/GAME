@@ -1,5 +1,5 @@
 import type { RefObject } from 'react';
-import type { ViewInstance } from 'react-native';
+import { NativeModules, TurboModuleRegistry, type ViewInstance } from 'react-native';
 
 type ViewShotModule = typeof import('react-native-view-shot');
 type SharingModule = typeof import('expo-sharing');
@@ -12,6 +12,8 @@ interface ShareModules {
 let modules: ShareModules | null | undefined;
 /** The image of the last share – deleted before the next one and when the summary closes. */
 let lastImage: string | null = null;
+/** Counts releases: a capture that finishes after one belongs to a summary that is gone. */
+let generation = 0;
 
 /**
  * Loaded on first use instead of at the top: expo-sharing needs its native module as soon
@@ -24,11 +26,24 @@ function loadModules(): ShareModules | null {
     const sharing = require('expo-sharing') as SharingModule;
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const viewShot = require('react-native-view-shot') as ViewShotModule;
+    // react-native-view-shot does not throw without its native module – look for it the way
+    // the library does, so a build without it hides the button instead of failing on tap.
+    if (!(TurboModuleRegistry.get('RNViewShot') ?? NativeModules.RNViewShot)) {
+      throw new Error('RNViewShot is not part of this build.');
+    }
     modules = { sharing, viewShot };
   } catch {
     modules = null;
   }
   return modules;
+}
+
+function deleteImage(image: string): void {
+  try {
+    loadModules()?.viewShot.releaseCapture(image);
+  } catch {
+    // The system clears temporary files anyway.
+  }
 }
 
 /** Whether this build can turn the result into an image and hand it to the share menu. */
@@ -38,14 +53,10 @@ export function canShareResultImage(): boolean {
 
 /** Deletes the image of the last share from the app's temporary files. */
 export function releaseResultImage(): void {
+  generation += 1;
   const image = lastImage;
   lastImage = null;
-  if (!image) return;
-  try {
-    loadModules()?.viewShot.releaseCapture(image);
-  } catch {
-    // The system clears temporary files anyway.
-  }
+  if (image) deleteImage(image);
 }
 
 /**
@@ -56,7 +67,13 @@ export async function shareResultImage(card: RefObject<ViewInstance | null>, dia
   const loaded = loadModules();
   if (!loaded) throw new Error('Sharing images is not available in this build.');
   releaseResultImage();
+  const current = generation;
   const image = await loaded.viewShot.captureRef(card, { format: 'png', quality: 1, result: 'tmpfile' });
+  if (current !== generation) {
+    // The summary closed while the picture was being made: delete it, share nothing.
+    deleteImage(image);
+    return;
+  }
   // Kept until the next share or until the summary closes: on Android the receiving app
   // may still be reading the file when the share menu reports back.
   lastImage = image;
