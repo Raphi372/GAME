@@ -64,20 +64,25 @@ const TYPES = {
   '.xml': 'application/xml',
 };
 
+class SiteError extends Error {}
+
 const [command = 'build', ...args] = process.argv.slice(2);
 const option = (name, fallback) => {
   const index = args.indexOf(`--${name}`);
-  return index === -1 ? fallback : args[index + 1];
+  if (index === -1) return fallback;
+  const value = args[index + 1];
+  if (value === undefined || value.startsWith('--')) throw new SiteError(`Die Option --${name} braucht einen Wert.`);
+  return value;
 };
 const fromRoot = (path) => resolve(root, path);
-const paths = {
+/** Set before a command runs – inside the error handling, so a bad option gives a clear message. */
+let paths;
+const resolvePaths = () => ({
   out: fromRoot(option('out', 'dist-site')),
   legal: fromRoot(option('legal', 'src/config/legal.json')),
   config: fromRoot(option('config', 'site/site.config.json')),
   store: fromRoot(option('store-config', 'store.config.json')),
-};
-
-class SiteError extends Error {}
+});
 
 const readJson = (path) => JSON.parse(readFileSync(path, 'utf8'));
 const text = (value) => (typeof value === 'string' && value.trim() ? value.trim() : null);
@@ -116,7 +121,11 @@ function loadSettings() {
   if (supportEmail && !new RegExp(`^${EMAIL.source}$`, 'i').test(supportEmail)) {
     problems.push('site/site.config.json: „supportEmail“ ist keine gültige E-Mail-Adresse.');
   }
-  const missing = [!providerLines && 'provider', !hosting && 'hosting', !email && 'supportEmail'].filter(Boolean);
+  // Without its address the 404 page could not link back (on GitHub Pages the site lives in
+  // a subfolder), and language versions, sitemap and store addresses would be missing.
+  const missing = [!providerLines && 'provider', !hosting && 'hosting', !email && 'supportEmail', !url && 'url'].filter(
+    Boolean,
+  );
   return { providerLines, email, hosting, url, links, missing, problems };
 }
 
@@ -193,8 +202,9 @@ function privacyPage(lang, settings) {
     ? settings.providerLines.map(escapeHtml)
     : providerTemplate.map(templateLine);
   const body = markdown(source)
-    .replace(`<p>${PROVIDER}</p>`, `<p class="address">${address.join('<br>')}</p>`)
-    .replace(HOSTING, settings.hosting ? escapeHtml(settings.hosting) : templateLine(hostingTemplate));
+    // Functions, not strings: a "$&" or "$$" in the provider details must stay as it is.
+    .replace(`<p>${PROVIDER}</p>`, () => `<p class="address">${address.join('<br>')}</p>`)
+    .replace(HOSTING, () => (settings.hosting ? escapeHtml(settings.hosting) : templateLine(hostingTemplate)));
   const title = /^#\s+(.+)$/m.exec(source)?.[1] ?? 'SPICY NIGHT';
   return { title, body };
 }
@@ -470,6 +480,7 @@ const MISSING_TEXT = {
   provider: 'src/config/legal.json: „providerContact“ (Anbieterdaten) eintragen',
   hosting: 'site/site.config.json: „hosting“ (Name und Anschrift des Hosting-Anbieters) eintragen',
   supportEmail: 'site/site.config.json: „supportEmail“ eintragen (oder eine E-Mail-Adresse in „providerContact“)',
+  url: 'site/site.config.json: „url“ eintragen – die Adresse der Website, z. B. https://<name>.github.io/<repository> oder die eigene Domain',
 };
 
 function build({ release }) {
@@ -542,8 +553,6 @@ function report({ settings, pages }) {
     for (const lang of LANGUAGES) {
       console.log(`  ${lang}: Datenschutz ${settings.url}/${lang}/privacy/ · Support ${settings.url}/${lang}/support/`);
     }
-  } else {
-    console.log('\nHinweis: Mit „url“ in site/site.config.json kennt die Website ihre Adresse (Sprachverweise, Sitemap, Store-Adressen).');
   }
 }
 
@@ -572,7 +581,13 @@ function preview() {
   const port = Number(option('port', 4173));
   const out = paths.out;
   createServer((request, response) => {
-    const path = decodeURIComponent(new URL(request.url ?? '/', 'http://localhost').pathname);
+    let path;
+    try {
+      path = decodeURIComponent(new URL(request.url ?? '/', 'http://localhost').pathname);
+    } catch {
+      response.writeHead(400).end();
+      return;
+    }
     let file = resolve(join(out, path));
     if (file !== out && !file.startsWith(out + sep)) {
       response.writeHead(403).end();
@@ -593,6 +608,7 @@ function preview() {
 }
 
 try {
+  paths = resolvePaths();
   if (command === 'build') report(build({ release: args.includes('--release') }));
   else if (command === 'preview') preview();
   else if (command === 'store-urls') storeUrls();

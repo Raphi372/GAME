@@ -68,7 +68,11 @@ npm run release:check   # zeigt, was im Repository noch fehlt (Anbieterdaten, UR
    den internen Play-Test-Track – mindestens einmal auf Deutsch, Englisch und Spanisch durch
    Einführung, ein Spiel und die Auswertung. Dabei das **Ergebnis teilen** (mit und ohne
    Namen, einmal an eine Messenger-App, einmal über „Bild sichern“ auf iOS): Das Bild muss
-   scharf und vollständig ankommen – das lässt sich nur auf echten Geräten prüfen.
+   scharf und vollständig ankommen – das lässt sich nur auf echten Geräten prüfen. Wichtig ist
+   ein kleines Handy (z. B. iPhone SE), auf dem die Vorschau verkleinert erscheint: Das
+   gesicherte Bild muss trotzdem die ganze Karte randlos in voller Größe zeigen. Hat es dort
+   Ränder oder fehlt etwas, in `src/features/share/shareImage.ts` für iOS
+   `useRenderInContext: true` an `captureRef` übergeben.
 6. **Bauen und einreichen:**
    ```bash
    npm run build:ios && npm run submit:ios

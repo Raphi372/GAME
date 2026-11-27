@@ -233,7 +233,34 @@ describe('website build', () => {
     expect(result.stderr).toContain('src/config/legal.json: „providerContact“');
     expect(result.stderr).toContain('site/site.config.json: „hosting“');
     expect(result.stderr).toContain('„supportEmail“');
+    expect(result.stderr).toContain('„url“');
     expect(existsSync(out)).toBe(false);
+  });
+
+  it('needs the address of the website before it may be published', () => {
+    // Without it the 404 page could not link back – on GitHub Pages the site lives in a subfolder.
+    const { result } = build('no-address', { legal: LEGAL, config: { ...CONFIG, url: null }, release: true });
+    expect(result.status).toBe(1);
+    expect(result.stderr).toContain('site/site.config.json: „url“ eintragen');
+    expect(result.stderr).not.toContain('providerContact');
+  });
+
+  it('keeps dollar signs in the provider details and the hosting as they are', () => {
+    const { out, result } = build('dollars', {
+      legal: { providerContact: "Spiel $& Spaß GmbH\nWeg $' 1\nhallo@example.com" },
+      config: { ...CONFIG, hosting: 'Host $$ AG' },
+      release: true,
+    });
+    expect(result.status).toBe(0);
+    const html = read(out, 'de/privacy/index.html');
+    expect(html).toContain('<p class="address">Spiel $&amp; Spaß GmbH<br>Weg $&#39; 1<br>hallo@example.com</p>');
+    expect(html).toContain('Diese Website wird bei Host $$ AG gehostet.');
+  });
+
+  it('explains an option without a value instead of crashing', () => {
+    const result = run(['build', '--out']);
+    expect(result.status).toBe(1);
+    expect(result.stderr.trim()).toBe('Die Option --out braucht einen Wert.');
   });
 
   it('rejects store links and addresses without https', () => {

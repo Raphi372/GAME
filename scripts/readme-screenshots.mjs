@@ -2,23 +2,37 @@
 /**
  * README screenshots from the web build (phone window 390 × 844 at 2×, plus one tablet).
  *
- *   EXPO_PUBLIC_SHARE_PREVIEW=1 npx expo export --platform web --output-dir dist
- *   node scripts/readme-screenshots.mjs dist docs/screenshots
+ *   npm run docs:screenshots
+ *   # = node scripts/readme-screenshots.mjs --build dist docs/screenshots
  *
- * `EXPO_PUBLIC_SHARE_PREVIEW=1` shows "Ergebnis teilen" in the web build, which normally hides
- * it (no image capture in the browser) – so the summary looks like in the apps.
+ * `--build` first exports the web build with `EXPO_PUBLIC_SHARE_PREVIEW=1` – set here, so it
+ * works in every shell, Windows included. The variable shows "Ergebnis teilen" in the web build,
+ * which normally hides it (no image capture in the browser), so the summary looks like in the
+ * apps. Without `--build` the script uses an existing export in the given folder.
  *
  * Needs Playwright with Chromium – see `scripts/lib/app-screens.mjs`. Every scene starts from
  * a fixed game state with hand-picked cards; some then tap through the app (open a sheet,
  * mark players, end the game for the summary).
  */
+import { spawnSync } from 'node:child_process';
 import { mkdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
 import { appStorage, chromium, makePlayers, makeSession, openScreen, scrollToEnd, serveBuild } from './lib/app-screens.mjs';
 
-const distDir = resolve(process.argv[2] ?? 'dist');
-const outDir = resolve(process.argv[3] ?? 'docs/screenshots');
+const args = process.argv.slice(2);
+const [distArg = 'dist', outArg = 'docs/screenshots'] = args.filter((arg) => arg !== '--build');
+const distDir = resolve(distArg);
+const outDir = resolve(outArg);
+
+if (args.includes('--build')) {
+  const exported = spawnSync('npx', ['expo', 'export', '--platform', 'web', '--output-dir', distArg], {
+    stdio: 'inherit',
+    env: { ...process.env, EXPO_PUBLIC_SHARE_PREVIEW: '1' },
+    shell: process.platform === 'win32',
+  });
+  if (exported.status !== 0) process.exit(exported.status ?? 1);
+}
 const PORT = 8791;
 
 const PHONE = { viewport: { width: 390, height: 844 }, scale: 2 };
