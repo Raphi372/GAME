@@ -13,6 +13,7 @@ import { LevelPill } from '@/features/gameplay/components/LevelPill';
 import { LevelSheet } from '@/features/gameplay/components/LevelSheet';
 import { PlayerPicker } from '@/features/gameplay/components/PlayerPicker';
 import { QuestionCard } from '@/features/gameplay/components/QuestionCard';
+import { FirstCardHint } from '@/features/rounds/MixRules';
 import { TurnBanner } from '@/features/gameplay/components/TurnBanner';
 import { countRemaining } from '@/features/gameplay/engine/deck';
 import { isLevelUp, isMixedRound } from '@/features/gameplay/engine/round';
@@ -104,6 +105,8 @@ export default function GameScreen() {
   const showModeChip = isMixedRound(session.round) && !(group && mode.cardLead);
   // Escalating round: the first card of a new level says so.
   const levelUp = session.round.escalate && isLevelUp(session.round, session.turnsCompleted);
+  // Mixed rounds explain each mode briefly the first time one of its cards comes up.
+  const firstOfMode = isMixedRound(session.round) && session.dealtByMode[session.modeId] === 1;
   // Choice modes ("Wahrheit oder Pflicht"): the player first picks a kind.
   const choiceKinds = mode.choice?.kinds;
   const awaitingChoice = isAwaitingChoice(session, { choiceKinds });
@@ -332,7 +335,10 @@ export default function GameScreen() {
             onChangeLevel={() => setLevelSheetOpen(true)}
           />
         ) : awaitingChoice && choiceKinds && kindCounts ? (
-          <ChoicePanel kinds={choiceKinds} remaining={kindCounts} onChoose={chooseCard} />
+          <>
+            <ChoicePanel kinds={choiceKinds} remaining={kindCounts} onChoose={chooseCard} />
+            {firstOfMode ? <FirstCardHint modeId={session.modeId} /> : null}
+          </>
         ) : (
           <>
             <QuestionCard
@@ -352,6 +358,8 @@ export default function GameScreen() {
               compact={isGroup}
               style={isGroup && !wide ? undefined : styles.card}
             />
+            {/* Below the card: the card itself stays in view on small phones. */}
+            {firstOfMode ? <FirstCardHint modeId={session.modeId} /> : null}
             {question?.seconds ? (
               <ChallengeTimer seconds={question.seconds} accent={meta.accent} resetKey={cardKey} />
             ) : null}

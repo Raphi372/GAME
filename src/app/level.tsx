@@ -17,6 +17,7 @@ import { canEscalate } from '@/features/gameplay/engine/round';
 import { LevelCard } from '@/features/levels/components/LevelCard';
 import { LEVELS, listLevels } from '@/features/levels/levels';
 import { getDeckSize } from '@/features/question-decks';
+import { MixRules } from '@/features/rounds/MixRules';
 import { RoundSettingsPanel } from '@/features/rounds/RoundSettingsPanel';
 import { useTranslation } from '@/i18n';
 import { feedback } from '@/services/feedback';
@@ -110,6 +111,11 @@ export default function LevelScreen() {
       <AppText variant="overline" color={colors.accent} style={styles.modeName}>
         {mixed ? `${MIX_EMOJI} ${t('mix.title')}` : `${mode.emoji} ${t(modeTitleKey(modeId))}`}
       </AppText>
+      {mixed ? (
+        <View style={styles.mixRules}>
+          <MixRules modeIds={mixPlayable.length > 0 ? mixPlayable : mixModes} />
+        </View>
+      ) : null}
       {mode.howTo && !mixed ? (
         <Surface style={styles.howTo} testID="how-to">
           <Icon name="information-circle-outline" size={20} color={colors.lilacOrText} />
@@ -187,6 +193,7 @@ const styles = StyleSheet.create({
   modeName: { marginTop: spacing.xs, marginLeft: spacing.xs },
   howTo: { flexDirection: 'row', gap: spacing.md, marginTop: spacing.md },
   howToText: { flex: 1, gap: spacing.xxs },
+  mixRules: { marginTop: spacing.md },
   list: { gap: spacing.lg, paddingTop: spacing.lg },
   customLink: { alignSelf: 'center', marginTop: spacing.md },
 });

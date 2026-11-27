@@ -115,6 +115,12 @@ describe('custom rounds', () => {
     expect(screen.getByRole('button', { name: 'Spiel starten' })).toBeDisabled();
 
     await user.press(screen.getByRole('checkbox', { name: 'Random Challenges' }));
+    // "So geht's" lists one rule per chosen mode.
+    const rules = screen.getByTestId('mix-how-to');
+    expect(within(rules).getByText('🔥 Spicy Questions – Wer dran ist, beantwortet die Frage – oder passt.')).toBeOnTheScreen();
+    expect(within(rules).getByText(/^⚡ Random Challenges – /)).toBeOnTheScreen();
+    expect(within(rules).queryByText(/Ich hab noch nie/)).not.toBeOnTheScreen();
+    expect(within(rules).getByText(/getrunken wird nicht/)).toBeOnTheScreen();
     await user.press(screen.getByRole('button', { name: 'Spiel starten' }));
     expect(router.getPathname()).toBe('/game');
     expect(session()?.round.modeIds).toEqual(['spicy-questions', 'random-challenges']);
@@ -131,9 +137,13 @@ describe('custom rounds', () => {
     const seen = new Set<string>();
     for (let card = 0; card < 6; card += 1) {
       const modeId = session()!.modeId;
-      seen.add(modeId);
       const label = modeId === 'random-challenges' ? '⚡ Random Challenges' : '🔥 Spicy Questions';
       expect(screen.getByText(label)).toBeOnTheScreen();
+      // The rule of a mode shows with its first card only.
+      const hint = screen.queryByText(`Neu in dieser Runde: ${label}`);
+      if (seen.has(modeId)) expect(hint).not.toBeOnTheScreen();
+      else expect(hint).toBeOnTheScreen();
+      seen.add(modeId);
       await user.press(
         screen.getByRole('button', { name: modeId === 'random-challenges' ? 'Geschafft' : 'Nächste Frage' }),
       );
