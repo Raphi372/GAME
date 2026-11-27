@@ -4,12 +4,13 @@ import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { AppText, Button, ConfirmSheet, Header, Screen, SectionTitle, Surface } from '@/components/ui';
+import { describeHiddenCards } from '@/features/hidden-cards/describe';
 import { hasContentInLocale } from '@/features/question-decks';
 import { LinkRow, RadioRow, SettingsGroup, SwitchRow } from '@/features/settings/SettingsRows';
 import { useMotion } from '@/hooks/useMotion';
 import { useTranslation } from '@/i18n';
 import { clearPersistedData } from '@/services/storage';
-import { useCustomCardsStore, useGameStore, useSettingsStore } from '@/store';
+import { useCustomCardsStore, useGameStore, useHiddenCardsStore, useSettingsStore } from '@/store';
 import { colors, spacing } from '@/theme';
 import { LOCALES } from '@/types';
 
@@ -20,6 +21,9 @@ export default function SettingsScreen() {
   const settings = useSettingsStore();
   const [revokeOpen, setRevokeOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const hiddenIds = useHiddenCardsStore((state) => state.ids);
+  const customCards = useCustomCardsStore((state) => state.cards);
+  const hiddenCount = describeHiddenCards(hiddenIds, locale, customCards, '').length;
 
   const version = Constants.expoConfig?.version ?? '1.0.0';
   const confirmedOn =
@@ -31,6 +35,7 @@ export default function SettingsScreen() {
     setDeleteOpen(false);
     useGameStore.getState().resetAll();
     useCustomCardsStore.getState().resetCustomCards();
+    useHiddenCardsStore.getState().showAllCards();
     useSettingsStore.getState().resetSettings();
     void clearPersistedData();
   };
@@ -102,6 +107,12 @@ export default function SettingsScreen() {
 
       <SectionTitle>{t('settings.section.data')}</SectionTitle>
       <SettingsGroup>
+        <LinkRow
+          icon="eye-off-outline"
+          label={t('hidden.title')}
+          hint={hiddenCount > 0 ? t('hidden.count', { count: hiddenCount }) : t('hidden.none')}
+          onPress={() => router.push('/settings/hidden-cards')}
+        />
         <LinkRow
           icon="trash-outline"
           tone="danger"

@@ -9,6 +9,7 @@ export const STORAGE_KEYS = {
   settings: 'spicy-night/settings',
   game: 'spicy-night/game',
   customCards: 'spicy-night/custom-cards',
+  hiddenCards: 'spicy-night/hidden-cards',
 } as const;
 
 function report(action: string, key: string, error: unknown) {

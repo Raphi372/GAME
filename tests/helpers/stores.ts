@@ -8,6 +8,7 @@ import {
   useCustomCardsStore,
   useEntitlementsStore,
   useGameStore,
+  useHiddenCardsStore,
   useSettingsStore,
 } from '@/store';
 import { createSeededRng } from '@/utils/random';
@@ -19,6 +20,7 @@ export async function resetStores(seed = 1234) {
   useGameStore.setState({ ...INITIAL_GAME_DATA, lastResult: null });
   useSettingsStore.setState({ ...DEFAULT_SETTINGS });
   useCustomCardsStore.setState({ cards: [] });
+  useHiddenCardsStore.setState({ ids: [] });
   useEntitlementsStore.setState({ entitlements: FREE_ENTITLEMENTS });
 }
 

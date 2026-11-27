@@ -35,6 +35,7 @@ The app stores data only locally on your device:
 
 - the names you enter for the players,
 - the cards you write yourself,
+- which cards you have hidden,
 - the current game (whose turn it is, which cards have been played),
 - your settings (language, sound, vibration, animations),
 - the time you confirmed that you are at least 18 years old.

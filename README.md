@@ -67,9 +67,9 @@ teilen“ gibt es nur in den Apps; für diese Bilder blendet das Skript den Knop
 | :-: | :-: | :-: | :-: |
 | <img src="docs/screenshots/17-summary.jpg" width="190"> | <img src="docs/screenshots/22-share.jpg" width="190"> | <img src="docs/screenshots/18-summary-mixed.jpg" width="190"> | <img src="docs/screenshots/19-settings.jpg" width="190"> |
 
-| Einführung beim ersten Start |
-| :-: |
-| <img src="docs/screenshots/21-intro.jpg" width="190"> |
+| Einführung beim ersten Start | Ausgeblendete Karten |
+| :-: | :-: |
+| <img src="docs/screenshots/21-intro.jpg" width="190"> | <img src="docs/screenshots/23-hidden-cards.jpg" width="190"> |
 
 **Tablet-Layout** (iPad 13″, gemischte Runde):
 
@@ -160,6 +160,16 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
   die Regel eines Modus unter seiner ersten Karte („Neu in dieser Runde: …“). Die
   Auswertung zeigt je nach Modi Beantwortet, Geständnisse, Gewählt und Gepasst; „Mutigste
   Person“ zählt Antworten und Geständnisse.
+
+### Karten ausblenden
+- Passt eine Karte nicht zur Runde, blendet „Karte ausblenden“ unter der Karte sie nach einer
+  kurzen Rückfrage dauerhaft aus – in allen Modi, auch bei eigenen Karten und in gemischten
+  Runden. Dieselbe Person bekommt sofort die nächste Karte; das zählt weder als Runde noch als
+  Überspringen.
+- Unter **Einstellungen → Ausgeblendete Karten** stehen alle ausgeblendeten Karten mit Modus und
+  Level in der App-Sprache; jede lässt sich einzeln oder alle auf einmal zurückholen.
+- Kartenzahlen (Level-Auswahl, „noch … im Deck“) zählen nur Karten, die noch kommen können.
+  Gespeichert wird nur die Liste der Karten-IDs, lokal; „Alle lokalen Daten löschen“ leert sie.
 
 ### Ergebnis teilen
 - Nach jeder Runde macht „Ergebnis teilen“ aus der Auswertung ein Bild im Hochformat (4:5,
@@ -427,7 +437,8 @@ leeres/durchgespieltes Deck, lokale Speicherung inkl. App-Neustart und korrupter
 Einstellungen, Sprache, 18+-Sperre, die Einführung beim ersten Start, das Teilen des Ergebnisbilds
 (Namen standardmäßig aus, Aufnahme und Teilen-Menü, Fehlerfall, Aufräumen der Bilddatei,
 ausgeblendet ohne native Module), die Website (alle Seiten und Links, keine fremden Server,
-Entwurfs- und Release-Modus, Store-Adressen), Datenlöschung sowie der komplette Spielablauf
+Entwurfs- und Release-Modus, Store-Adressen), das Ausblenden von Karten (in jedem Modus, bis
+zum leeren Deck, Liste, Zurückholen, Löschen), Datenlöschung sowie der komplette Spielablauf
 aller fünf Spielmodi über die echten Routen (inkl. Wahl Wahrheit/Pflicht, Spielerauswahl und
 Zählern in den Gruppenmodi, dem 3‑2‑1‑Countdown und dem Challenge-Timer), die englischen und
 spanischen Karten inklusive Sprachwechsel mitten im Spiel, der Start in der Gerätesprache sowie die eigenen Karten (gesperrt ohne Premium;
@@ -730,8 +741,8 @@ Wörterbüchern, `cardLead` in der Registry, Kartentexte in `src/data/questions/
 ## Datenschutz & Sicherheit
 
 - Keine Registrierung, kein Konto, kein Server, keine Analyse-/Werbe-/Tracking-SDKs.
-- Lokal gespeichert werden nur: Spielernamen, eigene Karten, Spielstand, Einstellungen,
-  Zeitpunkt der Altersbestätigung. **Antworten werden nie gespeichert.** In den Gruppenmodi enthält der
+- Lokal gespeichert werden nur: Spielernamen, eigene Karten, ausgeblendete Karten, Spielstand,
+  Einstellungen, Zeitpunkt der Altersbestätigung. **Antworten werden nie gespeichert.** In den Gruppenmodi enthält der
   Spielstand nur Zähler, wie oft jemand angetippt wurde (nicht bei welcher Karte); mit dem
   Spielende wird der Spielstand gelöscht.
 - Keine Berechtigungen für Kamera, Mikrofon, Kontakte oder Standort (Mikrofon- und

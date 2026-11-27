@@ -35,6 +35,7 @@ Die App speichert ausschließlich lokal auf deinem Gerät:
 
 - die Namen, die du für die Mitspieler eingibst,
 - die Karten, die du selbst schreibst,
+- welche Karten du ausgeblendet hast,
 - den aktuellen Spielstand (wer dran ist, welche Karten schon gespielt wurden),
 - deine Einstellungen (Sprache, Ton, Vibration, Animationen),
 - den Zeitpunkt deiner Bestätigung, dass du mindestens 18 Jahre alt bist.

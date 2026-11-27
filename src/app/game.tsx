@@ -29,7 +29,7 @@ import { renderQuestionText, splitLead } from '@/features/question-decks';
 import { useLayout } from '@/hooks/useLayout';
 import { useTranslation } from '@/i18n';
 import { feedback } from '@/services/feedback';
-import { getPlayableDeck, useCustomCardsStore, useEntitlementsStore, useGameStore } from '@/store';
+import { getPlayableDeck, useCustomCardsStore, useEntitlementsStore, useGameStore, useHiddenCardsStore } from '@/store';
 import { colors, spacing } from '@/theme';
 import type { SpicyLevel } from '@/types';
 
@@ -52,8 +52,9 @@ export default function GameScreen() {
   const reshuffle = useGameStore((state) => state.reshuffle);
   const endGame = useGameStore((state) => state.endGame);
   const refreshDecks = useGameStore((state) => state.refreshDecks);
-  // Re-render when the players' own cards or the Premium state change.
+  // Re-render when the players' own cards, the hidden cards or the Premium state change.
   useCustomCardsStore((state) => state.cards);
+  useHiddenCardsStore((state) => state.ids);
   useEntitlementsStore((state) => state.entitlements);
 
   // The card on the table may have been deleted (own cards) – deal a new one then.
@@ -66,6 +67,7 @@ export default function GameScreen() {
 
   const [levelSheetOpen, setLevelSheetOpen] = useState(false);
   const [endSheetOpen, setEndSheetOpen] = useState(false);
+  const [hideSheetOpen, setHideSheetOpen] = useState(false);
   /** Set while navigating to the summary so the screen doesn't redirect home first. */
   const [leaving, setLeaving] = useState(false);
   /** Group modes: players marked on the current card – only valid for the card it was made on. */
@@ -290,7 +292,7 @@ export default function GameScreen() {
 
   // Keyboard users (web) must be able to scroll the card area on small screens: it becomes
   // focusable when it holds no controls of its own (player picker, choice tiles, timer …).
-  const scrollHasControls = isGroup || awaitingChoice || exhausted || Boolean(question?.seconds);
+  const scrollHasControls = isGroup || awaitingChoice || exhausted || question !== null;
 
   return (
     <Screen
@@ -391,6 +393,18 @@ export default function GameScreen() {
                 }
               />
             ) : null}
+            {question ? (
+              <Button
+                label={t('game.hideCard')}
+                hint={t('game.hideCardHint')}
+                icon="eye-off-outline"
+                variant="ghost"
+                size="sm"
+                onPress={() => setHideSheetOpen(true)}
+                style={styles.hide}
+                testID="action-hide"
+              />
+            ) : null}
           </>
         )}
       </View>
@@ -415,6 +429,26 @@ export default function GameScreen() {
         }}
       />
       <ConfirmSheet
+        visible={hideSheetOpen}
+        emoji="🙈"
+        title={t('hide.title')}
+        body={t('hide.body')}
+        confirmLabel={t('hide.confirm')}
+        cancelLabel={t('common.cancel')}
+        accent={meta.accent}
+        gradient={meta.gradient}
+        onConfirm={() => {
+          setHideSheetOpen(false);
+          if (!question) return;
+          // Gone from every deck at once – the same player gets the next card, like after a
+          // deleted own card (no turn, no skip counted).
+          useHiddenCardsStore.getState().hideCard(question.id);
+          refreshDecks();
+        }}
+        onCancel={() => setHideSheetOpen(false)}
+        testID="hide-sheet"
+      />
+      <ConfirmSheet
         visible={endSheetOpen}
         emoji="🌙"
         title={t('game.endTitle')}
@@ -434,6 +468,7 @@ const styles = StyleSheet.create({
   topBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   content: { flex: 1, gap: spacing.xl, paddingTop: spacing.md },
   card: { flexGrow: 1 },
+  hide: { alignSelf: 'center' },
   badges: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
   secondaryRow: { flexDirection: 'row', gap: spacing.md },
   half: { flex: 1 },
