@@ -42,6 +42,19 @@ describe('language of a fresh install', () => {
     expect(detectDeviceLocale()).toBe('de');
   });
 
+  it('falls back to German when the native module is missing (outdated development build)', () => {
+    jest.isolateModules(() => {
+      jest.doMock('expo-localization', () => {
+        throw new Error("Cannot find native module 'ExpoLocalization'");
+      });
+      const { detectDeviceLocale: detectWithoutModule } =
+        jest.requireActual<typeof import('@/i18n/deviceLocale')>('@/i18n/deviceLocale');
+      expect(detectWithoutModule()).toBe('de');
+    });
+    // Back to the shared mock for the other tests.
+    jest.doMock('expo-localization', () => ({ getLocales: mockedLocales }));
+  });
+
   it('starts a fresh install – and the app after "delete all data" – in the device language', () => {
     device('es', 'en');
     expect(initialSettings()).toMatchObject({ locale: 'es', ageConfirmedAt: null, soundEnabled: true });

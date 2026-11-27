@@ -386,8 +386,17 @@ describe('Spanish content', () => {
       /(küss|kuss auf|einen kuss|massier|massage|umarm|im arm|schoß|streichel|berühr|nacken|schulter|kuschel|knabber|lippen|hals|puls|herzschlag|fütter|polonaise|wange an wange|slow dance|tango|tanzt .*eng|eng mit|verbundenen augen|augen verbinden|hand reich|die hand von|hand aufs herz|ins ohr|am ohr)/i;
     const others = (text: string) =>
       text.includes('{other}') || text.startsWith('Alle:') || /\b(person|personen|jemand|jemanden)\b/i.test(text);
-    const askedEs =
-      /(solo si|si \{other\}|si (los|las) dos|sí claro|de acuerdo|acept|consentimiento|permiso|decid|quiere|quieren|quiera|apetece|le parece bien|decir que no|rechaz|negarse|veto|la última palabra|sin tocar|sin contacto|opcional|voluntari|se puede pasar)/iu;
+    // Same rule as the validator: the other person agrees ("si {other} quiere", "{other} decide") –
+    // "donde quieras" or "lo que tú decidas" is the active player choosing, not consent.
+    const askedEs = words(
+      'solo si|sólo si|si \\{other\\}|si a \\{other\\}|si (los|las) dos|si ambos|si ambas|de ambas partes|' +
+        'un sí claro|sí claro|de acuerdo|consentimiento|permiso|quiere|quieren|quiera|quieran|apetece|' +
+        'tiene ganas|tienen ganas|le parece bien|les parece bien|decide|deciden|decida|decidan|acepta|aceptan|' +
+        'decir que no|dice que no|rechazar\\p{L}*|negarse|veto|la última palabra|sin tocar|sin contacto|' +
+        'opcional|voluntari\\p{L}*|se puede pasar',
+    );
+    expect(askedEs.test('Besa a {other} en el cuello donde quieras.')).toBe(false);
+    expect(askedEs.test('Masajea a {other} lo que tú decidas.')).toBe(false);
     const needsConsent = pairs.filter(
       ({ mode, de }) =>
         (mode === 'truth-or-dare' && de.kind === 'dare' && de.text.includes('{other}') && touch.test(de.text)) ||
@@ -399,7 +408,7 @@ describe('Spanish content', () => {
 
   it('contains no drinking and stays neutral for Spain and Latin America', () => {
     const drinking = words(
-      '(?!bebés?(?![\\p{L}]))beb\\p{L}*|tragos?|chupitos?|sorbos?|shots?|alcohol\\p{L}*|borrach\\p{L}*|emborrach\\p{L}*|cervezas?|brindis',
+      '(?!bebés?(?![\\p{L}]))beb\\p{L}*|tragos?|chupitos?|sorbos?|shots?|alcohol\\p{L}*|borrach\\p{L}*|emborrach\\p{L}*|cervezas?|chelas?|birras?|copas?|brindis|(toma|tomar|tómate|tomarse|tomemos|tomen) algo',
     );
     // No "vosotros" (Spain) and no "ustedes" (Latin America): one player is "tú", the group is described.
     const pluralAddress = new RegExp(

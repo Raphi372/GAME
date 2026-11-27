@@ -117,7 +117,17 @@ const EN_DRINKING = /\b(drink|drinks|drinking|shots?|sips?|chug|booze|alcohol|ti
  * matched with Unicode-aware boundaries instead.
  */
 const words = (source) => new RegExp(`(?<![\\p{L}\\p{N}])(?:${source})(?![\\p{L}\\p{N}])`, 'iu');
-const ES_CONSENT = /(solo si|sólo si|si \{other\}|si (los|las) dos|si ambos|si ambas|si quiere|si quieren|si le apetece|si les apetece|si te deja|si te dejan|sí claro|de acuerdo|acept|consentimiento|permiso|decid|decide|quiere|quieren|quiera|apetece|le parece bien|les parece bien|elige si|decir que no|dice que no|rechaz|negarse|veto|la última palabra|sin tocar|sin contacto|opcional|voluntari|se puede pasar|puede pasar)/iu;
+/**
+ * Consent of the other person: "si {other} quiere", "si los dos quieren", "{other} decide" –
+ * third-person forms only, so "donde quieras" (the active player chooses) does not count.
+ */
+const ES_CONSENT = words(
+  'solo si|sólo si|si \\{other\\}|si a \\{other\\}|si (los|las) dos|si ambos|si ambas|de ambas partes|' +
+    'un sí claro|sí claro|de acuerdo|consentimiento|permiso|quiere|quieren|quiera|quieran|apetece|' +
+    'tiene ganas|tienen ganas|le parece bien|les parece bien|decide|deciden|decida|decidan|acepta|aceptan|' +
+    'decir que no|dice que no|rechazar\\p{L}*|negarse|veto|la última palabra|sin tocar|sin contacto|' +
+    'opcional|voluntari\\p{L}*|se puede pasar',
+);
 const ES_LOOKS = /(más atractiv|más guap|más lind|más bell|mejor aspecto|mejor cuerpo|mejor figura|(cuerpo|figura|aura|look|sonrisa|mirada|cara|boca|labios|ojos|pelo|cabello|piernas|manos|trasero) más (bonit|lind|herm|bell|sexy|atractiv))/iu;
 const ES_PICKS_PLAYER = new RegExp(
   `${words('aquí|(en|de) (este|el|tu) grupo|del grupo|(en|de) la ronda').source}|^¿quién es más probable que |^todos:`,
@@ -128,7 +138,9 @@ const ES_SEX_APPEAL = /(más seductor|besa mejor|mejor besador|besar mejor|más 
 /** "tu/su mirada más seductora" – each player shows off their own (group cards say "su"). */
 const ES_OWN_PERFORMANCE = /(?<![\p{L}])(tus?|sus?)\s+\p{L}+\s+más\s+(seductor|seductora|sexy)/iu;
 const ES_DRINKING = words(
-  '(?!bebés?(?![\\p{L}]))beb\\p{L}*|tragos?|chupitos?|sorbos?|shots?|alcohol\\p{L}*|borrach\\p{L}*|emborrach\\p{L}*|ebri[oa]s?|cervezas?|tequilas?|vodka|whisky|cubatas?|brindis',
+  '(?!bebés?(?![\\p{L}]))beb\\p{L}*|tragos?|chupitos?|sorbos?|shots?|alcohol\\p{L}*|borrach\\p{L}*|emborrach\\p{L}*|ebri[oa]s?|cervezas?|chelas?|birras?|tequilas?|vodka|whisky|cubatas?|copas?|brindis|' +
+    // "tomar algo" is how Latin America says "have a drink".
+    '(toma|tomar|tómate|tomarse|tomemos|tomen) algo',
 );
 /** Neutral Spanish for Spain and Latin America: no "vosotros" and no "ustedes". */
 const ES_PLURAL_ADDRESS = new RegExp(

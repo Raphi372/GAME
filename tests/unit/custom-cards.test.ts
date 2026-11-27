@@ -125,9 +125,19 @@ describe('custom cards in Spanish', () => {
     expect(es({ modeId: 'never-have-i-ever', body: 'Yo nunca me he enamorado en vacaciones' })).toBe(
       'Yo nunca me he enamorado en vacaciones.',
     );
-    for (const body of ['se case primero', 'Quién es más probable que se case primero', '¿se case primero?']) {
+    for (const body of [
+      'se case primero',
+      'Quién es más probable que se case primero',
+      '¿se case primero?',
+      'se case primero.',
+      'se case primero!',
+    ]) {
       expect(es({ modeId: 'most-likely', body })).toBe('¿Quién es más probable que se case primero?');
     }
+    // "Wer würde am ehesten …?" is always a question, too.
+    expect(textOf(validateCustomCard(draft({ modeId: 'most-likely', body: 'im Zoo heiraten!' }), 'de'))).toBe(
+      'Wer würde am ehesten im Zoo heiraten?',
+    );
   });
 
   it('keeps the content rules in Spanish', () => {
@@ -137,8 +147,22 @@ describe('custom cards in Spanish', () => {
     expect(es({ body: 'Disfrázate de colegiala' })).toBe('minors');
     expect(es({ body: 'Besa a {other} sin preguntar' })).toBe('consent');
     expect(es({ body: 'Obliga a {other} a bailar' })).toBe('consent');
-    // "bebé" is a pet name, not a drink.
+    // In Latin America "tomar algo" means having a drink.
+    expect(es({ modeId: 'random-challenges', body: 'Tómate una copa si alguna vez mentiste' })).toBe('drinking');
+    expect(es({ modeId: 'random-challenges', body: 'Toma algo si alguna vez mentiste' })).toBe('drinking');
+    expect(es({ body: 'Oblígale a contar su peor cita' })).toBe('consent');
+    // "bebé" is a pet name, not a drink; taking someone's hand is not drinking either.
     expect(es({ modeId: 'random-challenges', body: 'Llama bebé a {other}' })).toBe('Llama bebé a {other}.');
+    expect(es({ modeId: 'random-challenges', body: 'Toma la mano de {other} si quiere' })).toBe(
+      'Toma la mano de {other} si quiere.',
+    );
+    // Reassuring players is not forcing them.
+    expect(es({ modeId: 'random-challenges', body: 'Cuenta tu peor cita – nada es obligatorio' })).toBe(
+      'Cuenta tu peor cita – nada es obligatorio.',
+    );
+    expect(es({ body: 'Nadie está obligado a responder: qué harías' })).toBe(
+      'Nadie está obligado a responder: ¿qué harías?',
+    );
   });
 });
 
