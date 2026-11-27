@@ -12,6 +12,8 @@ export interface SettingsData {
   locale: Locale;
   /** Timestamp of the 18+ confirmation, `null` if not confirmed. */
   ageConfirmedAt: number | null;
+  /** The short introduction after the first age confirmation was finished or skipped. */
+  introSeen: boolean;
 }
 
 export interface SettingsState extends SettingsData {
@@ -21,6 +23,7 @@ export interface SettingsState extends SettingsData {
   setLocale: (locale: Locale) => void;
   confirmAge: (now?: number) => void;
   revokeAgeConfirmation: () => void;
+  completeIntro: () => void;
   resetSettings: () => void;
 }
 
@@ -31,6 +34,7 @@ export const DEFAULT_SETTINGS: SettingsData = {
   animationsEnabled: true,
   locale: 'de',
   ageConfirmedAt: null,
+  introSeen: false,
 };
 
 /** Settings of a fresh install (and after "delete all data"): defaults in the device language. */
@@ -49,6 +53,7 @@ function sanitize(persisted: unknown): Partial<SettingsData> {
   if (typeof data.ageConfirmedAt === 'number' || data.ageConfirmedAt === null) {
     result.ageConfirmedAt = data.ageConfirmedAt;
   }
+  if (typeof data.introSeen === 'boolean') result.introSeen = data.introSeen;
   return result;
 }
 
@@ -62,18 +67,20 @@ export const useSettingsStore = create<SettingsState>()(
       setLocale: (locale) => set({ locale }),
       confirmAge: (now = Date.now()) => set({ ageConfirmedAt: now }),
       revokeAgeConfirmation: () => set({ ageConfirmedAt: null }),
+      completeIntro: () => set({ introSeen: true }),
       resetSettings: () => set(initialSettings()),
     }),
     {
       name: STORAGE_KEYS.settings,
       version: 1,
       storage: persistStorage,
-      partialize: ({ soundEnabled, hapticsEnabled, animationsEnabled, locale, ageConfirmedAt }) => ({
+      partialize: ({ soundEnabled, hapticsEnabled, animationsEnabled, locale, ageConfirmedAt, introSeen }) => ({
         soundEnabled,
         hapticsEnabled,
         animationsEnabled,
         locale,
         ageConfirmedAt,
+        introSeen,
       }),
       merge: (persisted, current) => ({ ...current, ...sanitize(persisted) }),
     },

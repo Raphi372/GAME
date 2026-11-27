@@ -64,7 +64,8 @@ export default function RootLayout() {
           contentStyle: { backgroundColor: colors.background },
         }}
       >
-        <Stack.Protected guard={ageConfirmed}>
+        {/* Everything but the info pages needs the 18+ confirmation – otherwise: age gate. */}
+        <Stack.Protected guard={ageConfirmed} redirectTo="/age-gate">
           <Stack.Screen name="index" options={{ animation: fade }} />
           <Stack.Screen name="players" />
           <Stack.Screen name="level" />
@@ -80,6 +81,8 @@ export default function RootLayout() {
         <Stack.Protected guard={!ageConfirmed}>
           <Stack.Screen name="age-gate" options={{ animation: fade }} />
         </Stack.Protected>
+        {/* Shown right after the first age confirmation and again from the settings. */}
+        <Stack.Screen name="intro" options={{ animation: fade, gestureEnabled: false }} />
         <Stack.Screen name="settings/privacy" />
         <Stack.Screen name="settings/fair-play" />
         <Stack.Screen name="settings/about" />

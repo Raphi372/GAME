@@ -89,6 +89,8 @@ describe('Spanish on a Spanish device', () => {
     await renderRouter(APP_DIR, { initialUrl: '/' });
     expect(await screen.findByText('¿Tienes 18 años o más?')).toBeOnTheScreen();
     await user.press(screen.getByRole('button', { name: 'Tengo 18 o más' }));
+    expect(await screen.findByText('Así se juega')).toBeOnTheScreen();
+    await user.press(screen.getByRole('button', { name: 'Saltar' }));
     expect(await screen.findByText('Modos de juego')).toBeOnTheScreen();
     expect(screen.getByText('Verdad o reto')).toBeOnTheScreen();
 

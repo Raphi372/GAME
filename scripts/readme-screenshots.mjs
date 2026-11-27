@@ -178,6 +178,7 @@ const SCENES = [
   },
   { name: '19-settings', path: '/settings' },
   { name: '20-tablet', path: '/game', state: { session: mixedGame }, device: TABLET },
+  { name: '21-intro', path: '/intro' },
 ];
 
 const server = serveBuild(distDir, PORT);
