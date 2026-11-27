@@ -23,9 +23,17 @@ const join = (...parts: string[]) => parts.join('/');
 
 const STORE_DIR = join(__dirname, '../../docs/store');
 
-const LOCALES: { store: 'de-DE' | 'en-US'; app: Locale }[] = [
-  { store: 'de-DE', app: 'de' },
-  { store: 'en-US', app: 'en' },
+type AppleLocale = keyof typeof storeConfig.apple.info;
+
+/**
+ * One App Store and one Google Play listing per app language. Spanish gets two of each –
+ * Spain and Latin America (App Store: es-MX, Google Play: es-419) – with the same neutral text.
+ */
+const LOCALES: { store: AppleLocale; play: string; app: Locale }[] = [
+  { store: 'de-DE', play: 'de-DE', app: 'de' },
+  { store: 'en-US', play: 'en-US', app: 'en' },
+  { store: 'es-ES', play: 'es-ES', app: 'es' },
+  { store: 'es-MX', play: 'es-419', app: 'es' },
 ];
 
 const apple = storeConfig.apple.info;
@@ -34,30 +42,44 @@ function play(locale: string, file: 'title' | 'short_description' | 'full_descri
   return readFileSync(join(STORE_DIR, 'google-play', locale, `${file}.txt`), 'utf8').trim();
 }
 
-function allTexts(locale: 'de-DE' | 'en-US'): string[] {
-  const info = apple[locale];
+function allTexts({ store, play: playLocale }: (typeof LOCALES)[number]): string[] {
+  const info = apple[store];
   return [
     info.title,
     info.subtitle,
     info.promoText,
     info.description,
     info.keywords.join(','),
-    play(locale, 'title'),
-    play(locale, 'short_description'),
-    play(locale, 'full_description'),
+    play(playLocale, 'title'),
+    play(playLocale, 'short_description'),
+    play(playLocale, 'full_description'),
   ];
 }
+
+/** The fair-play promises every description has to make, in its language. */
+const FAIR_PLAY: Record<Locale, RegExp[]> = {
+  de: [/„Ich passe“ ist immer erlaubt/, /Kein Alkohol nötig/],
+  en: [/“I pass” is always allowed/, /No alcohol needed/],
+  es: [/“Paso” siempre está permitido/, /No hace falta alcohol/],
+};
 
 /**
  * Sexual keywords in a listing break Google Play's policy, and the game itself never
  * asks anybody to drink – so neither belongs in the store texts.
  */
 const BANNED =
-  /\b(sex\w*|nackt\w*|naked|nud(e|es|ity)|porn\w*|xxx|eroti\w*|dirty|kinky|hookup|fetis\w*|fetish\w*|strip\w*|nsfw|trinkspiel\w*|saufspiel\w*|drinking games?|shots?)\b/i;
+  /\b(sex\w*|nackt\w*|naked|nud(e|es|ity)|porn\w*|xxx|eroti\w*|eróti\w*|desnud\w*|dirty|kinky|hookup|fetis\w*|fetish\w*|fetich\w*|strip\w*|nsfw|trinkspiel\w*|saufspiel\w*|drinking games?|juegos? (de|para) beber|shots?|chupitos?|tragos?)\b/i;
 
 describe('store listing', () => {
-  it('has App Store texts for German and English', () => {
-    expect(Object.keys(apple).sort()).toEqual(['de-DE', 'en-US']);
+  it('has App Store texts for German, English and Spanish', () => {
+    expect(Object.keys(apple).sort()).toEqual(['de-DE', 'en-US', 'es-ES', 'es-MX']);
+  });
+
+  it('uses the same neutral Spanish texts for Spain and Latin America', () => {
+    expect(apple['es-MX']).toEqual(apple['es-ES']);
+    for (const file of ['title', 'short_description', 'full_description'] as const) {
+      expect(play('es-419', file)).toBe(play('es-ES', file));
+    }
   });
 
   it.each(LOCALES)('App Store texts stay within Apple’s limits ($store)', ({ store }) => {
@@ -82,43 +104,48 @@ describe('store listing', () => {
     }
   });
 
-  it.each(LOCALES)('Google Play texts stay within Google’s limits ($store)', ({ store }) => {
-    expect(play(store, 'title').length).toBeLessThanOrEqual(30);
-    expect(play(store, 'short_description').length).toBeLessThanOrEqual(80);
-    expect(play(store, 'full_description').length).toBeLessThanOrEqual(4000);
+  it.each(LOCALES)('Google Play texts stay within Google’s limits ($play)', ({ play: playLocale }) => {
+    expect(play(playLocale, 'title').length).toBeLessThanOrEqual(30);
+    expect(play(playLocale, 'short_description').length).toBeLessThanOrEqual(80);
+    expect(play(playLocale, 'full_description').length).toBeLessThanOrEqual(4000);
   });
 
-  it.each(LOCALES)('both stores show the same description ($store)', ({ store }) => {
-    expect(play(store, 'full_description')).toBe(apple[store].description);
+  it.each(LOCALES)('both stores show the same description ($store / $play)', ({ store, play: playLocale }) => {
+    expect(play(playLocale, 'full_description')).toBe(apple[store].description);
   });
 
-  it.each(LOCALES)('contains no sexual or drinking keywords ($store)', ({ store }) => {
-    for (const text of allTexts(store)) {
+  it.each(LOCALES)('contains no sexual or drinking keywords ($store)', (locale) => {
+    for (const text of allTexts(locale)) {
       expect(text).not.toMatch(BANNED);
     }
   });
 
-  it.each(LOCALES)('states the age limit and the fair-play rules ($store)', ({ store }) => {
+  it.each(LOCALES)('states the age limit and the fair-play rules ($store)', ({ store, app }) => {
     const { description } = apple[store];
     expect(description).toMatch(/\b18\b/);
-    expect(description).toMatch(store === 'de-DE' ? /„Ich passe“ ist immer erlaubt/ : /“I pass” is always allowed/);
-    expect(description).toMatch(store === 'de-DE' ? /Kein Alkohol nötig/ : /No alcohol needed/);
+    for (const promise of FAIR_PLAY[app]) expect(description).toMatch(promise);
   });
 
-  it.each(LOCALES)('numbers in the texts match the app ($store)', ({ store, app }) => {
-    const cards = countBuiltInCards(listPlayableModeIds(), app);
-    for (const text of allTexts(store)) {
-      for (const match of text.matchAll(/(\d+) (Karten|cards)\b/g)) {
+  it.each(LOCALES)('names every language the cards come in ($store)', ({ store }) => {
+    expect(apple[store].description).toMatch(
+      /Deutsch, Englisch und Spanisch|English, German and Spanish|español, inglés y alemán/,
+    );
+  });
+
+  it.each(LOCALES)('numbers in the texts match the app ($store)', (locale) => {
+    const cards = countBuiltInCards(listPlayableModeIds(), locale.app);
+    for (const text of allTexts(locale)) {
+      for (const match of text.matchAll(/(\d+) (Karten|cards|cartas)\b/g)) {
         expect(Number(match[1])).toBe(cards);
       }
-      for (const match of text.matchAll(/(\d+) (bis|to) (\d+) (Spieler|players)\b/g)) {
+      for (const match of text.matchAll(/(\d+) (bis|to|a) (\d+) (Spieler|players|jugadores)\b/g)) {
         expect([Number(match[1]), Number(match[3])]).toEqual([MIN_PLAYERS, MAX_PLAYERS]);
       }
-      for (const match of text.matchAll(/(\d+) (Modi|modes)\b/g)) {
+      for (const match of text.matchAll(/(\d+) (Modi|modes|modos)\b/g)) {
         expect(Number(match[1])).toBe(listPlayableModeIds().length);
       }
     }
-    // The long descriptions spell the number of modes out ("FÜNF SPIELMODI" / "FIVE GAME MODES").
+    // The long descriptions spell the number of modes out ("FÜNF SPIELMODI" / "CINCO MODOS DE JUEGO").
     expect(listPlayableModeIds()).toHaveLength(5);
   });
 });
@@ -170,7 +197,7 @@ describe('store graphics', () => {
   ];
 
   it.each(Object.entries(SIZES))('screenshots for %s have the exact store size', (device, [width, height]) => {
-    for (const locale of ['de', 'en']) {
+    for (const locale of ['de', 'en', 'es']) {
       for (const shot of SHOTS) {
         const file = join(STORE_DIR, 'screenshots', device, locale, `${shot}.jpg`);
         expect(existsSync(file)).toBe(true);

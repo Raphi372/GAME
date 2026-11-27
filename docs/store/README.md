@@ -8,8 +8,8 @@ nicht im Repository.
 
 | Datei | Inhalt |
 | --- | --- |
-| [`../../store.config.json`](../../store.config.json) | App-Store-Texte DE/EN für EAS Metadata: Name, Untertitel, Werbetext, Beschreibung, Keywords, Kategorien |
-| [`google-play/<sprache>/`](google-play/) | Google-Play-Texte DE/EN: `title.txt`, `short_description.txt`, `full_description.txt` |
+| [`../../store.config.json`](../../store.config.json) | App-Store-Texte für EAS Metadata (Deutsch, Englisch, Spanisch für Spanien und Mexiko): Name, Untertitel, Werbetext, Beschreibung, Keywords, Kategorien |
+| [`google-play/<sprache>/`](google-play/) | Google-Play-Texte (`de-DE`, `en-US`, `es-ES`, `es-419`): `title.txt`, `short_description.txt`, `full_description.txt` |
 | [`google-play/icon-512.png`](google-play/icon-512.png) | Play-Store-Symbol, 512 × 512 PNG mit Alphakanal |
 | [`google-play/feature-graphic.jpg`](google-play/feature-graphic.jpg) | Play-Store-Vorstellungsgrafik, 1024 × 500 JPEG |
 | [`screenshots/ios-6.9/`](screenshots/ios-6.9/) | iPhone 6,9″, 1320 × 2868 (deckt alle iPhone-Größen ab) |
@@ -17,9 +17,13 @@ nicht im Repository.
 | [`screenshots/android-phone/`](screenshots/android-phone/) | Android-Smartphone, 1080 × 2340 |
 | [`questionnaires.md`](questionnaires.md) | Antworten für App-Datenschutz, Data safety, Altersfreigabe, IARC und App-Inhalte |
 | [`review-notes.md`](review-notes.md) | Hinweise für das App-Review (EN zum Einfügen, DE zum Nachlesen) |
-| [`privacy-policy.de.md`](privacy-policy.de.md), [`privacy-policy.en.md`](privacy-policy.en.md) | Datenschutzerklärung zum Veröffentlichen auf einer Website |
+| [`privacy-policy.de.md`](privacy-policy.de.md), [`privacy-policy.en.md`](privacy-policy.en.md), [`privacy-policy.es.md`](privacy-policy.es.md) | Datenschutzerklärung zum Veröffentlichen auf einer Website |
 
-Jede Screenshot-Reihe gibt es auf Deutsch (`de/`) und Englisch (`en/`), je sechs Bilder:
+Spanisch ist neutral formuliert (mit „tú“, ohne „vosotros“ und „ustedes“) und funktioniert
+in Spanien wie in Lateinamerika – deshalb stehen für Spanien und Lateinamerika dieselben Texte
+in den Stores (ein Test achtet darauf, dass sie gleich bleiben).
+
+Jede Screenshot-Reihe gibt es auf Deutsch (`de/`), Englisch (`en/`) und Spanisch (`es/`), je sechs Bilder:
 Startseite, Level-Auswahl, Spicy Questions, Wahrheit oder Pflicht, Ich hab noch nie und
 Random Challenges. `tests/unit/store-listing.test.ts` prüft Textlängen, Keyword-Limit,
 verbotene Begriffe, Bildgrößen und dass Zahlen wie „1560 Karten“ zur App passen.
@@ -62,7 +66,9 @@ steht in `app.json` (`version`).
 
 ### App Store (App Store Connect)
 
-1. App in App Store Connect anlegen (Bundle-ID wie in `app.json`, Hauptsprache Deutsch).
+1. App in App Store Connect anlegen (Bundle-ID wie in `app.json`, Hauptsprache Deutsch) und
+   die Sprachen Englisch (USA), Spanisch (Spanien) und Spanisch (Mexiko) hinzufügen – über
+   Spanisch (Mexiko) erscheint der Eintrag in den lateinamerikanischen App Stores.
 2. In `store.config.json` unter `apple` ergänzen: `copyright` (z. B. `"2026 Deine Firma"`)
    und je Sprache unter `info` die Felder `supportUrl` und `privacyPolicyUrl`. Bis dahin
    meldet `npx eas-cli@latest metadata:lint` genau diese fehlende `privacyPolicyUrl` –
@@ -70,7 +76,7 @@ steht in `app.json` (`version`).
 3. Texte hochladen: `npm run store:metadata` (EAS Metadata – lädt Texte und Kategorien,
    aber keine Screenshots).
 4. Screenshots aus `screenshots/ios-6.9/<sprache>/` und `screenshots/ipad-13/<sprache>/`
-   in der jeweiligen Sprache hochladen.
+   in der jeweiligen Sprache hochladen (`es/` für Spanien und Mexiko).
 5. **App-Datenschutz** und **Altersfreigabe (18+)** nach [`questionnaires.md`](questionnaires.md)
    ausfüllen.
 6. Unter „App Review Information“ den englischen Text aus [`review-notes.md`](review-notes.md)
@@ -83,9 +89,11 @@ ergänzen und neu bauen.
 
 ### Google Play (Play Console)
 
-1. App in der Play Console anlegen (Standardsprache Deutsch, Englisch als Übersetzung).
-2. **Store-Eintrag:** Texte aus `google-play/de-DE/` und `google-play/en-US/`, dazu
-   `icon-512.png`, `feature-graphic.jpg` und die Bilder aus `screenshots/android-phone/<sprache>/`.
+1. App in der Play Console anlegen (Standardsprache Deutsch; Englisch (USA), Spanisch
+   (Spanien) und Spanisch (Lateinamerika) als Übersetzungen).
+2. **Store-Eintrag:** Texte aus `google-play/de-DE/`, `google-play/en-US/`, `google-play/es-ES/`
+   und `google-play/es-419/`, dazu `icon-512.png`, `feature-graphic.jpg` und die Bilder aus
+   `screenshots/android-phone/<sprache>/` (`es/` für beide spanischen Einträge).
    Kategorie: Spiele → Karten (oder Gelegenheitsspiele).
 3. **App-Inhalte, Data safety und IARC** nach [`questionnaires.md`](questionnaires.md) –
    Zielgruppe nur „18 und älter“.

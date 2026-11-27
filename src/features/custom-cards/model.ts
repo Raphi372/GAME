@@ -55,17 +55,18 @@ export const MIN_TIMER_SECONDS = 5;
 export const MAX_TIMER_SECONDS = 120;
 
 /*
- * Content rules for player-written cards (German and English). They mirror the rules of
- * the built-in decks: the game works without alcohol, never involves minors and never
- * makes anybody do something against their will.
+ * Content rules for player-written cards (German, English and Spanish). They mirror the
+ * rules of the built-in decks: the game works without alcohol, never involves minors and
+ * never makes anybody do something against their will.
  */
-// "Exen" is left out on purpose: it is also the plural of "Ex" (ex-partners).
+// "Exen" is left out on purpose: it is also the plural of "Ex" (ex-partners); "bebé"
+// (baby) does not count as drinking either.
 const DRINKING =
-  /\b(trink\w*|getrunken|schluck(?!auf)\w*|shots?|sauf\w*|besoffen|betrunken|alkohol\w*|drink\w*|drunk|tipsy|chug\w*|booze|alcohol\w*)\b/i;
+  /\b(trink\w*|getrunken|schluck(?!auf)\w*|shots?|sauf\w*|besoffen|betrunken|alkohol\w*|drink\w*|drunk|tipsy|chug\w*|booze|alcohol\w*|beb(e|es|en|er|emos|ed|ido|idos|ida|idas|iendo|imos|ieron|a|as|an|amos)|bebidas?|tragos?|chupitos?|sorbos?|borrach\w*|emborrach\w*|ebri[oa]s?|cervezas?|tequilas?|vodka|whisky|cubatas?)\b/i;
 const MINORS =
-  /(minderjährig|\bunter 18\b|unter achtzehn|\bunder 18\b|underage|\bminors?\b|schulmädchen|schuljunge|schoolgirl|schoolboy|\bloli\b|lolita|jailbait)/i;
+  /(minderjährig|\bunter 18\b|unter achtzehn|\bunder 18\b|underage|\bminors?\b|schulmädchen|schuljunge|schoolgirl|schoolboy|\bloli\b|lolita|jailbait|menor(es)? de edad|\bmenos de 18\b|menos de dieciocho|colegial)/i;
 const NO_CONSENT =
-  /(gegen (den|deinen|ihren|seinen|euren) willen|ohne (zu fragen|erlaubnis|einverständnis|zustimmung)|\bzwing\w*|\bgezwungen|against (their|her|his|your) will|without (asking|consent|permission)|\bforc(e|ed|es|ing)\b)/i;
+  /(gegen (den|deinen|ihren|seinen|euren) willen|ohne (zu fragen|erlaubnis|einverständnis|zustimmung)|\bzwing\w*|\bgezwungen|against (their|her|his|your) will|without (asking|consent|permission)|\bforc(e|ed|es|ing)\b|contra (su|tu|vuestra) voluntad|sin (preguntar|pedir permiso|(su |tu )?permiso|(su |tu )?consentimiento)|\boblig\w*|a la fuerza|\bforz\w*)/i;
 const PLACEHOLDER = /\{[^}]*\}/g;
 const ENDS_WITH_PUNCTUATION = /[.!?…]$/;
 
@@ -98,15 +99,34 @@ function defaultEnding(modeId: GameModeId, kind?: CardKind): string {
   return '?';
 }
 
+/** Spanish questions and exclamations open with ¿ / ¡. */
+const OPENING_MARK = /^[¿¡]/;
+const SENTENCE_BREAK = /[.!?…:]\s+/g;
+
 /** Removes a lead-in the player typed anyway (in any language), so it is not doubled. */
 function stripLead(modeId: GameModeId, body: string): string {
   const mode = getGameMode(modeId);
   if (!mode.cardLead || mode.turnStyle !== 'group') return body;
+  // "Quién es más probable que …" counts as the lead, with or without its "¿".
+  const typed = body.replace(OPENING_MARK, '');
   for (const locale of LOCALES) {
-    const lead = mode.cardLead[locale];
-    if (body.toLowerCase().startsWith(`${lead.toLowerCase()} `)) return body.slice(lead.length + 1).trim();
+    const lead = mode.cardLead[locale].replace(OPENING_MARK, '');
+    if (typed.toLowerCase().startsWith(`${lead.toLowerCase()} `)) return typed.slice(lead.length + 1).trim();
   }
   return body;
+}
+
+/**
+ * Adds the opening ¿ / ¡ of a Spanish question or exclamation to the last sentence of a
+ * card when the player left it out ("Qué harías?" → "¿Qué harías?").
+ */
+export function withSpanishOpeningMark(text: string): string {
+  const open = text.endsWith('?') ? '¿' : text.endsWith('!') ? '¡' : null;
+  if (!open) return text;
+  let start = 0;
+  for (const match of text.slice(0, -1).matchAll(SENTENCE_BREAK)) start = (match.index ?? 0) + match[0].length;
+  const sentence = text.slice(start);
+  return sentence.includes(open) ? text : `${text.slice(0, start)}${open}${sentence}`;
 }
 
 /** Splits a stored card back into lead-in and editable body (for the editor). */
@@ -125,10 +145,12 @@ export function validateCustomCard(draft: CustomCardDraft, locale: Locale): Cust
 
   const lead = requiredLead(draft.modeId, locale);
   const kind = needsKind(draft.modeId) ? draft.kind : undefined;
-  const withLead = lead ? `${lead} ${body}` : body;
-  const text = ENDS_WITH_PUNCTUATION.test(withLead)
+  // A lead that opens with "¿" already starts the question.
+  const withLead = lead ? `${lead} ${OPENING_MARK.test(lead) ? body.replace(OPENING_MARK, '') : body}` : body;
+  const ended = ENDS_WITH_PUNCTUATION.test(withLead)
     ? withLead
     : `${withLead}${defaultEnding(draft.modeId, kind)}`;
+  const text = locale === 'es' ? withSpanishOpeningMark(ended) : ended;
   if (text.length > CUSTOM_CARD_MAX_LENGTH) return { ok: false, error: 'tooLong' };
 
   const placeholders = text.match(PLACEHOLDER) ?? [];

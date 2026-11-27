@@ -5,15 +5,16 @@ import type { Locale } from '@/types';
 
 import { de, type TranslationKey } from './de';
 import { en } from './en';
+import { es } from './es';
 
 export type { TranslationKey } from './de';
 
 export type TranslationParams = Record<string, string | number>;
 
-const dictionaries: Record<Locale, Record<TranslationKey, string>> = { de, en };
+const dictionaries: Record<Locale, Record<TranslationKey, string>> = { de, en, es };
 
-/** BCP-47 tags for Intl APIs (dates, prices). */
-export const INTL_LOCALES: Record<Locale, string> = { de: 'de-DE', en: 'en-GB' };
+/** BCP-47 tags for Intl APIs (dates, prices) – plain "es" for neutral Spanish. */
+export const INTL_LOCALES: Record<Locale, string> = { de: 'de-DE', en: 'en-GB', es: 'es' };
 
 export function translate(locale: Locale, key: TranslationKey, params?: TranslationParams): string {
   const template = dictionaries[locale][key] ?? de[key] ?? key;

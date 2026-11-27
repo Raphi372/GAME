@@ -222,6 +222,7 @@ export const de = {
   'settings.section.language': 'Sprache',
   'settings.language.de': 'Deutsch',
   'settings.language.en': 'English',
+  'settings.language.es': 'Español',
   'settings.contentLanguageNote': 'Die Fragen sind derzeit nur auf Deutsch verfügbar.',
   'settings.section.info': 'Sicherheit & Info',
   'settings.fairPlay': 'Fair Play & Hinweise',

@@ -6,7 +6,7 @@ SPICY NIGHT ist eine Partyspiel-App für Erwachsene (18+) im Dark-Luxury-Design.
 fügt ihre Mitspieler hinzu, wählt einen Spielmodus und eines von drei Spicy-Levels und bekommt
 zufällige Karten rund um Flirt, Dating, Geständnisse und Intimität – mit fairer
 Spielerrotation, ohne Wiederholungen und komplett offline. Alle 1560 Karten gibt es auf
-Deutsch und Englisch.
+Deutsch, Englisch und Spanisch.
 
 **Spielmodi:** 🔥 *Spicy Questions* (Fragen an die Person, die dran ist), 🎲 *Wahrheit oder Pflicht*
 (die Person wählt selbst), ⚡ *Random Challenges* (zufällige Aufgaben, teils mit Timer),
@@ -69,8 +69,8 @@ festen Spielständen und lassen sich mit `npm run docs:screenshots` neu erzeugen
 
 <img src="docs/screenshots/20-tablet.jpg" width="420">
 
-Die **Store-Screenshots** in den von Apple und Google geforderten Größen (Deutsch und
-Englisch) liegen in [`docs/store/screenshots/`](docs/store/screenshots/) – siehe
+Die **Store-Screenshots** in den von Apple und Google geforderten Größen (Deutsch, Englisch
+und Spanisch) liegen in [`docs/store/screenshots/`](docs/store/screenshots/) – siehe
 [Store-Vorbereitung](#store-vorbereitung).
 
 ---
@@ -198,8 +198,15 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
 
 ### Einstellungen
 - Sound, Vibration, Animationen an/aus (lokal gespeichert)
-- Sprache: Deutsch (Standard) / English – Oberfläche und alle Karten; der Wechsel geht auch mitten
+- Sprache: Deutsch / English / Español – Oberfläche und alle Karten; der Wechsel geht auch mitten
   im Spiel, die aktuelle Karte und der Spielstand bleiben erhalten
+- Beim ersten Start (und nach „Alle lokalen Daten löschen“) übernimmt die App die erste
+  passende Gerätesprache (`expo-localization`); spricht das Gerät keine davon, startet sie auf
+  Englisch. Danach gilt die Wahl in den Einstellungen.
+- Spanisch ist neutral für Spanien und Lateinamerika geschrieben: Wer das Handy hält, wird mit
+  „tú“ angesprochen, die Runde wird beschrieben statt mit „vosotros“ oder „ustedes“ angeredet,
+  und Spieler werden ohne männliche/weibliche Adjektive angesprochen („te dan nervios“ statt
+  „estás nervioso/nerviosa“)
 - Fair Play & Hinweise, Datenschutz, Über SPICY NIGHT
 - Altersbestätigung 18+ (anzeigen & widerrufen)
 - Alle lokalen Daten löschen
@@ -216,11 +223,11 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
   ohne Premium erklärt der Bildschirm die Funktion und verlinkt zur Premium-Seite. Mit Premium:
   - eigene Karten je Spielmodus und Level anlegen, bearbeiten und löschen (nur auf dem Gerät);
   - „Ich hab noch nie …“ / „Wer würde am ehesten …?“ ergänzt die App selbst (in der App-Sprache),
-    ebenso fehlende Satzzeichen; „Mitspieler einfügen“ setzt einen zufälligen Mitspieler ein
+    ebenso fehlende Satzzeichen – auf Spanisch samt öffnendem „¿“/„¡“; „Mitspieler einfügen“ setzt einen zufälligen Mitspieler ein
     (nicht in Gruppenmodi); bei Wahrheit oder Pflicht wählt man die Art, bei Random Challenges
     optional einen Timer (15/30/60 s);
   - Inhaltsregeln: Karten mit Trinkaufforderung, Bezug auf Minderjährige oder Zwang („gegen den
-    Willen“, „ohne zu fragen“) werden mit Erklärung abgelehnt;
+    Willen“, „ohne zu fragen“) werden mit Erklärung abgelehnt – auf Deutsch, Englisch und Spanisch;
   - eigene Karten mischen sich ins normale Deck (Kategorie „Eigene Karte“), die Level-Auswahl
     zeigt „+ 3 eigene“. Ohne Premium bleiben gespeicherte Karten erhalten, werden aber nicht
     gespielt.
@@ -279,9 +286,10 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
 │   │   ├── most-likely/         # Wer würde am ehesten?: mild.json, hot.json, extreme.json
 │   │   ├── truth-or-dare/       # Wahrheit oder Pflicht: mild.json, hot.json, extreme.json
 │   │   ├── random-challenges/   # Random Challenges: mild.json, hot.json, extreme.json
-│   │   └── en/                  # Englische Texte je Modus: en/<modus>/<level>.json
+│   │   ├── en/                  # Englische Texte je Modus: en/<modus>/<level>.json
+│   │   └── es/                  # Spanische Texte je Modus: es/<modus>/<level>.json
 │   ├── hooks/                   # useMotion (Animationen + „Bewegung reduzieren“), useLayout
-│   ├── i18n/                    # de.ts (Quelle), en.ts, useTranslation
+│   ├── i18n/                    # de.ts (Quelle), en.ts, es.ts, useTranslation, Gerätesprache
 │   ├── services/                # Storage, Haptik, Sound, Feedback, Zufallsquelle
 │   ├── store/                   # Zustand-Stores (Spiel, Einstellungen, eigene Karten,
 │   │                            # Premium-Status), Hydrierung, spielbares Deck
@@ -374,8 +382,8 @@ Spieler hinzufügen/umbenennen/entfernen, faire Rotation, Überspringen, Passen,
 leeres/durchgespieltes Deck, lokale Speicherung inkl. App-Neustart und korrupter Daten,
 Einstellungen, Sprache, 18+-Sperre, Datenlöschung sowie der komplette Spielablauf
 aller fünf Spielmodi über die echten Routen (inkl. Wahl Wahrheit/Pflicht, Spielerauswahl und
-Zählern in den Gruppenmodi, dem 3‑2‑1‑Countdown und dem Challenge-Timer) und die englischen
-Karten inklusive Sprachwechsel mitten im Spiel sowie die eigenen Karten (gesperrt ohne Premium;
+Zählern in den Gruppenmodi, dem 3‑2‑1‑Countdown und dem Challenge-Timer), die englischen und
+spanischen Karten inklusive Sprachwechsel mitten im Spiel, der Start in der Gerätesprache sowie die eigenen Karten (gesperrt ohne Premium;
 mit simuliertem Premium-Status: Anlegen, Ablehnen, Bearbeiten, Löschen, Anzeige im Spiel) und
 die Store-Version mit ausgeblendetem Premium (keine Verweise, Deep Links führen zur Startseite)
 sowie individuelle Runden (Rundenlänge mit automatischer Auswertung, Steigerung, gemischte Modi).
@@ -442,14 +450,15 @@ mit transparentem Hintergrund und ca. 66 % Safe-Zone).
 
 Alles für App Store und Google Play außer Käufen liegt in [`docs/store/`](docs/store/README.md):
 
-- **Texte** auf Deutsch und Englisch – für den App Store in `store.config.json`
-  (hochladen mit `npm run store:metadata`), für Google Play in `docs/store/google-play/`.
+- **Texte** auf Deutsch, Englisch und Spanisch (Spanien und Lateinamerika mit demselben
+  neutralen Text) – für den App Store in `store.config.json` (hochladen mit
+  `npm run store:metadata`), für Google Play in `docs/store/google-play/`.
 - **Screenshots** für iPhone 6,9″ (1320 × 2868), iPad 13″ (2064 × 2752) und Android
   (1080 × 2340), dazu Play-Symbol (512 × 512) und Vorstellungsgrafik (1024 × 500).
   Neu erzeugen mit `npm run store:screenshots`.
 - **Fragebögen:** App-Datenschutz („Keine Daten erfasst“), Data safety („Keine Daten
   erhoben“), Altersfreigabe 18+, IARC, App-Inhalte – mit fertigen Antworten.
-- **Review-Hinweise** für Apple und eine **Datenschutzerklärung** (DE/EN) zum Veröffentlichen.
+- **Review-Hinweise** für Apple und eine **Datenschutzerklärung** (DE/EN/ES) zum Veröffentlichen.
 - **Checkliste** mit allem, was vor der Einreichung noch von dir kommt: Bundle-ID,
   Anbieterdaten in `src/config/legal.ts`, Datenschutz- und Support-URL, Konten.
 
@@ -478,9 +487,12 @@ oder Trink-Begriffe und mit denselben Zahlen wie die App.
 }
 ```
 
+**Spanische Texte** liegen genauso in `src/data/questions/es/<modus>/<level>.json`
+(„Yo nunca …“, „¿Quién es más probable que …?“, „Todos: …“).
+
 Kategorie, Art (`kind`), Timer (`seconds`) und Intensität kommen immer aus der deutschen Datei,
-die IDs sind in beiden Sprachen gleich – deshalb übersteht ein laufendes Spiel den Sprachwechsel.
-Wer eine deutsche Karte ergänzt, muss auch die englische Übersetzung anlegen.
+die IDs sind in allen Sprachen gleich – deshalb übersteht ein laufendes Spiel den Sprachwechsel.
+Wer eine deutsche Karte ergänzt, muss auch die englische und die spanische Übersetzung anlegen.
 
 Jede Datei ist ein Array pro Level, z. B. für Spicy Questions:
 
@@ -523,16 +535,21 @@ In allen Decks lehnt er außerdem Karten ab, die die Runde Mitspieler nach Ausse
 vergleichen lassen („Wen findest du hier am attraktivsten?“, „Wer hier wirkt am verführerischsten?“,
 „… der beste Kisser“) – über sich selbst zu sprechen oder etwas vorzuführen („Zeig deinen
 verführerischsten Blick“) ist erlaubt.
-Für die englischen Texte prüft er, dass jede deutsche Karte genau eine Übersetzung hat, dass
-Platzhalter, Zahlen (wichtig für Timer-Texte), Fragezeichen und das Format übereinstimmen
-(„Never have I ever …“, „Who is most likely to …?“, „Everyone: …“), dass jede
-Einverständnis-Formulierung erhalten bleibt und dass kein Trinken vorkommt.
+Für die englischen und spanischen Texte prüft er, dass jede deutsche Karte genau eine
+Übersetzung hat, dass Platzhalter, Zahlen (wichtig für Timer-Texte), Fragezeichen und das Format
+übereinstimmen („Never have I ever …“ / „Yo nunca …“, „Who is most likely to …?“ /
+„¿Quién es más probable que …?“, „Everyone: …“ / „Todos: …“), dass jede
+Einverständnis-Formulierung erhalten bleibt und dass kein Trinken vorkommt. Spanische Karten
+müssen außerdem Fragen und Ausrufe mit „¿“/„¡“ öffnen, ohne „vosotros“/„ustedes“ auskommen,
+keine Wörter benutzen, die in Teilen der spanischsprachigen Welt regional oder vulgär sind
+(„coger“, „móvil“, „coche“ …), und Spieler nicht mit männlichen oder weiblichen Adjektiven
+ansprechen („¿Estás nervioso?“ → „¿Qué te da nervios?“).
 
 **Inhaltsrichtlinien:** nur Erwachsene, nichts mit Minderjährigen oder Schul-/Jugendbezug in
 intimen Kontexten, nichts Nicht-Einvernehmliches, keine Diskriminierung oder Demütigung, keine
 Vergleiche von Mitspielern nach Aussehen, keine Trinkaufforderungen. Fragen sind Gesprächsanlässe, keine Handlungsanweisungen.
 
-Neue Kategorie? In `src/types/index.ts` (`QUESTION_CATEGORIES`), in beiden Übersetzungsdateien
+Neue Kategorie? In `src/types/index.ts` (`QUESTION_CATEGORIES`), in allen Übersetzungsdateien
 (`category.<name>`) und im Validator ergänzen.
 
 ---
@@ -599,11 +616,19 @@ Neuen Modus aktivieren:
 - `adPolicy.ts` – `canShowAd()` verbietet Werbung während einer Runde (MVP: gar keine Werbung).
 
 ### Internationalisierung (`src/i18n`)
-`de.ts` ist die Quelle aller Schlüssel; `en.ts` muss (per TypeScript erzwungen) jeden Schlüssel
-liefern. Fragen-Pakete haben ein `locale`: Die englischen Pakete entstehen in
-`question-decks/packs.ts` aus den deutschen Paketen, indem nur die Texte ersetzt werden. Fehlt
-eine Sprache, wird auf Deutsch zurückgegriffen. Feste Kartenanfänge („Ich hab noch nie“ /
-„Never have I ever“) stehen pro Sprache in der Registry (`cardLead`).
+`de.ts` ist die Quelle aller Schlüssel; `en.ts` und `es.ts` müssen (per TypeScript erzwungen)
+jeden Schlüssel liefern, ein Test prüft dieselben Platzhalter. Fragen-Pakete haben ein `locale`:
+Die englischen und spanischen Pakete entstehen in `question-decks/packs.ts` aus den deutschen
+Paketen, indem nur die Texte ersetzt werden. Fehlt eine Sprache, wird auf Deutsch
+zurückgegriffen. Feste Kartenanfänge („Ich hab noch nie“ / „Never have I ever“ / „Yo nunca“)
+stehen pro Sprache in der Registry (`cardLead`). `deviceLocale.ts` wählt beim ersten Start die
+Sprache aus den Gerätesprachen (`expo-localization`).
+
+**Eine weitere Sprache ergänzen:** Code in `LOCALES` (`src/types/index.ts`), Wörterbuch
+`src/i18n/<code>.ts` und `INTL_LOCALES`, Sprachname `settings.language.<code>` in allen
+Wörterbüchern, `cardLead` in der Registry, Kartentexte in `src/data/questions/<code>/`, Pakete in
+`packs.ts`, Regeln im Validator (`LANGUAGES`, `translations`) und in den eigenen Karten
+(`src/features/custom-cards/model.ts`), Store-Texte und `PLAYERS` im Screenshot-Skript.
 
 ---
 

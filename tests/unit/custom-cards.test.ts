@@ -102,6 +102,46 @@ describe('custom card validation', () => {
   });
 });
 
+describe('custom cards in Spanish', () => {
+  const es = (overrides: Partial<CustomCardDraft>) => textOf(validateCustomCard(draft(overrides), 'es'));
+
+  it('opens questions and exclamations with ¿ and ¡ – in the last sentence only', () => {
+    expect(es({ body: 'Cuál fue tu mejor cita' })).toBe('¿Cuál fue tu mejor cita?');
+    expect(es({ body: 'Piensa en tu ex. Qué le dirías?' })).toBe('Piensa en tu ex. ¿Qué le dirías?');
+    expect(es({ body: '¿Qué harías?' })).toBe('¿Qué harías?');
+    expect(es({ body: 'Dime, ¿qué harías?' })).toBe('Dime, ¿qué harías?');
+    expect(es({ modeId: 'random-challenges', body: 'Baila 10 segundos!' })).toBe('¡Baila 10 segundos!');
+    expect(es({ modeId: 'random-challenges', body: 'Todos: quién se ríe primero?' })).toBe(
+      'Todos: ¿quién se ríe primero?',
+    );
+    // German and English cards stay exactly as typed.
+    expect(textOf(validateCustomCard(draft({ body: 'Qué tal' }), 'de'))).toBe('Qué tal?');
+  });
+
+  it('adds the Spanish lead-ins – with or without the typed ¿', () => {
+    expect(es({ modeId: 'never-have-i-ever', body: 'he cantado en el autobús' })).toBe(
+      'Yo nunca he cantado en el autobús.',
+    );
+    expect(es({ modeId: 'never-have-i-ever', body: 'Yo nunca me he enamorado en vacaciones' })).toBe(
+      'Yo nunca me he enamorado en vacaciones.',
+    );
+    for (const body of ['se case primero', 'Quién es más probable que se case primero', '¿se case primero?']) {
+      expect(es({ modeId: 'most-likely', body })).toBe('¿Quién es más probable que se case primero?');
+    }
+  });
+
+  it('keeps the content rules in Spanish', () => {
+    expect(es({ body: 'Bebe un trago si alguna vez mentiste' })).toBe('drinking');
+    expect(es({ body: 'Quién se emborrachó primero' })).toBe('drinking');
+    expect(es({ body: 'Quién salió con alguien menor de edad' })).toBe('minors');
+    expect(es({ body: 'Disfrázate de colegiala' })).toBe('minors');
+    expect(es({ body: 'Besa a {other} sin preguntar' })).toBe('consent');
+    expect(es({ body: 'Obliga a {other} a bailar' })).toBe('consent');
+    // "bebé" is a pet name, not a drink.
+    expect(es({ modeId: 'random-challenges', body: 'Llama bebé a {other}' })).toBe('Llama bebé a {other}.');
+  });
+});
+
 describe('stored custom cards', () => {
   it('drops broken entries, duplicates and kindless "Wahrheit oder Pflicht" cards', () => {
     const valid = { id: 'custom_1', modeId: 'spicy-questions', level: 'mild', text: 'Eigene Frage?', createdAt: 1 };

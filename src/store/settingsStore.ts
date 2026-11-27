@@ -1,8 +1,9 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+import { detectDeviceLocale } from '@/i18n/deviceLocale';
 import { persistStorage, STORAGE_KEYS } from '@/services/storage';
-import { LOCALES, type Locale } from '@/types';
+import { isLocale, type Locale } from '@/types';
 
 export interface SettingsData {
   soundEnabled: boolean;
@@ -23,6 +24,7 @@ export interface SettingsState extends SettingsData {
   resetSettings: () => void;
 }
 
+/** Default values. A fresh install takes its language from the device – see `initialSettings`. */
 export const DEFAULT_SETTINGS: SettingsData = {
   soundEnabled: true,
   hapticsEnabled: true,
@@ -31,6 +33,11 @@ export const DEFAULT_SETTINGS: SettingsData = {
   ageConfirmedAt: null,
 };
 
+/** Settings of a fresh install (and after "delete all data"): defaults in the device language. */
+export function initialSettings(): SettingsData {
+  return { ...DEFAULT_SETTINGS, locale: detectDeviceLocale() };
+}
+
 function sanitize(persisted: unknown): Partial<SettingsData> {
   if (typeof persisted !== 'object' || persisted === null) return {};
   const data = persisted as Record<string, unknown>;
@@ -38,9 +45,7 @@ function sanitize(persisted: unknown): Partial<SettingsData> {
   if (typeof data.soundEnabled === 'boolean') result.soundEnabled = data.soundEnabled;
   if (typeof data.hapticsEnabled === 'boolean') result.hapticsEnabled = data.hapticsEnabled;
   if (typeof data.animationsEnabled === 'boolean') result.animationsEnabled = data.animationsEnabled;
-  if (typeof data.locale === 'string' && (LOCALES as readonly string[]).includes(data.locale)) {
-    result.locale = data.locale as Locale;
-  }
+  if (isLocale(data.locale)) result.locale = data.locale;
   if (typeof data.ageConfirmedAt === 'number' || data.ageConfirmedAt === null) {
     result.ageConfirmedAt = data.ageConfirmedAt;
   }
@@ -50,14 +55,14 @@ function sanitize(persisted: unknown): Partial<SettingsData> {
 export const useSettingsStore = create<SettingsState>()(
   persist(
     (set) => ({
-      ...DEFAULT_SETTINGS,
+      ...initialSettings(),
       setSoundEnabled: (soundEnabled) => set({ soundEnabled }),
       setHapticsEnabled: (hapticsEnabled) => set({ hapticsEnabled }),
       setAnimationsEnabled: (animationsEnabled) => set({ animationsEnabled }),
       setLocale: (locale) => set({ locale }),
       confirmAge: (now = Date.now()) => set({ ageConfirmedAt: now }),
       revokeAgeConfirmation: () => set({ ageConfirmedAt: null }),
-      resetSettings: () => set({ ...DEFAULT_SETTINGS }),
+      resetSettings: () => set(initialSettings()),
     }),
     {
       name: STORAGE_KEYS.settings,

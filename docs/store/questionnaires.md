@@ -20,8 +20,8 @@ baut keine Verbindung auf. Ergebnis im Store: **„Keine Daten erfasst“**.
 
 Weitere Felder:
 
-- **Datenschutz-URL:** öffentliche Adresse von [`privacy-policy.de.md`](privacy-policy.de.md)
-  bzw. [`privacy-policy.en.md`](privacy-policy.en.md) (Pflicht).
+- **Datenschutz-URL:** öffentliche Adresse von [`privacy-policy.de.md`](privacy-policy.de.md),
+  [`privacy-policy.en.md`](privacy-policy.en.md) bzw. [`privacy-policy.es.md`](privacy-policy.es.md) (Pflicht).
 - **Tracking (App Tracking Transparency):** nicht nötig – die App trackt nicht.
 - **Verschlüsselung (Export Compliance):** bereits beantwortet über
   `ios.config.usesNonExemptEncryption: false` in `app.json`.

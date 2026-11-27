@@ -47,8 +47,12 @@ export interface Player {
   colorIndex: number;
 }
 
-export const LOCALES = ['de', 'en'] as const;
+export const LOCALES = ['de', 'en', 'es'] as const;
 export type Locale = (typeof LOCALES)[number];
+
+export function isLocale(value: unknown): value is Locale {
+  return typeof value === 'string' && (LOCALES as readonly string[]).includes(value);
+}
 
 export function isSpicyLevel(value: unknown): value is SpicyLevel {
   return typeof value === 'string' && (SPICY_LEVELS as readonly string[]).includes(value);
