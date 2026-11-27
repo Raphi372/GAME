@@ -1,0 +1,97 @@
+{
+  "languageName": "Español",
+  "skipLink": "Saltar al contenido",
+  "navLabel": "Páginas",
+  "languagesLabel": "Idioma",
+  "pages": {
+    "home": "Inicio",
+    "support": "Ayuda y contacto",
+    "privacy": "Privacidad",
+    "imprint": "Aviso legal"
+  },
+  "draft": "Plantilla – no publicar así. Falta todavía: {missing}.",
+  "missing": {
+    "provider": "datos del responsable (src/config/legal.json)",
+    "hosting": "proveedor de alojamiento (site/site.config.json)",
+    "supportEmail": "correo de contacto (site/site.config.json o en los datos del responsable)"
+  },
+  "ageNotice": "SPICY NIGHT está dirigido exclusivamente a personas adultas de 18 años o más.",
+  "home": {
+    "title": "SPICY NIGHT – Juego de fiesta para adultos",
+    "storesSoon": "Pronto en el App Store y en Google Play.",
+    "appStore": "En el App Store",
+    "googlePlay": "En Google Play",
+    "screenshotsTitle": "Un vistazo a la app",
+    "screenshots": [
+      { "file": "01-home", "alt": "Pantalla de inicio con los cinco modos de juego" },
+      { "file": "03-spicy-questions", "alt": "Una carta de pregunta de Spicy Questions con “Paso”" },
+      { "file": "05-never-have-i-ever", "alt": "Una carta de “Yo nunca” en la que juega todo el grupo" }
+    ],
+    "help": "¿Preguntas sobre la app? Encontrarás respuestas y contacto en [Ayuda y contacto](support/)."
+  },
+  "support": {
+    "title": "Ayuda y contacto",
+    "description": "Respuestas a preguntas frecuentes sobre SPICY NIGHT y cómo contactarnos.",
+    "contactTitle": "Contacto",
+    "contactText": "¿Una pregunta, un error o una carta que no encaja? Escríbenos, idealmente con tu dispositivo, el sistema operativo y la versión de la app (en la app, en **Ajustes → Acerca de SPICY NIGHT**).",
+    "contactPlaceholder": "[correo de contacto]",
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "q": "¿Hay compras o anuncios en la app?",
+        "a": "No. La versión actual no tiene compras dentro de la app ni anuncios: todos los modos de juego y todas las cartas están incluidos."
+      },
+      {
+        "q": "¿Necesito una cuenta o internet?",
+        "a": "No. SPICY NIGHT funciona sin cuenta y totalmente sin conexión. Se juega en un solo dispositivo que va pasando por el grupo."
+      },
+      {
+        "q": "¿Cuántas personas pueden jugar?",
+        "a": "De 2 a 20. “¿Quién es más probable?” necesita al menos 3 personas."
+      },
+      {
+        "q": "¿Hay que beber alcohol?",
+        "a": "No, ninguna carta pide alcohol. “Paso” siempre está permitido, los retos con contacto físico solo se hacen con un sí claro y EXTREME solo empieza cuando todo el grupo está de acuerdo."
+      },
+      {
+        "q": "¿Qué datos guarda la app?",
+        "a": "Solo en tu dispositivo: los nombres de los jugadores, tus propias cartas, la partida actual y tus ajustes. Las respuestas nunca se guardan y no se transmite nada, ni a nosotros ni a terceros. Más información en la [política de privacidad](../privacy/)."
+      },
+      {
+        "q": "¿Cómo borro todos los datos?",
+        "a": "En la app, en **Ajustes → Datos → Borrar todos los datos locales**. Al desinstalar la app también se eliminan."
+      },
+      {
+        "q": "¿Cómo cambio el idioma?",
+        "a": "SPICY NIGHT empieza en el idioma de tu dispositivo (alemán, inglés o español). Puedes cambiarlo cuando quieras en **Ajustes → Idioma**, incluso en mitad de una partida."
+      },
+      {
+        "q": "¿Puedo compartir el resultado de una ronda?",
+        "a": "Sí. Después de cada ronda, “Compartir el resultado” convierte el resumen en una imagen que envías desde el menú de compartir de tu teléfono. Los nombres solo aparecen si el grupo los activa."
+      },
+      {
+        "q": "¿Por qué mi iPhone pide acceso a las fotos?",
+        "a": "Solo cuando guardas una imagen del resultado en tus fotos con “Guardar imagen” en el menú de compartir. Entonces la app puede añadir fotos, pero no puede ver tus fotos."
+      },
+      {
+        "q": "¿Para quién es SPICY NIGHT?",
+        "a": "Exclusivamente para personas adultas de 18 años o más. Las cartas tratan de coqueteo, citas y preguntas personales: solo texto, sin imágenes y sin desnudos."
+      }
+    ]
+  },
+  "privacy": {
+    "description": "Política de privacidad de la app SPICY NIGHT y de este sitio web: sin cuentas, sin rastreadores, todos los datos se quedan en tu dispositivo."
+  },
+  "imprint": {
+    "title": "Aviso legal",
+    "description": "Aviso legal y datos de contacto del responsable de SPICY NIGHT.",
+    "providerTitle": "Responsable",
+    "contactTitle": "Contacto",
+    "providerPlaceholder": ["[Nombre o empresa]", "[Calle y número]", "[Código postal, ciudad, país]"]
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "text": "Esta página no existe (o ya no existe).",
+    "back": "Ir a la página de inicio"
+  }
+}

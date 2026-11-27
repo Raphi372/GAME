@@ -1,10 +1,15 @@
 # Política de privacidad – SPICY NIGHT
 
-> **Plantilla.** Debe revisarse legalmente y completarse todo lo que está entre corchetes
-> antes de publicarla. Esta página tiene que ser accesible públicamente (p. ej., en tu propio
-> sitio web); su dirección se indica en App Store Connect y en Google Play Console como URL
-> de la política de privacidad. Coincide con la pantalla de privacidad de la app
-> (Ajustes → Privacidad).
+<!-- template-note -->
+
+> **Plantilla.** Debe revisarse legalmente antes de publicarla. `npm run site:build` la
+> convierte en la página de privacidad del sitio web y rellena lo que está entre corchetes:
+> los datos del responsable desde `src/config/legal.json` y el proveedor de alojamiento desde
+> `site/site.config.json`. Su dirección se indica en App Store Connect y en Google Play
+> Console como URL de la política de privacidad. Coincide con la pantalla de privacidad de la
+> app (Ajustes → Privacidad), más el sitio web.
+
+<!-- /template-note -->
 
 Última actualización: 27 de noviembre de 2026
 
@@ -15,10 +20,14 @@ dispositivo. No recibimos ningún dato tuyo.
 
 ## Responsable
 
+<!-- provider -->
+
 [Nombre o empresa]
 [Calle y número]
 [Código postal, ciudad, país]
 Correo electrónico: [dirección de contacto]
+
+<!-- /provider -->
 
 ## ¿Qué datos se guardan?
 
@@ -67,6 +76,19 @@ Como no recibimos ningún dato sobre ti, tampoco podemos informarte bajo petici�
 guardados – solo existen en tu dispositivo. Para preguntas sobre privacidad, escríbenos a la
 dirección indicada arriba. También tienes derecho a presentar una reclamación ante una
 autoridad de control de protección de datos.
+
+## Este sitio web
+
+Este sitio web está alojado en <!-- hosting -->[nombre y dirección del proveedor de alojamiento]<!-- /hosting -->.
+Al abrir una página, el proveedor de alojamiento trata los datos técnicamente necesarios
+(dirección IP, fecha y hora, la página solicitada y datos del navegador) para servir las
+páginas y protegerlas frente a abusos (art. 6, apdo. 1, letra f del RGPD). El proveedor de
+alojamiento determina cuánto tiempo se conservan estos registros del servidor.
+
+El sitio web no usa cookies, no carga contenido de otros servidores (tampoco fuentes) y no
+utiliza servicios de analítica ni de rastreo. Sobre los datos de tu visita tienes derecho de
+acceso, rectificación, supresión, limitación del tratamiento y oposición (arts. 15 a 21 del
+RGPD).
 
 ## Límite de edad
 

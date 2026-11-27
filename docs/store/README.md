@@ -18,7 +18,7 @@ nicht im Repository. Den kompletten Ablauf bis zur Einreichung fasst
 | [`screenshots/android-phone/`](screenshots/android-phone/) | Android-Smartphone, 1080 × 2340 |
 | [`questionnaires.md`](questionnaires.md) | Antworten für App-Datenschutz, Data safety, Altersfreigabe, IARC und App-Inhalte |
 | [`review-notes.md`](review-notes.md) | Hinweise für das App-Review (EN zum Einfügen, DE zum Nachlesen) |
-| [`privacy-policy.de.md`](privacy-policy.de.md), [`privacy-policy.en.md`](privacy-policy.en.md), [`privacy-policy.es.md`](privacy-policy.es.md) | Datenschutzerklärung zum Veröffentlichen auf einer Website |
+| [`privacy-policy.de.md`](privacy-policy.de.md), [`privacy-policy.en.md`](privacy-policy.en.md), [`privacy-policy.es.md`](privacy-policy.es.md) | Datenschutzerklärung – daraus entsteht die Datenschutz-Seite der Website (`npm run site:build`, siehe [README → Website](../../README.md#website-datenschutz--support)) |
 
 Spanisch ist neutral formuliert (mit „tú“, ohne „vosotros“ und „ustedes“) und funktioniert
 in Spanien wie in Lateinamerika – deshalb stehen für Spanien und Lateinamerika dieselben Texte
@@ -36,12 +36,17 @@ verbotene Begriffe, Bildgrößen und dass Zahlen wie „1560 Karten“ zur App p
 - [ ] **Bundle-ID / Paketname** festlegen. Aktuell steht in `app.json` der Platzhalter
       `com.spicynight.app` (iOS und Android). Nach dem ersten Upload ist er endgültig –
       am besten eine eigene Domain rückwärts verwenden, z. B. `de.deinefirma.spicynight`.
-- [ ] **Anbieterdaten** in [`src/config/legal.ts`](../../src/config/legal.ts) eintragen
-      (`providerContact`). Solange dort `null` steht, zeigt der Datenschutz-Bildschirm einen
-      sichtbaren Vorlagen-Hinweis – so darf die App nicht eingereicht werden.
-- [ ] **Datenschutzerklärung** rechtlich prüfen, Platzhalter ausfüllen und öffentlich
-      erreichbar machen (eigene Website o. Ä.). Beide Stores verlangen die URL.
-- [ ] **Support-URL** (Apple: Pflicht) – eine Seite mit Kontaktmöglichkeit genügt.
+- [ ] **Anbieterdaten** in [`src/config/legal.json`](../../src/config/legal.json) eintragen
+      (`providerContact`). Solange dort `null` steht, zeigen der Datenschutz-Bildschirm und
+      die Website einen sichtbaren Vorlagen-Hinweis – so darf die App nicht eingereicht werden.
+- [ ] **Datenschutzerklärung und Impressum** rechtlich prüfen und über die Website
+      veröffentlichen: [`site/site.config.json`](../../site/site.config.json) ausfüllen
+      (Adresse, Hosting-Anbieter), dann GitHub Pages oder eigener Webhoster – siehe
+      [README → Website](../../README.md#website-datenschutz--support). Beide Stores
+      verlangen die Datenschutz-URL.
+- [ ] **Support-URL** (Apple: Pflicht) – die Seite „Hilfe & Kontakt“ der Website
+      (`/<sprache>/support/`). Google Play verlangt im Store-Eintrag außerdem eine
+      Kontakt-E-Mail-Adresse.
 - [ ] **App-Name prüfen:** „SPICY NIGHT“ muss im App Store noch frei sein. Ist er vergeben,
       Namen in `store.config.json` (`title`) und `app.json` anpassen.
 
@@ -73,10 +78,11 @@ steht in `app.json` (`version`).
    Sprachen der App selbst (Deutsch, Englisch, Spanisch) stehen im Build
    (`CFBundleLocalizations` über `expo-localization` in `app.json`) und erscheinen im App Store
    automatisch.
-2. In `store.config.json` unter `apple` ergänzen: `copyright` (z. B. `"2026 Deine Firma"`)
-   und je Sprache unter `info` die Felder `supportUrl` und `privacyPolicyUrl`. Bis dahin
-   meldet `npx eas-cli@latest metadata:lint` genau diese fehlende `privacyPolicyUrl` –
-   sonst ist die Datei fehlerfrei.
+2. In `store.config.json` unter `apple` ergänzen: `copyright` (z. B. `"2026 Deine Firma"`);
+   die Felder `marketingUrl`, `supportUrl` und `privacyPolicyUrl` je Sprache trägt
+   `npm run site:store-urls` aus der Website-Adresse ein. Bis dahin meldet
+   `npx eas-cli@latest metadata:lint` genau diese fehlende `privacyPolicyUrl` – sonst ist die
+   Datei fehlerfrei.
 3. Texte hochladen: `npm run store:metadata` (EAS Metadata – lädt Texte und Kategorien,
    aber keine Screenshots).
 4. Screenshots aus `screenshots/ios-6.9/<sprache>/` und `screenshots/ipad-13/<sprache>/`
@@ -98,7 +104,8 @@ ergänzen und neu bauen.
 2. **Store-Eintrag:** Texte aus `google-play/de-DE/`, `google-play/en-US/`, `google-play/es-ES/`
    und `google-play/es-419/`, dazu `icon-512.png`, `feature-graphic.jpg` und die Bilder aus
    `screenshots/android-phone/<sprache>/` (`es/` für beide spanischen Einträge).
-   Kategorie: Spiele → Karten (oder Gelegenheitsspiele).
+   Kategorie: Spiele → Karten (oder Gelegenheitsspiele). Website, Kontakt-E-Mail und die
+   Datenschutz-URL (eine für alle Sprachen) nennt `npm run site:store-urls`.
 3. **App-Inhalte, Data safety und IARC** nach [`questionnaires.md`](questionnaires.md) –
    Zielgruppe nur „18 und älter“.
 4. Den **ersten** Android-Build nimmt Google nur über die Play Console an (AAB von der

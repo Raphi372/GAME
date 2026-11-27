@@ -24,8 +24,10 @@ Drittanbieter-SDK erhalten es. Namen stehen nur darauf, wenn sie eingeschaltet w
 
 Weitere Felder:
 
-- **Datenschutz-URL:** öffentliche Adresse von [`privacy-policy.de.md`](privacy-policy.de.md),
-  [`privacy-policy.en.md`](privacy-policy.en.md) bzw. [`privacy-policy.es.md`](privacy-policy.es.md) (Pflicht).
+- **Datenschutz-URL:** die Datenschutz-Seite der Website je Sprache (`/<sprache>/privacy/`,
+  gebaut aus [`privacy-policy.de.md`](privacy-policy.de.md),
+  [`privacy-policy.en.md`](privacy-policy.en.md) bzw. [`privacy-policy.es.md`](privacy-policy.es.md);
+  `npm run site:store-urls` trägt sie ein) (Pflicht).
 - **Tracking (App Tracking Transparency):** nicht nötig – die App trackt nicht.
 - **Fotos hinzufügen:** Die App fragt nie selbst nach Fotozugriff. Wählt jemand im
   Teilen-Menü „Bild sichern“, fragt iOS mit dem Text aus `NSPhotoLibraryAddUsageDescription`

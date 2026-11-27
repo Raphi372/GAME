@@ -18,14 +18,16 @@ const json = (path) => JSON.parse(read(path));
 
 const app = json('app.json').expo;
 const store = json('store.config.json');
-const legal = read('src/config/legal.ts');
+const legal = json('src/config/legal.json');
+const site = json('site/site.config.json');
 const changelog = existsSync(join(root, 'CHANGELOG.md')) ? read('CHANGELOG.md') : '';
+const filled = (value) => typeof value === 'string' && value.trim().length > 0;
 
 /** Blocking: the stores would reject the app or the app would ship with placeholders. */
 const blocking = [
   {
-    ok: !/providerContact:\s*null/.test(legal),
-    text: 'Anbieterdaten in src/config/legal.ts eintragen (providerContact) – sonst zeigt der Datenschutz-Bildschirm einen Vorlagen-Hinweis',
+    ok: filled(legal.providerContact),
+    text: 'Anbieterdaten in src/config/legal.json eintragen (providerContact) – sonst zeigen der Datenschutz-Bildschirm und die Website einen Vorlagen-Hinweis',
   },
   {
     ok: Boolean(app.extra?.eas?.projectId),
@@ -36,8 +38,8 @@ const blocking = [
     text: 'store.config.json: apple.copyright eintragen (z. B. "2026 Deine Firma")',
   },
   ...Object.entries(store.apple?.info ?? {}).flatMap(([locale, info]) => [
-    { ok: Boolean(info.privacyPolicyUrl), text: `store.config.json: privacyPolicyUrl für ${locale} eintragen` },
-    { ok: Boolean(info.supportUrl), text: `store.config.json: supportUrl für ${locale} eintragen` },
+    { ok: Boolean(info.privacyPolicyUrl), text: `store.config.json: privacyPolicyUrl für ${locale} eintragen (npm run site:store-urls)` },
+    { ok: Boolean(info.supportUrl), text: `store.config.json: supportUrl für ${locale} eintragen (npm run site:store-urls)` },
   ]),
   {
     ok: changelog.includes(`## [${app.version}]`),
@@ -47,6 +49,10 @@ const blocking = [
 
 /** Worth a second look, but not necessarily wrong. */
 const warnings = [
+  {
+    ok: filled(site.url) && filled(site.hosting),
+    text: 'Website (Datenschutz, Hilfe, Impressum): in site/site.config.json „url“ und „hosting“ eintragen, veröffentlichen und npm run site:store-urls ausführen – siehe docs/RELEASE.md',
+  },
   {
     ok: app.ios?.bundleIdentifier !== 'com.spicynight.app' && app.android?.package !== 'com.spicynight.app',
     text: 'Bundle-ID / Paketname ist noch der Platzhalter com.spicynight.app – nach dem ersten Upload nicht mehr änderbar',

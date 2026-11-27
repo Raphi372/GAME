@@ -1,9 +1,15 @@
 # Privacy Policy – SPICY NIGHT
 
-> **Template.** Have it reviewed legally and fill in everything in square brackets before
-> publishing. This page must be publicly reachable (e.g. on your own website); its address
-> goes into App Store Connect and the Google Play Console as the privacy policy URL. It
-> matches the privacy screen inside the app (Settings → Privacy).
+<!-- template-note -->
+
+> **Template.** Have it reviewed legally before publishing. `npm run site:build` turns it into
+> the privacy page of the website and fills in the placeholders in square brackets: the
+> provider details from `src/config/legal.json` and the hosting provider from
+> `site/site.config.json`. The page's address goes into App Store Connect and the Google Play
+> Console as the privacy policy URL. It matches the privacy screen inside the app
+> (Settings → Privacy), plus the website.
+
+<!-- /template-note -->
 
 Last updated: November 27, 2026
 
@@ -14,10 +20,14 @@ your device. We do not receive any data from you.
 
 ## Controller
 
+<!-- provider -->
+
 [Name or company]
 [Street and number]
 [Postcode, city, country]
 E-mail: [contact address]
+
+<!-- /provider -->
 
 ## What is stored?
 
@@ -66,6 +76,18 @@ Because we do not receive any data about you, we cannot provide information abou
 data on request either – it exists only on your device. For privacy questions, contact us at
 the address above. You also have the right to lodge a complaint with a data protection
 supervisory authority.
+
+## This website
+
+This website is hosted by <!-- hosting -->[name and address of the hosting provider]<!-- /hosting -->.
+When you open a page, the hosting provider processes technically necessary data (IP address,
+date and time, the page requested and browser details) to deliver the pages and protect them
+against misuse (Art. 6(1)(f) GDPR). How long these server logs are kept is determined by the
+hosting provider.
+
+The website sets no cookies, loads no content from other servers (not even fonts) and uses no
+analytics or tracking services. For the data from your visit you have the rights of access,
+rectification, erasure, restriction of processing and objection (Art. 15 to 21 GDPR).
 
 ## Age limit
 
