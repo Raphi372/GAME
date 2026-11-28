@@ -18,6 +18,7 @@ import {
   isSessionOver,
   normalizeRound,
   repairSession,
+  replaceHiddenCard,
   roundProgress,
   skipQuestion,
   syncSessionPlayers,
@@ -205,6 +206,31 @@ function play(session: GameSession, ctx: SessionContext): GameSession {
 }
 
 describe('mixed rounds', () => {
+  it('takes back the deal of a hidden card, so its mode is not counted twice', () => {
+    const ctx = makeMixedContext(makePlayers(4));
+    const session = createSession({ ...base, round: { modeIds: MIX } }, ctx);
+    const hidden = session.current!.questionId!;
+    const modeId = session.modeId;
+    expect(session.dealtByMode[modeId]).toBe(1);
+    const without = (getDeck: SessionContext['getDeck']): SessionContext['getDeck'] => (level) =>
+      getDeck(level).filter((question) => question.id !== hidden);
+    const next = replaceHiddenCard(session, {
+      ...ctx,
+      getDeck: without(ctx.getDeck),
+      forMode: (id) => {
+        const mode = ctx.forMode!(id);
+        return { ...mode, getDeck: without(mode.getDeck) };
+      },
+      isHidden: (id) => id === hidden,
+    });
+    expect(next.modeId).toBe(modeId);
+    expect(next.current!.questionId!.startsWith(`${modeId}:`)).toBe(true);
+    expect(next.current!.questionId).not.toBe(hidden);
+    // Still the first card of its mode: the rule hint shows again, the mode order stays fair.
+    expect(next.dealtByMode).toEqual(session.dealtByMode);
+    expect(next.turnsCompleted).toBe(0);
+  });
+
   it('deals every mode equally often and never the same mode twice in a row', () => {
     const ctx = makeMixedContext(makePlayers(4));
     let session = createSession({ ...base, round: { modeIds: MIX } }, ctx);

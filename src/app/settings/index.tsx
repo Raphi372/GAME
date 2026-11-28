@@ -68,6 +68,8 @@ export default function SettingsScreen() {
     useCustomCardsStore.getState().resetCustomCards();
     useHiddenCardsStore.getState().showAllCards();
     useSettingsStore.getState().resetSettings();
+    // Last: AsyncStorage runs writes and removals in the order they were started, so the
+    // resets above cannot write a key back after it was removed.
     void clearPersistedData();
   };
 
@@ -121,7 +123,7 @@ export default function SettingsScreen() {
         <LinkRow icon="heart-outline" label={t('settings.fairPlay')} onPress={() => router.push('/settings/fair-play')} />
         <LinkRow icon="shield-checkmark-outline" label={t('settings.privacy')} onPress={() => router.push('/settings/privacy')} />
         <LinkRow icon="information-circle-outline" label={t('settings.about')} onPress={() => router.push('/settings/about')} />
-        {/* Only once the website and the contact e-mail are filled in (src/config/support.ts). */}
+        {/* Each row only once its address is filled in: website or contact e-mail (src/config/support.ts). */}
         {SUPPORT.websiteUrl ? (
           <LinkRow
             icon="help-buoy-outline"

@@ -49,7 +49,8 @@ const FONTS = [
 const CSP =
   "default-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; script-src 'self'; " +
   "base-uri 'none'; form-action 'none'; object-src 'none'";
-const EMAIL = /[^\s@<>()"']+@[^\s@<>()"']+\.[a-z]{2,}/i;
+/** An e-mail address – without the characters that would break a mailto link (? # & % / …). */
+const EMAIL = /[^\s@<>()"'?#&%\/\\,;:[\]]+@[^\s@<>()"'?#&%\/\\,;:[\]]+\.[a-z]{2,}/i;
 /** Marks a build output folder, so a rebuild only ever deletes its own files. */
 const MARKER = '.spicy-night-site';
 const TYPES = {

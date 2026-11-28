@@ -57,6 +57,19 @@ describe('translations', () => {
     }
   });
 
+  it.each([
+    ['German', de],
+    ['English', en],
+    ['Spanish', es],
+  ])('names the way into the settings in %s exactly like the settings screen does', (_name, dictionary) => {
+    const texts: Record<string, string> = dictionary;
+    const labels = Object.values(texts).filter((label) => label.length > 2);
+    // "Einstellungen → Ausgeblendete Karten …": what follows the arrow must be a real label.
+    const paths = Object.values(texts).flatMap((text) => text.split(`${texts['settings.title']} → `).slice(1));
+    expect(paths.length).toBeGreaterThan(2);
+    for (const rest of paths) expect(labels.some((label) => rest.startsWith(label))).toBe(true);
+  });
+
   it('contains the three required game buttons', () => {
     expect(de['game.next']).toBe('Nächste Frage');
     expect(de['game.skip']).toBe('Überspringen');

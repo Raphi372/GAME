@@ -273,6 +273,12 @@ describe('website build', () => {
     expect(result.stderr).toContain('„googlePlayUrl“ muss eine Adresse mit https:// sein');
   });
 
+  it('rejects a contact address that would break the mail link', () => {
+    const { result } = build('bad-mail', { config: { ...CONFIG, supportEmail: 'hilfe#app@example.com' } });
+    expect(result.status).toBe(1);
+    expect(result.stderr).toContain('„supportEmail“ ist keine gültige E-Mail-Adresse');
+  });
+
   it('never deletes a folder it did not create', () => {
     const out = join(work, 'foreign');
     mkdirSync(out);

@@ -63,6 +63,25 @@ describe('hidden cards', () => {
     expect(getPlayableDeck('spicy-questions', 'mild', 'de').map((card) => card.id)).not.toContain(id);
   });
 
+  it('forgets own cards once they are deleted', () => {
+    useEntitlementsStore.setState({ entitlements: { premium: true } });
+    const add = (body: string) => {
+      const result = useCustomCardsStore.getState().addCard({ modeId: 'spicy-questions', level: 'mild', body });
+      if (!result.ok) throw new Error(result.error);
+      return result.card.id;
+    };
+    const first = add('Was war dein schönstes Date?');
+    const second = add('Wohin würdest du gern einmal reisen?');
+    hidden().hideCard('mild_001');
+    hidden().hideCard(first);
+    hidden().hideCard(second);
+
+    useCustomCardsStore.getState().removeCard(first);
+    expect(hidden().ids).toEqual(['mild_001', second]);
+    useCustomCardsStore.getState().resetCustomCards();
+    expect(hidden().ids).toEqual(['mild_001']);
+  });
+
   it('cleans up what it finds in the storage', () => {
     expect(sanitizeHiddenIds(null)).toEqual([]);
     expect(sanitizeHiddenIds('mild_001')).toEqual([]);

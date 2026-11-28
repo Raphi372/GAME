@@ -94,6 +94,11 @@ export interface SessionContext extends ModeContext {
    * Without it, the context's own deck is used for every card.
    */
   forMode?: (modeId: GameModeId) => ModeContext & { minPlayers: number };
+  /**
+   * Cards the group hid ("Karte ausblenden") – they are left out of the decks but stay in
+   * the played lists, so a card shown again later cannot come back in the same game.
+   */
+  isHidden?: (id: string) => boolean;
 }
 
 export const emptyStats = (): PlayerStats => ({
@@ -418,6 +423,31 @@ export function skipQuestion(session: GameSession, ctx: SessionContext): GameSes
 }
 
 /**
+ * KARTE AUSBLENDEN: the card on the table has just left the decks (`ctx` no longer has
+ * it). The same player gets the next card right away – counted neither as a turn nor as
+ * a skip. In choice modes the new card has the same kind, like after ÜBERSPRINGEN; if
+ * none is left, the player chooses again. In a mixed round the hidden card's deal is
+ * taken back, so it does not count for its mode.
+ */
+export function replaceHiddenCard(session: GameSession, ctx: SessionContext): GameSession {
+  const current = session.current;
+  if (!current || current.questionId === null) return session;
+  if (current.kind) {
+    return (
+      drawCard(session, current.playerId, ctxFor(ctx, session.modeId), current.kind) ?? {
+        ...session,
+        current: { playerId: current.playerId, questionId: null, targetPlayerId: null, kind: null },
+      }
+    );
+  }
+  const dealt = session.dealtByMode[session.modeId] ?? 0;
+  const dealtByMode = isMixedRound(session.round)
+    ? { ...session.dealtByMode, [session.modeId]: Math.max(0, dealt - 1) }
+    : session.dealtByMode;
+  return dealNext({ ...session, dealtByMode }, current.playerId, ctx, session.modeId);
+}
+
+/**
  * Switches the spicy level between rounds. The current player keeps their turn. A
  * level picked by hand ends the automatic escalation – the group decides now.
  */
@@ -516,7 +546,8 @@ export function syncSessionPlayers(session: GameSession, ctx: SessionContext): G
 
 /**
  * Repairs a persisted session (e.g. after an app update changed the question
- * database): drops unknown ids and deals a new question if necessary.
+ * database): drops unknown ids and deals a new question if necessary. Hidden cards
+ * count as known – they are only out of the decks for now.
  */
 export function repairSession(session: GameSession, ctx: SessionContext): GameSession {
   const round = normalizeRound(session.round, session.modeId, session.level);
@@ -526,7 +557,9 @@ export function repairSession(session: GameSession, ctx: SessionContext): GameSe
     const known = new Set(
       round.modeIds.flatMap((modeId) => ctxFor(ctx, modeId).getDeck(level).map((question) => question.id)),
     );
-    playedByLevel[level] = (session.playedByLevel?.[level] ?? []).filter((id) => known.has(id));
+    playedByLevel[level] = (session.playedByLevel?.[level] ?? []).filter(
+      (id) => known.has(id) || ctx.isHidden?.(id) === true,
+    );
   }
   let repaired = syncSessionPlayers(
     { ...session, round, dealtByMode: session.dealtByMode ?? {}, playedByLevel },

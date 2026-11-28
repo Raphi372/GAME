@@ -11,6 +11,8 @@ export interface HiddenCardsState {
   ids: string[];
   hideCard: (id: string) => void;
   showCard: (id: string) => void;
+  /** Takes several cards off the list at once, e.g. own cards that were deleted. */
+  showCards: (ids: readonly string[]) => void;
   showAllCards: () => void;
 }
 
@@ -29,7 +31,15 @@ export const useHiddenCardsStore = create<HiddenCardsState>()(
         if (get().ids.includes(id)) return;
         set({ ids: [...get().ids, id].slice(-MAX_HIDDEN_CARDS) });
       },
-      showCard: (id) => set({ ids: get().ids.filter((entry) => entry !== id) }),
+      showCard: (id) => {
+        if (!get().ids.includes(id)) return;
+        set({ ids: get().ids.filter((entry) => entry !== id) });
+      },
+      showCards: (ids) => {
+        const gone = new Set(ids);
+        const kept = get().ids.filter((entry) => !gone.has(entry));
+        if (kept.length !== get().ids.length) set({ ids: kept });
+      },
       showAllCards: () => set({ ids: [] }),
     }),
     {

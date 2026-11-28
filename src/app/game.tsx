@@ -52,6 +52,7 @@ export default function GameScreen() {
   const reshuffle = useGameStore((state) => state.reshuffle);
   const endGame = useGameStore((state) => state.endGame);
   const refreshDecks = useGameStore((state) => state.refreshDecks);
+  const replaceHiddenCard = useGameStore((state) => state.replaceHiddenCard);
   // Re-render when the players' own cards, the hidden cards or the Premium state change.
   useCustomCardsStore((state) => state.cards);
   useHiddenCardsStore((state) => state.ids);
@@ -440,10 +441,10 @@ export default function GameScreen() {
         onConfirm={() => {
           setHideSheetOpen(false);
           if (!question) return;
-          // Gone from every deck at once – the same player gets the next card, like after a
-          // deleted own card (no turn, no skip counted).
+          // Gone from every deck at once – the same player gets the next card (in Wahrheit
+          // oder Pflicht of the same kind); no turn, no skip counted.
           useHiddenCardsStore.getState().hideCard(question.id);
-          refreshDecks();
+          replaceHiddenCard();
         }}
         onCancel={() => setHideSheetOpen(false)}
         testID="hide-sheet"

@@ -13,6 +13,7 @@ import {
 import { persistStorage, STORAGE_KEYS } from '@/services/storage';
 import { createId } from '@/utils/id';
 
+import { useHiddenCardsStore } from './hiddenCardsStore';
 import { useSettingsStore } from './settingsStore';
 
 export type CustomCardResult = { ok: true; card: CustomCard } | { ok: false; error: CustomCardError };
@@ -64,8 +65,15 @@ export const useCustomCardsStore = create<CustomCardsState>()(
         set({ cards: get().cards.map((entry) => (entry.id === id ? card : entry)) });
         return { ok: true, card };
       },
-      removeCard: (id) => set({ cards: get().cards.filter((card) => card.id !== id) }),
-      resetCustomCards: () => set({ cards: [] }),
+      removeCard: (id) => {
+        set({ cards: get().cards.filter((card) => card.id !== id) });
+        // A deleted card cannot come back – it leaves the hidden list as well.
+        useHiddenCardsStore.getState().showCard(id);
+      },
+      resetCustomCards: () => {
+        useHiddenCardsStore.getState().showCards(get().cards.map((card) => card.id));
+        set({ cards: [] });
+      },
     }),
     {
       name: STORAGE_KEYS.customCards,
