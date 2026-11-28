@@ -3,7 +3,8 @@ import type { Locale } from '@/types';
 import site from '../../site/site.config.json';
 import legal from './legal.json';
 
-const EMAIL = /[^\s@<>()"']+@[^\s@<>()"']+\.[a-z]{2,}/i;
+/** An e-mail address – without the characters that would break a mailto link (? # & % / …). */
+const EMAIL = /[^\s@<>()"'?#&%\/\\,;:[\]]+@[^\s@<>()"'?#&%\/\\,;:[\]]+\.[a-z]{2,}/i;
 const text = (value: unknown) => (typeof value === 'string' && value.trim() ? value.trim() : null);
 
 /**

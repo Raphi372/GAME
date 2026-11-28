@@ -164,12 +164,16 @@ In der Level-Auswahl unter **„Runde anpassen“** (Auswahl wird für das näch
 ### Karten ausblenden
 - Passt eine Karte nicht zur Runde, blendet „Karte ausblenden“ unter der Karte sie nach einer
   kurzen Rückfrage dauerhaft aus – in allen Modi, auch bei eigenen Karten und in gemischten
-  Runden. Dieselbe Person bekommt sofort die nächste Karte; das zählt weder als Runde noch als
-  Überspringen.
+  Runden. Dieselbe Person bekommt sofort die nächste Karte (bei Wahrheit oder Pflicht wieder eine
+  Wahrheit bzw. Pflicht, wie beim Überspringen); das zählt weder als Runde noch als Überspringen.
+- Sind alle Karten eines Levels ausgeblendet, sagt das Spiel genau das und bietet den
+  Levelwechsel an. Eine ausgeblendete Karte bleibt im laufenden Spiel als gespielt markiert –
+  holt man sie zurück, kommt sie erst im nächsten Spiel wieder.
 - Unter **Einstellungen → Ausgeblendete Karten** stehen alle ausgeblendeten Karten mit Modus und
   Level in der App-Sprache; jede lässt sich einzeln oder alle auf einmal zurückholen.
-- Kartenzahlen (Level-Auswahl, „noch … im Deck“) zählen nur Karten, die noch kommen können.
-  Gespeichert wird nur die Liste der Karten-IDs, lokal; „Alle lokalen Daten löschen“ leert sie.
+- Kartenzahlen (Startseite, Level-Auswahl, „noch … im Deck“) zählen nur Karten, die noch kommen
+  können. Gespeichert wird nur die Liste der Karten-IDs, lokal; „Alle lokalen Daten löschen“
+  leert sie, und eine gelöschte eigene Karte verschwindet auch aus der Liste.
 
 ### Ergebnis teilen
 - Nach jeder Runde macht „Ergebnis teilen“ aus der Auswertung ein Bild im Hochformat (4:5,

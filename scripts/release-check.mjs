@@ -23,7 +23,7 @@ const site = json('site/site.config.json');
 const changelog = existsSync(join(root, 'CHANGELOG.md')) ? read('CHANGELOG.md') : '';
 const filled = (value) => typeof value === 'string' && value.trim().length > 0;
 /** Same rule as scripts/site.mjs and src/config/support.ts. */
-const EMAIL = /[^\s@<>()"']+@[^\s@<>()"']+\.[a-z]{2,}/i;
+const EMAIL = /[^\s@<>()"'?#&%\/\\,;:[\]]+@[^\s@<>()"'?#&%\/\\,;:[\]]+\.[a-z]{2,}/i;
 const contactEmail = filled(site.supportEmail)
   ? new RegExp(`^${EMAIL.source}$`, 'i').test(site.supportEmail.trim())
   : filled(legal.providerContact) && EMAIL.test(legal.providerContact);

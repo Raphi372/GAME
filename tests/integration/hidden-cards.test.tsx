@@ -3,6 +3,7 @@ import { renderRouter, screen, within } from 'expo-router/testing-library';
 
 import { getDeck } from '@/features/question-decks';
 import { getPlayableDeck, useGameStore, useHiddenCardsStore, useSettingsStore } from '@/store';
+import { SPICY_LEVELS } from '@/types';
 
 import { addPlayers, resetStores } from '../helpers/stores';
 
@@ -71,12 +72,17 @@ describe('hiding cards', () => {
     });
     await user.press(await screen.findByRole('button', { name: /^Wahrheit: Eine ehrliche Antwort\./ }));
     const truth = session().current!.questionId!;
+    const player = session().current!.playerId;
     await hideCurrentCard(user);
     expect(hiddenIds()).toEqual([statement, truth]);
+    // Like after skipping: another truth for the same person – no new choice.
+    expect(session().current).toMatchObject({ playerId: player, kind: 'truth' });
+    expect(session().current!.questionId).not.toBeNull();
     expect(session().current!.questionId).not.toBe(truth);
+    expect(screen.queryByRole('button', { name: /^Wahrheit: Eine ehrliche Antwort\./ })).not.toBeOnTheScreen();
   });
 
-  it('ends at the "played through" card when the last card is hidden', async () => {
+  it('says so when every card of the level is hidden – reshuffling would not help', async () => {
     const user = userEvent.setup();
     useGameStore.getState().startGame('spicy-questions', 'mild');
     const current = session().current!.questionId!;
@@ -86,8 +92,27 @@ describe('hiding cards', () => {
     await renderRouter(APP_DIR, { initialUrl: '/game' });
 
     await hideCurrentCard(user);
-    expect(await screen.findByText('Deck durchgespielt!')).toBeOnTheScreen();
+    expect(await screen.findByRole('heading', { name: 'Alle Karten ausgeblendet' })).toBeOnTheScreen();
+    expect(
+      screen.getByText('In MILD sind alle Karten ausgeblendet. Wechselt das Level oder holt Karten unter Einstellungen → Ausgeblendete Karten zurück.'),
+    ).toBeOnTheScreen();
+    expect(screen.queryByRole('button', { name: 'Neu mischen' })).not.toBeOnTheScreen();
+    expect(screen.getByRole('button', { name: 'Level wechseln' })).toBeOnTheScreen();
     expect(screen.queryByRole('button', { name: 'Karte ausblenden' })).not.toBeOnTheScreen();
+  });
+
+  it('leaves hidden cards out of the card counts on the home screen', async () => {
+    const total = SPICY_LEVELS.reduce((sum, level) => sum + getDeck('spicy-questions', level).length, 0);
+    const [first, second] = getDeck('spicy-questions', 'hot');
+    await renderRouter(APP_DIR, { initialUrl: '/' });
+    // The tile reads "<tagline> · 330 Fragen".
+    expect(await screen.findByText(new RegExp(` · ${total} Fragen$`))).toBeOnTheScreen();
+
+    await act(async () => {
+      useHiddenCardsStore.getState().hideCard(first!.id);
+      useHiddenCardsStore.getState().hideCard(second!.id);
+    });
+    expect(await screen.findByText(new RegExp(` · ${total - 2} Fragen$`))).toBeOnTheScreen();
   });
 
   it('lists hidden cards in the settings and brings them back one by one or all at once', async () => {

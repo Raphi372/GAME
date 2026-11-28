@@ -20,6 +20,7 @@ import {
   isSessionOver,
   normalizeRound,
   repairSession,
+  replaceHiddenCard,
   reshuffleLevel,
   skipQuestion,
   syncSessionPlayers,
@@ -45,6 +46,7 @@ import {
 import { createId } from '@/utils/id';
 
 import { getPlayableDeck } from './decks';
+import { hiddenCardIds } from './hiddenCardsStore';
 import { useSettingsStore } from './settingsStore';
 
 /** Round options chosen before a game ("Runde anpassen"). */
@@ -118,6 +120,11 @@ export interface GameState extends GameData {
    * deleted the custom card that is on the table – a new card is dealt if needed.
    */
   refreshDecks: () => void;
+  /**
+   * The card on the table was just hidden ("Karte ausblenden"): the same player gets the
+   * next card – of the same kind in choice modes – without a turn or skip being counted.
+   */
+  replaceHiddenCard: () => void;
   endGame: () => void;
   resetAll: () => void;
 }
@@ -147,6 +154,7 @@ function contextFor(players: readonly Player[], modeId: GameModeId): SessionCont
       choiceKinds: getGameMode(id).choice?.kinds,
       minPlayers: getGameMode(id).minPlayers,
     }),
+    isHidden: (id) => hiddenCardIds().has(id),
   };
 }
 
@@ -439,6 +447,7 @@ export const useGameStore = create<GameState>()(
         },
         reshuffle: () => updateSession(reshuffleLevel),
         refreshDecks: () => updateSession(repairSession),
+        replaceHiddenCard: () => updateSession(replaceHiddenCard),
         endGame: () => {
           const { session, players } = get();
           if (!session) return;

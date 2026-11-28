@@ -8,6 +8,7 @@ import {
   createSession,
   getCurrentQuestion,
   repairSession,
+  replaceHiddenCard,
   reshuffleLevel,
   skipQuestion,
   syncSessionPlayers,
@@ -219,6 +220,17 @@ describe('game session', () => {
     expect(repaired.current?.questionId).toMatch(/^mild_/);
     expect(repaired.current?.playerId).toBe('p1');
   });
+
+  it('keeps hidden cards in the played lists when it repairs a session', () => {
+    const ctx = makeContext(makePlayers(2), { mild: 5 });
+    const session = start(ctx);
+    const card = session.current!.questionId!;
+    const getDeck: SessionContext['getDeck'] = (level) => ctx.getDeck(level).filter((question) => question.id !== card);
+    // Hidden: only out of the deck for now – a card shown again must not come back in this game.
+    expect(repairSession(session, { ...ctx, getDeck, isHidden: (id) => id === card }).playedByLevel.mild).toContain(card);
+    // Unknown (e.g. removed by an app update): dropped as before.
+    expect(repairSession(session, { ...ctx, getDeck }).playedByLevel.mild).not.toContain(card);
+  });
 });
 
 describe('group rounds ("Ich hab noch nie")', () => {
@@ -317,6 +329,38 @@ describe('choice rounds ("Wahrheit oder Pflicht")', () => {
     ];
     return { players, rng: createSeededRng(5), getDeck: () => deck, choiceKinds: ['truth', 'dare'] };
   }
+
+  it('KARTE AUSBLENDEN: deals another card of the chosen kind and counts nothing', () => {
+    const base = todContext();
+    const session = chooseCard(createSession(todOptions, base), 'dare', base);
+    const hidden = session.current!.questionId!;
+    const ctx: SessionContext = {
+      ...base,
+      getDeck: (level) => base.getDeck(level).filter((question) => question.id !== hidden),
+      isHidden: (id) => id === hidden,
+    };
+    const next = replaceHiddenCard(session, ctx);
+    expect(next.current).toMatchObject({ playerId: session.current!.playerId, kind: 'dare' });
+    expect(next.current!.questionId).toMatch(/^d/);
+    expect(next.current!.questionId).not.toBe(hidden);
+    expect(next.stats).toEqual(session.stats);
+    expect(next.turnsCompleted).toBe(session.turnsCompleted);
+    // Still counts as played: shown again later, it does not come back in this game.
+    expect(next.playedByLevel.mild).toContain(hidden);
+  });
+
+  it('KARTE AUSBLENDEN: the player chooses again when no card of that kind is left', () => {
+    const base = todContext(2, 1);
+    const session = chooseCard(createSession(todOptions, base), 'dare', base);
+    const hidden = session.current!.questionId!;
+    const ctx: SessionContext = {
+      ...base,
+      getDeck: (level) => base.getDeck(level).filter((question) => question.id !== hidden),
+    };
+    const next = replaceHiddenCard(session, ctx);
+    expect(next.current).toEqual({ playerId: session.current!.playerId, questionId: null, targetPlayerId: null, kind: null });
+    expect(remainingByKind(next, ctx.getDeck, ['truth', 'dare'])).toEqual({ truth: 2, dare: 0 });
+  });
 
   it('starts every turn with a choice instead of a card', () => {
     const ctx = todContext();

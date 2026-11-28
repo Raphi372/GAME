@@ -15,6 +15,12 @@ describe('help and feedback settings', () => {
     expect(resolveSupportEmail('kein-mail', provider)).toBeNull();
     expect(resolveSupportEmail(null, 'Beispiel GmbH\nohne E-Mail')).toBeNull();
     expect(resolveSupportEmail(null, null)).toBeNull();
+    // Nothing that would break the mailto link, but + and umlauts are fine.
+    expect(resolveSupportEmail('hilfe#app@example.com', provider)).toBeNull();
+    expect(resolveSupportEmail('hilfe?cc=x@example.com', provider)).toBeNull();
+    expect(resolveSupportEmail('max+spicy@example.com', null)).toBe('max+spicy@example.com');
+    expect(resolveSupportEmail(null, 'Kontakt: info@müller.de')).toBe('info@müller.de');
+    expect(resolveSupportEmail(null, 'E-Mail:hallo@example.com')).toBe('hallo@example.com');
   });
 
   it('only accept an https address for the website', () => {

@@ -8,10 +8,9 @@ import { ModeCard, ModeTile } from '@/features/game-modes/ModeCard';
 import { listGameModes, MIX_EMOJI, MIX_PARAM, type GameModeId } from '@/features/game-modes/registry';
 import { isMixedRound } from '@/features/gameplay/engine/round';
 import { ResumeCard } from '@/features/gameplay/components/ResumeCard';
-import { getDeckSize } from '@/features/question-decks';
 import { useMotion } from '@/hooks/useMotion';
 import { useTranslation } from '@/i18n';
-import { useGameStore } from '@/store';
+import { getBuiltInDeck, useGameStore, useHiddenCardsStore } from '@/store';
 import { colors, NATIVE_DRIVER, spacing } from '@/theme';
 import { SPICY_LEVELS } from '@/types';
 
@@ -36,15 +35,17 @@ function useBreathing(enabled: boolean) {
 
 export default function HomeScreen() {
   const router = useRouter();
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const { enabled: motion } = useMotion();
   const session = useGameStore((state) => state.session);
+  // Card totals leave out hidden cards, like the level screen – re-render when they change.
+  useHiddenCardsStore((state) => state.ids);
   const playerCount = useGameStore((state) => state.players.length);
   const scale = useBreathing(motion);
 
   const modes = useMemo(() => listGameModes(), []);
   const totalQuestions = (modeId: GameModeId) =>
-    SPICY_LEVELS.reduce((sum, level) => sum + getDeckSize(modeId, level), 0);
+    SPICY_LEVELS.reduce((sum, level) => sum + getBuiltInDeck(modeId, level, locale).length, 0);
   const allCards = modes
     .filter((mode) => mode.status === 'available')
     .reduce((sum, mode) => sum + totalQuestions(mode.id), 0);
